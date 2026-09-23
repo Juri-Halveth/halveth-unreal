@@ -2,7 +2,7 @@
 param(
     [string]$PackageRoot,
     [string]$MakeNSIS,
-    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version = '0.1.0',
+    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version = '0.2.0',
     [switch]$PackageReady,
     [switch]$PrepareOnly
 )

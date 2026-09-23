@@ -1,0 +1,246 @@
+{
+  "schema": "halveth.open-content-source-register/1",
+  "designTarget": "HALVETH Portal Garden 0.2",
+  "checkedOn": "2026-09-23",
+  "state": "METADATA_AND_DESIGN_REVIEW_ONLY",
+  "activityScope": "THIS_REGISTER_PREPARATION_ONLY",
+  "sourceCount": 8,
+  "importedCount": 0,
+  "foreignSourceFilesDownloaded": false,
+  "claimScope": "Eight selected sources and proposed original gameplay hooks; no catalog-wide rights clearance, content ingestion, runtime implementation or media-quality verification.",
+  "sources": [
+    {
+      "sourceID": "SRC_SRD_521",
+      "title": "Dungeons & Dragons System Reference Document 5.2.1",
+      "publisher": "Wizards of the Coast",
+      "url": "https://www.dndbeyond.com/srd",
+      "domain": "www.dndbeyond.com",
+      "category": "tabletop-rules",
+      "version": "5.2.1",
+      "observedVersionDates": {
+        "englishPublication": "2025-05-01",
+        "germanPublication": "2025-12-08",
+        "providerPageUpdated": "2026-03-02"
+      },
+      "license": "CC-BY-4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by/4.0/legalcode",
+      "scope": "Content of the selected SRD 5.2.1, not all D&D products, settings, characters, logos or third-party publications.",
+      "licenseRoute": "SRD_5_2_1_CC_BY_ONLY",
+      "excludedRoute": "OGL 1.0a is a separate historical route for SRD 5.1; no OGL content selected here.",
+      "attributionBeforeImport": "Use the exact attribution block of the selected official SRD version; identify changes and preserve relevant notices.",
+      "imported": false,
+      "concreteHALVETHVariableHook": {
+        "variables": ["skills.practiceRank", "spells.baseCost", "spells.manaCost"],
+        "proposal": "manaCost = max(1, baseCost - floor(practiceRank / 3))",
+        "designOrigin": "Original HALVETH balancing proposal, not an SRD formula.",
+        "test": "A completed practice objective changes the displayed and actually charged mana cost once; repeated completion has no additional rank effect.",
+        "state": "DESIGN_PROPOSAL"
+      }
+    },
+    {
+      "sourceID": "SRC_FATE_CORE",
+      "title": "Fate Core official Creative Commons SRD route",
+      "publisher": "Evil Hat Productions",
+      "url": "https://fate-srd.com/official-licensing-fate",
+      "domain": "fate-srd.com",
+      "category": "narrative-rules",
+      "version": "Fate Core System; exact downloadable SRD file version must be pinned before import",
+      "license": "CC-BY-3.0",
+      "licenseURL": "https://creativecommons.org/licenses/by/3.0/",
+      "scope": "Official SRD files selected through the CC route. The provider explicitly distinguishes these files from the adapted website text; logos and trademarks have separate terms.",
+      "supportingURLs": [
+        "https://fate-srd.com/official-licensing-fate/cc",
+        "https://fate-srd.com/fate-core/aspects-fate-points",
+        "https://evilhat.com/wp-content/uploads/2022/03/Fate-Version-Guide-Spheres-Differences-Licensing-Selections-2021.pdf"
+      ],
+      "attributionBeforeImport": "Use the attribution block for each actual SRD used; record modifications and do not imply endorsement.",
+      "imported": false,
+      "concreteHALVETHVariableHook": {
+        "variables": ["npc.dispositionTags", "dialogue.requiredTags", "orders.fulfilledIds"],
+        "proposal": "An original character trait selects a dialogue response after a fulfilled promise or help order.",
+        "designOrigin": "Original HALVETH traits and dialogue; descriptive aspects are a research reference, not imported Fate rules text.",
+        "test": "The same fulfilled order consistently unlocks its authored dialogue; unrelated actions do not.",
+        "state": "DESIGN_PROPOSAL"
+      }
+    },
+    {
+      "sourceID": "SRC_BASIC_FANTASY_4E",
+      "title": "Basic Fantasy Role-Playing Game 4th Edition online SRD",
+      "publisher": "Chris Gonnerman / The Basic Fantasy Project",
+      "url": "https://basicfantasy.org/srd/",
+      "domain": "basicfantasy.org",
+      "category": "equipment-and-exploration",
+      "version": "Online SRD Release 128, published 2023-05-02; not a claim of the newest project release",
+      "license": "CC-BY-SA-4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "scope": "Text, maps, floorplans, diagrams, charts and forms designated by this SRD. Most other illustrations are expressly excluded and remain under their creators' permissions.",
+      "supportingURLs": ["https://www.basicfantasy.org/srd/equipment.html"],
+      "attributionBeforeImport": "Determine the adapted portion, retain attribution and changes, and resolve ShareAlike and distribution compatibility. Do not relicense copied or adapted material as original MIT code.",
+      "imported": false,
+      "concreteHALVETHVariableHook": {
+        "variables": ["lantern.lightRadiusCm", "lantern.coneAngleDeg", "lantern.fuelUnits"],
+        "proposal": "A workbench preview exchanges a wider light cone for a higher displayed fuel cost using original values.",
+        "designOrigin": "Original implementation, geometry, item prose and numbers; source equipment descriptions are not copied.",
+        "test": "Preview, rendered cone and consumed fuel match; cancellation leaves the original lantern unchanged.",
+        "state": "DESIGN_PROPOSAL"
+      }
+    },
+    {
+      "sourceID": "SRC_GRIMM_1812",
+      "title": "Kinder- und Haus-Märchen, volume 1, Berlin 1812",
+      "authors": ["Jacob Grimm", "Wilhelm Grimm"],
+      "publisher": "Deutsches Textarchiv / Berlin-Brandenburgische Akademie der Wissenschaften",
+      "url": "https://www.deutschestextarchiv.de/book/show/grimm_maerchen01_1812",
+      "domain": "www.deutschestextarchiv.de",
+      "category": "historical-german-literature",
+      "version": "German original, volume 1, Realschulbuchhandlung, Berlin, 1812",
+      "license": "PUBLIC_DOMAIN_PLAIN_ORIGINAL_TEXT_ONLY",
+      "licenseURL": "https://www.deutschestextarchiv.de/doku/nutzungsbedingungen",
+      "scope": "The original plain text only, as distinguished by DTA terms section 2. Annotated electronic editions carry CC-BY-SA-4.0; page images have separately stated conditions. No modern translation or illustration is included.",
+      "jurisdictionScope": "German original selected; no blanket worldwide conclusion for translations, editions or visual reproductions.",
+      "supportingURLs": [
+        "https://www.gesetze-im-internet.de/urhg/__3.html",
+        "https://www.gesetze-im-internet.de/urhg/__64.html",
+        "https://www.gesetze-im-internet.de/urhg/__69.html"
+      ],
+      "editionComparison": {
+        "url": "https://www.gutenberg.org/ebooks/2591",
+        "finding": "English-language edition, cataloged as public domain in the USA; not selected as the German original."
+      },
+      "coverageGap": "The first narrative page could not be fetched; no exact original sentence or critical textual reading is claimed.",
+      "attributionBeforeImport": "Pin the exact plain-text edition and preserve bibliographic provenance. Resolve contradictory legacy wording before importing annotated or scanned material.",
+      "imported": false,
+      "concreteHALVETHVariableHook": {
+        "variables": ["mythMotif.promiseState", "dialogue.promiseOutcome"],
+        "values": ["UNMADE", "OFFERED", "KEPT", "DECLINED"],
+        "proposal": "Write an original fairy-tale help order in which a voluntary promise changes a later conversation.",
+        "designOrigin": "New HALVETH plot and sentences; historical work is a reference anchor, not a copied story.",
+        "test": "A declined offer remains playable; an accepted and fulfilled promise changes only its bound quest/dialogue state.",
+        "state": "DESIGN_PROPOSAL"
+      }
+    },
+    {
+      "sourceID": "SRC_MET_OPEN_ACCESS",
+      "title": "The Metropolitan Museum of Art Collection API / Open Access",
+      "publisher": "The Metropolitan Museum of Art",
+      "url": "https://metmuseum.github.io/",
+      "domain": "metmuseum.github.io",
+      "category": "museum-materials-and-object-forms",
+      "version": "Live catalog metadata reviewed 2026-09-23; no object image selected",
+      "license": "CC0-1.0_FOR_DESIGNATED_OPEN_ACCESS_MATERIAL",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "scope": "Selected open-access metadata and specifically designated public-domain object images. The metadata also describe protected artworks, so record availability is not image clearance.",
+      "supportingURLs": ["https://metmuseum.org/openaccess"],
+      "attributionBeforeImport": "Record object ID, source image URL, OA/public-domain status, material scope and provenance; attribution is useful even where CC0 does not require it.",
+      "imported": false,
+      "concreteHALVETHVariableHook": {
+        "variables": ["craft.materialClass", "prop.surfaceFinish", "prop.sourceObjectId"],
+        "proposal": "Use material/classification vocabulary to organize original ceramic and metal crafting variants.",
+        "designOrigin": "Original forms and parameters now; an actual image reference would require a later individual object record.",
+        "test": "Each recipe's chosen material category produces its intended own material instance; no unavailable museum image is requested at runtime.",
+        "state": "DESIGN_PROPOSAL"
+      }
+    },
+    {
+      "sourceID": "SRC_COMMONS_BOTANY",
+      "title": "Wikimedia Commons category: Botanical illustrations",
+      "publisher": "Wikimedia Commons contributors",
+      "url": "https://commons.wikimedia.org/wiki/Category:Botanical_illustrations",
+      "domain": "commons.wikimedia.org",
+      "category": "botanical-visual-reference-catalog",
+      "version": "Category reviewed 2026-09-23; no individual media file selected",
+      "license": "PER_FILE_NOT_CATALOG_WIDE",
+      "licenseURL": "https://commons.wikimedia.org/wiki/Commons:Reusing_content_outside_Wikimedia/licenses",
+      "scope": "Discovery catalog only. Every selected media file requires its own creator, source, license version and rights record; category membership gives no common CC0 grant.",
+      "attributionBeforeImport": "Prefer individually verified CC0/PD or CC-BY media for this release route; fulfill the actual file license and record edits. Review ShareAlike separately when relevant.",
+      "imported": false,
+      "concreteHALVETHVariableHook": {
+        "variables": ["codex.plantDiagramSourceId", "plants.visualTraitTags"],
+        "proposal": "Design original leaf and flower silhouettes that players can distinguish as crafting ingredients; consider one verified historical plate later.",
+        "designOrigin": "Current silhouettes remain original; no Commons file is embedded.",
+        "test": "Ingredients can be distinguished through shape and text labels, including when color cues are unavailable.",
+        "state": "DESIGN_PROPOSAL"
+      }
+    },
+    {
+      "sourceID": "SRC_FREESOUND_PAGE_151220",
+      "title": "Page Turn (1)",
+      "publisher": "OwlStorm on Freesound",
+      "url": "https://freesound.org/people/OwlStorm/sounds/151220/",
+      "domain": "freesound.org",
+      "category": "optional-book-ui-audio",
+      "version": "Sound ID 151220, published 2012-04-10",
+      "license": "CC0-1.0",
+      "licenseURL": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "scope": "This concrete sound record carries an uploader CC0 statement. It is not a license for the entire Freesound catalog or an independent verification of authorship.",
+      "catalogMetadata": {
+        "durationSeconds": 0.588,
+        "format": "WAV",
+        "sampleRateHz": 44100,
+        "channels": 2,
+        "audioBytesInspected": false,
+        "audioListened": false
+      },
+      "supportingURLs": ["https://freesound.org/help/faq/"],
+      "attributionBeforeImport": "Retain sound ID, record URL, license snapshot, original hash and processing notes. Optional credit suggested by uploader: Ashe Kirk or Owlish Media.",
+      "imported": false,
+      "concreteHALVETHVariableHook": {
+        "variables": ["bookAudio.pageTurnCue", "bookAudio.gainDb", "accessibility.pageSoundEnabled"],
+        "proposal": "Play a quiet optional cue once per actual page change; the cue and elapsed audio duration award no progress.",
+        "designOrigin": "HALVETH interaction logic; the selected recording is still a future candidate and has not been imported.",
+        "test": "Muted mode is silent, one page change produces at most one cue, and holding a navigation key does not create uncontrolled overlapping sounds.",
+        "state": "DESIGN_PROPOSAL"
+      }
+    },
+    {
+      "sourceID": "SRC_GBIF_BACKBONE",
+      "title": "GBIF Backbone Taxonomy",
+      "publisher": "GBIF Secretariat",
+      "url": "https://www.gbif.org/en/dataset/d7dddbf4-2cf0-4f39-9b2a-bb099caae36c",
+      "domain": "www.gbif.org",
+      "category": "scientific-taxonomy",
+      "version": "Publication 2023-08-28; metadata last modified 2023-11-17",
+      "doi": "10.15468/39omei",
+      "license": "CC-BY-4.0",
+      "licenseURL": "https://creativecommons.org/licenses/by/4.0/",
+      "scope": "Selected synthetic taxonomic checklist dataset, not all GBIF occurrence data, images or ecological claims. Dataset bytes and individual taxon records were not downloaded.",
+      "attributionBeforeImport": "Cite GBIF Secretariat, dataset DOI, exact selected archive/version, access date, subset and modifications. Keep taxonomic names separate from simulated ecological parameters.",
+      "imported": false,
+      "concreteHALVETHVariableHook": {
+        "variables": ["ecology.taxonKey", "ecology.familyKey", "ecology.selectionGroup"],
+        "proposal": "Organize varied fictional flora with explicit grouping; treat humidity, abundance, growth rate and behavior as original simulation settings unless separately evidenced.",
+        "designOrigin": "Original generator grouping design; a taxonomy is not a calibrated ecosystem or evidence of local species abundance.",
+        "test": "The same bound group configuration and world seed yield the same selection; the UI identifies invented organisms and simulated parameters as game content.",
+        "state": "DESIGN_PROPOSAL"
+      }
+    }
+  ],
+  "rightsBoundaries": [
+    {
+      "name": "Tolkien",
+      "state": "NO_OPEN_MATERIAL_SELECTED",
+      "url": "https://www.tolkienestate.com/frequently-asked-questions-and-links/",
+      "finding": "Rights-holder policy is not a general open license. Determine specific work, publication, right, territory and licensing route before any use of protected text, characters, images or designs.",
+      "nextPermittedDesignStep": "Create independent landscapes, languages, names and stories."
+    },
+    {
+      "name": "Lovecraft",
+      "state": "NO_WORK_EDITION_TERRITORY_CLEARANCE",
+      "url": "https://www.riamco.org/render?eadid=US-RPB-mslovecraft&view=access",
+      "finding": "The holding institution distinguishes territory and publication status. Its fixed pre-1923 US cutoff is not a complete current 2026 assessment. No title, translation or edition is approved as a whole by this register.",
+      "nextPermittedDesignStep": "Use original cosmic-wonder ideas; reopen exact rights review for a named original work and intended territories."
+    }
+  ],
+  "laterImportReceiptRequiredFields": [
+    "sourceID",
+    "workOrFileID",
+    "version",
+    "licenseURL",
+    "attribution",
+    "modifications",
+    "bytes",
+    "sha256",
+    "targetPath",
+    "verifiedAt"
+  ]
+}

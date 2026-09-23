@@ -74,13 +74,14 @@ New-Item -ItemType Directory -Force -Path $destinationRoot | Out-Null
 foreach ($entry in $validated) {
     $destination = Resolve-BoundNoticePath $destinationRoot $entry.Relative
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $destination) | Out-Null
-    Copy-Item -LiteralPath $entry.Source -Destination $destination
+    # Upstream legal files can be read-only. Replace only this validated staged copy.
+    Copy-Item -LiteralPath $entry.Source -Destination $destination -Force
     Assert-NoticeFile $destination $entry.Bytes $entry.Hash
 }
 foreach ($name in @('README.md', 'MANIFEST.json')) {
     $source = Resolve-BoundNoticePath $noticeRoot $name
     $destination = Resolve-BoundNoticePath $destinationRoot $name
-    Copy-Item -LiteralPath $source -Destination $destination
+    Copy-Item -LiteralPath $source -Destination $destination -Force
     Assert-NoticeFile $destination (Get-Item -LiteralPath $source).Length (Get-FileHash -LiteralPath $source -Algorithm SHA256).Hash
 }
 $projectNotices = @(
@@ -97,7 +98,7 @@ foreach ($item in $projectNotices) {
     $source = Resolve-BoundNoticePath $projectRoot $item.Source
     $destination = Resolve-BoundNoticePath $packagePath $item.Destination
     New-Item -ItemType Directory -Force -Path (Split-Path -Parent $destination) | Out-Null
-    Copy-Item -LiteralPath $source -Destination $destination
+    Copy-Item -LiteralPath $source -Destination $destination -Force
     Assert-NoticeFile $destination (Get-Item -LiteralPath $source).Length (Get-FileHash -LiteralPath $source -Algorithm SHA256).Hash
 }
 $artworkReadme = Resolve-BoundNoticePath $packagePath 'Artwork-Notices/README.md'

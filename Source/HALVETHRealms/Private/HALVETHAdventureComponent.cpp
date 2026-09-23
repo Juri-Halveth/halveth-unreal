@@ -1,4 +1,5 @@
 #include "HALVETHAdventureComponent.h"
+#include "HALVETHKnowledgeComponent.h"
 
 #include "CollisionQueryParams.h"
 #include "CollisionShape.h"
@@ -86,7 +87,7 @@ void UHALVETHAdventureComponent::TickComponent(float DeltaTime, ELevelTick TickT
     Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
     if (!FMath::IsFinite(DeltaTime) || DeltaTime <= 0) return;
     Elapsed += DeltaTime;
-    Mana = FMath::Min(100.0f, Mana + DeltaTime * 8);
+    Mana = FMath::Min(GetMaxMana(), Mana + DeltaTime * 8);
     Stamina = FMath::Min(100.0f, Stamina + DeltaTime * 20);
     AbilityCooldown = FMath::Max(0.0f, AbilityCooldown - DeltaTime);
     DodgeCooldown = FMath::Max(0.0f, DodgeCooldown - DeltaTime);
@@ -125,7 +126,7 @@ FString UHALVETHAdventureComponent::ItemName(int32 Index)
     {
         case 1: return TEXT("Moonwater");
         case 2: return TEXT("Sunfruit");
-        default: return TEXT("Roseleaf");
+        default: return TEXT("Lumen Draught");
     }
 }
 
@@ -149,7 +150,7 @@ bool UHALVETHAdventureComponent::ActivateAbility()
         SetFeedback(TEXT("Spell is recovering. Try again in a moment."));
         return false;
     }
-    const float Cost = AbilityCosts[SelectedAbility];
+    const float Cost = GetSelectedAbilityCost();
     if (Mana < Cost)
     {
         SetFeedback(FString::Printf(TEXT("%s needs %.0f mana. Mana returns over time; Moonwater restores 45."),
@@ -169,14 +170,14 @@ bool UHALVETHAdventureComponent::ActivateAbility()
         const float Before = Health;
         Health = FMath::Min(100.0f, Health + 35);
         LoveRemaining = 4;
-        SetFeedback(FString::Printf(TEXT("LOVE: +%.0f health, warm light for 4s. Cost 20 mana."), Health - Before));
+        SetFeedback(FString::Printf(TEXT("LOVE: +%.0f health, warm light for 4s. Cost %.1f mana."), Health - Before, Cost));
     }
     else if (SelectedAbility == 1)
-        SetFeedback(TEXT("SPARK: a travelling light bolt, 25 impact damage. Cost 15 mana."));
+        SetFeedback(FString::Printf(TEXT("SPARK: a travelling light bolt, 25 impact damage. Cost %.1f mana."), Cost));
     else
     {
         ShieldRemaining = 6;
-        SetFeedback(TEXT("AEGIS: 75% less incoming damage for 6s. Cost 30 mana."));
+        SetFeedback(FString::Printf(TEXT("AEGIS: 75%% less incoming damage for 6s. Cost %.1f mana."), Cost));
     }
     return true;
 }
@@ -192,6 +193,33 @@ int32 UHALVETHAdventureComponent::GetItemCount(int32 Index) const
     return Index >= 0 && Index < 3 ? ItemCounts[Index] : 0;
 }
 
+bool UHALVETHAdventureComponent::GrantConsumable(int32 Index, int32 Amount)
+{
+    if (Index < 0 || Index >= 3 || Amount <= 0 || Amount > 99 || ItemCounts[Index] > 99 - Amount) return false;
+    ItemCounts[Index] += Amount;
+    SetFeedback(FString::Printf(TEXT("Crafted %s x%d. Stored in your inventory."), *ItemName(Index), Amount));
+    return true;
+}
+
+bool UHALVETHAdventureComponent::RestoreConsumables(int32 HealthItems, int32 ManaItems, int32 StaminaItems)
+{
+    if (HealthItems < 0 || HealthItems > 99 || ManaItems < 0 || ManaItems > 99 || StaminaItems < 0 || StaminaItems > 99) return false;
+    ItemCounts[0] = HealthItems; ItemCounts[1] = ManaItems; ItemCounts[2] = StaminaItems;
+    return true;
+}
+
+float UHALVETHAdventureComponent::GetMaxMana() const
+{
+    const auto* Knowledge = GetOwner() ? GetOwner()->FindComponentByClass<UHALVETHKnowledgeComponent>() : nullptr;
+    return 100.0f + (Knowledge ? FMath::Clamp(Knowledge->GetMaxManaBonus(), 0.0f, 100.0f) : 0.0f);
+}
+
+float UHALVETHAdventureComponent::GetSelectedAbilityCost() const
+{
+    const auto* Knowledge = GetOwner() ? GetOwner()->FindComponentByClass<UHALVETHKnowledgeComponent>() : nullptr;
+    return AbilityCosts[SelectedAbility] * (Knowledge ? FMath::Clamp(Knowledge->GetSpellCostMultiplier(), 0.25f, 1.0f) : 1.0f);
+}
+
 bool UHALVETHAdventureComponent::UseItem()
 {
     if (ItemCounts[SelectedItem] <= 0)
@@ -200,13 +228,14 @@ bool UHALVETHAdventureComponent::UseItem()
         return false;
     }
     float& Value = SelectedItem == 0 ? Health : (SelectedItem == 1 ? Mana : Stamina);
-    if (Value >= 100)
+    const float Maximum = SelectedItem == 1 ? GetMaxMana() : 100.0f;
+    if (Value >= Maximum)
     {
         SetFeedback(TEXT("Already full; your item is kept."));
         return false;
     }
     const float Before = Value;
-    Value = FMath::Min(100.0f, Value + (SelectedItem == 0 ? 40.0f : 45.0f));
+    Value = FMath::Min(Maximum, Value + (SelectedItem == 0 ? 40.0f : 45.0f));
     --ItemCounts[SelectedItem];
     SetFeedback(FString::Printf(TEXT("Used %s: +%.0f %s. %d left."), *ItemName(SelectedItem), Value - Before,
         SelectedItem == 0 ? TEXT("health") : (SelectedItem == 1 ? TEXT("mana") : TEXT("stamina")),
@@ -247,7 +276,7 @@ float UHALVETHAdventureComponent::ReceiveDamage(float RawDamage)
     Health = FMath::Max(0.0f, Health - Effective);
     SetFeedback(FString::Printf(TEXT("%s%.0f damage. Health %.0f/100.%s"),
         IsShieldActive() ? TEXT("Aegis softened the hit: ") : TEXT(""), Before - Health, Health,
-        Health <= 0 ? TEXT(" Use LOVE or Roseleaf to recover; death is not simulated in this prototype.") : TEXT("")));
+        Health <= 0 ? TEXT(" Use LOVE or a Lumen Draught to recover; death is not simulated in this prototype.") : TEXT("")));
     return Before - Health;
 }
 
@@ -383,8 +412,8 @@ FString UHALVETHAdventureComponent::AuthoredDialogue(FName Identity, int32 Step)
     if (Identity == TEXT("HALVETH_NPC_LUCINET"))
         return bFirst ? TEXT("LUCINET: Every portal keeps a path home. The blue tide holds questions, not a promised destiny.")
             : TEXT("LUCINET: SPARK travels until it meets the world. Observe its impact. A map is useful only when you can test its paths.");
-    return bFirst ? TEXT("RACHEL: A small beginning is still a beginning. Your pack has Roseleaf, Moonwater and Sunfruit.")
-        : TEXT("RACHEL: Roseleaf restores health, Moonwater mana, Sunfruit stamina. Items stay in your pack when that resource is full.");
+    return bFirst ? TEXT("RACHEL: A small beginning is still a beginning. Your pack has Lumen Draught, Moonwater and Sunfruit.")
+        : TEXT("RACHEL: Lumen Draught restores health, Moonwater mana, Sunfruit stamina. Items stay in your pack when that resource is full.");
 }
 
 bool UHALVETHAdventureComponent::InteractWithNearbyCharacter()
@@ -416,22 +445,22 @@ bool UHALVETHAdventureComponent::InteractWithNearbyCharacter()
 
 FString UHALVETHAdventureComponent::GetStatusText() const
 {
-    return FString::Printf(TEXT("HEALTH %.0f/100   MANA %.0f/100 (+8/s)   STAMINA %.0f/100 (+20/s)%s"),
-        Health, Mana, Stamina, IsShieldActive() ? *FString::Printf(TEXT("   SHIELD %.1fs"), ShieldRemaining) : TEXT(""));
+    return FString::Printf(TEXT("HEALTH %.0f/100   MANA %.0f/%.0f (+8/s)   STAMINA %.0f/100 (+20/s)%s"),
+        Health, Mana, GetMaxMana(), Stamina, IsShieldActive() ? *FString::Printf(TEXT("   SHIELD %.1fs"), ShieldRemaining) : TEXT(""));
 }
 
 FString UHALVETHAdventureComponent::GetAbilityText() const
 {
     static const TCHAR* Descriptions[] = {
-        TEXT("Heal 35 + light 4s | 20 mana"), TEXT("Travelling bolt | 25 impact damage | 15 mana"),
-        TEXT("75% damage reduction for 6s | 30 mana")};
-    return FString::Printf(TEXT("%s [%d/3] - %s"), *AbilityName(SelectedAbility), SelectedAbility + 1, Descriptions[SelectedAbility]);
+        TEXT("Heal 35 + light 4s"), TEXT("Travelling bolt | 25 impact damage"),
+        TEXT("75% damage reduction for 6s")};
+    return FString::Printf(TEXT("%s [%d/3] - %s | %.1f mana"), *AbilityName(SelectedAbility), SelectedAbility + 1, Descriptions[SelectedAbility], GetSelectedAbilityCost());
 }
 
 FString UHALVETHAdventureComponent::GetInventoryText() const
 {
     static const TCHAR* Benefits[] = {TEXT("+40 health"), TEXT("+45 mana"), TEXT("+45 stamina")};
-    return FString::Printf(TEXT("%s x%d [%d/3] - %s | Pack: Roseleaf %d, Moonwater %d, Sunfruit %d"),
+    return FString::Printf(TEXT("%s x%d [%d/3] - %s | Pack: Lumen Draught %d, Moonwater %d, Sunfruit %d"),
         *ItemName(SelectedItem), ItemCounts[SelectedItem], SelectedItem + 1, Benefits[SelectedItem],
         ItemCounts[0], ItemCounts[1], ItemCounts[2]);
 }

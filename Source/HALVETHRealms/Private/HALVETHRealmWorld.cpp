@@ -2,6 +2,7 @@
 #include "HALVETHTrainingTarget.h"
 #include "Engine/World.h"
 #include "RealmLayout.h"
+#include "KnowledgeSystem.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/PointLightComponent.h"
 #include "Components/DirectionalLightComponent.h"
@@ -237,8 +238,12 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
             Shape(SphereMesh, Base + FVector(0, 0, Height + 22), FVector(0.65f, 0.65f, 0.85f), RealmColor(1 + Prop.Variant), 1.5f, false);
         }
     }
+    ReadablePositions.Empty();
     if (Realm == 0)
     {
+        Readable(FVector(-680, -960, 0), 0);
+        Readable(FVector(670, 450, 0), 1);
+        Readable(FVector(-670, 450, 0), 2);
         Guide(FVector(-380, -530, 0), 1);
         Guide(FVector(380, 0, 0), 2);
         Guide(FVector(-380, 600, 0), 3);
@@ -249,6 +254,7 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
     }
     else
     {
+        Readable(FVector(720, -250, 0), Realm + 2);
         Guide(FVector(-380, -470, 0), Realm);
         Portal(FVector(0, 1180, 0), 0, RealmColor(0));
         // A central landmark gives each destination a silhouette, not only a palette.
@@ -304,6 +310,47 @@ void AHALVETHRealmWorld::Guide(FVector Position, int32 Identity)
     Shape(SphereMesh, Position + FVector(48, 0, 216), FVector(0.24f), Color, 4, false);
     Light(Position + FVector(0, -65, 160), Color, 450, 290);
     Label(Position + FVector(0, 0, 253), Names[Identity - 1] + TEXT("  [E]"), FLinearColor(0.96f, 0.84f, 0.60f), 19);
+}
+
+void AHALVETHRealmWorld::Readable(FVector Position, int32 Book)
+{
+    if (Book < 0 || Book >= static_cast<int32>(halveth::knowledge::BookCount)) return;
+    ReadablePositions.Add(Book, Position);
+    const FLinearColor Cover = RealmColor(1 + Book % 3);
+    Shape(CylinderMesh, Position + FVector(0, 0, 45), FVector(0.16f, 0.16f, 0.9f), FLinearColor(0.15f, 0.11f, 0.10f));
+    Shape(CubeMesh, Position + FVector(0, 0, 92), FVector(0.95f, 0.65f, 0.09f), FLinearColor(0.22f, 0.13f, 0.11f));
+    if (Book == 3)
+    {
+        Shape(CubeMesh, Position + FVector(0, 0, 102), FVector(0.65f, 0.48f, 0.015f), FLinearColor(0.88f, 0.76f, 0.50f));
+        for (int32 Side : {-1, 1}) Shape(CylinderMesh, Position + FVector(Side * 34, 0, 105), FVector(0.09f, 0.09f, 0.61f), Cover, 0.3f, false, FRotator(90, 0, 0));
+    }
+    else
+    {
+        Shape(CubeMesh, Position + FVector(0, 0, 101), FVector(0.69f, 0.48f, Book == 4 ? 0.018f : 0.07f), Cover, 0.15f);
+        Shape(CubeMesh, Position + FVector(-18, 0, 108), FVector(0.30f, 0.43f, 0.025f), FLinearColor(0.93f, 0.82f, 0.60f), 0, false, FRotator(0, 0, -8));
+        Shape(CubeMesh, Position + FVector(18, 0, 108), FVector(0.30f, 0.43f, 0.025f), FLinearColor(0.93f, 0.82f, 0.60f), 0, false, FRotator(0, 0, 8));
+    }
+    for (int32 Line = 0; Line < 4; ++Line)
+        Shape(CubeMesh, Position + FVector(0, -14 + Line * 9, 112), FVector(0.43f, 0.009f, 0.008f), Cover * 0.18f, 0, false);
+    Light(Position + FVector(0, 0, 175), Cover, 150, 200);
+    Label(Position + FVector(0, 0, 171), TEXT("E  /  READ"), FLinearColor(0.96f, 0.84f, 0.60f), 15);
+}
+
+int32 AHALVETHRealmWorld::FindReadable(const FVector& Position) const
+{
+    int32 Result = INDEX_NONE; float Best = 180.0f * 180.0f;
+    for (const auto& Entry : ReadablePositions)
+    {
+        const float Distance = FVector::DistSquared2D(Position, Entry.Value);
+        if (Distance < Best && FMath::Abs(Position.Z - Entry.Value.Z) < 220) { Best = Distance; Result = Entry.Key; }
+    }
+    return Result;
+}
+
+FVector AHALVETHRealmWorld::GetReadablePosition(int32 Book) const
+{
+    const FVector* Position = ReadablePositions.Find(Book);
+    return Position ? *Position : FVector::ZeroVector;
 }
 
 int32 AHALVETHRealmWorld::FindPortal(const FVector& Position) const

@@ -40,6 +40,10 @@ public:
     UFUNCTION(BlueprintCallable, Category="HALVETH|Adventure") bool InteractWithNearbyCharacter();
     UFUNCTION(BlueprintCallable, Category="HALVETH|Adventure") float ReceiveDamage(float RawDamage);
     UFUNCTION(BlueprintCallable, Category="HALVETH|Adventure") void ClearTransientEffects();
+    bool GrantConsumable(int32 Index, int32 Amount);
+    bool RestoreConsumables(int32 HealthItems, int32 ManaItems, int32 StaminaItems);
+    float GetMaxMana() const;
+    float GetSelectedAbilityCost() const;
 
     UFUNCTION(BlueprintPure, Category="HALVETH|Adventure") float GetHealth() const { return Health; }
     UFUNCTION(BlueprintPure, Category="HALVETH|Adventure") float GetMana() const { return Mana; }

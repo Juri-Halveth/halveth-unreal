@@ -1,0 +1,160 @@
+{
+  "schema": "halveth.portal-garden.release-validation/2",
+  "recordedAt": "2026-09-23T10:45:53.536579+00:00",
+  "version": "0.2.0",
+  "engine": "5.8.0-55116800",
+  "configuration": "Win64 Development",
+  "codeLicense": "MIT",
+  "signing": "UNSIGNED",
+  "nativeIntegration": {
+    "entry": "HALVETHRealms.exe",
+    "gameplaySurface": "NATIVE_CPP_CANVAS",
+    "browserRequired": false,
+    "companionServerRequired": false,
+    "singleFileExecutable": false,
+    "originalMorrowindEngineAdapterImplemented": false
+  },
+  "build": {
+    "uatExitCode": 0,
+    "runtimeNoticeFilesVerified": 1299,
+    "runtimeNoticeSourceBytes": 19412883,
+    "executableSha256": "31002bc637d17e296ba4c3c1b9afafc22c5b265cbb6f86ccbf42b0e78a80bfb3"
+  },
+  "packagedGameplay": {
+    "exitCode": 0,
+    "receiptFresh": true,
+    "startedAt": "2026-09-23T10:39:18.9581227Z",
+    "gameplay": {
+      "schema": 1,
+      "passed": true,
+      "seed": 127,
+      "detail": "portals_love_collision_recovery_quality_inventory_shield_npc_dodge_projectiles_crystal_library_recall_crafting_enchantments_scribble_council_construction_realm_persistence_save_restore",
+      "engine": "5.8.0-55116800+++UE5+Release-5.8",
+      "renderingVerified": false
+    }
+  },
+  "installedGameplay": {
+    "exitCode": 0,
+    "receiptFresh": true,
+    "result": {
+      "schema": 1,
+      "passed": true,
+      "seed": 127,
+      "detail": "portals_love_collision_recovery_quality_inventory_shield_npc_dodge_projectiles_crystal_library_recall_crafting_enchantments_scribble_council_construction_realm_persistence_save_restore",
+      "engine": "5.8.0-55116800+++UE5+Release-5.8",
+      "renderingVerified": false
+    }
+  },
+  "smokeScope": {
+    "phasesInSource": 31,
+    "numericCounterInRuntimeReceipt": false,
+    "profileMappingChecks": 3,
+    "renderingVerifiedByNullRHI": false
+  },
+  "sourceTests": {
+    "localMsvcKnowledgeAssertions": 18008,
+    "compilerWarningsAsErrors": true,
+    "progressionSeeds": {
+      "first": 0,
+      "last": 255
+    },
+    "pythonPassed": 10,
+    "pythonSkipped": 1,
+    "pythonSkipReason": "Test process could not create filesystem links on this Windows host.",
+    "ci": "Commit-specific Windows/MSVC and Linux/GCC results are linked from the release."
+  },
+  "installation": {
+    "firstFinalCandidateInstall": "UPDATE_OF_UNPUBLISHED_LOCAL_0_2_CANDIDATE",
+    "installExitCode": 0,
+    "payloadFilesVerified": 1350,
+    "payloadBytes": 694486194,
+    "manifestSha256": "91e2415d9f9a90c680056cb1c2b97a5f462682ca7bddbb7808fc2f4063fa8c6e",
+    "installedAndReinstalledHashesMatched": true,
+    "versionedLinksVerified": 3
+  },
+  "uninstallation": {
+    "exitCode": 0,
+    "payloadRemoved": true,
+    "registryRemoved": true,
+    "ownFixturesPreserved": 2,
+    "linksRemoved": true
+  },
+  "reinstallation": {
+    "exitCode": 0,
+    "allHashesMatched": true,
+    "files": 1350,
+    "ownFixturesPreserved": 2,
+    "ownFixturesRemoved": true,
+    "installedReady": true
+  },
+  "previousVersionPreservation": {
+    "version": "0.1.0",
+    "fileHashesUnchanged": 5,
+    "registryUnchanged": true,
+    "scope": "Two executable files, three shortcuts and uninstall registry; no whole-host claim."
+  },
+  "coldStart": {
+    "scope": "Own scripted progression fixture in a reserved QA seed; no player-save migration.",
+    "separateRenderedProcesses": 6,
+    "allExitCodesZero": true,
+    "fieldsPreserved": [
+      "inventory",
+      "xp",
+      "craftedCounts",
+      "enchantmentRanks",
+      "builtCounts",
+      "questChoices",
+      "constructions",
+      "adventureItems",
+      "discoveredRecipes"
+    ],
+    "learnedPageRestored": true,
+    "constructionCountRestored": 1,
+    "ownFixtureRemoved": true,
+    "screenshot": "screenshots/knowledge-coldstart-0.2.0.png"
+  },
+  "graphicsStartup": {
+    "preparedSettingsWithoutOverride": "Performance visibly restored",
+    "explicitOverrideOnSameSettings": "Epic visibly selected",
+    "physicalKeySelectionTest": false,
+    "screenshots": [
+      "screenshots/quality-restored-0.2.0.png",
+      "screenshots/quality-override-0.2.0.png"
+    ]
+  },
+  "visualObservation": {
+    "dx12Sm6": true,
+    "viewport": [
+      1280,
+      720
+    ],
+    "libraryPanelsInspected": 4,
+    "physicalInputVerified": false,
+    "newFrameRateClaim": false,
+    "method": "Native Shot showui captures; no promotional mockups."
+  },
+  "portableIntegrity": {
+    "zipFiles": 1351,
+    "verification": "ALL_MEMBERS_CRC_SIZE_AND_SHA256_VERIFIED"
+  },
+  "artifacts": [
+    {
+      "file": "HALVETH-Portal-Garden-Setup-0.2.0-x64.exe",
+      "bytes": 328132178,
+      "sha256": "9a06b1186dd9a5fac628b0682507cda2d3a077e6433a78c89789f10ff734b99e"
+    },
+    {
+      "file": "HALVETH-Portal-Garden-0.2.0-Windows-portable.zip",
+      "bytes": 405898493,
+      "sha256": "302268eb970e2c00532c09c703d441c268106c8718a26b5529ed9e781cea9919"
+    }
+  ],
+  "limitations": [
+    "Independent native prototype with four small realms, geometric figures and authored guide dialogue.",
+    "No original Morrowind executable integration, Morrowind-save import or complete campaign.",
+    "No connected AI conversations, voice, multiplayer, Steam or blockchain integration.",
+    "Progression persists; player position, active realm, current vitals and guide dialogue steps do not.",
+    "Tested on one existing Windows machine; clean-machine prerequisites and physical input not verified.",
+    "Six rendered frames and scripted gameplay do not establish full visual, audio or animation coverage."
+  ]
+}

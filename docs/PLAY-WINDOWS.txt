@@ -1,25 +1,70 @@
-HALVETH PORTAL GARDEN 0.1.0
+HALVETH PORTAL GARDEN 0.2.0
 
-Start HALVETHRealms.exe. This package contains a native Unreal Engine game;
-it does not require the Unreal Editor, a browser, an account or a wallet.
-This unsigned development preview was tested on Windows with an RTX 4070 SUPER.
-Other hardware and a clean Windows installation are not yet certified.
+An independent native Unreal Engine world prototype: explore, read, craft,
+enchant and build. Start HALVETHRealms.exe or the versioned installed shortcut
+HALVETH Portal Garden 0.2.0. No Unreal Editor, browser, account or wallet is
+needed to run the game. This is an unsigned Win64 Development prototype.
+Release-specific validation is available with the GitHub download.
 
+EXPLORE
 WASD / mouse: move / look. Space: jump. Shift: run. Left Ctrl: dodge.
-E near a guide or portal: speak / travel. R: return home.
+E near a material marker, book, guide or portal: gather / read / speak / travel.
+R: return home. B: open the library. T: choose structure. G: build ahead.
 Q: choose LOVE, SPARK or AEGIS. Left mouse: cast. L: quick LOVE.
 I: select inventory item. F: use selected item.
 1 / 2 / 3: Performance / Balanced / Epic. H: controls. F10: credits.
-Escape: exit.
+Escape: exit. Falling from an island returns you to the spawn point.
+
+LIBRARY AND WORKSHOP
+Six original texts contain fifteen pages. Tab: next text.
+Page Up / Page Down: change page. 1 / 2 / 3: answer the recall prompt.
+O: cycle the right-hand panel. C: choose recipe or enchantment. V: make it.
+P: pack a crafted Lumen Draught into your healing-item pocket.
+T: choose Ground / Workbench, Camp or Beacon.
+N: select one of three council decisions. Z / X / Y: select its three routes.
+F5: save. F9: reload the saved knowledge and inventories for this seed.
+B / Escape: close the library.
+
+For visible construction: T selects, B closes, face clear ground, then G
+places the chosen structure. Materials are charged only for a successful
+construction. A Ground / Workbench is the milestone for Camp and Beacon;
+up to 32 constructions are recorded across the four realms.
+
+First successful recall earns knowledge once. Reading time only records
+engagement; there is no minimum wait and it is not a comprehension score.
+Crafting spends materials and earns practical skill. The three recipes are
+Lumen Draught, Ward Ink and Binding Resin. The workshop lists their sources,
+costs and your available quantities. Sixteen garden nodes cover all seven
+raw materials across the four realms. Press E nearby to gather again;
+gathering grants no XP and nodes remain available.
+
+Lantern Weave adds 10 maximum mana per rank; Quiet Step reduces spell costs
+by 5% per rank. Both have three ranks. Pack a Lumen Draught with P, close the
+library, select the healing item with I and use F for up to 40 health.
+Items are kept when the relevant resource is already full.
 
 LOVE heals and lights the world. SPARK damages the training crystal.
 AEGIS reduces incoming damage for six seconds. Item counts and spell costs
-are shown in the HUD. Guides currently use authored dialogue.
-Session progress is not saved. World seed defaults to 127.
+are shown in the HUD. Guides use authored fictional dialogue.
 
-The four small generated realms are an early playable foundation. Detailed
-characters, animation, a campaign, persistent saves, voice, multiplayer and
-AI conversations in this Unreal project remain future development.
+LOCAL SAVES
+Default seed: 127. The version-independent save location is:
+%LOCALAPPDATA%\HALVETH\PortalGarden\SaveGames\knowledge-SEED.json
+For the default seed: knowledge-127.json.
+
+Progression actions and periodic updates save learned pages, recipes, XP,
+materials, packed consumables, enchantments, council choices and constructions
+with their realm positions. F9 replaces in-memory progression with the stored
+state. Save failures appear in the library. Incompatible or damaged files are
+preserved; keep a backup before recovery.
+
+A session begins in the Confluence. Position, current realm, current health,
+mana, stamina, temporary effects and guide conversation steps are not resumed.
+The shared save path is outside application-version folders. Future schema
+compatibility must be checked; back up saves before testing a changed schema.
+
+Detailed characters, animation, a campaign, voice, multiplayer and connected
+AI conversations remain future development.
 
 Original code: LICENSE (MIT).
 Engine runtime: THIRD-PARTY-NOTICES.md and Runtime-Notices.
@@ -27,6 +72,8 @@ PBR floor maps: Artwork-Notices (Poly Haven CC0).
 Original heart icon: Artwork-Notices/ICON-LICENSE.txt (MIT).
 Source and releases: https://github.com/Juri-Halveth/halveth-unreal
 
-The installer installs for the current user and adds desktop/start-menu
-shortcuts. Its uninstaller removes the exact installed application files
-and retains newly created runtime state and unrelated files.
+The installer uses %LOCALAPPDATA%\HALVETH\PortalGarden\0.2.0 and versioned
+desktop / Start menu shortcuts. Version 0.1 and its shortcuts remain separate.
+Existing shortcuts with the same name are retained. The uninstaller removes
+its exact application files and its own shortcuts while preserving save data
+and unrelated files.

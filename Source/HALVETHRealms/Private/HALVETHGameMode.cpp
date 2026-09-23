@@ -1,6 +1,7 @@
 #include "HALVETHGameMode.h"
 #include "HALVETHCharacter.h"
 #include "HALVETHAdventureComponent.h"
+#include "HALVETHKnowledgeComponent.h"
 #include "HALVETHTrainingTarget.h"
 #include "HALVETHHUD.h"
 #include "HALVETHRealmWorld.h"
@@ -19,6 +20,27 @@
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 #include "Misc/Parse.h"
+
+namespace
+{
+    int32 SavedQualityProfile(const UGameUserSettings* Settings)
+    {
+        if (!Settings) return 1;
+        // The engine has already loaded these settings before BeginPlay. Its
+        // overall-level getter also compares resolution scale, whereas our
+        // profiles deliberately use their own 67 / 85 / 100 percent scales.
+        const auto& Quality = Settings->ScalabilityQuality;
+        const int32 Level = Quality.ViewDistanceQuality;
+        const int32 Groups[] = {Quality.AntiAliasingQuality, Quality.ShadowQuality,
+            Quality.GlobalIlluminationQuality, Quality.ReflectionQuality,
+            Quality.PostProcessQuality, Quality.TextureQuality, Quality.EffectsQuality,
+            Quality.FoliageQuality, Quality.ShadingQuality, Quality.LandscapeQuality};
+        for (const int32 Group : Groups) if (Group != Level) return 1;
+        if (Level == 0) return 0;
+        if (Level == 3) return 2;
+        return 1; // Balanced is the fallback for unknown or mixed custom settings.
+    }
+}
 
 AHALVETHGameMode::AHALVETHGameMode()
 {
@@ -39,16 +61,23 @@ void AHALVETHGameMode::BeginPlay()
         return;
     }
     RealmWorld->BuildRealm(0, static_cast<uint32>(WorldSeed));
-    if (auto* Pawn = Cast<AHALVETHCharacter>(UGameplayStatics::GetPlayerPawn(this, 0))) Pawn->ResetToSpawn();
+    if (auto* Pawn = Cast<AHALVETHCharacter>(UGameplayStatics::GetPlayerPawn(this, 0)))
+    {
+        Pawn->ResetToSpawn();
+        if (Pawn->GetKnowledge()) Pawn->GetKnowledge()->InitializeWorld(static_cast<uint32>(WorldSeed), 0);
+        if (Pawn->GetKnowledge() && FParse::Param(FCommandLine::Get(), TEXT("HalvethLibrary"))) Pawn->GetKnowledge()->ToggleReading();
+        int32 InitialPanel = 0;
+        if (FParse::Value(FCommandLine::Get(), TEXT("HalvethPanel="), InitialPanel)) Pawn->SetReaderPanel(InitialPanel);
+    }
     if (APlayerController* Player = UGameplayStatics::GetPlayerController(this, 0))
     {
         Player->SetInputMode(FInputModeGameOnly());
         Player->bShowMouseCursor = false;
     }
-    int32 RequestedQuality = 2;
+    int32 RequestedQuality = SavedQualityProfile(GEngine ? GEngine->GetGameUserSettings() : nullptr);
     FParse::Value(FCommandLine::Get(), TEXT("HalvethQuality="), RequestedQuality);
     ApplyQuality(FMath::Clamp(RequestedQuality, 0, 2), false);
-    Notify(TEXT("Welcome home. Walk to a portal and press E. L sends LOVE."));
+    Notify(TEXT("Welcome home. B opens your living library. E gathers, speaks or enters a portal. L sends LOVE."));
 }
 
 void AHALVETHGameMode::Notify(const FString& Text)
@@ -64,7 +93,11 @@ bool AHALVETHGameMode::Travel(int32 Destination)
         if (Pawn->GetAdventure()) Pawn->GetAdventure()->ClearTransientEffects();
     RealmWorld->BuildRealm(Destination, static_cast<uint32>(WorldSeed));
     TravelCooldown = 0.65f;
-    if (auto* Pawn = Cast<AHALVETHCharacter>(UGameplayStatics::GetPlayerPawn(this, 0))) Pawn->ResetToSpawn();
+    if (auto* Pawn = Cast<AHALVETHCharacter>(UGameplayStatics::GetPlayerPawn(this, 0)))
+    {
+        Pawn->ResetToSpawn();
+        if (Pawn->GetKnowledge()) Pawn->GetKnowledge()->OnRealmChanged(Destination);
+    }
     if (APlayerController* Player = UGameplayStatics::GetPlayerController(this, 0))
         if (Player->PlayerCameraManager) Player->PlayerCameraManager->StartCameraFade(1, 0, 0.65f, FLinearColor(0.08f, 0.015f, 0.045f));
     Notify(AHALVETHRealmWorld::RealmDescription(Destination));
@@ -148,6 +181,18 @@ void AHALVETHGameMode::RunSmokeStep()
         Interact(Pawn);
         if (RealmWorld->GetCurrentRealm() != Destination || RealmWorld->GetPortalCount() != (Destination == 0 ? 3 : 1))
         { FinishSmoke(false, TEXT("portal_roundtrip_failed")); return; }
+        // Walk the actual resource interactions across all four realms, twice per node.
+        const FVector GatherPoints[] = {FVector(-320,-870,100), FVector(350,-520,100), FVector(-340,150,100), FVector(330,620,100)};
+        for (int32 Local = 0; Local < 4; ++Local)
+        {
+            auto* Knowledge = Pawn->GetKnowledge();
+            if (!Knowledge) { FinishSmoke(false, TEXT("knowledge_missing_on_portal")); return; }
+            const int32 Material = (Destination * 4 + Local + static_cast<uint32>(WorldSeed) % 7u) % 7u;
+            const int32 Before = Knowledge->GetMaterialCount(Material);
+            Pawn->SetActorLocation(GatherPoints[Local]);
+            if (!Knowledge->GatherNearby() || !Knowledge->GatherNearby() || Knowledge->GetMaterialCount(Material) < Before + 2)
+            { FinishSmoke(false, TEXT("renewable_native_gather_failed")); return; }
+        }
     }
     else if (SmokeStep == 7)
     {
@@ -164,9 +209,17 @@ void AHALVETHGameMode::RunSmokeStep()
     {
         if (Pawn->GetActorLocation().Z < 0) { FinishSmoke(false, TEXT("fall_recovery_failed")); return; }
         ApplyQuality(0, false);
+        const auto* Settings = GEngine ? GEngine->GetGameUserSettings() : nullptr;
+        if (!Settings || SavedQualityProfile(Settings) != 0)
+        { FinishSmoke(false, TEXT("performance_quality_restore_failed")); return; }
         auto* GI = IConsoleManager::Get().FindConsoleVariable(TEXT("r.DynamicGlobalIlluminationMethod"));
         if (!GI || GI->GetInt() != 0) { FinishSmoke(false, TEXT("performance_quality_not_applied")); return; }
-        ApplyQuality(1, false); ApplyQuality(2, false);
+        ApplyQuality(1, false);
+        if (SavedQualityProfile(Settings) != 1)
+        { FinishSmoke(false, TEXT("balanced_quality_restore_failed")); return; }
+        ApplyQuality(2, false);
+        if (SavedQualityProfile(Settings) != 2)
+        { FinishSmoke(false, TEXT("epic_quality_restore_failed")); return; }
         if (GI->GetInt() != 1) { FinishSmoke(false, TEXT("epic_quality_not_applied")); return; }
     }
     else if (SmokeStep == 10)
@@ -223,7 +276,100 @@ void AHALVETHGameMode::RunSmokeStep()
         auto* Target = Cast<AHALVETHTrainingTarget>(UGameplayStatics::GetActorOfClass(this, AHALVETHTrainingTarget::StaticClass()));
         if (!Target || Target->IsBroken() || Target->GetHealth() != 100)
         { FinishSmoke(false, TEXT("crystal_regeneration_missing")); return; }
-        FinishSmoke(true, TEXT("portals_love_collision_recovery_quality_inventory_shield_npc_dodge_four_projectile_hits_crystal_regeneration"));
+    }
+    else if (SmokeStep == 24)
+    {
+        auto* Knowledge = Pawn->GetKnowledge();
+        if (!Knowledge || RealmWorld->FindReadable(RealmWorld->GetReadablePosition(0)) != 0)
+        { FinishSmoke(false, TEXT("physical_library_missing")); return; }
+        Pawn->SetActorLocation(RealmWorld->GetReadablePosition(0) + FVector(0,0,100));
+        if (Knowledge->GatherNearby()) { FinishSmoke(false, TEXT("resource_shadows_book_interaction")); return; }
+        Knowledge->OpenBook(0);
+        if (Knowledge->RecallPage(1) || !Knowledge->RecallPage(0) || Knowledge->RecallPage(0)
+            || !Knowledge->CraftSelected() || !Knowledge->PackDraught() || Pawn->GetAdventure()->GetItemCount(0) != 3)
+        { FinishSmoke(false, TEXT("read_recall_craft_pack_failed")); return; }
+    }
+    else if (SmokeStep == 25)
+    {
+        auto* Knowledge = Pawn->GetKnowledge();
+        Knowledge->OpenBook(2);
+        if (!Knowledge->RecallPage(1)) { FinishSmoke(false, TEXT("architecture_learning_failed")); return; }
+        Knowledge->ToggleReading();
+        SmokeReadingMilliseconds = Knowledge->GetActiveReadingMilliseconds();
+        Pawn->SetActorLocation(FVector(0,0,100));
+        Pawn->SetActorRotation(FRotator(0,90,0));
+        if (Pawn->GetController()) Pawn->GetController()->SetControlRotation(FRotator(0,90,0));
+        if (!Knowledge->BuildSelected() || Knowledge->GetBuiltCount() != 1 || Knowledge->GetVisibleBuiltCount() != 1)
+        { FinishSmoke(false, TEXT("visible_world_construction_failed")); return; }
+    }
+    else if (SmokeStep == 26)
+    {
+        auto* Knowledge = Pawn->GetKnowledge();
+        if (Knowledge->GetActiveReadingMilliseconds() != SmokeReadingMilliseconds || Knowledge->BuildSelected()
+            || Knowledge->GetBuiltCount() != 1 || !Knowledge->SaveProgress() || !Travel(1))
+        { FinishSmoke(false, TEXT("closed_reading_build_spacing_save_failed")); return; }
+    }
+    else if (SmokeStep == 27)
+    {
+        auto* Knowledge = Pawn->GetKnowledge();
+        if (Knowledge->GetBuiltCount() != 1 || Knowledge->GetVisibleBuiltCount() != 0
+            || RealmWorld->FindReadable(RealmWorld->GetReadablePosition(3)) != 3 || !Travel(0))
+        { FinishSmoke(false, TEXT("construction_realm_isolation_failed")); return; }
+    }
+    else if (SmokeStep == 28)
+    {
+        auto* Knowledge = Pawn->GetKnowledge();
+        if (Knowledge->GetVisibleBuiltCount() != 1 || !Knowledge->ReloadProgress() || Pawn->GetAdventure()->GetItemCount(0) != 3)
+        { FinishSmoke(false, TEXT("construction_reload_failed")); return; }
+        Knowledge->OpenBook(0);
+        if (Knowledge->RecallPage(0)) { FinishSmoke(false, TEXT("learned_page_lost_on_reload")); return; }
+        Knowledge->NextPage();
+        if (!Knowledge->RecallPage(1)) { FinishSmoke(false, TEXT("ward_ink_learning_failed")); return; }
+        Knowledge->CycleRecipe();
+        if (!Knowledge->CraftSelected()) { FinishSmoke(false, TEXT("ward_ink_crafting_failed")); return; }
+        Knowledge->OpenBook(1);
+        if (!Knowledge->RecallPage(1)) { FinishSmoke(false, TEXT("lantern_first_page_failed")); return; }
+        Knowledge->NextPage();
+        if (!Knowledge->RecallPage(2)) { FinishSmoke(false, TEXT("lantern_second_page_failed")); return; }
+        Knowledge->CycleRecipe(); Knowledge->CycleRecipe();
+        if (!Knowledge->CraftSelected() || Pawn->GetAdventure()->GetMaxMana() != 110)
+        { FinishSmoke(false, TEXT("enchantment_maximum_mana_failed")); return; }
+    }
+    else if (SmokeStep == 29)
+    {
+        auto* Knowledge = Pawn->GetKnowledge();
+        Knowledge->OpenBook(0); Knowledge->NextPage(); Knowledge->NextPage();
+        if (!Knowledge->RecallPage(2)) { FinishSmoke(false, TEXT("resin_learning_failed")); return; }
+        for (int32 I=0; I<4; ++I) Knowledge->CycleRecipe(); // 3 -> 2: resin.
+        if (!Knowledge->CraftSelected()) { FinishSmoke(false, TEXT("resin_crafting_failed")); return; }
+        for (int32 I=0; I<3; ++I) Knowledge->CycleRecipe(); // 2 -> 0: draught kept as reagent.
+        if (!Knowledge->CraftSelected()) { FinishSmoke(false, TEXT("reagent_draught_crafting_failed")); return; }
+        Knowledge->OpenBook(1); Knowledge->NextPage(); Knowledge->NextPage();
+        if (!Knowledge->RecallPage(0)) { FinishSmoke(false, TEXT("quiet_step_learning_failed")); return; }
+        Knowledge->OpenBook(4);
+        if (!Knowledge->RecallPage(2)) { FinishSmoke(false, TEXT("scribble_learning_failed")); return; }
+        for (int32 I=0; I<4; ++I) Knowledge->CycleRecipe();
+        if (!Knowledge->CraftSelected() || !FMath::IsNearlyEqual(Pawn->GetAdventure()->GetSelectedAbilityCost(), 14.25f))
+        { FinishSmoke(false, TEXT("scribble_enchantment_spell_cost_failed")); return; }
+        if (!Knowledge->ChooseQuest(0) || Knowledge->ChooseQuest(0))
+        { FinishSmoke(false, TEXT("council_one_time_choice_failed")); return; }
+        Knowledge->CycleQuest();
+        if (!Knowledge->ChooseQuest(2)) { FinishSmoke(false, TEXT("council_archive_branch_failed")); return; }
+        Knowledge->CycleQuest();
+        if (!Knowledge->ChooseQuest(1) || !Knowledge->SaveProgress())
+        { FinishSmoke(false, TEXT("council_construction_branch_failed")); return; }
+    }
+    else if (SmokeStep == 30)
+    {
+        auto* Knowledge = Pawn->GetKnowledge();
+        Pawn->GetAdventure()->ReceiveDamage(40);
+        if (!Pawn->GetAdventure()->UseItem() || Pawn->GetAdventure()->GetItemCount(0) != 2 || !Knowledge->ReloadProgress()
+            || Pawn->GetAdventure()->GetItemCount(0) != 3 || Knowledge->GetBuiltCount() != 1
+            || Knowledge->GetVisibleBuiltCount() != 1 || Pawn->GetAdventure()->GetMaxMana() != 110
+            || !FMath::IsNearlyEqual(Pawn->GetAdventure()->GetSelectedAbilityCost(), 14.25f) || Knowledge->ChooseQuest(0))
+        { FinishSmoke(false, TEXT("knowledge_save_restore_inventory_enchants_quests_failed")); return; }
+        Knowledge->ToggleReading();
+        FinishSmoke(true, TEXT("portals_love_collision_recovery_quality_inventory_shield_npc_dodge_projectiles_crystal_library_recall_crafting_enchantments_scribble_council_construction_realm_persistence_save_restore"));
         return;
     }
     ++SmokeStep;

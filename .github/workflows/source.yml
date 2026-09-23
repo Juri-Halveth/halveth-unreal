@@ -37,6 +37,8 @@ jobs:
           mkdir -p dist/layout
           g++ -std=c++20 -Wall -Wextra -Werror tests/layout_test.cpp -o dist/layout/layout_test
           ./dist/layout/layout_test
+          g++ -std=c++20 -Wall -Wextra -Werror tests/knowledge_test.cpp -o dist/layout/knowledge_test
+          ./dist/layout/knowledge_test
       - name: Compile and run the production layout with MSVC
         if: runner.os == 'Windows'
         shell: cmd
@@ -49,5 +51,9 @@ jobs:
           cl /nologo /std:c++20 /EHsc /W4 /WX tests\layout_test.cpp /Fo:dist\layout\layout_test.obj /Fe:dist\layout\layout_test.exe
           if errorlevel 1 exit /b 1
           dist\layout\layout_test.exe
+          if errorlevel 1 exit /b 1
+          cl /nologo /std:c++20 /EHsc /W4 /WX tests\knowledge_test.cpp /Fo:dist\layout\knowledge_test.obj /Fe:dist\layout\knowledge_test.exe
+          if errorlevel 1 exit /b 1
+          dist\layout\knowledge_test.exe
       - name: Verify source export and licensed art hashes
         run: python scripts/package_source.py --check

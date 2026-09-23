@@ -35,6 +35,8 @@ public:
     void BuildRealm(int32 Realm, uint32 Seed);
     void BeginLovePulse();
     int32 FindPortal(const FVector& Position) const;
+    int32 FindReadable(const FVector& Position) const;
+    FVector GetReadablePosition(int32 Book) const;
     FVector GetPortalPosition(int32 Destination) const;
     int32 GetPortalCount() const { return Portals.Num(); }
     int32 GetCurrentRealm() const { return CurrentRealm; }
@@ -61,6 +63,7 @@ private:
     UPROPERTY() TObjectPtr<UPointLightComponent> LoveLight;
     UPROPERTY() TObjectPtr<AActor> TrainingTarget;
     UPROPERTY() TArray<TObjectPtr<UStaticMeshComponent>> GuideHeads;
+    TMap<int32, FVector> ReadablePositions;
     int32 CurrentRealm = 0;
     float Elapsed = 0;
     float LoveRemaining = 0;
@@ -72,4 +75,5 @@ private:
     void Portal(FVector Position, int32 Destination, FLinearColor Color);
     void Label(FVector Position, const FString& Text, FLinearColor Color, float Size = 28);
     void Guide(FVector Position, int32 Identity);
+    void Readable(FVector Position, int32 Book);
 };

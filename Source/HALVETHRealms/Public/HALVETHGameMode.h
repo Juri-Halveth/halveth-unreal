@@ -32,6 +32,7 @@ private:
     bool bSmokeTest = false;
     bool bSmokeFailed = false;
     int32 SmokeStep = 0;
+    int32 SmokeReadingMilliseconds = 0;
     float SmokeElapsed = 0;
     float TravelCooldown = 0;
     void RunSmokeStep();
