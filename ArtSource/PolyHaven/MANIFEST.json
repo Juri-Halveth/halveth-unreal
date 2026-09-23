@@ -1,0 +1,195 @@
+{
+  "schema": "halveth.pbr-source-assets.v1",
+  "downloadedAt": "2026-09-23T03:27:24.873699+02:00",
+  "provider": "Poly Haven",
+  "providerUrl": "https://polyhaven.com",
+  "license": "CC0-1.0",
+  "licenseUrl": "https://polyhaven.com/license",
+  "licenseLegalCode": "https://creativecommons.org/publicdomain/zero/1.0/legalcode",
+  "apiTermsUrl": "https://github.com/Poly-Haven/Public-API/blob/master/ToS.md",
+  "apiDocumentationUrl": "https://polyhaven.com/our-api",
+  "sourceQuality": "Original PBR texture maps from provider API; no screenshots or example renders.",
+  "byteBudget": 150000000,
+  "downloadedMapBytes": 37668548,
+  "filesCount": 6,
+  "apiUserAgent": "HALVETH-AssetPreparation/0.1 (local CC0 material import)",
+  "accountRequired": false,
+  "purchasePerformed": false,
+  "unrealImportStatus": "SOURCE_FILES_READY_NOT_IMPORTED_BY_THIS_COLLECTOR",
+  "normalConvention": "DirectX",
+  "assets": [
+    {
+      "id": "cobblestone_floor_03",
+      "name": "Cobblestone Floor 03",
+      "materialName": "M_PH_CobblestoneFloor03",
+      "assetUrl": "https://polyhaven.com/a/cobblestone_floor_03",
+      "infoApiUrl": "https://api.polyhaven.com/info/cobblestone_floor_03",
+      "filesApiUrl": "https://api.polyhaven.com/files/cobblestone_floor_03",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "providerDimensionsMm": [
+        2400.0000953674316,
+        2400.0000953674316
+      ],
+      "tileSizeCm": [
+        240.0,
+        240.0
+      ],
+      "providerFilesHash": "1245575829b7b814bb94635b25337ec56d3cde7b",
+      "license": "CC0-1.0",
+      "resolution": "2k",
+      "format": "png",
+      "maps": [
+        "Diffuse",
+        "nor_dx",
+        "Rough"
+      ]
+    },
+    {
+      "id": "forest_ground_04",
+      "name": "Forest Ground 04",
+      "materialName": "M_PH_ForestGround04",
+      "assetUrl": "https://polyhaven.com/a/forest_ground_04",
+      "infoApiUrl": "https://api.polyhaven.com/info/forest_ground_04",
+      "filesApiUrl": "https://api.polyhaven.com/files/forest_ground_04",
+      "authors": {
+        "Rob Tuytel": "Photography, Processing",
+        "Rico Cilliers": "Minor adjustment"
+      },
+      "providerDimensionsMm": [
+        3150.0000953674316,
+        3150.0000953674316
+      ],
+      "tileSizeCm": [
+        315.0,
+        315.0
+      ],
+      "providerFilesHash": "60e454ab149c058f8514ae29d4ce8b16f6f3bce5",
+      "license": "CC0-1.0",
+      "resolution": "2k",
+      "format": "png",
+      "maps": [
+        "Diffuse",
+        "nor_dx",
+        "Rough"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "assetId": "cobblestone_floor_03",
+      "map": "Diffuse",
+      "relativePath": "cobblestone_floor_03/cobblestone_floor_03_diff_2k.png",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/cobblestone_floor_03/cobblestone_floor_03_diff_2k.png",
+      "expectedBytes": 7991910,
+      "providerMD5": "0ba0074518b672354a75a9f6b36eb5d9",
+      "resolution": "2k",
+      "format": "png",
+      "bytes": 7991910,
+      "sha256": "96c8b2dadbfc32c13232f2143a64d478f6fdb5152a5cc2e911e0a4a101308596",
+      "providerMD5Matches": true,
+      "width": 2048,
+      "height": 2048,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "modified": false
+    },
+    {
+      "assetId": "cobblestone_floor_03",
+      "map": "nor_dx",
+      "relativePath": "cobblestone_floor_03/cobblestone_floor_03_nor_dx_2k.png",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/cobblestone_floor_03/cobblestone_floor_03_nor_dx_2k.png",
+      "expectedBytes": 5689967,
+      "providerMD5": "e1083d4bf98e87ab740a7c2da461c6ed",
+      "resolution": "2k",
+      "format": "png",
+      "bytes": 5689967,
+      "sha256": "4c88060023b983a5ee39efa9aac9cf1dea606feefe6bd6fd23e4d0d12568ed1f",
+      "providerMD5Matches": true,
+      "width": 2048,
+      "height": 2048,
+      "pngBitDepth": 8,
+      "pngColorType": 6,
+      "modified": false
+    },
+    {
+      "assetId": "cobblestone_floor_03",
+      "map": "Rough",
+      "relativePath": "cobblestone_floor_03/cobblestone_floor_03_rough_2k.png",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/cobblestone_floor_03/cobblestone_floor_03_rough_2k.png",
+      "expectedBytes": 2051596,
+      "providerMD5": "e7ae10a5ef43bdbda3edace52f504185",
+      "resolution": "2k",
+      "format": "png",
+      "bytes": 2051596,
+      "sha256": "31cf60a9513cc0cdeaa0cd694c693fc5c59e7f2592aabc7ef7aeb13649254ef4",
+      "providerMD5Matches": true,
+      "width": 2048,
+      "height": 2048,
+      "pngBitDepth": 8,
+      "pngColorType": 0,
+      "modified": false
+    },
+    {
+      "assetId": "forest_ground_04",
+      "map": "Diffuse",
+      "relativePath": "forest_ground_04/forest_ground_04_diff_2k.png",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/forest_ground_04/forest_ground_04_diff_2k.png",
+      "expectedBytes": 9338911,
+      "providerMD5": "93972c83249ae015111c8da714e6162c",
+      "resolution": "2k",
+      "format": "png",
+      "bytes": 9338911,
+      "sha256": "e8c273851a153e751a3664891ba5cbb28713f0cf98aca442291ab7b27b79900e",
+      "providerMD5Matches": true,
+      "width": 2048,
+      "height": 2048,
+      "pngBitDepth": 8,
+      "pngColorType": 2,
+      "modified": false
+    },
+    {
+      "assetId": "forest_ground_04",
+      "map": "nor_dx",
+      "relativePath": "forest_ground_04/forest_ground_04_nor_dx_2k.png",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/forest_ground_04/forest_ground_04_nor_dx_2k.png",
+      "expectedBytes": 9986137,
+      "providerMD5": "d269f8896df0410506721605931f6416",
+      "resolution": "2k",
+      "format": "png",
+      "bytes": 9986137,
+      "sha256": "206e39772680dca34f40688b7db5704e34623f57b6a86ab7e3aa1722289e242d",
+      "providerMD5Matches": true,
+      "width": 2048,
+      "height": 2048,
+      "pngBitDepth": 8,
+      "pngColorType": 2,
+      "modified": false
+    },
+    {
+      "assetId": "forest_ground_04",
+      "map": "Rough",
+      "relativePath": "forest_ground_04/forest_ground_04_rough_2k.png",
+      "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/2k/forest_ground_04/forest_ground_04_rough_2k.png",
+      "expectedBytes": 2610027,
+      "providerMD5": "49bd9e53639081da4b8bda9163c469b5",
+      "resolution": "2k",
+      "format": "png",
+      "bytes": 2610027,
+      "sha256": "1ea792fe7232bffbb002f863bf1048af15125730dba1d1a8564b10733abf9f71",
+      "providerMD5Matches": true,
+      "width": 2048,
+      "height": 2048,
+      "pngBitDepth": 8,
+      "pngColorType": 0,
+      "modified": false
+    }
+  ],
+  "apiSchemaUrl": "https://raw.githubusercontent.com/Poly-Haven/Public-API/master/swagger.yml",
+  "sourceReview": {
+    "albedoImages": "Both opened and visually inspected",
+    "normalAndRoughness": "Provider MD5, byte count, PNG signature and dimensions checked",
+    "engineMaterialRendering": "Not performed by this source collector"
+  }
+}

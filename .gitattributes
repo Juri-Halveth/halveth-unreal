@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.png binary
+*.ico binary
+*.uasset binary
+*.umap binary
+# Preserve the exact upstream legal-document bytes and whitespace.
+docs/NSIS-COPYING.txt -text -whitespace
+ArtSource/PolyHaven/LICENSE-CC0-1.0.txt -text -whitespace

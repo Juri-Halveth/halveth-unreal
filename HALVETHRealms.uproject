@@ -1,0 +1,11 @@
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.8",
+  "Category": "Games",
+  "Description": "HALVETH Portal Garden: an original, procedural local world prototype.",
+  "Plugins": [{ "Name": "AndroidFileServer", "Enabled": false }],
+  "Modules": [
+    { "Name": "HALVETHRealms", "Type": "Runtime", "LoadingPhase": "Default" },
+    { "Name": "HALVETHRealmsEditor", "Type": "Editor", "LoadingPhase": "Default" }
+  ]
+}

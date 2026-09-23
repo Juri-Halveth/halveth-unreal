@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "observedAt": "2026-09-23T01:50:26Z",
+  "capture": "UE CSV Profiler, 900 requested startup frames; static hub; packaged Development EXE",
+  "sourceSha256": "53261c59787215ac0635962585667c4d32b6015ef3c17c287047a8a5b833cc3c",
+  "requestedRenderSize": [
+    1440,
+    900
+  ],
+  "quality": "Epic",
+  "rhi": "D3D12 SM6",
+  "gpu": "NVIDIA GeForce RTX 4070 SUPER",
+  "frameLimit": 60,
+  "totalNumericFrames": 900,
+  "warmupFramesExcluded": 120,
+  "sampleFrames": 780,
+  "sampleSeconds": 13.000136099999999,
+  "meanFrameMs": 16.666841153846153,
+  "medianFrameMs": 16.6644,
+  "p95FrameMs": 17.0241,
+  "maxFrameMs": 17.9437,
+  "meanFpsFromMeanFrameTime": 59.999371852730064,
+  "csvCompleted": true,
+  "processExitObserved": 777003,
+  "engineRequestedExitStatus": 0,
+  "exitStatusDiscrepancy": "Not investigated; not represented as an exit-0 run. CSV and orderly engine shutdown were observed.",
+  "limits": [
+    "Single short stationary scene, not a gameplay benchmark or minimum hardware result.",
+    "Development build and active profiling influence timings.",
+    "Concurrent local installer compression and other applications were running.",
+    "Resolution is the requested value; no independent per-frame render-target measurement."
+  ]
+}

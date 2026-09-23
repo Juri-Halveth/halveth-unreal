@@ -1,0 +1,32 @@
+HALVETH PORTAL GARDEN 0.1.0
+
+Start HALVETHRealms.exe. This package contains a native Unreal Engine game;
+it does not require the Unreal Editor, a browser, an account or a wallet.
+This unsigned development preview was tested on Windows with an RTX 4070 SUPER.
+Other hardware and a clean Windows installation are not yet certified.
+
+WASD / mouse: move / look. Space: jump. Shift: run. Left Ctrl: dodge.
+E near a guide or portal: speak / travel. R: return home.
+Q: choose LOVE, SPARK or AEGIS. Left mouse: cast. L: quick LOVE.
+I: select inventory item. F: use selected item.
+1 / 2 / 3: Performance / Balanced / Epic. H: controls. F10: credits.
+Escape: exit.
+
+LOVE heals and lights the world. SPARK damages the training crystal.
+AEGIS reduces incoming damage for six seconds. Item counts and spell costs
+are shown in the HUD. Guides currently use authored dialogue.
+Session progress is not saved. World seed defaults to 127.
+
+The four small generated realms are an early playable foundation. Detailed
+characters, animation, a campaign, persistent saves, voice, multiplayer and
+AI conversations in this Unreal project remain future development.
+
+Original code: LICENSE (MIT).
+Engine runtime: THIRD-PARTY-NOTICES.md and Runtime-Notices.
+PBR floor maps: Artwork-Notices (Poly Haven CC0).
+Original heart icon: Artwork-Notices/ICON-LICENSE.txt (MIT).
+Source and releases: https://github.com/Juri-Halveth/halveth-unreal
+
+The installer installs for the current user and adds desktop/start-menu
+shortcuts. Its uninstaller removes the exact installed application files
+and retains newly created runtime state and unrelated files.

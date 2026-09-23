@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+ <defs>
+  <linearGradient id="night" x2=".8" y2="1"><stop stop-color="#18323e"/><stop offset="1" stop-color="#08151d"/></linearGradient>
+  <linearGradient id="gold" x2=".7" y2="1"><stop stop-color="#fff1c8"/><stop offset=".48" stop-color="#dcbb80"/><stop offset="1" stop-color="#976b49"/></linearGradient>
+  <linearGradient id="rose" x2=".8" y2="1"><stop stop-color="#ffbfcc"/><stop offset=".52" stop-color="#df6c91"/><stop offset="1" stop-color="#9e355c"/></linearGradient>
+  <radialGradient id="aura"><stop stop-color="#f698b7" stop-opacity=".27"/><stop offset="1" stop-color="#f698b7" stop-opacity="0"/></radialGradient>
+ </defs>
+ <rect x="18" y="18" width="476" height="476" rx="114" fill="url(#night)"/>
+ <rect x="28" y="28" width="456" height="456" rx="105" fill="none" stroke="#49616a" stroke-width="2"/>
+ <circle cx="256" cy="272" r="182" fill="url(#aura)"/>
+ <path d="M256 92c89 44 151 108 151 187s-62 134-151 158c-89-24-151-79-151-158S167 136 256 92Z" fill="none" stroke="url(#gold)" stroke-width="14"/>
+ <path d="M256 120c72 40 125 93 125 159 0 64-47 110-125 132-78-22-125-68-125-132 0-66 53-119 125-159Z" fill="none" stroke="#ba8f81" stroke-opacity=".42" stroke-width="2"/>
+ <path d="M256 359c-21-24-84-60-88-103-5-47 47-69 74-42l14 14 14-14c27-27 79-5 74 42-4 43-67 79-88 103Z" fill="url(#rose)"/>
+ <path d="m256 55 12 27 27 12-27 12-12 27-12-27-27-12 27-12Z" fill="url(#gold)"/>
+ <circle cx="102" cy="257" r="8" fill="#edc993"/><circle cx="410" cy="257" r="8" fill="#edc993"/>
+ <path d="M228 384h56" stroke="#f4d8ab" stroke-width="5" stroke-linecap="round"/>
+</svg>

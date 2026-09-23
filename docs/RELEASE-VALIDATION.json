@@ -1,0 +1,69 @@
+{
+  "schema": "halveth.portal-garden.release-validation/1",
+  "recordedAt": "2026-09-23T01:56:35.774991+00:00",
+  "version": "0.1.0",
+  "engine": "5.8.0-55116800",
+  "configuration": "Win64 Development",
+  "codeLicense": "MIT",
+  "signing": "UNSIGNED",
+  "uatExitCode": 0,
+  "editorGameplay": "PASS_24_STEPS_NULLRHI",
+  "packagedGameplay": {
+    "schema": 1,
+    "passed": true,
+    "seed": 127,
+    "detail": "portals_love_collision_recovery_quality_inventory_shield_npc_dodge_four_projectile_hits_crystal_regeneration",
+    "engine": "5.8.0-55116800+++UE5+Release-5.8",
+    "renderingVerified": false
+  },
+  "installedGameplay": {
+    "installedGameplayPassed": true,
+    "processExit": 0,
+    "receiptFresh": true,
+    "startedAt": "2026-09-23T01:54:17.8225517Z"
+  },
+  "freshInstallation": {
+    "exitCode": 0,
+    "payloadFilesHashed": 1348,
+    "allMatchedManifest": true
+  },
+  "uninstallation": {
+    "uninstallExit": 0,
+    "preservedFiles": 5,
+    "preservedHashes": true,
+    "registryRemoved": true,
+    "shortcutRemoved": true
+  },
+  "reinstallation": {
+    "reinstallExit": 0,
+    "payloadFilesVerified": 1348,
+    "savesPreserved": true,
+    "ownFixturesRemoved": true,
+    "installedReady": true
+  },
+  "visualObservation": {
+    "standaloneDX12SM6": true,
+    "screenshot": "screenshots/portal-garden-standalone-dx12.png",
+    "physicalInputInPackagedPass": "NOT_VERIFIED; automation foreground activation unavailable",
+    "editorPhysicalQAndF10": "OBSERVED"
+  },
+  "frameSample": "FRAME-SAMPLE.json",
+  "artifacts": [
+    {
+      "file": "HALVETH-Portal-Garden-Setup-0.1.0-x64.exe",
+      "bytes": 328082975,
+      "sha256": "4e3b5f7838c9e213fca23c6c865bf26bd0273e5c88a78ab2b564023f4eb4c03c"
+    },
+    {
+      "file": "HALVETH-Portal-Garden-0.1.0-Windows-portable.zip",
+      "bytes": 405833383,
+      "sha256": "70606c109958806a0fbb44748008129731004b01ecb586584328468ff1cc813d"
+    }
+  ],
+  "limitations": [
+    "Prototype: authored guide dialogue, procedural figures, four small realms.",
+    "No persistent game progress, campaign, online AI or multiplayer in this Unreal release.",
+    "Tested on one existing Windows installation; clean-machine prerequisites not tested.",
+    "Game-state smoke uses NullRHI; rendering was checked separately."
+  ]
+}

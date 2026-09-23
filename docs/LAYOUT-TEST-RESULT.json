@@ -1,0 +1,20 @@
+{
+  "schema": "halveth.layout-test.v1",
+  "checkedAt": "2026-09-23",
+  "compiler": "MSVC 14.51.36231, C++20",
+  "productionSource": "Source/HALVETHRealms/Public/RealmLayout.h",
+  "testSource": "tests/layout_test.cpp",
+  "passed": true,
+  "seedRealmSamples": 20,
+  "propPlacements": 800,
+  "reversibleDirectedPortalRoutes": 6,
+  "seed127Fingerprints": [
+    "15480670318311666167",
+    "15103696736554213914",
+    "8776491094132948516",
+    "11426871535637314886"
+  ],
+  "fingerprintKind": "non-cryptographic FNV1a-style regression fingerprint",
+  "sourceDeliveryTestsPassed": 3,
+  "claimScope": "Production layout header compiled and executed; source-delivery contract checked. This receipt does not assert engine compilation, runtime rendering, visual quality or storefront publication."
+}

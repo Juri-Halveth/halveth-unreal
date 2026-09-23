@@ -1,0 +1,53 @@
+name: Source contracts
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  portable-source:
+    name: Portable source (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.13'
+      - name: Test source and export contracts
+        run: python -m unittest discover -s tests -v
+      - name: Validate project structure
+        run: python scripts/validate_project.py
+      - name: Compile and run the production layout with GCC
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          mkdir -p dist/layout
+          g++ -std=c++20 -Wall -Wextra -Werror tests/layout_test.cpp -o dist/layout/layout_test
+          ./dist/layout/layout_test
+      - name: Compile and run the production layout with MSVC
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: |
+          for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do set "VSROOT=%%i"
+          if not defined VSROOT exit /b 1
+          call "%VSROOT%\VC\Auxiliary\Build\vcvars64.bat"
+          if errorlevel 1 exit /b 1
+          if not exist dist\layout mkdir dist\layout
+          cl /nologo /std:c++20 /EHsc /W4 /WX tests\layout_test.cpp /Fo:dist\layout\layout_test.obj /Fe:dist\layout\layout_test.exe
+          if errorlevel 1 exit /b 1
+          dist\layout\layout_test.exe
+      - name: Verify source export and licensed art hashes
+        run: python scripts/package_source.py --check
