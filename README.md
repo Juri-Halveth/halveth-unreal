@@ -1,5 +1,14 @@
 # HALVETH Portal Garden 0.2.0
 
+<!-- HALVETH_WORK_CERTIFICATES_V1_1 -->
+## Juri Janovski / Juri Halveth – Privates HALVETH-Werkzertifikat
+
+[Privates HALVETH-Werkzertifikat: Dokumentierte portable C++-Quellprüfungen – HALVETH Portal Garden](https://juri-halveth.github.io/werkzertifikate/#werk-halveth-unreal).
+
+HALVETH VERACHEL STUDIOS · Quellstand, dokumentierte Ergebnisse und SHA-256-Belege stehen im Werkzertifikat. Private, mit Codex erstellte Werkdokumentation; keine ISTQB- oder sonstige Personenzertifizierung.
+<!-- /HALVETH_WORK_CERTIFICATES_V1_1 -->
+
+
 An independent native C++ world prototype for **Unreal Engine 5.8**. Explore four luminous realms, learn from original books, turn recipes into useful items, enchant your magic and place structures in the garden. The world is generated locally from a small seed. The prototype runs offline without a browser, server, wallet, account or AI subscription.
 
 **0.2 adds the Living Library:** read original lore, learn recipes, practise crafting and carry your constructions back through the portals. See the [0.2 native validation](docs/NATIVE-VALIDATION-0.2.0.md) and [versioned release record](docs/RELEASE-VALIDATION-0.2.0.json) for the tested build and its limits.
