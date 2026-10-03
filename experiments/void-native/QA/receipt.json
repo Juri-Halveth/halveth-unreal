@@ -1,0 +1,79 @@
+{
+  "schema": "halveth-void-soul-review/1.0",
+  "recorded_at": "2026-10-03T20:37:55.078322+00:00",
+  "engine": "Unreal Engine 5.8.0",
+  "scope": "four bounded native soulseed runs: zero, symbolic expression, 240-digit number, multiline UTF-8 file; seven resolver roundtrips",
+  "recipe": "sha256-domain-utf8-v1; all eight digest words participate in terrain",
+  "numeric_upper_bound": "NONE_IN_INPUT_API",
+  "default_soulseed": "0",
+  "renderer_observed": "PCD3D_SM6",
+  "image_size": [
+    1920,
+    1080
+  ],
+  "reports": [
+    {
+      "file": "QA/soul-expression.json",
+      "sha256": "2b453ae50b0421a9342c291b4f7dc1c50989001d9506b106dc874eb3074834dd",
+      "soul_id": "dab863eaf187f3b5a5b797b51472dc6c3d27586e12b49d4e41f82bc11d378388",
+      "soulseed_utf8_bytes": 10,
+      "observed_file_write_utc": "2026-10-03T20:30:45.377340+00:00"
+    },
+    {
+      "file": "QA/soul-file.json",
+      "sha256": "d70138761e6b4d3cb7d5524d5d0175f1744c15d0b3e43d1950d21054fad8f6af",
+      "soul_id": "598bc8fb0f4ff55021b04dcc601f6813ade68b414d237bc9c7dda1effb0e7faf",
+      "soulseed_utf8_bytes": 45,
+      "observed_file_write_utc": "2026-10-03T20:35:18.623827+00:00"
+    },
+    {
+      "file": "QA/soul-large.json",
+      "sha256": "844f4d1204ed5ea7463be965cb414ffc5168a58d614900a72cbdeed6451acb70",
+      "soul_id": "0184ec66bfeefc38d1d34f25a051854961f704a35dbf11117b07345215f8417c",
+      "soulseed_utf8_bytes": 240,
+      "observed_file_write_utc": "2026-10-03T20:32:11.458242+00:00"
+    },
+    {
+      "file": "QA/soul-zero.json",
+      "sha256": "a2478fe86087fa0779b527b5dbbc38b93608cadbc394096de97cc507f863e276",
+      "soul_id": "b6b1319c427f55ea5584486f01b6d7ae06b4922b73a32539abae53c66121d8b3",
+      "soulseed_utf8_bytes": 1,
+      "observed_file_write_utc": "2026-10-03T20:29:07.194627+00:00"
+    }
+  ],
+  "images": [
+    {
+      "file": "Preview/VOID-inventory.png",
+      "sha256": "fc64efaeec291c61a43536ee25c0dfb72b7d6aaf0118c855f98dfda59636e679",
+      "captured_file_write_utc": "2026-10-03T20:29:28.506035+00:00"
+    },
+    {
+      "file": "Preview/VOID-overlook.png",
+      "sha256": "170854f9f4c081f8ee580bca9fd40c57ef61fa851488fc35d57e41042dcb845c",
+      "captured_file_write_utc": "2026-10-03T20:29:24.514240+00:00"
+    },
+    {
+      "file": "Preview/VOID-shore.png",
+      "sha256": "121187272841b046f3e976d1cba45e26e87da33148b46af8272331c96f9383e3",
+      "captured_file_write_utc": "2026-10-03T20:29:16.724898+00:00"
+    }
+  ],
+  "visual_soulseed": "0",
+  "visual_observations": [
+    "open shoreline visible",
+    "fine fern mask visible",
+    "hover description and values visible"
+  ],
+  "open_visual_work": [
+    "dark shadows",
+    "soft rock close-ups",
+    "sharp wet/dry shoreline"
+  ],
+  "open_gameplay_work": [
+    "NPCs and quests",
+    "collectible items",
+    "swimming",
+    "playable portals",
+    "continuous chunk streaming"
+  ]
+}
