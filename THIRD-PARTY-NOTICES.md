@@ -40,6 +40,6 @@ The product credits reproduce Epic's prescribed notice text with the actual prod
 
 ## Current nature and character assets
 
-Poly Haven assets use their bound CC0 source records. MakeHuman hm08 core anatomy, rig, skinning and skin maps retain SOURCES.json. Authored CC0 clothing, footwear and hair are bound in ArtSource/Characters/wardrobe-sources.json. System assets were expressly released to CC0 in September 2020 by Data Collection AB, Joel Palmius and Jonas Hauquier; the selected Culturalibre garment is expressly CC0. Original author headers are retained.
+Tree Small 02 (Rico Cilliers), Fern 02 (Rob Tuytel/Rico Cilliers) and Rock Moss Set 01 (Kless Gyzen) retain their bound Poly Haven CC0 records. MakeHuman hm08 core anatomy, rig, skinning and skin maps retain SOURCES.json. Authored CC0 clothing, footwear and hair are bound in ArtSource/Characters/wardrobe-sources.json. System assets were expressly released to CC0 in September 2020 by Data Collection AB, Joel Palmius and Jonas Hauquier. Original author headers are retained.
 
 The hm08 affine attachment reader is independent MIT code. Blender and its bundled FBX parser/writer remain separately licensed tools. Current source exports contain CC0 character inputs and MIT builders; Unreal binaries, vendor content, retail Morrowind assets, saves and raw runtime logs stay local.
