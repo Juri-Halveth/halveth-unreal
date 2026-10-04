@@ -19,6 +19,20 @@ private retail-derived clothing files are not part of this public repository.
 
 ## Verified current development build
 
+The 2026-10-04 world-contact increment gives every placed tree a simple colliding
+trunk. The following body/development increment replaces the fixed 6 × 5.2 metre
+patrol with individual terrain-supported goal selection, exploration, book and
+portal visits, and recovery. Ground probes and capsule sweeps steer the next step;
+translational velocity drives gait,
+avoiding invented strides from turning in place. Capture cameras and
+dialogue tests follow the moving guide. See [world-contact scope and measurements](docs/WORLD-SCALE.md).
+
+The current body increment derives pelvis support from anatomical leg lengths,
+removes the permanent crouch and independent eye oscillation, rebuilds face
+targets, and connects reserve, breathing and response to actual movement.
+A growing virtual genome records development events and adapts future behavior.
+See [body and development](docs/BODY-AND-DEVELOPMENT.md) and its current receipt.
+
 The C++ build and the 31-step native gameplay sequence passed. Three character
 checks verified the skeleton, eight morph targets and sampled internal head/hand
 motion. Native motion capture additionally tested a 1.5 metre fall, walkable
@@ -34,7 +48,8 @@ separate modeled footwear. Runtime stance targets narrow the rigging A-pose and
 relax the hands beside the body. The regeneration entry point also refreshes its
 public byte inventory after FBX sanitizing.
 
-See [the current character rebuild receipt](QA/native-character-rebuild.json),
+See [the current body and development receipt](QA/native-body-development.json),
+[the previous character rebuild receipt](QA/native-character-rebuild.json),
 [the historical landscape receipt](QA/native-landscape.json),
 [motion, gravity and sky](docs/MOTION-EARTH-SKY.md),
 [character construction](docs/CHARACTERS.md) and
@@ -57,7 +72,8 @@ prepares authored geometry and character assets and compiles changed source.
 Later starts reuse bound local assets. `GARDEN_ENGINE` selects the engine;
 `GARDEN_PYTHON` selects Python; `GARDEN_VOID_ROOT` selects a local VOID source tree.
 `bash GARDEN.sh check` runs native gameplay checks; `bash GARDEN.sh visual` runs
-the automated rendered capture. Bash orchestrates the native C++ game and art tools.
+the automated rendered capture. `bash GARDEN.sh motion` runs a short motion/gravity
+capture with sparse 2 Hz stills. Bash orchestrates the native C++ game and art tools.
 `bash GARDEN.sh sky` refreshes the Sun data. The observer is a declared virtual
 site, 45° N and 0° E. Cached later days repeat the explicitly dated path; clouds,
 stars and night fill are authored, rather than a live weather or Moon service.

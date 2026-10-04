@@ -9,6 +9,7 @@
 #include "EarthDynamicsMath.h"
 #include "CollisionShape.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Engine/SkeletalMesh.h"
 #include "Animation/AnimSequence.h"
 #include "Animation/AnimSingleNodeInstance.h"
@@ -28,9 +29,26 @@
 #include "Materials/MaterialInstanceDynamic.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Kismet/GameplayStatics.h"
+#include "Misc/CommandLine.h"
+#include "Misc/Parse.h"
+#include "GuideGenome.h"
+#include "HAL/PlatformMisc.h"
+#include "Misc/Paths.h"
+#include "Misc/FileHelper.h"
+#include "Misc/DateTime.h"
+#include "Misc/Guid.h"
+#include "HAL/PlatformFileManager.h"
+#include "Serialization/JsonWriter.h"
+#include "Serialization/JsonSerializer.h"
+THIRD_PARTY_INCLUDES_START
+#include <openssl/sha.h>
+THIRD_PARTY_INCLUDES_END
 
 namespace
 {
+    bool HashBodyData(const void* Data,uint32 Bytes,FSHA256Signature& Out){
+        return SHA256(static_cast<const unsigned char*>(Data),Bytes,Out.Signature)!=nullptr;
+    }
     FLinearColor RealmColor(int32 Realm)
     {
         switch (Realm)
@@ -205,12 +223,17 @@ void AHALVETHRealmWorld::Portal(FVector Position, int32 Destination, FLinearColo
 void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
 {
     if (!HalvethLayout::ValidRealm(Realm)) return;
+    if(BodyOrigin.IsEmpty()){
+        if(!FParse::Value(FCommandLine::Get(),TEXT("HalvethBodyOrigin="),BodyOrigin))BodyOrigin=FString::Printf(TEXT("HALVETH/body-origin/v1/seed/%u"),Seed);
+    }
     if (TrainingTarget) { TrainingTarget->Destroy(); TrainingTarget = nullptr; }
     for(auto GuideActor:GuideActors)if(GuideActor)GuideActor->Destroy();GuideActors.Empty();
     GuideHeads.Empty();
     GuideBodies.Empty(); GuideOrigins.Empty(); GuideIdentities.Empty();
     GuideBoneBaseline.Empty();GuidePoseChanged.Empty();
-    GuidePatrolTime.Empty();GuideHandBaseline.Empty();GuideHandTravel.Empty();GuideHeadBaseline.Empty();GuideHeadTravel.Empty();
+    GuidePatrolTime.Empty();GuideSpatialTravel.Empty();GuideHandBaseline.Empty();GuideHandTravel.Empty();GuideHeadBaseline.Empty();GuideHeadTravel.Empty();
+    GuideChoices.Empty();GuideGoals.Empty();GuideDecisionAt.Empty();GuideRestUntil.Empty();GuideBlockedTime.Empty();GuideDecisionCount.Empty();
+    GuideProfiles.Empty();GuideBodyStates.Empty();
     SoilComponents.Empty();SoilCenters.Empty();SoilVertices.Empty();SoilColors.Empty();SoilLoads.Empty();SoilDepths.Empty();Stars.Empty();
     Portals.Empty(); Fireflies.Empty(); FireflyOrigins.Empty();
     LoveOrb = nullptr; LoveLight = nullptr;
@@ -299,7 +322,17 @@ void AHALVETHRealmWorld::Guide(FVector Position, int32 Identity)
     if(auto* Motion=Cast<UHALVETHGuideAnimInstance>(Body->GetAnimInstance())){Motion->BaseIdle=Idle;Motion->Identity=Identity;}
     GuideBodies.Add(Body); GuideOrigins.Add(Position); GuideIdentities.Add(Identity);
     GuideBoneBaseline.Add(FQuat::Identity);GuidePoseChanged.Add(false);
-    GuidePatrolTime.Add(Identity*3.7);GuideHandBaseline.Add(FVector::ZeroVector);GuideHandTravel.Add(0);GuideHeadBaseline.Add(FQuat::Identity);GuideHeadTravel.Add(0);
+    GuidePatrolTime.Add(Identity*3.7);GuideSpatialTravel.Add(0);GuideHandBaseline.Add(FVector::ZeroVector);GuideHandTravel.Add(0);GuideHeadBaseline.Add(FQuat::Identity);GuideHeadTravel.Add(0);
+    GuideChoices.Emplace(Identity*7919+CurrentRealm*104729);GuideGoals.Add(GuideActor->GetActorLocation());
+    GuideDecisionAt.Add(0);GuideRestUntil.Add(0);GuideBlockedTime.Add(0);GuideDecisionCount.Add(0);
+    if(!BodyLineages.Contains(Identity)){
+        FHALVETHBodyLineage Line;Line.Profile=HalvethBody::Profile::ForIdentity(Identity);
+        Line.JournalPath=FPaths::ProjectSavedDir()/TEXT("BodyLineage")/(FGuid::NewGuid().ToString(EGuidFormats::Digits)+FString::Printf(TEXT("-entity-%d.jsonl"),Identity));
+        BodyLineages.Add(Identity,MoveTemp(Line));GrowBodyLineage(Identity,TEXT("birth"));
+    }
+    GuideProfiles.Add(BodyLineages[Identity].Profile);GuideBodyStates.Add(BodyLineages[Identity].State);
+    GuideActor->GetCharacterMovement()->MaxWalkSpeed=GuideProfiles.Last().paceCmS;
+    GuideActor->GetCharacterMovement()->Mass=GuideProfiles.Last().massKg;
     UE_LOG(LogTemp,Display,TEXT("GARDEN_GUIDE_READY identity=%d skeletal=%d idle=%d own_clothing=true cc0_human=true morphs=%d"),Identity,Body->GetSkeletalMeshAsset()!=nullptr,Idle!=nullptr,Body->GetSkeletalMeshAsset()?Body->GetSkeletalMeshAsset()->GetMorphTargets().Num():0);
     auto* Glow=Light(Position + FVector(0, -65, 160), Color, 180, 290);
     Glow->AttachToComponent(Body,FAttachmentTransformRules::KeepWorldTransform);
@@ -315,6 +348,64 @@ FVector AHALVETHRealmWorld::GetGuidePosition(int32 Identity) const {
 AHALVETHGuideCharacter* AHALVETHRealmWorld::GetGuideCharacter(int32 Identity) const {
     for(int I=0;I<GuideIdentities.Num();I++)if(GuideIdentities[I]==Identity&&GuideActors.IsValidIndex(I))return GuideActors[I];
     return nullptr;
+}
+
+void AHALVETHRealmWorld::GrowBodyLineage(int32 Identity,const FString& Event){
+    auto* Line=BodyLineages.Find(Identity);if(!Line)return;
+    const FString Parent=Line->Digest;
+    auto Record=MakeShared<FJsonObject>();
+    Record->SetStringField(TEXT("schema"),TEXT("halveth.virtual-body-lineage.v2"));
+    Record->SetStringField(TEXT("lineageId"),FPaths::GetBaseFilename(Line->JournalPath));
+    Record->SetStringField(TEXT("entityId"),FString::Printf(TEXT("halveth-guide-%d"),Identity));
+    Record->SetStringField(TEXT("event"),Event);Record->SetStringField(TEXT("recordedAt"),FDateTime::UtcNow().ToIso8601());
+    Record->SetNumberField(TEXT("simulationSeconds"),Elapsed);Record->SetStringField(TEXT("parentDigest"),Parent);
+    Record->SetStringField(TEXT("generation"),LexToString(Line->Generation));
+    Record->SetNumberField(TEXT("muscleReserve"),Line->State.muscleReserve);
+    if(Line->Generation==0){
+        FTCHARToUTF8 OriginBytes(*BodyOrigin);FSHA256Signature OriginSignature;
+        if(!HashBodyData(OriginBytes.Get(),OriginBytes.Length(),OriginSignature))return;
+        Record->SetStringField(TEXT("originDigest"),OriginSignature.ToString());
+    }
+    FString Payload;FJsonSerializer::Serialize(Record,TJsonWriterFactory<TCHAR,TCondensedJsonPrintPolicy<TCHAR>>::Create(&Payload));
+    FTCHARToUTF8 Bytes(*Payload);FSHA256Signature Signature;
+    if(!HashBodyData(Bytes.Get(),Bytes.Length(),Signature)){
+        UE_LOG(LogTemp,Warning,TEXT("GARDEN_GENOME_WRITE identity=%d result=hash_unavailable"),Identity);return;
+    }
+    HalvethGenome::Digest Data;for(int J=0;J<32;J++)Data[J]=Signature.Signature[J];
+    const std::string Bases=HalvethGenome::Encode(Data);auto NextProfile=Line->Profile;
+    if(Line->Generation==0){
+        NextProfile.massKg*=.97+.06*double(Data[0])/255.;
+        NextProfile.paceCmS=56+28*double(Data[1])/255.;
+        NextProfile.curiosity=double(Data[2])/255.;NextProfile.reactionSeconds=.14+.12*double(Data[3])/255.;
+    }else{
+        NextProfile.curiosity+=.01*(Line->State.muscleReserve-.5);
+        NextProfile.paceCmS+=.025*(Line->State.muscleReserve-.5);
+    }
+    Record->SetStringField(TEXT("sourcePayload"),Payload);
+    Record->SetStringField(TEXT("sourceDigest"),Signature.ToString());Record->SetStringField(TEXT("newBases"),UTF8_TO_TCHAR(Bases.c_str()));
+    Record->SetNumberField(TEXT("massKg"),NextProfile.massKg);Record->SetNumberField(TEXT("paceCmS"),NextProfile.paceCmS);
+    Record->SetNumberField(TEXT("curiosity"),NextProfile.curiosity);Record->SetNumberField(TEXT("reactionSeconds"),NextProfile.reactionSeconds);
+    FString Encoded;FJsonSerializer::Serialize(Record,TJsonWriterFactory<TCHAR,TCondensedJsonPrintPolicy<TCHAR>>::Create(&Encoded));
+    FTCHARToUTF8 RecordBytes(*Encoded);FSHA256Signature RecordSignature;
+    if(!HashBodyData(RecordBytes.Get(),RecordBytes.Length(),RecordSignature))return;
+    FPlatformFileManager::Get().GetPlatformFile().CreateDirectoryTree(*FPaths::GetPath(Line->JournalPath));
+    if(!FFileHelper::SaveStringToFile(Encoded+TEXT("\n"),*Line->JournalPath,FFileHelper::EEncodingOptions::ForceUTF8WithoutBOM,&IFileManager::Get(),FILEWRITE_Append)){
+        UE_LOG(LogTemp,Warning,TEXT("GARDEN_GENOME_WRITE identity=%d result=journal_failed"),Identity);return;
+    }
+    Line->Profile=NextProfile;Line->Digest=RecordSignature.ToString();Line->Genome+=UTF8_TO_TCHAR(Bases.c_str());Line->Generation++;
+    UE_LOG(LogTemp,Display,TEXT("GARDEN_GENOME_WRITE identity=%d generation=%llu bases=%d parent=%s digest=%s result=appended"),Identity,Line->Generation,Line->Genome.Len(),*Parent,*Line->Digest);
+}
+
+bool AHALVETHRealmWorld::VerifyGuidePatrol() const
+{
+    if (GuideSpatialTravel.Num() != 3) return false;
+    for (int32 I=0; I<GuideSpatialTravel.Num(); ++I)
+    {
+        const bool Passed = GuideSpatialTravel[I] >= 150.;
+        UE_LOG(LogTemp,Display,TEXT("GARDEN_PATROL_AUDIT identity=%d passed=%d observed_max_distance_cm=%.5f required_distance_cm=150"),GuideIdentities[I],Passed,GuideSpatialTravel[I]);
+        if (!Passed) return false;
+    }
+    return true;
 }
 
 bool AHALVETHRealmWorld::VerifyCharacters() const
@@ -335,6 +426,9 @@ bool AHALVETHRealmWorld::VerifyCharacters() const
         const bool Motion=GuidePoseChanged.IsValidIndex(I)&&GuidePoseChanged[I];
         UE_LOG(LogTemp,Display,TEXT("GARDEN_CHARACTER_AUDIT identity=%d skeleton_animation_morphs=%d sampled_internal_pose_change=%d"),GuideIdentities[I],Bound,Motion);
         UE_LOG(LogTemp,Display,TEXT("GARDEN_MOTION_AUDIT identity=%d hand_travel_cm=%.5f head_angle_radians=%.5f independent_bones=1 foot_ik=1"),GuideIdentities[I],GuideHandTravel[I],GuideHeadTravel[I]);
+        UE_LOG(LogTemp,Display,TEXT("GARDEN_GUIDE_WALK_EXTENT identity=%d observed_max_distance_from_start_cm=%.5f decisions=%d locomotion=terrain_checked_individual_goal_selection"),GuideIdentities[I],GuideSpatialTravel[I],GuideDecisionCount[I]);
+        const auto& Phys=GuideBodyStates[I];const auto& Genes=GuideProfiles[I];const auto Mass=HalvethBody::MassBudget(Genes.massKg);
+        UE_LOG(LogTemp,Display,TEXT("GARDEN_BODY_AUDIT identity=%d model=fictional_gameplay_physiology mass_kg=%.5f tissue_budget_kg=%.5f muscle_reserve=%.5f muscle_power=%.5f oxygen_supply=%.5f heart_rate_bpm=%.5f breathing_rate_per_min=%.5f reaction_seconds=%.5f tendon_strain=%.5f decisions=%d"),GuideIdentities[I],Genes.massKg,Mass.total(),Phys.muscleReserve,Phys.musclePower,Phys.oxygenSupply,Phys.heartRateBpm,Phys.breathsPerMinute,Phys.reactionSeconds,Phys.tendonStrain,GuideDecisionCount[I]);
         if(!Bound||!Motion||GuideHandTravel[I]<1.0||GuideHeadTravel[I]<.01)return false;
     }
     return true;
@@ -427,22 +521,81 @@ void AHALVETHRealmWorld::Tick(float DeltaSeconds)
         Body->SetMorphTarget(TEXT("Blink"),Blink);
         auto* GuideActor=GuideActors.IsValidIndex(I)?GuideActors[I].Get():nullptr;if(!GuideActor)continue;
         auto* Movement=GuideActor->GetCharacterMovement();
+        auto& Phys=GuideBodyStates[I];auto& Genes=GuideProfiles[I];
+        Phys.advance(Genes,Movement->IsMovingOnGround()?Movement->Velocity.Size2D():0,DeltaSeconds);
+        Movement->MaxWalkSpeed=Genes.paceCmS*Phys.musclePower;
+        Movement->MaxAcceleration=260*Phys.musclePower;
+        Motion->BodyBreathPhase=Phys.breathPhase;Motion->BodyHeartPhase=Phys.heartPhase;
+        Motion->BodyLoad=1-Phys.oxygenSupply;Motion->ResponseSeconds=Phys.reactionSeconds;
+        Motion->CruiseSpeed=Genes.paceCmS;BodyLineages[GuideIdentities[I]].State=Phys;
         const FVector Before=Body->GetComponentLocation();
+        GuideSpatialTravel[I]=FMath::Max(GuideSpatialTravel[I],FVector::DistXY(Before,GetActorLocation()+GuideOrigins[I]));
         FVector Difference=Player?Player->GetActorLocation()-Body->GetComponentLocation():FVector(0,-5000,0);
         const bool Near=Difference.SizeSquared2D()<FMath::Square(360.f);
         const bool Speaking=Near&&Player&&Player->GetAdventure()&&Body->ComponentTags.Num()>0
             &&Player->GetAdventure()->IsSpeakingTo(Body->ComponentTags[0]);
-        if(!Near) {
-            GuidePatrolTime[I]+=DeltaSeconds;
-            const double T=GuidePatrolTime[I];
-            FVector Goal=GetActorLocation()+GuideOrigins[I]+FVector(75*FMath::Sin(T*.37),55*FMath::Sin(T*.29),0);
-            FVector Direction=Goal-Before;Direction.Z=0;
-            const FVector Next=Before+Direction.GetSafeNormal()*65;
+        // Ordinary proximity permits movement. A conversation pauses it;
+        // development still portraits explicitly hold their nearby subjects.
+        const bool PortraitHold=Near&&FParse::Param(FCommandLine::Get(),TEXT("HalvethVisual"));
+        if(!Speaking&&!PortraitHold) {
+            if(Phys.muscleReserve<.22&&Elapsed>=GuideRestUntil[I]){
+                GuideRestUntil[I]=Elapsed+12;GuideDecisionAt[I]=GuideRestUntil[I];
+                UE_LOG(LogTemp,Display,TEXT("GARDEN_GUIDE_INTENT identity=%d event=muscle_recovery time_s=%.5f until_s=%.5f reserve=%.5f"),GuideIdentities[I],Elapsed,GuideRestUntil[I],Phys.muscleReserve);
+                GrowBodyLineage(GuideIdentities[I],TEXT("muscle_recovery"));Genes=BodyLineages[GuideIdentities[I]].Profile;
+            }
             FCollisionQueryParams Query(SCENE_QUERY_STAT(GuidePatrol),true);Query.AddIgnoredActor(GuideActor);
-            FHitResult Support;
-            const FVector GroundPoint=Next;
-            const bool Supported=GetWorld()->LineTraceSingleByChannel(Support,GroundPoint+FVector(0,0,150),GroundPoint-FVector(0,0,250),ECC_Visibility,Query);
-            if(Supported&&Direction.Size2D()>3)GuideActor->AddMovementInput(Direction.GetSafeNormal(),FMath::Clamp(Direction.Size2D()/30,0.,1.),true);
+            auto& Choice=GuideChoices[I];
+            if(GuideDecisionCount[I]>0&&Elapsed>=GuideRestUntil[I]&&FVector::Dist2D(Before,GuideGoals[I])<35&&Elapsed<GuideDecisionAt[I]){
+                GuideRestUntil[I]=Elapsed+Choice.FRandRange(2.0,4.5);
+                GuideDecisionAt[I]=GuideRestUntil[I];
+                UE_LOG(LogTemp,Display,TEXT("GARDEN_GUIDE_INTENT identity=%d event=rest time_s=%.5f until_s=%.5f"),GuideIdentities[I],Elapsed,GuideRestUntil[I]);
+                GrowBodyLineage(GuideIdentities[I],TEXT("rest"));Genes=BodyLineages[GuideIdentities[I]].Profile;
+            }
+            if(Elapsed>=GuideDecisionAt[I]&&Elapsed>=GuideRestUntil[I]){
+                bool Chosen=false;FString Kind=TEXT("explore");
+                for(int Attempt=0;Attempt<12&&!Chosen;Attempt++){
+                    const double Angle=Choice.FRandRange(-PI,PI),Distance=Choice.FRandRange(450,800);
+                    FVector Goal=Before+FVector(FMath::Cos(Angle)*Distance,FMath::Sin(Angle)*Distance,0);
+                    // Curiosity can turn a later walk towards an actual book or portal.
+                    if(Attempt==0&&GuideDecisionCount[I]>0&&Choice.FRand()<.2+.35*Genes.curiosity){
+                        if(Choice.FRand()<.5&&Portals.Num()>0){Goal=Portals[Choice.RandRange(0,Portals.Num()-1)].Position+GetActorLocation()+FVector(80,-100,0);Kind=TEXT("visit_portal");}
+                        else if(ReadablePositions.Num()>0){TArray<int32> Books;ReadablePositions.GetKeys(Books);Books.Sort();Goal=ReadablePositions[Books[Choice.RandRange(0,Books.Num()-1)]]+GetActorLocation()+FVector(80,-100,0);Kind=TEXT("visit_book");}
+                    }else Kind=TEXT("explore");
+                    const FVector LocalGoal=Goal-GetActorLocation();
+                    if(FMath::Abs(LocalGoal.X)>27500||FMath::Abs(LocalGoal.Y)>27500||FVector::Dist2D(Goal,Before)<200)continue;
+                    FHitResult Ground;
+                    if(GetWorld()->LineTraceSingleByChannel(Ground,Goal+FVector(0,0,1500),Goal-FVector(0,0,1500),ECC_Visibility,Query)&&Ground.ImpactNormal.Z>.75){
+                        Goal.Z=Ground.ImpactPoint.Z;GuideGoals[I]=Goal;Chosen=true;
+                    }
+                }
+                if(Chosen){
+                    GuideDecisionCount[I]++;GuideDecisionAt[I]=Elapsed+Choice.FRandRange(12,19);GuideBlockedTime[I]=0;
+                    UE_LOG(LogTemp,Display,TEXT("GARDEN_GUIDE_INTENT identity=%d event=choose sequence=%d kind=%s time_s=%.5f target=%s"),GuideIdentities[I],GuideDecisionCount[I],*Kind,Elapsed,*GuideGoals[I].ToString());
+                    GrowBodyLineage(GuideIdentities[I],Kind);Genes=BodyLineages[GuideIdentities[I]].Profile;
+                }else {GuideDecisionAt[I]=Elapsed+1;GuideRestUntil[I]=Elapsed+1;}
+            }
+            FVector Direction=GuideGoals[I]-Before;Direction.Z=0;
+            auto SafeDirection=[&](FVector Candidate) {
+                const FVector Next=Before+Candidate*85;
+                FHitResult Support;
+                if(!GetWorld()->LineTraceSingleByChannel(Support,Next+FVector(0,0,150),Next-FVector(0,0,250),ECC_Visibility,Query)
+                    ||Support.ImpactNormal.Z<.70||Support.ImpactPoint.Z-Before.Z>Movement->MaxStepHeight)return false;
+                const FVector Centre=GuideActor->GetActorLocation();
+                const auto* Capsule=GuideActor->GetCapsuleComponent();
+                FHitResult Obstacle;
+                return !GetWorld()->SweepSingleByChannel(Obstacle,Centre,Centre+Candidate*85,FQuat::Identity,ECC_Pawn,
+                    FCollisionShape::MakeCapsule(Capsule->GetScaledCapsuleRadius(),Capsule->GetScaledCapsuleHalfHeight()-3),Query);
+            };
+            bool Advanced=false;
+            if(Elapsed>=GuideRestUntil[I]&&Direction.Size2D()>35) {
+                const FVector Forward=Direction.GetSafeNormal();
+                for(double Turn:{0.,60.,-60.}) {
+                    const FVector Candidate=Forward.RotateAngleAxis(Turn,FVector::UpVector);
+                    if(SafeDirection(Candidate)) {GuideActor->AddMovementInput(Candidate,FMath::Clamp(Direction.Size2D()/85,0.,1.),true);Advanced=true;break;}
+                }
+            }
+            GuideBlockedTime[I]=Advanced?0:GuideBlockedTime[I]+DeltaSeconds;
+            if(Elapsed>=GuideRestUntil[I]&&GuideBlockedTime[I]>1.5){GuideDecisionAt[I]=Elapsed;GuideBlockedTime[I]=0;}
         }
         const FVector Velocity=Movement->Velocity;
         FRotator Facing=GuideActor->GetActorRotation();
@@ -452,10 +605,10 @@ void AHALVETHRealmWorld::Tick(float DeltaSeconds)
             double Angle=FMath::Atan2(FVector::DotProduct(Local,Motion->Right),FVector::DotProduct(Local,Motion->Forward));
             if(FMath::Abs(Angle)>.55)Facing.Yaw=Difference.Rotation().Yaw;
         }
-        const float PreviousYaw=GuideActor->GetActorRotation().Yaw;
-        GuideActor->SetActorRotation(FMath::RInterpTo(GuideActor->GetActorRotation(),Facing,DeltaSeconds,1.0));
-        const double Turn=FMath::Abs(FMath::FindDeltaAngleDegrees(PreviousYaw,GuideActor->GetActorRotation().Yaw))/FMath::Max(DeltaSeconds,SMALL_NUMBER);
-        Motion->DesiredSpeed=Movement->IsMovingOnGround()?FMath::Max(Velocity.Size2D(),Turn>.5?FMath::Min(18.,Turn*.2):0.):0;
+        GuideActor->SetActorRotation(FMath::RInterpTo(GuideActor->GetActorRotation(),Facing,DeltaSeconds,2.3));
+        // Translation drives strides. Turning towards a speaker must not leave
+        // a planted walking foot behind while the capsule rotates in place.
+        Motion->DesiredSpeed=Movement->IsMovingOnGround()?Velocity.Size2D():0;
         Motion->Speaking=Speaking;
         FVector EyeTarget=Player?Player->GetActorLocation()+FVector(0,0,55)-Body->GetComponentLocation():FVector(0,0,0);
         EyeTarget=Body->GetComponentTransform().InverseTransformVectorNoScale(EyeTarget);

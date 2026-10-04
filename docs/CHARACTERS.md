@@ -34,8 +34,8 @@ names no longer collide in Unreal's case-insensitive package namespace.
 
 The runtime derives anatomical axes before narrowing the rigging stance to 55%
 of its original width. Limb solving moves hips/knees into that stance rather than
-scaling the body. Relaxed hand targets use 97.5% of arm reach and stronger opposed
-arm swing while walking. The footwear source extends about 3.2 cm below the body
+scaling the body. The body/development increment relaxes hand targets to 99.3%
+of arm reach with opposed arm swing while walking. The footwear source extends about 3.2 cm below the body
 origin; the foot contact target includes that sole clearance.
 
 `ArtSource/Characters/SOURCES.json` binds source URLs and selected skin members.

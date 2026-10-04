@@ -1,0 +1,390 @@
+{
+  "schema": "halveth.native-body-development.v1",
+  "recordedAt": "2026-10-04T21:51:46.799858+00:00",
+  "project": "HALVETH Portal Garden",
+  "engine": "Unreal Engine 5.8",
+  "states": {
+    "nativeBuildAndGameplay": "PASSED",
+    "bodyAndLineageControls": "PASSED",
+    "renderCapture": "OBSERVED",
+    "convincingHumanArtAcceptance": "OPEN"
+  },
+  "nativeGameplay": {
+    "schema": 1,
+    "passed": true,
+    "seed": 127,
+    "detail": "portals_love_collision_recovery_quality_inventory_shield_npc_dodge_projectiles_crystal_library_recall_crafting_enchantments_scribble_council_construction_realm_persistence_save_restore",
+    "engine": "5.8.0-55116800+++UE5+Release-5.8",
+    "renderingVerified": false
+  },
+  "nativeMotion": {
+    "nativeMotionPassed": true,
+    "requestedFrames": 40,
+    "simulationSeconds": 20.03578,
+    "nominalSamplingHz": 2,
+    "timingFile": "world-scale-motion-frames.tsv",
+    "scope": "Native walking, proximity stop, dialogue and gaze sequence"
+  },
+  "motionScopeCorrection": "Guide walking, falling, following camera, dialogue and gaze. Ordinary proximity permits movement; portrait capture explicitly holds a nearby subject.",
+  "nativeVisual": {
+    "spell_cycle_passed": true,
+    "capture_mode": "native_rendering",
+    "sampled_views": 12
+  },
+  "pose": {
+    "samples": 300,
+    "motionSamples": 240,
+    "visualSamples": 60,
+    "binding": "last_completed_evaluation",
+    "maxAnkleTargetErrorCm": 0.0,
+    "settledIdleSamples": 94,
+    "settledIdleKneeBendDeg": [
+      6.0,
+      12.86092
+    ],
+    "scope": "Component-space ankle endpoint matching and sampled knee bend; does not measure whole sole geometry or visual quality"
+  },
+  "guideMovement": [
+    {
+      "entity": 1,
+      "maxDistanceFromStartCm": 790.92855
+    },
+    {
+      "entity": 2,
+      "maxDistanceFromStartCm": 431.29881
+    },
+    {
+      "entity": 3,
+      "maxDistanceFromStartCm": 710.3436
+    }
+  ],
+  "gravity": {
+    "passed": true,
+    "liftCm": 150.0,
+    "minimumVerticalVelocityCmS": -492.80141,
+    "landingHeightDifferenceCm": 0.04455
+  },
+  "sourceTests": {
+    "run": 17,
+    "passed": 16,
+    "skipped": 1,
+    "skipReason": "Creating symlinks unavailable for the test process"
+  },
+  "mathControls": {
+    "limbSamples": 10000,
+    "supportedHipSamples": 1000,
+    "bodyProfilesLoadAndRecovery": 3,
+    "genomeRoundtrips": 256,
+    "maximumEndpointErrorCm": 2.16103e-14
+  },
+  "virtualGenome": {
+    "model": "Authored virtual gameplay mapping; SHA-256 events reversibly encoded as A/C/G/T",
+    "identityAndStatePersistence": "Across realm transitions in the current session; a new launch starts a fresh lineage",
+    "observedChains": [
+      {
+        "entity": "halveth-guide-2",
+        "records": 11,
+        "bases": 1408,
+        "headDigest": "ecd0cd54357c031562ebd502f143921b4fb4d8676a301657ed7cb5acf86cb5c0",
+        "profileChanged": true,
+        "parentChainPassed": true,
+        "sourceDigestsPassed": true,
+        "genomeMappingPassed": true
+      },
+      {
+        "entity": "halveth-guide-3",
+        "records": 9,
+        "bases": 1152,
+        "headDigest": "d0dc7b0ce2a547702272e247d7b9c41185b3d46d747b8bc5f78d0089e44afe93",
+        "profileChanged": true,
+        "parentChainPassed": true,
+        "sourceDigestsPassed": true,
+        "genomeMappingPassed": true
+      },
+      {
+        "entity": "halveth-guide-1",
+        "records": 10,
+        "bases": 1280,
+        "headDigest": "17e54eafebd7951e492933672ebe9de8fe677a42c0b52b6712eadddf2f035e55",
+        "profileChanged": true,
+        "parentChainPassed": true,
+        "sourceDigestsPassed": true,
+        "genomeMappingPassed": true
+      }
+    ]
+  },
+  "visualReview": {
+    "views": 12,
+    "motionFrames": 40,
+    "nominalMotionHz": 2,
+    "observations": [
+      "Standing posture is more upright.",
+      "Faces remain smooth and wax-like.",
+      "Procedural locomotion remains limited in expressive human movement."
+    ],
+    "remainingWork": [
+      "Skin and facial surface detail",
+      "Expressive gait and facial performance",
+      "Individual internal tissue geometry and deformation"
+    ]
+  },
+  "sourceBindings": [
+    {
+      "path": "scripts/generate_characters.py",
+      "sha256": "b5e1bfc413a2e51233bc935d39f0e90e6672026edcd01acba9b8b700c37e4226"
+    },
+    {
+      "path": "scripts/validate_body_lineage.py",
+      "sha256": "06883cb791ac114e727b675d7820cce472e3d8353e96727afb6c5437113993ff"
+    },
+    {
+      "path": "Source/HALVETHRealms/HALVETHRealms.Build.cs",
+      "sha256": "812fee550e9ebe532a0f9dbd9644845bcdd09ee76b04ce2c053912505d96974a"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/GardenEarthSky.cpp",
+      "sha256": "a69242f0749ac2d68b18367f86f69b73a91bc3da1147c6f21cac2128024c8072"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/GardenLandscape.cpp",
+      "sha256": "dd58d3a0ac4b6a82b39f3a520fa05af3beb17e77ef54f18efc22770e21ae331e"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/GardenSoil.cpp",
+      "sha256": "2e40c959eef2915f47e2a3907ce957ee4586b036deb8c3c6c4efeea8bea1ba5e"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/GardenVisual.cpp",
+      "sha256": "9dffc9e9185001f09ff098cc9307a3816f5c6cd269b8da92f6065308ec2d5b10"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/GuideMotionCapture.cpp",
+      "sha256": "49a6290a2d51da30e043aed689bc84dcdab0671d0dcbf936406ac35f4c14f5e7"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHAdventureComponent.cpp",
+      "sha256": "03548bd699dc1adc74460e3666b3d34102b7861c9ccdf196d6efea697b42d078"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHCharacter.cpp",
+      "sha256": "79ff2f8b9f7b903958ba817540892540935216b1c748b36649b22848e2e57a8f"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHGameMode.cpp",
+      "sha256": "b27a9bb9a4eace427e6288c6f06942233e35f5ca8397be534703be6165c47290"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHGuideAnimInstance.cpp",
+      "sha256": "1e6fe1f80a2b9b5584d58776cae427de2037f224b5b09b2e872db9aa5ffe6b59"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHGuideCharacter.cpp",
+      "sha256": "566c077e90e1328225c315c2edc30cbaa3346aced6b2047ebc1286f39e7a6485"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHHUD.cpp",
+      "sha256": "63bc50bb1f2ca7e9a80f7f8122408969a43f8f3373f5fcc214ff57a76c0baf91"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHKnowledgeComponent.cpp",
+      "sha256": "8f6a83bd8c8d058a67f6feab6abe00501a0b0bf2e97ae5793b74fdbbd4cefa1b"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHRealms.cpp",
+      "sha256": "d1fe417bbe96b4c41d1f9ec2858841316d041f2c849c50f3455a58dea24a750e"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHRealmWorld.cpp",
+      "sha256": "f06c5d57ef089de50e5e5e16e278ae87ec3bace6bdcf88abdcb74dd7c612c77e"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHTrainingTarget.cpp",
+      "sha256": "46ac9a35002194f33e61ffff4d4dcf684dbe9712e312ce836337dcd3b7d6ee03"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/EarthDynamicsMath.h",
+      "sha256": "6699c505db5a302de1247be09793f99b75ffeff8cbf44cbb54178538151832d0"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/GardenField.h",
+      "sha256": "722e8f9c45353b5010615740a1afefd1ca6e66180d56d2caba4318e657ee30aa"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/GardenSoil.h",
+      "sha256": "1d5d109cc3ec01c45de4a0bd25fc51490aea868adeab14fc1466fa45c922e390"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/GuideBodyModel.h",
+      "sha256": "4b1f4d5316238107d6aea1504c6936aa838e699257d01d83a540f5b1c4e98ea5"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/GuideGenome.h",
+      "sha256": "d01fbed41bf20d65e5fe75fd8d37c4a47e65821225f3375f5a87052bb44bb973"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/GuideMotionMath.h",
+      "sha256": "0d8c71c8a69035680f63807572b5e36ac667a6573e903d1da7e8dee3da1f0987"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHAdventureComponent.h",
+      "sha256": "a00b28798220761818670e3026291e7106bec0b6b55b040e809ea67abb3071e6"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHCharacter.h",
+      "sha256": "ae14592a4e626e6e54707ece45b1581d28306fc8a1a7042e381065efe57dd12b"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHGameMode.h",
+      "sha256": "49e6ee55d3dd474c9efcc9baaabdc293916ac05745e07ce979d4929c1e0e8988"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHGuideAnimInstance.h",
+      "sha256": "116fed969102e4289df7bead41561db6fdb72bddeb9f5740147986a4afcd0600"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHGuideCharacter.h",
+      "sha256": "8b7f5fe25b34848f95b963715453a81b100ff741e5c2d38cb9b01569c49c05ab"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHHUD.h",
+      "sha256": "17d2f28c591515219c9de7c750c8f8cdfe5e6513b24d08b4f8906e6485621dd1"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHKnowledgeComponent.h",
+      "sha256": "f519d53fc8a445ba315e6d9aa3d616853b0829578cdbdf027022a6e93842d371"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHRealmWorld.h",
+      "sha256": "44cbda5a833b7e494838d33f3cb574eb5f9794e997e3660f3ede6337db868423"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHTrainingTarget.h",
+      "sha256": "83018039f849eb51afab13b960d3340285a2e3c3d949e7544a62f0acd96f84c6"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/KnowledgeSystem.h",
+      "sha256": "302e63acb44968080e234c17a15a2e2d55bde47ccb418f81871ca7b1cc5e2b15"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/RealmLayout.h",
+      "sha256": "0e7e2bd5ec839ead58442f556592ea0305b05235351fa9e3fb20eabdbd831322"
+    },
+    {
+      "path": "Source/HALVETHRealms.Target.cs",
+      "sha256": "22561e2804161c24cce8b86a236516612d294127c6c1830699e83760b1905d15"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/HALVETHRealmsEditor.Build.cs",
+      "sha256": "c14020476fd62a664322d1ac03396dffec21c01fd34aee08b847250232cc1b21"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Private/GardenCharactersCommandlet.cpp",
+      "sha256": "b699e6f43b7252f2f925d6f5ef08c43b77fa7c29477860ed0dfb9b080b3dc3b5"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Private/GardenPrepareCommandlet.cpp",
+      "sha256": "47cc8173e3a9691e4a9713f3e109a3fc848e059216efe80f85a35025a5043302"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Private/HALVETHPrepareCommandlet.cpp",
+      "sha256": "764fbd319ff3b43e02dae21609ef49ccdddd6333578c42986501fc41df253d62"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Private/HALVETHRealmsEditor.cpp",
+      "sha256": "aabd1d0a3d0fe5c2def1427482dac83523bc680c57dae2df202c4f1d8ec583ac"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Public/GardenCharactersCommandlet.h",
+      "sha256": "d1682466bf7a082f4ba22901e9a5ff72209e64bdea4d00b0d49c874876fd4f46"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Public/GardenPrepareCommandlet.h",
+      "sha256": "aa35cb772166abe2ba378e08499d4e00dde74ce2bbc1b35f52cb74a65e3b9ed6"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Public/HALVETHPrepareCommandlet.h",
+      "sha256": "5a56dc589845670dc1afdeda964393cb67988ab1d0ec39898b82c3634dcac74f"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor.Target.cs",
+      "sha256": "20c1a705fbed123012da6b9b6f8df0527a0825a69914b425b4cf66e35e6a8a38"
+    },
+    {
+      "path": "Source/OpenMW/scripts/veyra_live_motion/npc.lua",
+      "sha256": "80e9a7f767675775636f562042832167563b50236106fe0c02aaba70edc6433d"
+    },
+    {
+      "path": "Source/OpenMW/veyra-live-motion.omwscripts",
+      "sha256": "13de9f218029d37cc9c22b664353913fae1673658f66a94a2f0be34e8301b4ac"
+    },
+    {
+      "path": "tests/motion_math_test.cpp",
+      "sha256": "0053482a580aa4e6b509a135adf1e582242cbfa067ccb469ee28f322dc86d477"
+    },
+    {
+      "path": "tests/test_body_lineage.py",
+      "sha256": "25685188b8191ead843fc239068e926917f6d11d087237c0164fc5a5d1a266b3"
+    }
+  ],
+  "renderBindings": [
+    {
+      "path": "Preview/GARDEN_CRYSTAL_BROKEN.png",
+      "sha256": "5e39ccef7d0649b450ecf77617b7b6941fca493fe55e19e728f40488754c1eb6"
+    },
+    {
+      "path": "Preview/GARDEN_CRYSTAL_READY.png",
+      "sha256": "276a8a51984597c2bfe090db57edfad78acc7d31e52c7c3d4b83ea399606c8fd"
+    },
+    {
+      "path": "Preview/GARDEN_CRYSTAL_REFORMED.png",
+      "sha256": "748950b972a0fdcd37b3c23eaf8d3c0571fa26b1301365d364008a54aa23d0c2"
+    },
+    {
+      "path": "Preview/GARDEN_HUB.png",
+      "sha256": "771ca7fbc29ebf339bdf58bc30e14e6ee1be1a0fb5543fbe9d434617e647e1d0"
+    },
+    {
+      "path": "Preview/GARDEN_LANDSCAPE.png",
+      "sha256": "2c424413478b2339b5ddd4b192d7b34a6c8f881da7aa8115f1e6ae322bcd644d"
+    },
+    {
+      "path": "Preview/GARDEN_LUCINET_CHARACTER.png",
+      "sha256": "6568c7ec80a6ddaa90896958ee680b7ebe0bfd1f6c3f7807de1bc300b57e442e"
+    },
+    {
+      "path": "Preview/GARDEN_MEMORY.png",
+      "sha256": "a9b5ba48e2a68554ef08ae2b219c9cbaeaf40974600784d39c767b425ec1f989"
+    },
+    {
+      "path": "Preview/GARDEN_RACHEL_CHARACTER.png",
+      "sha256": "5ebd9365211d258a85aec244bb8c9edbe8d24dba097818303660e3ae78735f5b"
+    },
+    {
+      "path": "Preview/GARDEN_SCARLET.png",
+      "sha256": "cc8990521fac0da5297528fb209a71a56e1dbccfb39164bd9ce4a5eadeedd47d"
+    },
+    {
+      "path": "Preview/GARDEN_SCARLET_CHARACTER.png",
+      "sha256": "26221b9b6eaf110f5eb24f1a9358fffeb7bfffd24adb708a9765edf74a79417d"
+    },
+    {
+      "path": "Preview/GARDEN_SCARLET_FACE.png",
+      "sha256": "800ad57ea6646742e42b1363f63c1db84869a5fc1e3867305f667213741551bc"
+    },
+    {
+      "path": "Preview/GARDEN_TIDELIGHT.png",
+      "sha256": "ba4e7e249fa8eca8d15599cd6b757f8bc23e1e2ac51cd7fbb7bca9a567869588"
+    }
+  ],
+  "binaryBindings": [
+    {
+      "path": "Binaries/Win64/UnrealEditor-HALVETHRealms.dll",
+      "sha256": "56bc9da2778527b94c041e53725bc986a2da832de28286ab1222043cda57f86d"
+    }
+  ],
+  "effects": {
+    "localNativeProject": "Updated and tested",
+    "externalPublication": "No external action in this increment",
+    "originalOpenMWAdapter": "Unchanged in this increment"
+  }
+}

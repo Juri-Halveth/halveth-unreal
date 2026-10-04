@@ -34,6 +34,7 @@ private:
     int32 SmokeStep = 0;
     int32 SmokeReadingMilliseconds = 0;
     float SmokeElapsed = 0;
+    FVector SmokeDodgeStart = FVector::ZeroVector;
     float TravelCooldown = 0;
     void RunSmokeStep();
     void FinishSmoke(bool Success, const FString& Detail);

@@ -252,14 +252,17 @@ void AHALVETHGameMode::RunSmokeStep()
     else if (SmokeStep == 12)
     {
         if(!RealmWorld->VerifyCharacters()) {FinishSmoke(false,TEXT("character_skeleton_animation_morphs_or_temporal_pose_failed"));return;}
-        Pawn->SetActorLocation(FVector(-380, -700, 100));
+        if(!RealmWorld->VerifyGuidePatrol()) {FinishSmoke(false,TEXT("guide_spatial_patrol_failed"));return;}
+        // Dialogue follows the moving guide; dodge still requires measured displacement.
+        SmokeDodgeStart=RealmWorld->GetGuidePosition(1)+FVector(0,-170,100);
+        Pawn->SetActorLocation(SmokeDodgeStart);
         if (!Pawn->GetAdventure()->InteractWithNearbyCharacter() || !Pawn->GetAdventure()->Dodge()
             || Pawn->GetAdventure()->GetStamina() > 73)
         { FinishSmoke(false, TEXT("npc_dialogue_or_dodge")); return; }
     }
     else if (SmokeStep == 13)
     {
-        if (FVector::Dist2D(Pawn->GetActorLocation(), FVector(-380, -700, 100)) < 20)
+        if (FVector::Dist2D(Pawn->GetActorLocation(), SmokeDodgeStart) < 20)
         { FinishSmoke(false, TEXT("dodge_movement_missing")); return; }
         auto* Target = Cast<AHALVETHTrainingTarget>(UGameplayStatics::GetActorOfClass(this, AHALVETHTrainingTarget::StaticClass()));
         if (!Target) { FinishSmoke(false, TEXT("training_target_missing")); return; }

@@ -13,6 +13,13 @@ struct V {
     V unit()const{double l=length();return l>1e-12?*this*(1/l):V{0,0,1};}
 };
 struct Chain {V knee,end;bool reachable;};
+// Maximum hip height for the requested horizontal foot position and knee bend.
+// Both leg lengths remain anatomical; a shared pelvis takes the lower limit.
+inline double SupportedHipHeight(V hip,V foot,double upper,double lower,double bendRadians){
+    double dx=hip.x-foot.x,dy=hip.y-foot.y;
+    double reach2=upper*upper+lower*lower+2*upper*lower*std::cos(bendRadians);
+    return foot.z+std::sqrt(std::max(0.0,reach2-dx*dx-dy*dy));
+}
 // Centimetres. Preserve both segment lengths; unreachable goals are explicit.
 inline Chain Solve(V start,V target,V pole,double upper,double lower){
     V delta=target-start;double requested=delta.length();

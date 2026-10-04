@@ -13,12 +13,17 @@ public:
     virtual void NativeUpdateAnimation(float DeltaSeconds) override;
     virtual FAnimInstanceProxy* CreateAnimInstanceProxy() override;
     virtual void DestroyAnimInstanceProxy(FAnimInstanceProxy* Proxy) override;
+    void LogPoseAudit(const TCHAR* Context) const;
     UPROPERTY() TObjectPtr<UAnimSequence> BaseIdle;
     float DesiredSpeed=0,DesiredLookYaw=0,DesiredLookPitch=0;
     bool Speaking=false;
     int32 Identity=1;
     double Time=0,GaitPhase=0;
     float WalkWeight=0,LookYaw=0,LookPitch=0,Gesture=0;
+    double BodyBreathPhase=0,BodyHeartPhase=0,BodyLoad=0,ResponseSeconds=.18;
+    double CruiseSpeed=84;
+    FVector EvaluatedFootTargets[2];
+    bool PoseAuditReady=false;
     FVector Forward=FVector::ForwardVector,Right=FVector::RightVector;
     FVector RefFeet[2];
     FVector FootTargets[2],PlantWorld[2],GroundNormals[2]={FVector::UpVector,FVector::UpVector};

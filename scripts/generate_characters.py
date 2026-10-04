@@ -19,9 +19,9 @@ for line in (SRC/'base.obj').read_text().splitlines():
 used=sorted({v for face in F for v,t in face});MAP={v:i for i,v in enumerate(used)}
 BASE_P=[v.copy() for v in P]
 FACE_TARGETS={
- 'Scarlet':{'head/head-age-incr.target':.25,'chin/chin-prominent-incr.target':.22,'nose/nose-point-up.target':.1,'cheek/l-cheek-bones-incr.target':.35,'cheek/r-cheek-bones-incr.target':.35},
- 'Lucinet':{'macrodetails/caucasian-male-young.target':.7,'head/head-age-incr.target':.65,'chin/chin-width-incr.target':.75,'chin/chin-prominent-incr.target':.4,'nose/nose-curve-convex.target':.35,'nose/nose-scale-depth-incr.target':.35,'cheek/l-cheek-volume-decr.target':.4,'cheek/r-cheek-volume-decr.target':.4},
- 'Rachel':{'head/head-age-incr.target':.4,'chin/chin-width-incr.target':.2,'nose/nose-point-up.target':.3,'cheek/l-cheek-bones-incr.target':.15,'cheek/r-cheek-bones-incr.target':.15}}
+ 'Scarlet':{'chin/chin-prominent-incr.target':.1,'nose/nose-point-up.target':.1,'cheek/l-cheek-bones-incr.target':.15,'cheek/r-cheek-bones-incr.target':.15},
+ 'Lucinet':{'macrodetails/caucasian-male-young.target':.7,'chin/chin-width-incr.target':.35,'chin/chin-prominent-incr.target':.15,'nose/nose-curve-convex.target':.1,'nose/nose-scale-depth-incr.target':.1,'cheek/l-cheek-volume-decr.target':.1,'cheek/r-cheek-volume-decr.target':.1},
+ 'Rachel':{'chin/chin-width-incr.target':.2,'nose/nose-point-up.target':.2,'cheek/l-cheek-bones-incr.target':.1,'cheek/r-cheek-bones-incr.target':.1}}
 bottom=min(P[v].y for v in used);top=max(P[v].y for v in used);SCALE=180/(top-bottom)
 def convert(p):return Vector((p.x*SCALE,-p.z*SCALE,(p.y-bottom)*SCALE))
 rigdef=json.loads((SRC/'default.mhskel').read_text());weights=json.loads((SRC/'default_weights.mhw').read_text())['weights']

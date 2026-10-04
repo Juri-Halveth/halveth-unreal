@@ -2,12 +2,12 @@
   "schema": "halveth.nasa-sun.v1",
   "source": "NASA/JPL Horizons",
   "apiSignature": {
-    "version": "1.2",
-    "source": "NASA/JPL Horizons API"
+    "source": "NASA/JPL Horizons API",
+    "version": "1.2"
   },
   "requestUrl": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40399%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%270%2C45%2C0%27&START_TIME=%272026-10-04%27&STOP_TIME=%272026-10-05%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&CSV_FORMAT=%27YES%27&ANG_FORMAT=%27DEG%27&APPARENT=%27AIRLESS%27",
-  "fetchedAtUtc": "2026-10-04T12:53:38.365535+00:00",
-  "rawResponseSha256": "4c5698de6d50a746ea40e98850170bd61dba8dd180c93b09be12057c83306a35",
+  "fetchedAtUtc": "2026-10-04T14:07:41.035143+00:00",
+  "rawResponseSha256": "1f3205ce095bdfe8ec4bad3990e32a4ad856f7f1df4e2e14f09a77ed1eb891cb",
   "target": "Sun (10)",
   "observer": {
     "kind": "DECLARED_VIRTUAL_SITE",

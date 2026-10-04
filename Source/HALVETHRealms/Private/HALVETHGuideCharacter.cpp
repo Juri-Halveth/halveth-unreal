@@ -12,9 +12,9 @@ AHALVETHGuideCharacter::AHALVETHGuideCharacter(){
     auto* Movement=GetCharacterMovement();
     Movement->GravityScale=1;
     Movement->bRunPhysicsWithNoController=true;
-    Movement->MaxWalkSpeed=42;
-    Movement->MaxAcceleration=110;
-    Movement->BrakingDecelerationWalking=150;
+    Movement->MaxWalkSpeed=84;
+    Movement->MaxAcceleration=260;
+    Movement->BrakingDecelerationWalking=340;
     Movement->GroundFriction=3;
     Movement->MaxStepHeight=30;
     Movement->SetWalkableFloorAngle(46);

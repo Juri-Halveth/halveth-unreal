@@ -10,6 +10,19 @@
 
 void AHALVETHRealmWorld::BuildLandscape(uint32 Seed) {
     TreeCount=FernCount=RockCount=0;
+    // Leaves remain traversable; a separate simple trunk blocks actual movement.
+    // Collision uses instancing as the visible forest does, rather than one actor per tree.
+    TreeTrunks=nullptr;
+    if(auto* Trunk=LoadObject<UStaticMesh>(nullptr,TEXT("/Engine/BasicShapes/Cylinder.Cylinder"))) {
+        TreeTrunks=NewObject<UHierarchicalInstancedStaticMeshComponent>(this);
+        AddInstanceComponent(TreeTrunks); TreeTrunks->SetupAttachment(RootComponent);
+        TreeTrunks->SetStaticMesh(Trunk); TreeTrunks->SetMobility(EComponentMobility::Static);
+        TreeTrunks->SetVisibility(false); TreeTrunks->SetHiddenInGame(true);
+        TreeTrunks->SetCastShadow(false); TreeTrunks->SetCanEverAffectNavigation(false);
+        TreeTrunks->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+        TreeTrunks->SetCollisionResponseToAllChannels(ECR_Block);
+        TreeTrunks->RegisterComponent(); Generated.Add(TreeTrunks);
+    }
     FString TerrainPath=FString::Printf(TEXT("/Game/Garden/Terrain_R%d.Terrain_R%d"),CurrentRealm,CurrentRealm);
     UStaticMesh* Mesh=LoadObject<UStaticMesh>(nullptr,*TerrainPath);
     if(!Mesh) { UE_LOG(LogTemp,Error,TEXT("GARDEN_TERRAIN_MISSING run GardenPrepare")); return; }
@@ -63,7 +76,14 @@ void AHALVETHRealmWorld::BuildLandscape(uint32 Seed) {
                 }
                 Z-=Bounds.GetSize().Z*Scale*.18;
             }
-            C->AddInstance(FTransform(Rotation,FVector(X,Y,Z)-Anchor-FVector(0,0,4),FVector(Scale)));
+            const FTransform Placement(Rotation,FVector(X,Y,Z)-Anchor-FVector(0,0,4),FVector(Scale));
+            C->AddInstance(Placement);
+            if(Key==TEXT("tree_small_02")&&TreeTrunks) {
+                const FVector Base=Placement.TransformPosition(FVector(0,0,Bounds.Min.Z));
+                const double Radius=FMath::Clamp(Bounds.GetExtent().Size2D()*.045,8.,24.)*Scale;
+                const double Height=FMath::Clamp(Bounds.GetSize().Z*Scale*.45,180.,1400.);
+                TreeTrunks->AddInstance(FTransform(FRotator::ZeroRotator,Base+FVector(0,0,Height*.5),FVector(Radius/50.,Radius/50.,Height/100.)));
+            }
             if(Key==TEXT("tree_small_02")) TreeCount++; else if(Key==TEXT("fern_02")) FernCount++; else RockCount++;
         }
     };
@@ -71,10 +91,25 @@ void AHALVETHRealmWorld::BuildLandscape(uint32 Seed) {
     Scatter(TEXT("fern_02"),15000,false);
     Scatter(TEXT("rock_moss_set_01"),550,true);
     UE_LOG(LogTemp,Display,TEXT("GARDEN_LANDSCAPE_READY realm=%d extent_m=600 trees=%d ferns=%d rocks=%d"),CurrentRealm,TreeCount,FernCount,RockCount);
+    UE_LOG(LogTemp,Display,TEXT("GARDEN_FOREST_PHYSICS realm=%d visual_trees=%d colliding_trunks=%d"),CurrentRealm,TreeCount,TreeTrunks?TreeTrunks->GetInstanceCount():0);
 }
 
 bool AHALVETHRealmWorld::VerifyLandscape() {
-    if(!TerrainComponent || !TreeCount || !FernCount || !RockCount) return false;
+    if(!TerrainComponent || !TreeCount || !FernCount || !RockCount || !TreeTrunks || TreeTrunks->GetInstanceCount()!=TreeCount) return false;
+    FCollisionQueryParams TrunkQuery(SCENE_QUERY_STAT(GardenTrunkCollision),false);
+    int32 TrunkChecks=0;
+    for(int32 Instance:{0,TreeCount/2,TreeCount-1}) {
+        FTransform Pose;
+        if(!TreeTrunks->GetInstanceTransform(Instance,Pose,true))return false;
+        const FVector Centre=Pose.GetLocation();
+        const double Radius=Pose.GetScale3D().X*50.;
+        FHitResult Hit;
+        if(!TreeTrunks->LineTraceComponent(Hit,Centre-FVector(Radius*2+25,0,0),Centre+FVector(Radius*2+25,0,0),TrunkQuery)) {
+            UE_LOG(LogTemp,Error,TEXT("GARDEN_TRUNK_RAY_FAILED realm=%d instance=%d"),CurrentRealm,Instance);return false;
+        }
+        TrunkChecks++;
+    }
+    UE_LOG(LogTemp,Display,TEXT("GARDEN_TRUNK_COLLISION_PASS realm=%d sampled_trunks=%d"),CurrentRealm,TrunkChecks);
     int32 Passed=0;
     FCollisionQueryParams Params(SCENE_QUERY_STAT(GardenTerrain),true);
     for(int32 Y=0;Y<21;Y++) for(int32 X=0;X<21;X++) {

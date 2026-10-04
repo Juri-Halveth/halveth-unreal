@@ -4,6 +4,9 @@
 #include "HALVETHRealmWorld.h"
 #include "HALVETHAdventureComponent.h"
 #include "HALVETHKnowledgeComponent.h"
+#include "HALVETHGuideCharacter.h"
+#include "HALVETHGuideAnimInstance.h"
+#include "Components/SkeletalMeshComponent.h"
 #include "GardenField.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
@@ -34,7 +37,13 @@ void AHALVETHGameMode::RunVisualStep() {
             Z=FMath::Max(Z,double(Support.ImpactPoint.Z));
         View(FVector(X,Y,Z+200),Target);
     };
-    auto Shot=[](const FString& Name) {
+    auto GuideView=[this,&View](int32 Identity,FVector CameraOffset,float TargetHeight) {
+        const FVector Position=RealmWorld->GetGuidePosition(Identity);
+        View(Position+CameraOffset,Position+FVector(0,0,TargetHeight));
+    };
+    auto Shot=[this](const FString& Name) {
+        for(int Identity=1;Identity<=3;Identity++)if(auto* Guide=RealmWorld->GetGuideCharacter(Identity))
+            if(auto* Motion=Cast<UHALVETHGuideAnimInstance>(Guide->GetMesh()->GetAnimInstance()))Motion->LogPoseAudit(*Name);
         FScreenshotRequest::RequestScreenshot(FPaths::ProjectDir()/TEXT("Preview")/(Name+TEXT(".png")),true,false);
         UE_LOG(LogTemp,Display,TEXT("GARDEN_NATIVE_CAPTURE %s"),*Name);
     };
@@ -70,13 +79,13 @@ void AHALVETHGameMode::RunVisualStep() {
         case 17: Shot(TEXT("GARDEN_MEMORY")); break;
         case 18:
             TravelCooldown=0; if(!Travel(0)) bVisualFailed=true;
-            View(FVector(-380,-840,55),FVector(-380,-530,104)); break;
+            GuideView(1,FVector(0,-310,55),104); break;
         case 19: Shot(TEXT("GARDEN_SCARLET_CHARACTER")); break;
-        case 20: View(FVector(-380,-670,92),FVector(-380,-530,164)); break;
+        case 20: GuideView(1,FVector(0,-140,92),164); break;
         case 21: Shot(TEXT("GARDEN_SCARLET_FACE")); break;
-        case 22: View(FVector(380,-310,55),FVector(380,0,104)); break;
+        case 22: GuideView(2,FVector(0,-310,55),104); break;
         case 23: Shot(TEXT("GARDEN_LUCINET_CHARACTER")); break;
-        case 24: View(FVector(-380,290,55),FVector(-380,600,104)); break;
+        case 24: GuideView(3,FVector(0,-310,55),104); break;
         case 25: Shot(TEXT("GARDEN_RACHEL_CHARACTER")); break;
         case 26:
             bVisualTest=false;

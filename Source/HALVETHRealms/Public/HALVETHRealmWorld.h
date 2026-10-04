@@ -2,10 +2,12 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GuideBodyModel.h"
 #include "HALVETHRealmWorld.generated.h"
 
 class UStaticMesh;
 class UStaticMeshComponent;
+class UHierarchicalInstancedStaticMeshComponent;
 class UMaterialInterface;
 class UMaterialInstanceDynamic;
 class UPointLightComponent;
@@ -18,6 +20,13 @@ class USkeletalMeshComponent;
 class AHALVETHGuideCharacter;
 class UProceduralMeshComponent;
 class UVolumetricCloudComponent;
+
+struct FHALVETHBodyLineage {
+    FString Digest,Genome,JournalPath;
+    uint64 Generation=0;
+    HalvethBody::Profile Profile;
+    HalvethBody::State State;
+};
 
 USTRUCT()
 struct FHALVETHPortal
@@ -47,6 +56,7 @@ public:
     float GetLoveStrength() const { return LoveRemaining / 4.0f; }
     bool VerifyLandscape();
     bool VerifyCharacters() const;
+    bool VerifyGuidePatrol() const;
     FVector GetGuidePosition(int32 Identity) const;
     AHALVETHGuideCharacter* GetGuideCharacter(int32 Identity) const;
     bool VerifyGroundDynamics() const;
@@ -100,11 +110,21 @@ private:
     TArray<FQuat> GuideBoneBaseline;
     TArray<bool> GuidePoseChanged;
     TArray<double> GuidePatrolTime;
+    TArray<FRandomStream> GuideChoices;
+    TArray<FVector> GuideGoals;
+    TArray<double> GuideDecisionAt,GuideRestUntil,GuideBlockedTime;
+    TArray<int32> GuideDecisionCount;
+    TArray<HalvethBody::Profile> GuideProfiles;
+    TArray<HalvethBody::State> GuideBodyStates;
+    TMap<int32,FHALVETHBodyLineage> BodyLineages;
+    FString BodyOrigin;
+    TArray<double> GuideSpatialTravel;
     TArray<FVector> GuideHandBaseline;
     TArray<double> GuideHandTravel;
     TArray<FQuat> GuideHeadBaseline;
     TArray<double> GuideHeadTravel;
     UPROPERTY() TObjectPtr<UStaticMeshComponent> TerrainComponent;
+    UPROPERTY() TObjectPtr<UHierarchicalInstancedStaticMeshComponent> TreeTrunks;
     int32 TerrainChecks = 0;
     int32 TreeCount = 0;
     int32 FernCount = 0;
@@ -121,6 +141,7 @@ private:
     void Portal(FVector Position, int32 Destination, FLinearColor Color);
     void Label(FVector Position, const FString& Text, FLinearColor Color, float Size = 28);
     void Guide(FVector Position, int32 Identity);
+    void GrowBodyLineage(int32 Identity,const FString& Event);
     void Readable(FVector Position, int32 Book);
     void BuildLandscape(uint32 Seed);
     void BuildSoil(FVector Guide);
