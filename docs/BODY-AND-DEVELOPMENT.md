@@ -82,3 +82,9 @@ The math suite checks anatomical segment preservation over 10,000 limb solves,
 256 exact genome encode/decode samples. The rendered audit is finite sampling:
 it provides sampled posture and movement evidence, rather than a biological
 equivalence claim or a judgment that the game's final art quality is complete.
+
+GitHub's strict GCC check identified an ambiguous-looking same-line return and
+declaration in `GuideGenome.h`. The publication fix inserts a line break between
+the two statements, preserving their tokens and control flow. The native
+receipt retains the input hash of the runtime-tested parent; the format bridge
+is bound in `QA/genome-source-format-bridge.json`.

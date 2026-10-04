@@ -13,7 +13,8 @@ inline std::string Encode(const Digest& bytes){
     return result;
 }
 inline bool Decode(const std::string& bases,Digest& bytes){
-    if(bases.size()!=128)return false;Digest decoded{};
+    if(bases.size()!=128)return false;
+    Digest decoded{};
     for(std::size_t i=0;i<128;i++){
         unsigned value;
         switch(bases[i]){case 'A':value=0;break;case 'C':value=1;break;case 'G':value=2;break;case 'T':value=3;break;default:return false;}
