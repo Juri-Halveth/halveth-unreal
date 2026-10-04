@@ -1,0 +1,280 @@
+{
+  "schema": "halveth.authored-wardrobe.v1",
+  "geometryLicense": "CC0-1.0",
+  "sources": [
+    {
+      "path": "Sources/Hair/Scarlet/ponytail01.mhclo",
+      "sha256": "97fc50b12bcb3b1c7b33edddd8d427a2604ffb06fe79b31132bf47f82d7afbac",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Hair/Scarlet/ponytail01.mhmat",
+      "sha256": "b145f5a7c9606859ad523f5113482a1cf989cf0e26dccc2ea95c377cb1c2557f",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Hair/Scarlet/ponytail01.obj",
+      "sha256": "d9f5fe96fbedbc8006220d87aad0e4a33d15286eb6b21f5929661cdc490ebf5a",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Hair/Scarlet/ponytail01_diffuse.png",
+      "sha256": "dcb364300cac06ce8bef91b2f7c0970baf310898bbdd06b0c6b884ee9306eb97",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Scarlet/shoes03.mhclo",
+      "sha256": "5a388e18e6759db99bcc8c7d062a2b3bed02eecd32705731ba90063a6e35265b",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Scarlet/shoes03.mhmat",
+      "sha256": "0104a8ecf68aa81bca878c12f909aca45a59e265f8b49cf4e4d5e2667773776e",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Scarlet/shoes03.mhw",
+      "sha256": "5ea7e817c2db05da540a0d4a71c3fadb422b3560857b8b73873df39ad3e49b5f",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Scarlet/shoes03.obj",
+      "sha256": "b03f46c0b5cdc38e4472e4747ba267f101e1e8ae88656180b1334986646108b2",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Scarlet/shoes03_diffuse.png",
+      "sha256": "fe8216fbd0c34ecd3ac0e1a01970a4ccf844417be5fd1d72c527c9209256db93",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Lucinet/male_casualsuit01.mhclo",
+      "sha256": "78503ed7f56c149843d85e06e1164bc6871ce7319b2ef689237046352cc90de4",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Lucinet/male_casualsuit01.mhmat",
+      "sha256": "043b25cefd398261b893d3dae58c81fc3e9633a25a01eafe66963591f5ad6eb6",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Lucinet/male_casualsuit01.obj",
+      "sha256": "001921d237e408c35103720d046aa37f9c5512db1a179a5ede6a065cd504ba89",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Lucinet/male_casualsuit01_ao.png",
+      "sha256": "9402d75d71318ef3ad90ee59f8b8688effefd13b3ec56423330e005bed5cd6c0",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Lucinet/male_casualsuit01_diffuse.png",
+      "sha256": "3fd0bba5dcbdea0ac427f644a6c7c298938f7369b8f96626621ce1e88989394e",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Lucinet/male_casualsuit01_normal.png",
+      "sha256": "ff029fc5a3350ebc72813cdf050afcffd23064c7701d99e664572713cfa98a5f",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Hair/Lucinet/short01.mhclo",
+      "sha256": "ae1ffaa98da5753b803b3a173bede4895d2215e6bb94763f3765a71f0e984f35",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Hair/Lucinet/short01.mhmat",
+      "sha256": "01e2e12ce3f3d3c859225456660acadcdd27d4f4b4d888bcbd6f11998cadd975",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Hair/Lucinet/short01.obj",
+      "sha256": "d998d8416f9b5d5591f1d756f4d292288d000a6951bc0f4d2e8e72727bbc44fa",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Hair/Lucinet/short01_diffuse.png",
+      "sha256": "f34a0957184e3d1e911ed59245f874f8d4843f61ee44ff49f43edb4be0196949",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Lucinet/shoes03.mhclo",
+      "sha256": "5a388e18e6759db99bcc8c7d062a2b3bed02eecd32705731ba90063a6e35265b",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Lucinet/shoes03.mhmat",
+      "sha256": "0104a8ecf68aa81bca878c12f909aca45a59e265f8b49cf4e4d5e2667773776e",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Lucinet/shoes03.mhw",
+      "sha256": "5ea7e817c2db05da540a0d4a71c3fadb422b3560857b8b73873df39ad3e49b5f",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Lucinet/shoes03.obj",
+      "sha256": "b03f46c0b5cdc38e4472e4747ba267f101e1e8ae88656180b1334986646108b2",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Lucinet/shoes03_diffuse.png",
+      "sha256": "fe8216fbd0c34ecd3ac0e1a01970a4ccf844417be5fd1d72c527c9209256db93",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Rachel/female_elegantsuit01.mhclo",
+      "sha256": "8ed657dbc49466e6a485993cfdcfd7b6ac30a0f44408dfd38de7a649477d8928",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Rachel/female_elegantsuit01.mhmat",
+      "sha256": "a0b1708efbff3c4ad96f8e7d8cc27fb1652719549455ce94b89bcf6294cfbed0",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Rachel/female_elegantsuit01.obj",
+      "sha256": "3b46cef6d63968954dc00c39ede649d76c05e5d36fe9f9c677349c88fd424de9",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Rachel/female_elegantsuit01_ao.png",
+      "sha256": "0f89546c63ab16e2c1ba0556da7e07264b98b58e6200b043491f92f796b87673",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Rachel/female_elegantsuit01_diffuse.png",
+      "sha256": "ebe6f2afcbaadbe56d5cee6e00bab45e97ce482f0be0e34491d16ca5f98b38ac",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Rachel/female_elegantsuit01_normal.png",
+      "sha256": "ae3650bce6678cd67d025ab70e68b22683176aeaabc06d8e5b2129af99c762e9",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Hair/Rachel/bob01.mhclo",
+      "sha256": "a295b11ab6c7808afa1e01d0c79fb595bbbd7885f65252766486c9fcf6d158c5",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Hair/Rachel/bob01.mhmat",
+      "sha256": "9c3015044a832fb9a72a5d2f28218914ebfbdf6725cfd237cc53a3d95f054e3b",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Hair/Rachel/bob01.obj",
+      "sha256": "d7fb73806f47ee37ba3c37bcfadff40a91ba99635d08c3e02d94b4acbf97c231",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Hair/Rachel/bob01_diffuse.png",
+      "sha256": "2b38bc7a028e06e8e633accb7fe2dd1b2bacbb9d32463df73f39f82e63ef9009",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Rachel/shoes03.mhclo",
+      "sha256": "5a388e18e6759db99bcc8c7d062a2b3bed02eecd32705731ba90063a6e35265b",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Rachel/shoes03.mhmat",
+      "sha256": "0104a8ecf68aa81bca878c12f909aca45a59e265f8b49cf4e4d5e2667773776e",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Rachel/shoes03.mhw",
+      "sha256": "5ea7e817c2db05da540a0d4a71c3fadb422b3560857b8b73873df39ad3e49b5f",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Rachel/shoes03.obj",
+      "sha256": "b03f46c0b5cdc38e4472e4747ba267f101e1e8ae88656180b1334986646108b2",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Footwear/Rachel/shoes03_diffuse.png",
+      "sha256": "fe8216fbd0c34ecd3ac0e1a01970a4ccf844417be5fd1d72c527c9209256db93",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Scarlet/male_casualsuit01.mhclo",
+      "sha256": "78503ed7f56c149843d85e06e1164bc6871ce7319b2ef689237046352cc90de4",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Scarlet/male_casualsuit01.mhmat",
+      "sha256": "043b25cefd398261b893d3dae58c81fc3e9633a25a01eafe66963591f5ad6eb6",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Scarlet/male_casualsuit01.obj",
+      "sha256": "001921d237e408c35103720d046aa37f9c5512db1a179a5ede6a065cd504ba89",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Scarlet/male_casualsuit01_ao.png",
+      "sha256": "9402d75d71318ef3ad90ee59f8b8688effefd13b3ec56423330e005bed5cd6c0",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Scarlet/male_casualsuit01_diffuse.png",
+      "sha256": "3fd0bba5dcbdea0ac427f644a6c7c298938f7369b8f96626621ce1e88989394e",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    },
+    {
+      "path": "Sources/Wardrobe/Scarlet/male_casualsuit01_normal.png",
+      "sha256": "ff029fc5a3350ebc72813cdf050afcffd23064c7701d99e664572713cfa98a5f",
+      "license": "CC0-1.0",
+      "sourcePack": "system-cc0"
+    }
+  ],
+  "operator": "hm08-affine-proxy-v1",
+  "sourcePackPages": [
+    "https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html"
+  ]
+}

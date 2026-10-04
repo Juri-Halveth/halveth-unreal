@@ -1,4 +1,4 @@
-# HALVETH Portal Garden — moving characters, ground response and Earth sky
+# HALVETH Portal Garden — anatomical characters, ground response and Earth sky
 
 Four locally generated 600 × 600 metre landscapes with hills, CC0 forest scans,
 portal arches, spell practice, library, crafting and persistent construction.
@@ -28,12 +28,20 @@ four cascades after a GPU page fault in the initial accelerated VSM/Nanite run.
 A separate DX12 run produced twelve reviewed 1920 × 1080 views.
 The crystal took four SPARK hits, broke and reformed after five simulation seconds.
 
-See [the runtime receipt](QA/native-landscape.json),
+The character rebuild replaces generated tube clothing and hair with authored
+CC0 meshes fitted to anatomy, preserved UVs, garment normal maps, masked hair and
+separate modeled footwear. Runtime stance targets narrow the rigging A-pose and
+relax the hands beside the body. The regeneration entry point also refreshes its
+public byte inventory after FBX sanitizing.
+
+See [the current character rebuild receipt](QA/native-character-rebuild.json),
+[the historical landscape receipt](QA/native-landscape.json),
 [motion, gravity and sky](docs/MOTION-EARTH-SKY.md),
 [character construction](docs/CHARACTERS.md) and
 [world and crystal checks](docs/GARDEN-LANDSCAPE.md).
-Hair shape, detailed facial sculpting, garment folds and several props still need
-art work. The screenshots show the current game; they are not concept renders.
+Skin microdetail, facial corrective shapes, richer captured gait, cloth simulation,
+fantasy-specific wardrobes and several props still need art work. The screenshots
+show the current game; they are not concept renders.
 
 ## Git Bash launch
 
@@ -67,7 +75,7 @@ bash CHARACTERS.sh build
 bash GARDEN.sh prepare
 ```
 
-The head deformation also transfers to the authored hair and beard. FBX path
+The anatomical deformation also transfers to authored clothing and hair. FBX path
 sanitizing replaces local author paths with relative filenames and verifies the
 parsed numeric geometry, skeleton and animation digest remains identical.
 
@@ -115,8 +123,7 @@ To build, select a structure with **T**, close the library with **B**, face clea
 
 Original HALVETH C++/Bash/Python source is MIT. MakeHuman core basemesh, rig,
 weights and target assets are CC0. The selected skins use the expressly CC0 pack
-members recorded in [SOURCES.json](ArtSource/Characters/SOURCES.json). Original
-hair, garments, eyes and fabric assets in that directory are dedicated to CC0.
+members recorded in [SOURCES.json](ArtSource/Characters/SOURCES.json). Authored CC0 clothing, footwear and hair retain their license headers and hashes in [wardrobe-sources.json](ArtSource/Characters/wardrobe-sources.json). Own eyes, fabric and animation additions are dedicated to CC0.
 See [MakeHuman's asset license](https://static.makehumancommunity.org/about/license.html)
 and [the character license](ArtSource/Characters/LICENSE.txt).
 

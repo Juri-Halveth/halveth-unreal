@@ -16,13 +16,18 @@ CHARACTERS = ['Scarlet', 'Lucinet', 'Rachel']
 CHARACTER_INPUTS = [f'ArtSource/Characters/{name}.fbx' for name in CHARACTERS] + [
     'ArtSource/Characters/skin_female.png', 'ArtSource/Characters/skin_male.png',
     'ArtSource/Characters/cloth_weave.png', 'ArtSource/Characters/cloth_normal.png',
-    'ArtSource/Characters/characters.json']
+    'ArtSource/Characters/characters.json','ArtSource/Characters/footwear_diffuse.png']
+CHARACTER_INPUTS += [f'ArtSource/Characters/{name}_{suffix}.png'
+    for name in CHARACTERS for suffix in ['wardrobe','wardrobe_normal','hair']]
 CHARACTER_ASSETS = [f'Content/Characters/{name}{suffix}.uasset'
     for name in CHARACTERS for suffix in ['', '_Skeleton', 'Idle']] + [
     'Content/Characters/skin_female.uasset', 'Content/Characters/skin_male.uasset',
-    'Content/Characters/cloth_weave.uasset', 'Content/Characters/cloth_normal.uasset'] + [
+    'Content/Characters/cloth_weave.uasset', 'Content/Characters/cloth_normal.uasset','Content/Characters/footwear_diffuse.uasset'] + [
     f'Content/Characters/{name}_{material}.uasset' for name in CHARACTERS
-    for material in ['Skin','Cloth','Leather','Metal','Hair','Sclera','Iris','Pupil']]
+    for material in ['Skin','Cloth','Leather','Footwear','Metal','Hair','Sclera','Iris','Pupil']]
+CHARACTER_ASSETS += [f'Content/Characters/{name}_{suffix}.uasset'
+    for name in CHARACTERS for suffix in ['wardrobe','wardrobe_normal']]
+CHARACTER_ASSETS += [f'Content/Characters/T_{name}Hair.uasset' for name in CHARACTERS]
 BOUND = GENERATED + SOURCES + ['Content/Materials/M_HalvethSurface.uasset',
     'Content/VOID/M_Terrain.uasset', 'Content/VOID/M_Water.uasset','Source/HALVETHRealms/Public/GardenSoil.h'] + CHARACTER_INPUTS + CHARACTER_ASSETS
 GEOMETRY_BINDINGS = GENERATED + SOURCES[:2] + ['Content/Materials/M_HalvethSurface.uasset',

@@ -104,8 +104,8 @@ struct FGuideProxy : FAnimInstanceProxy {
                 double TalkWave=Gesture*(.65+.35*FMath::Sin(Time*2.0+S));
                 // Hands rest beside the hips. The shoulder-relative target
                 // avoids inheriting the elevated elbows of the source A-pose.
-                FVector GoalHand=A-FVector::UpVector*(Length*(.91-.20*TalkWave))
-                    +Forward*(7+16*TalkWave+9*Walk*FMath::Sin(Phase*2*PI+S*PI))
+                FVector GoalHand=A-FVector::UpVector*(Length*(.975-.24*TalkWave))
+                    +Forward*(3+20*TalkWave+14*Walk*FMath::Sin(Phase*2*PI+S*PI))
                     +Right*(Sign*(5+5*TalkWave))+FVector(0,0,1.2*FMath::Sin(Time*1.07+S));
                 Limb(TEXT("upperarm"),TEXT("lowerarm"),TEXT("wrist"),Side,GoalHand,Right*(Sign*.7)-FVector::UpVector+Forward*.2);
                 Rotate(FName(*(TEXT("wrist.")+Side)),Forward,Sign*(.07+.13*TalkWave));
@@ -125,9 +125,17 @@ void UHALVETHGuideAnimInstance::NativeInitializeAnimation(){
     for(int I=0;I<Local.Num();I++){int Parent=Ref.GetParentIndex(I);World[I]=Parent>=0?Local[I]*World[Parent]:Local[I];}
     auto Pos=[&](FName N){int I=Ref.FindBoneIndex(FName(*N.ToString().Replace(TEXT("."),TEXT("_"))));return I==INDEX_NONE?FVector::ZeroVector:World[I].GetLocation();};
     RefFeet[0]=Pos(TEXT("foot.L"));RefFeet[1]=Pos(TEXT("foot.R"));
-    FootTargets[0]=RefFeet[0];FootTargets[1]=RefFeet[1];
     Forward=(Pos(TEXT("toe3-1.L"))-RefFeet[0]);Forward.Z=0;Forward.Normalize();
     Right=RefFeet[1]-RefFeet[0];Right.Z=0;Right.Normalize();
+    // The authored A-pose spreads the feet for rigging. Preserve its coordinate
+    // axes, then place stance targets nearer the centre of support; knees and
+    // hips follow through the existing limb solve instead of scaling anatomy.
+    const FVector Centre=(RefFeet[0]+RefFeet[1])*.5;
+    for(int S=0;S<2;S++){
+        RefFeet[S].X=Centre.X+(RefFeet[S].X-Centre.X)*.55;
+        RefFeet[S].Y=Centre.Y+(RefFeet[S].Y-Centre.Y)*.55;
+        FootTargets[S]=RefFeet[S];
+    }
     UE_LOG(LogTemp,Display,TEXT("GARDEN_MOTION_RIG left_foot=%s right_foot=%s forward=%s right=%s"),*RefFeet[0].ToString(),*RefFeet[1].ToString(),*Forward.ToString(),*Right.ToString());
     static bool Printed=false;if(!Printed){Printed=true;FString Names;for(int I=0;I<Local.Num();I++)Names+=Ref.GetBoneName(I).ToString()+TEXT(",");UE_LOG(LogTemp,Display,TEXT("GARDEN_MOTION_BONES %s"),*Names);}
 }
@@ -153,7 +161,9 @@ void UHALVETHGuideAnimInstance::NativeUpdateAnimation(float Dt){
         if(GetWorld()->LineTraceSingleByChannel(Hit,Contact+FVector(0,0,80),Contact-FVector(0,0,120),ECC_Visibility,Query)){
             double Ground=Body->GetComponentTransform().InverseTransformPosition(Hit.ImpactPoint).Z;
             GroundCorrections[S]=FMath::FInterpTo(GroundCorrections[S],Ground,Dt,15);
-            Contact.Z=Hit.ImpactPoint.Z+RefFeet[S].Z+Step.lift*WalkWeight;
+            // Measured source sole is 3.204499 cm below the hm08 body origin.
+            // Ground support binds the actual footwear sole, rather than origin.
+            Contact.Z=Hit.ImpactPoint.Z+RefFeet[S].Z+3.204499+Step.lift*WalkWeight;
             GroundNormals[S]=Body->GetComponentTransform().InverseTransformVectorNoScale(Hit.ImpactNormal).GetSafeNormal();
             if(WantPlant&&!Planted[S])PlantWorld[S]=Contact;
             if(WantPlant&&Planted[S]){PlantDriftMax=FMath::Max(PlantDriftMax,FVector::Dist2D(Contact,PlantWorld[S]));PlantSamples++;}

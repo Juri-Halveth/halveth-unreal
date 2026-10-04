@@ -50,5 +50,13 @@
     "https://static.makehumancommunity.org/about/license.html",
     "https://static.makehumancommunity.org/assets/assetpacks/skins01.html",
     "https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html"
+  ],
+  "authoredWardrobe": "wardrobe-sources.json",
+  "activeConstruction": "hm08-affine-proxy-v1",
+  "retiredActiveConstruction": [
+    "cylindrical coat",
+    "segmented tube sleeves",
+    "ellipsoid footwear",
+    "tube hair and cap"
   ]
 }

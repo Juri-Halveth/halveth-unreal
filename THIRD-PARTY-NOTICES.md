@@ -40,57 +40,6 @@ The product credits reproduce Epic's prescribed notice text with the actual prod
 
 ## Current nature and character assets
 
-Tree Small 02 (Rico Cilliers), Fern 02 (Rob Tuytel/Rico Cilliers), Rock Moss Set 01
-(Kless Gyzen) and terrain inputs use the recorded Poly Haven CC0 sources.
-MakeHuman core geometry, skeleton, weights and head targets use CC0; selected
-skin pack members and hashes are recorded in ArtSource/Characters/SOURCES.json.
-Original HALVETH character/fabric additions there are dedicated to CC0.
-The source builders are MIT. Blender and its bundled FBX parser/writer remain
-separately licensed software and are not bundled in the public source tree.
+Poly Haven assets use their bound CC0 source records. MakeHuman hm08 core anatomy, rig, skinning and skin maps retain SOURCES.json. Authored CC0 clothing, footwear and hair are bound in ArtSource/Characters/wardrobe-sources.json. System assets were expressly released to CC0 in September 2020 by Data Collection AB, Joel Palmius and Jonas Hauquier; the selected Culturalibre garment is expressly CC0. Original author headers are retained.
 
-Earlier local development used Epic mannequin placeholders. Current guide assets
-are generated from the above CC0 inputs and own additions. No Epic mannequin,
-engine binary, retail Morrowind asset, private save or raw runtime log is included
-in this source export.
-## Current nature and character assets
-
-Tree Small 02 (Rico Cilliers), Fern 02 (Rob Tuytel/Rico Cilliers), Rock Moss Set 01
-(Kless Gyzen) and terrain inputs use the recorded Poly Haven CC0 sources.
-MakeHuman core geometry, skeleton, weights and head targets use CC0; selected
-skin pack members and hashes are recorded in ArtSource/Characters/SOURCES.json.
-Original HALVETH character/fabric additions there are dedicated to CC0.
-The source builders are MIT. Blender and its bundled FBX parser/writer remain
-separately licensed software and are not bundled in the public source tree.
-
-Earlier local development used Epic mannequin placeholders. Current guide assets
-are generated from the above CC0 inputs and own additions. No Epic mannequin,
-engine binary, retail Morrowind asset, private save or raw runtime log is included
-in this source export.
-## Current nature and character assets
-
-Tree Small 02 (Rico Cilliers), Fern 02 (Rob Tuytel/Rico Cilliers), Rock Moss Set 01
-(Kless Gyzen) and terrain inputs use the recorded Poly Haven CC0 sources.
-MakeHuman core geometry, skeleton, weights and head targets use CC0; selected
-skin pack members and hashes are recorded in ArtSource/Characters/SOURCES.json.
-Original HALVETH character/fabric additions there are dedicated to CC0.
-The source builders are MIT. Blender and its bundled FBX parser/writer remain
-separately licensed software and are not bundled in the public source tree.
-
-Earlier local development used Epic mannequin placeholders. Current guide assets
-are generated from the above CC0 inputs and own additions. No Epic mannequin,
-engine binary, retail Morrowind asset, private save or raw runtime log is included
-in this source export.
-## Current nature and character assets
-
-Tree Small 02 (Rico Cilliers), Fern 02 (Rob Tuytel/Rico Cilliers), Rock Moss Set 01
-(Kless Gyzen) and terrain inputs use the recorded Poly Haven CC0 sources.
-MakeHuman core geometry, skeleton, weights and head targets use CC0; selected
-skin pack members and hashes are recorded in ArtSource/Characters/SOURCES.json.
-Original HALVETH character/fabric additions there are dedicated to CC0.
-The source builders are MIT. Blender and its bundled FBX parser/writer remain
-separately licensed software and are not bundled in the public source tree.
-
-Earlier local development used Epic mannequin placeholders. Current guide assets
-are generated from the above CC0 inputs and own additions. No Epic mannequin,
-engine binary, retail Morrowind asset, private save or raw runtime log is included
-in this source export.
+The hm08 affine attachment reader is independent MIT code. Blender and its bundled FBX parser/writer remain separately licensed tools. Current source exports contain CC0 character inputs and MIT builders; Unreal binaries, vendor content, retail Morrowind assets, saves and raw runtime logs stay local.

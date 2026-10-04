@@ -26,13 +26,13 @@ TREE_EXTENSIONS = {
     "tests": {".py", ".cpp", ".json"},
     "docs": {".md", ".txt", ".json", ".png", ".jpg", ".jpeg", ".svg"},
     "assets": {".svg", ".png", ".ico", ".md", ".txt", ".json"},
-    "ArtSource": {".png", ".md", ".txt", ".json", ".fbx", ".obj", ".mhskel", ".mhw", ".target"},
+    "ArtSource": {".png", ".md", ".txt", ".json", ".fbx", ".obj", ".mhskel", ".mhw", ".mhclo", ".mhmat", ".target"},
     "Preview": {".png"},
     "QA": {".json"},
     "installer": {".nsi"},
 }
 EXACT_EXTRA_FILES = frozenset({"Build/Windows/Application.ico", ".github/workflows/source.yml"})
-TEXT_EXTENSIONS = {".h", ".cpp", ".cs", ".ini", ".py", ".ps1", ".json", ".md", ".txt", ".svg", ".yml", ".nsi", ".sh", ".obj", ".mhskel", ".mhw", ".target", ".lua", ".omwscripts"}
+TEXT_EXTENSIONS = {".h", ".cpp", ".cs", ".ini", ".py", ".ps1", ".json", ".md", ".txt", ".svg", ".yml", ".nsi", ".sh", ".obj", ".mhskel", ".mhw", ".mhclo", ".mhmat", ".target", ".lua", ".omwscripts"}
 BLOCKED_PARTS = frozenset({"__pycache__", ".git", ".vs", ".idea", "node_modules"})
 SECRET_RULES = (
     ("credential_assignment", re.compile(
@@ -67,7 +67,7 @@ def allowed(relative: PurePosixPath) -> bool:
         return True
     if len(relative.parts) < 2 or relative.parts[0] not in TREE_EXTENSIONS:
         return False
-    if any(part in BLOCKED_PARTS or part.startswith(".") for part in relative.parts[1:]):
+    if any(part in BLOCKED_PARTS or part.startswith(".") or part.lower().endswith(".fbm") for part in relative.parts[1:]):
         return False
     # Native frame sequences are local capture evidence. Publication selects
     # reviewed root-level previews, rather than exporting every recorded frame.

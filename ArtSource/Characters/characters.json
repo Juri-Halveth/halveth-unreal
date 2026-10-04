@@ -1,11 +1,12 @@
 {
   "schema": "halveth.human-source.v1",
-  "geometryLicense": "CC0 MakeHuman core assets plus own authored clothing and hair",
+  "geometryLicense": "CC0 anatomical MakeHuman hm08 + explicitly CC0 authored garments, footwear and hair; own morph/idle additions",
   "characters": [
     {
       "identity": 1,
       "name": "Scarlet",
-      "vertices": 41668,
+      "construction": "hm08-affine-proxy-v1",
+      "vertices": 31406,
       "bones": 163,
       "seconds": 12,
       "morphs": [
@@ -25,12 +26,13 @@
         "cheek/l-cheek-bones-incr.target": 0.35,
         "cheek/r-cheek-bones-incr.target": 0.35
       },
-      "fbxSha256": "48a5eb76e0fc051a6a4464a5fcb97ae5770b9c4f214a927918431c08cb4119dd"
+      "fbxSha256": "819d1c1d8617451f40d123f89217ac7cc22f0e0d9be7517c54d3b03b4939ca4e"
     },
     {
       "identity": 2,
       "name": "Lucinet",
-      "vertices": 42378,
+      "construction": "hm08-affine-proxy-v1",
+      "vertices": 30672,
       "bones": 163,
       "seconds": 12,
       "morphs": [
@@ -53,12 +55,13 @@
         "cheek/l-cheek-volume-decr.target": 0.4,
         "cheek/r-cheek-volume-decr.target": 0.4
       },
-      "fbxSha256": "e8c172be3963141a5659a0e0898f86ee4b9002dfd7c4994d84c8adeb61de5331"
+      "fbxSha256": "548f2e8f0a434007d61f8f640d365626944983d42813b86c6d31f0a82fc1a4db"
     },
     {
       "identity": 3,
       "name": "Rachel",
-      "vertices": 41668,
+      "construction": "hm08-affine-proxy-v1",
+      "vertices": 26670,
       "bones": 163,
       "seconds": 12,
       "morphs": [
@@ -78,7 +81,7 @@
         "cheek/l-cheek-bones-incr.target": 0.15,
         "cheek/r-cheek-bones-incr.target": 0.15
       },
-      "fbxSha256": "e3aa638d15eb207cb1fdf02bc21a1ba8cfbb22d17cc18cb8e83a5e6602ef987b"
+      "fbxSha256": "2cfbe4b30605e88fbc629d8ff7cd294780979e0ebde7ab380a7ba7be53c6af83"
     }
   ]
 }
