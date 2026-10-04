@@ -149,5 +149,5 @@ void AHALVETHCharacter::ResetToSpawn()
 void AHALVETHCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
-    if (GetActorLocation().Z < -850) ResetToSpawn();
+    if (GetActorLocation().Z < -12000) ResetToSpawn();
 }

@@ -1,0 +1,250 @@
+{
+  "schema": "halveth.world-scale.v1",
+  "recordedAtUtc": "2026-10-04T21:02:03.350541+00:00",
+  "scope": "Independent HALVETH Portal Garden Unreal 5.8 development game",
+  "nativeTestSeed": 127,
+  "nativeGameplayPassed": true,
+  "nativeCheckLauncherExitCode": 0,
+  "motionLauncherExitCode": 0,
+  "daylightVisualLauncherExitCode": 0,
+  "sourceTests": {
+    "run": 12,
+    "passed": 11,
+    "skipped": 1,
+    "skip": "Symlink creation unavailable"
+  },
+  "captureLauncherChecks": [
+    {
+      "test": "bash_syntax",
+      "exitCode": 0,
+      "passed": true
+    },
+    {
+      "test": "NaN",
+      "exitCode": 2,
+      "passed": true
+    },
+    {
+      "test": "overflow",
+      "exitCode": 2,
+      "passed": true
+    },
+    {
+      "test": "malformed",
+      "exitCode": 2,
+      "passed": true
+    },
+    {
+      "test": "valid_noon",
+      "exitCode": 0,
+      "passed": true
+    }
+  ],
+  "forestByRealm": {
+    "0": {
+      "visibleTrees": 1029,
+      "collidingTrunks": 1029
+    },
+    "1": {
+      "visibleTrees": 1670,
+      "collidingTrunks": 1670
+    },
+    "2": {
+      "visibleTrees": 999,
+      "collidingTrunks": 999
+    },
+    "3": {
+      "visibleTrees": 1036,
+      "collidingTrunks": 1036
+    }
+  },
+  "totalTrunkInstancesAcrossFourRealms": 4734,
+  "trunkGeometryCoverage": "First, middle and last instance in each loaded realm; repeated hub loads retained in log",
+  "guideMaximumObservedDistanceFromOriginCm": {
+    "1": 384.86184,
+    "2": 373.20142,
+    "3": 317.58396
+  },
+  "guidePatrolGoalAreaCm": [
+    600,
+    520
+  ],
+  "guideMaxWalkSpeedCmS": 84,
+  "gravityDrop": {
+    "liftCm": 150,
+    "minVerticalVelocityCmS": -514.52539,
+    "landingHeightDifferenceCm": 0.19296,
+    "passed": true
+  },
+  "motionSamples": {
+    "count": 40,
+    "size": [
+      1280,
+      720
+    ],
+    "nominalHz": 2,
+    "minSampleIntervalSeconds": 0.5000752029999997,
+    "maxSampleIntervalSeconds": 0.5563659999999988,
+    "durationSeconds": 20.02168,
+    "completeContinuousFrameCoverage": false
+  },
+  "daylightCapture": {
+    "skyUnix": 1791115200,
+    "skyUtc": "2026-10-04T12:00:00Z",
+    "views": [
+      {
+        "path": "Preview/GARDEN_CRYSTAL_BROKEN.png",
+        "sha256": "6cd5b11b5d552d633f731a6b2104451911e05762a199733f839f1f9d1b4b0366",
+        "bytes": 4511825
+      },
+      {
+        "path": "Preview/GARDEN_CRYSTAL_READY.png",
+        "sha256": "8a912a9d005c45316fb84f8537d97575c285835a89ce0f27294a58756c77a790",
+        "bytes": 4481509
+      },
+      {
+        "path": "Preview/GARDEN_CRYSTAL_REFORMED.png",
+        "sha256": "9dcc61c2dc12dc1ee0abe8d6e5af45a77852d795659790b092c529f2f2cec0d1",
+        "bytes": 4460560
+      },
+      {
+        "path": "Preview/GARDEN_HUB.png",
+        "sha256": "c02804e1f08abbee1a227a961fe9018e073c9ee43120a8a2b44241be7640fe33",
+        "bytes": 4227239
+      },
+      {
+        "path": "Preview/GARDEN_LANDSCAPE.png",
+        "sha256": "0382f91b6121190f9da162e2f2d1c83a6709d66c0096a151889733b7c5cbc77c",
+        "bytes": 5014103
+      },
+      {
+        "path": "Preview/GARDEN_LUCINET_CHARACTER.png",
+        "sha256": "3f2d4046ecf1791a99887baa9d579c0ead884647e3a51465c1004f3c0ff92dee",
+        "bytes": 4479930
+      },
+      {
+        "path": "Preview/GARDEN_MEMORY.png",
+        "sha256": "ee26a97c1fd20333e926c068271836b2e3f457eaa9a366e0ba5d2a8aa6681fc8",
+        "bytes": 4840304
+      },
+      {
+        "path": "Preview/GARDEN_RACHEL_CHARACTER.png",
+        "sha256": "01c0f809d4192b142423d98aff09ba19cba38deefe05c7c52d0c67c7948193f6",
+        "bytes": 4273764
+      },
+      {
+        "path": "Preview/GARDEN_SCARLET.png",
+        "sha256": "1fead5268e35412ca19c60a003f121904a96dc609fe0d4ce9beed1463f178b70",
+        "bytes": 4704798
+      },
+      {
+        "path": "Preview/GARDEN_SCARLET_CHARACTER.png",
+        "sha256": "d1dce6ffc0f21fb07b09414a5bf6d5da668b6100a65e3ff624cec3b543465fdc",
+        "bytes": 4466160
+      },
+      {
+        "path": "Preview/GARDEN_SCARLET_FACE.png",
+        "sha256": "ea37c42587c37842097dc025f9c07c0b3135e9172f8ca10e99a5e87d826d2802",
+        "bytes": 4139323
+      },
+      {
+        "path": "Preview/GARDEN_TIDELIGHT.png",
+        "sha256": "f59c38bcf0395c9456a8034eab96dc0364b8863787c8932f8e55149503210097",
+        "bytes": 4467105
+      }
+    ],
+    "crystalCyclePassed": true
+  },
+  "visualReview": {
+    "overviewMotionSamples": 40,
+    "overviewDaylightViews": 12,
+    "detailedViews": [
+      "GARDEN_SCARLET_CHARACTER",
+      "GARDEN_SCARLET_FACE",
+      "GARDEN_LUCINET_CHARACTER",
+      "GARDEN_LANDSCAPE",
+      "GARDEN_SCARLET"
+    ],
+    "findings": [
+      "Visible guide travel and dialogue response",
+      "Stylized gait and pronounced knee flexion remain",
+      "Sole clearance needs mesh contact measurement",
+      "Flat skin detail and hand posture need art work",
+      "Primitive pickup props and bright night portal surfaces remain"
+    ]
+  },
+  "sourceChanges": [
+    {
+      "path": "GARDEN.sh",
+      "beforeSha256": "c9fb27d5c0a644816f4a0b159abd92f8e7fead8fa6e29ae8fd84d6761c32a90a",
+      "afterSha256": "8e99a1b1e88408cc8aa6eeae6eb7b79dc1f3688c8778f17073ae7e07c57ce179"
+    },
+    {
+      "path": "README.md",
+      "beforeSha256": "836d7e627ef5deaeb9c488a400b72cfc3e0eaf33e79932b82f4a3c29eef9106e",
+      "afterSha256": "c297173f42e474e65a35626a73522f8fedd21274d44a4579c933acc3cb4fa9b9"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/GardenLandscape.cpp",
+      "beforeSha256": "c03348a16dc13ffa2d09753de39ebc1387b5154f2d7248a25c381f3688684c63",
+      "afterSha256": "dd58d3a0ac4b6a82b39f3a520fa05af3beb17e77ef54f18efc22770e21ae331e"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/GardenVisual.cpp",
+      "beforeSha256": "420fb19af86d75278383bafa64853d6ab0800b2dacd7988b30abc1e356c9cc22",
+      "afterSha256": "5aa0dabe64e725e9c79cf9c1540ac402c7bf8bbd97f072455551cc4425a6c107"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/GuideMotionCapture.cpp",
+      "beforeSha256": "ec84c2e70b921d16c54a715d604eac73e4263cd260dd90fa26c96100fdf1a9c4",
+      "afterSha256": "fca8d492a60f6b51d7c3f910278d751e72d2d50d4ced518e6b8e4938060e3c21"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHGameMode.cpp",
+      "beforeSha256": "99ac947a5d02982bf3cf220df95ef31d24bb648c7fae24d17ce55f76d06b6f04",
+      "afterSha256": "b27a9bb9a4eace427e6288c6f06942233e35f5ca8397be534703be6165c47290"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHGuideAnimInstance.cpp",
+      "beforeSha256": "ff230785c5b7fd44caef1ed3387fd53d3056b46f8fa54471d2f94cc72e655a33",
+      "afterSha256": "78355b739a63e760cccb2ca5972b8387089188ef2aca1e3dbd90b868b77d269f"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHGuideCharacter.cpp",
+      "beforeSha256": "e786b51aa3f5ea8dbeee03560d83de8e6faf9b3efbeeb08b8bf22bb359d9edac",
+      "afterSha256": "566c077e90e1328225c315c2edc30cbaa3346aced6b2047ebc1286f39e7a6485"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHRealmWorld.cpp",
+      "beforeSha256": "e61c91113aa73b0d81dd2616808cb255caa0e950f2eb978a9bf17ca1fd320b35",
+      "afterSha256": "cca6d22518a57bb010cc6ed66d4a540738adc073e34e6c840cc964b87b49ed3b"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHGameMode.h",
+      "beforeSha256": "5a3e14eabd4dddccd5e3cc505aa036657e6343d8c8123def9ee21507016d3960",
+      "afterSha256": "49e6ee55d3dd474c9efcc9baaabdc293916ac05745e07ce979d4929c1e0e8988"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHRealmWorld.h",
+      "beforeSha256": "b23fd417879d0df21a0eef1a3d831316834d11d4cf602c94c7fb5cee6ef2bc9d",
+      "afterSha256": "5ff44eac9a012f5b97a06b087cf0db30c297a3c009ffb3d5961cea6ed6bdab8d"
+    }
+  ],
+  "addedDocumentation": "docs/WORLD-SCALE.md",
+  "evidenceLogSha256": {
+    "native-final.log": "432c208b3f0a5fbfec342d6fcdf8e3d52de4940a68827fc3dab9ab29c8b1d361",
+    "motion-final.log": "561303932419fd2e79d798be06c1c4d88741e2c5b0f33cde6d9ebebffb229129",
+    "daylight-visual.log": "8e72820a9f2f0a52c15635329ff8f07250300246500533e2cc9b66539742ae60",
+    "native-first-run.log": "46e8c50e73d3eb3e527b7c69a90043df916f8ca1ac83989b94eb86f7f63b0b72",
+    "native-first-run.json": "eb09c3eedfd88b3a50de4dac5204960591d67d7a7a625f7c958ab0075316ae1a",
+    "source-tests-final.log": "1d81857e8e03456a5dfbfafc45bcbe3abdda7f885abb2d4aee0ddf7a0c8788d4"
+  },
+  "externalPublication": "LOCAL_INCREMENT_ONLY",
+  "continuation": [
+    "Foot/hip support coordination",
+    "Captured gait mapped to the current skeleton",
+    "Relaxed hand/elbow pose",
+    "Skin and fantasy wardrobe art",
+    "Authored pickup meshes and portal luminance"
+  ]
+}

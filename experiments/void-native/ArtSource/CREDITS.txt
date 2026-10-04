@@ -1,0 +1,32 @@
+HALVETH VOID - art source credits
+
+All six source assets: Poly Haven, CC0-1.0.
+https://polyhaven.com/license
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Original source files are retained unchanged.
+ASSETS.json records individual download URLs, source byte sizes, upstream MD5 and local SHA256.
+
+Tree Small 02 [tree_small_02]
+https://polyhaven.com/a/tree_small_02
+Rico Cilliers: All
+
+Fern 02 [fern_02]
+https://polyhaven.com/a/fern_02
+Rob Tuytel: scanning; Rico Cilliers: modeling
+
+Rock Moss Set 01 [rock_moss_set_01]
+https://polyhaven.com/a/rock_moss_set_01
+Kless Gyzen: All
+
+Sand 03 [sand_03]
+https://polyhaven.com/a/sand_03
+Charlotte Baglioni: All
+
+Grass Path 2 [grass_path_2]
+https://polyhaven.com/a/grass_path_2
+Rob Tuytel: All
+
+Rock Boulder Dry [rock_boulder_dry]
+https://polyhaven.com/a/rock_boulder_dry
+Dimitrios Savva: Photography; Rico Cilliers: Processing

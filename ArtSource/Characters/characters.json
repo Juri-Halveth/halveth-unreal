@@ -1,0 +1,84 @@
+{
+  "schema": "halveth.human-source.v1",
+  "geometryLicense": "CC0 anatomical MakeHuman hm08 + explicitly CC0 authored garments, footwear and hair; own morph/idle additions",
+  "characters": [
+    {
+      "identity": 1,
+      "name": "Scarlet",
+      "construction": "hm08-affine-proxy-v1",
+      "vertices": 31406,
+      "bones": 163,
+      "seconds": 12,
+      "morphs": [
+        "Blink",
+        "Talk",
+        "Breath",
+        "Smile",
+        "ClothLeft",
+        "ClothRight",
+        "HairLeft",
+        "HairRight"
+      ],
+      "faceTargets": {
+        "chin/chin-prominent-incr.target": 0.1,
+        "nose/nose-point-up.target": 0.1,
+        "cheek/l-cheek-bones-incr.target": 0.15,
+        "cheek/r-cheek-bones-incr.target": 0.15
+      },
+      "fbxSha256": "56cb6fa9d8b710fd1646b4c04ccf3e76dc32a9a4628f5ad4dcf475793c71c2e1"
+    },
+    {
+      "identity": 2,
+      "name": "Lucinet",
+      "construction": "hm08-affine-proxy-v1",
+      "vertices": 30672,
+      "bones": 163,
+      "seconds": 12,
+      "morphs": [
+        "Blink",
+        "Talk",
+        "Breath",
+        "Smile",
+        "ClothLeft",
+        "ClothRight",
+        "HairLeft",
+        "HairRight"
+      ],
+      "faceTargets": {
+        "macrodetails/caucasian-male-young.target": 0.7,
+        "chin/chin-width-incr.target": 0.35,
+        "chin/chin-prominent-incr.target": 0.15,
+        "nose/nose-curve-convex.target": 0.1,
+        "nose/nose-scale-depth-incr.target": 0.1,
+        "cheek/l-cheek-volume-decr.target": 0.1,
+        "cheek/r-cheek-volume-decr.target": 0.1
+      },
+      "fbxSha256": "78330b7f420b5d2ffa0af383f9edea716b991bc1967d77916e3134aa16f8fb01"
+    },
+    {
+      "identity": 3,
+      "name": "Rachel",
+      "construction": "hm08-affine-proxy-v1",
+      "vertices": 26670,
+      "bones": 163,
+      "seconds": 12,
+      "morphs": [
+        "Blink",
+        "Talk",
+        "Breath",
+        "Smile",
+        "ClothLeft",
+        "ClothRight",
+        "HairLeft",
+        "HairRight"
+      ],
+      "faceTargets": {
+        "chin/chin-width-incr.target": 0.2,
+        "nose/nose-point-up.target": 0.2,
+        "cheek/l-cheek-bones-incr.target": 0.1,
+        "cheek/r-cheek-bones-incr.target": 0.1
+      },
+      "fbxSha256": "a58c7c44109d0e416ce6be45405178e6d1704edbec4e45a311c05d1a1cd35007"
+    }
+  ]
+}

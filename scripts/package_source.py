@@ -17,19 +17,22 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 ROOT_FILES = frozenset({
     "HALVETHRealms.uproject", "README.md", "LICENSE", "THIRD-PARTY-NOTICES.md", ".gitignore", ".gitattributes",
+    "GARDEN.sh", "CHARACTERS.sh", "requirements-art.txt",
 })
 TREE_EXTENSIONS = {
-    "Source": {".h", ".cpp", ".cs"},
+    "Source": {".h", ".cpp", ".cs", ".lua", ".omwscripts"},
     "Config": {".ini"},
     "scripts": {".py", ".ps1"},
     "tests": {".py", ".cpp", ".json"},
     "docs": {".md", ".txt", ".json", ".png", ".jpg", ".jpeg", ".svg"},
     "assets": {".svg", ".png", ".ico", ".md", ".txt", ".json"},
-    "ArtSource": {".png", ".md", ".txt", ".json"},
+    "ArtSource": {".png", ".md", ".txt", ".json", ".fbx", ".obj", ".mhskel", ".mhw", ".mhclo", ".mhmat", ".target"},
+    "Preview": {".png"},
+    "QA": {".json"},
     "installer": {".nsi"},
 }
 EXACT_EXTRA_FILES = frozenset({"Build/Windows/Application.ico", ".github/workflows/source.yml"})
-TEXT_EXTENSIONS = {".h", ".cpp", ".cs", ".ini", ".py", ".ps1", ".json", ".md", ".txt", ".svg", ".yml", ".nsi"}
+TEXT_EXTENSIONS = {".h", ".cpp", ".cs", ".ini", ".py", ".ps1", ".json", ".md", ".txt", ".svg", ".yml", ".nsi", ".sh", ".obj", ".mhskel", ".mhw", ".mhclo", ".mhmat", ".target", ".lua", ".omwscripts"}
 BLOCKED_PARTS = frozenset({"__pycache__", ".git", ".vs", ".idea", "node_modules"})
 SECRET_RULES = (
     ("credential_assignment", re.compile(
@@ -64,7 +67,11 @@ def allowed(relative: PurePosixPath) -> bool:
         return True
     if len(relative.parts) < 2 or relative.parts[0] not in TREE_EXTENSIONS:
         return False
-    if any(part in BLOCKED_PARTS or part.startswith(".") for part in relative.parts[1:]):
+    if any(part in BLOCKED_PARTS or part.startswith(".") or part.lower().endswith(".fbm") for part in relative.parts[1:]):
+        return False
+    # Native frame sequences are local capture evidence. Publication selects
+    # reviewed root-level previews, rather than exporting every recorded frame.
+    if relative.parts[0] == "Preview" and len(relative.parts) != 2:
         return False
     return relative.suffix.lower() in TREE_EXTENSIONS[relative.parts[0]]
 
@@ -147,13 +154,38 @@ def validate_art(files: dict[str, bytes]) -> dict:
         if (width, height) != (item.get("width"), item.get("height")):
             raise ExportError("Source-art PNG dimensions mismatch: " + name)
         byte_count += len(data)
-    actual = {name for name in files if name.startswith("ArtSource/") and name.lower().endswith(".png")}
+    character_prefix = "ArtSource/Characters/"
+    character_manifest = character_prefix + "MANIFEST.json"
+    character_files = {name for name in files if name.startswith(character_prefix)}
+    if character_files:
+        try:
+            inventory = json.loads(files[character_manifest].decode("utf-8-sig"))
+        except (KeyError, ValueError) as exc:
+            raise ExportError("Character source manifest is missing or invalid") from exc
+        if inventory.get("license") != "CC0-1.0":
+            raise ExportError("Character source inventory must bind its CC0 asset license")
+        declared = set()
+        for item in inventory.get("files", []):
+            raw = item.get("path", "")
+            relative = PurePosixPath(raw)
+            if not raw or "\\" in raw or relative.is_absolute() or ".." in relative.parts or ":" in raw:
+                raise ExportError("Invalid character source manifest path")
+            name = character_prefix + raw
+            if name in declared:
+                raise ExportError("Duplicate character source path")
+            declared.add(name)
+            data = files.get(name)
+            if data is None or len(data) != item.get("bytes") or sha256(data) != item.get("sha256"):
+                raise ExportError("Character source byte/hash mismatch: " + name)
+        if declared | {character_manifest} != character_files:
+            raise ExportError("Every character source asset must belong to its bound inventory")
+    actual = {name for name in files if name.startswith("ArtSource/") and not name.startswith(character_prefix) and name.lower().endswith(".png")}
     if listed != actual or not listed:
         raise ExportError("Every source-art PNG must belong to the reviewed Poly Haven manifest")
     if len(listed) != manifest.get("filesCount") or byte_count != manifest.get("downloadedMapBytes"):
         raise ExportError("Source-art manifest totals do not match the files")
     return {"license": "CC0-1.0", "files": len(listed), "bytes": byte_count,
-            "manifestSha256": sha256(files[manifest_name])}
+            "manifestSha256": sha256(files[manifest_name]), "characterSourceFiles": len(character_files)}
 
 
 def snapshot(root: Path = ROOT, maximum_bytes: int = 512 * 1024 * 1024) -> tuple[dict[str, bytes], dict]:

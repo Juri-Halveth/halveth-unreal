@@ -440,7 +440,13 @@ bool UHALVETHAdventureComponent::InteractWithNearbyCharacter()
     if (Nearest.IsNone()) return false;
     int32& Step = ConversationSteps.FindOrAdd(Nearest);
     SetFeedback(AuthoredDialogue(Nearest, Step++) + TEXT(" [Authored dialogue]"));
+    SpeakingIdentity=Nearest; SpeakingUntil=GetWorld()->GetTimeSeconds()+7.0;
     return true;
+}
+
+bool UHALVETHAdventureComponent::IsSpeakingTo(FName Identity) const
+{
+    return GetWorld() && SpeakingIdentity==Identity && GetWorld()->GetTimeSeconds()<SpeakingUntil;
 }
 
 FString UHALVETHAdventureComponent::GetStatusText() const

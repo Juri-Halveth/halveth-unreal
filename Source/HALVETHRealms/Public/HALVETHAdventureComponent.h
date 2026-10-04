@@ -44,6 +44,7 @@ public:
     bool RestoreConsumables(int32 HealthItems, int32 ManaItems, int32 StaminaItems);
     float GetMaxMana() const;
     float GetSelectedAbilityCost() const;
+    bool IsSpeakingTo(FName Identity) const;
 
     UFUNCTION(BlueprintPure, Category="HALVETH|Adventure") float GetHealth() const { return Health; }
     UFUNCTION(BlueprintPure, Category="HALVETH|Adventure") float GetMana() const { return Mana; }
@@ -83,6 +84,8 @@ private:
     int32 ItemCounts[3] = {3, 2, 2};
     FString InteractionText = TEXT("E near a guide: authored stories. Choose a spell or an inventory item.");
     TMap<FName, int32> ConversationSteps;
+    FName SpeakingIdentity = NAME_None;
+    double SpeakingUntil = 0;
 
     UFUNCTION() void OnOwnerDamaged(AActor* DamagedActor, float Damage, const UDamageType* DamageType,
         AController* InstigatedBy, AActor* DamageCauser);

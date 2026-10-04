@@ -1,0 +1,5 @@
+CC0 1.0 Universal
+
+MakeHuman hm08 basemesh, rig, weights and named targets retain their author headers and CC0 asset license. Selected garments, footwear and hair are the expressly CC0 members recorded in wardrobe-sources.json, with original copyright/license headers in Sources. Selected skin members retain SOURCES.json. Own eyes, fabric, morph and idle additions are dedicated to CC0. Python/Bash builders are MIT. Blender and Unreal are separately licensed tools.
+
+https://creativecommons.org/publicdomain/zero/1.0/legalcode

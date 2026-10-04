@@ -27,8 +27,14 @@ if ($Stage -in @('Build', 'All')) {
     if ($LASTEXITCODE -ne 0) { throw "Editor build failed ($LASTEXITCODE)." }
 }
 if ($Stage -in @('Prepare', 'All')) {
-    & $editor $projectFile -run=HALVETHPrepare -unattended -nop4 -nosound
-    if ($LASTEXITCODE -ne 0) { throw "Material preparation failed ($LASTEXITCODE)." }
+    $gardenBash = if ($env:GARDEN_BASH) { $env:GARDEN_BASH } else { Join-Path $env:ProgramFiles 'Git\bin\bash.exe' }
+    if (-not (Test-Path -LiteralPath $gardenBash -PathType Leaf)) { throw 'Git Bash is required for the shared Garden asset preparation.' }
+    $previousGardenEngine = $env:GARDEN_ENGINE
+    try {
+        $env:GARDEN_ENGINE = $enginePath
+        & $gardenBash (Join-Path $projectRoot 'GARDEN.sh') prepare
+        if ($LASTEXITCODE -ne 0) { throw "Garden world/character preparation failed ($LASTEXITCODE)." }
+    } finally { $env:GARDEN_ENGINE = $previousGardenEngine }
 }
 if ($Stage -in @('Smoke', 'All')) {
     $smokeStartedAt = [DateTime]::UtcNow

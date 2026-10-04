@@ -20,3 +20,15 @@ __pycache__/
 !/Build/Windows/
 /Build/Windows/*
 !/Build/Windows/Application.ico
+
+# Landscape/template generation remains local.
+/Content/Garden/
+/Content/VOID/
+/Content/Mannequin/
+/Content/Character/
+/Content/Animations/
+
+/Content/Characters/
+/ArtSource/Characters/*.blend
+/ArtSource/Characters/*.blend1
+/ArtSource/Characters/*.fbm/

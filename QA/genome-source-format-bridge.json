@@ -1,0 +1,12 @@
+{
+  "schema": "halveth.source-format-bridge.v1",
+  "recordedAt": "2026-10-04T22:03:21.2149547Z",
+  "path": "Source/HALVETHRealms/Public/GuideGenome.h",
+  "nativeParentSha256": "d01fbed41bf20d65e5fe75fd8d37c4a47e65821225f3375f5a87052bb44bb973",
+  "publicationInputSha256": "fa854ae6ffda84fa537dd6b2facde10fe69b27861dd99d70da244ed6c2ce7f7f",
+  "operator": "Insert line break after the early return, before the local Digest declaration",
+  "reason": "GCC -Werror=misleading-indentation",
+  "behavior": "Same tokens and control flow",
+  "runtimeReceipt": "QA/native-body-development.json",
+  "parentCommit": "e9504de03c82f36726cf81594822b690e93a9cb7"
+}

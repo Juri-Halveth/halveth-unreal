@@ -1,0 +1,77 @@
+{
+  "schema": "halveth.fbx-path-redaction.v1",
+  "records": [
+    {
+      "name": "Scarlet",
+      "fbxVersion": 7400,
+      "numericGeometryAnimationDigest": "98de39dec2dad0e393c2e637607577e9ce39e0e52fafcf51c7d44244b284df6b",
+      "numericRoundtripEqual": true,
+      "embeddedPathsReplaced": [
+        {
+          "element": "FileName",
+          "replacement": "skin_female.png"
+        },
+        {
+          "element": "P",
+          "replacement": "skin_female.png"
+        },
+        {
+          "element": "Filename",
+          "replacement": "skin_female.png"
+        }
+      ],
+      "sha256": "56cb6fa9d8b710fd1646b4c04ccf3e76dc32a9a4628f5ad4dcf475793c71c2e1"
+    },
+    {
+      "name": "Lucinet",
+      "fbxVersion": 7400,
+      "numericGeometryAnimationDigest": "08e88f4cfe1c2f6f26ad947f47b289352d97f91f50faba95f116f30d8a81c697",
+      "numericRoundtripEqual": true,
+      "embeddedPathsReplaced": [
+        {
+          "element": "P",
+          "replacement": "Lucinet.blend"
+        },
+        {
+          "element": "FileName",
+          "replacement": "skin_male.png"
+        },
+        {
+          "element": "P",
+          "replacement": "skin_male.png"
+        },
+        {
+          "element": "Filename",
+          "replacement": "skin_male.png"
+        }
+      ],
+      "sha256": "78330b7f420b5d2ffa0af383f9edea716b991bc1967d77916e3134aa16f8fb01"
+    },
+    {
+      "name": "Rachel",
+      "fbxVersion": 7400,
+      "numericGeometryAnimationDigest": "5da866f386d95b720d1d04b32bb55e8f61a18d6cdc6a5c408924b8d94ff651a5",
+      "numericRoundtripEqual": true,
+      "embeddedPathsReplaced": [
+        {
+          "element": "P",
+          "replacement": "Rachel.blend"
+        },
+        {
+          "element": "FileName",
+          "replacement": "skin_female.png"
+        },
+        {
+          "element": "P",
+          "replacement": "skin_female.png"
+        },
+        {
+          "element": "Filename",
+          "replacement": "skin_female.png"
+        }
+      ],
+      "sha256": "a58c7c44109d0e416ce6be45405178e6d1704edbec4e45a311c05d1a1cd35007"
+    }
+  ],
+  "scope": "Embedded local authoring paths converted to relative filenames; numeric geometry, indices, skeleton and animation properties retain the same parsed digest."
+}
