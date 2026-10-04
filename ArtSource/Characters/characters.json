@@ -1,0 +1,66 @@
+{
+  "schema": "halveth.human-source.v1",
+  "geometryLicense": "CC0 MakeHuman core assets plus own authored clothing and hair",
+  "characters": [
+    {
+      "identity": 1,
+      "name": "Scarlet",
+      "vertices": 41668,
+      "bones": 163,
+      "seconds": 12,
+      "morphs": [
+        "Blink",
+        "Talk"
+      ],
+      "faceTargets": {
+        "head/head-age-incr.target": 0.25,
+        "chin/chin-prominent-incr.target": 0.22,
+        "nose/nose-point-up.target": 0.1,
+        "cheek/l-cheek-bones-incr.target": 0.35,
+        "cheek/r-cheek-bones-incr.target": 0.35
+      },
+      "fbxSha256": "db910cf7e78c8e154d070154b3b10edc696d870f5ce258bc8f3e194eb1ebf53c"
+    },
+    {
+      "identity": 2,
+      "name": "Lucinet",
+      "vertices": 42378,
+      "bones": 163,
+      "seconds": 12,
+      "morphs": [
+        "Blink",
+        "Talk"
+      ],
+      "faceTargets": {
+        "macrodetails/caucasian-male-young.target": 0.7,
+        "head/head-age-incr.target": 0.65,
+        "chin/chin-width-incr.target": 0.75,
+        "chin/chin-prominent-incr.target": 0.4,
+        "nose/nose-curve-convex.target": 0.35,
+        "nose/nose-scale-depth-incr.target": 0.35,
+        "cheek/l-cheek-volume-decr.target": 0.4,
+        "cheek/r-cheek-volume-decr.target": 0.4
+      },
+      "fbxSha256": "176eb23a7e665e260b40962a8ff58398e1b22fd186887daf78ec7100cbde58ab"
+    },
+    {
+      "identity": 3,
+      "name": "Rachel",
+      "vertices": 41668,
+      "bones": 163,
+      "seconds": 12,
+      "morphs": [
+        "Blink",
+        "Talk"
+      ],
+      "faceTargets": {
+        "head/head-age-incr.target": 0.4,
+        "chin/chin-width-incr.target": 0.2,
+        "nose/nose-point-up.target": 0.3,
+        "cheek/l-cheek-bones-incr.target": 0.15,
+        "cheek/r-cheek-bones-incr.target": 0.15
+      },
+      "fbxSha256": "70342a4aa1e583d9439043d2649fc47862d882e31eacd1f65e2621405d230323"
+    }
+  ]
+}

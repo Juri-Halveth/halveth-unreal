@@ -14,6 +14,7 @@ class USkyLightComponent;
 class UExponentialHeightFogComponent;
 class USkyAtmosphereComponent;
 class UPostProcessComponent;
+class USkeletalMeshComponent;
 
 USTRUCT()
 struct FHALVETHPortal
@@ -41,6 +42,12 @@ public:
     int32 GetPortalCount() const { return Portals.Num(); }
     int32 GetCurrentRealm() const { return CurrentRealm; }
     float GetLoveStrength() const { return LoveRemaining / 4.0f; }
+    bool VerifyLandscape();
+    bool VerifyCharacters() const;
+    int32 GetTerrainChecks() const { return TerrainChecks; }
+    int32 GetTreeCount() const { return TreeCount; }
+    int32 GetFernCount() const { return FernCount; }
+    int32 GetRockCount() const { return RockCount; }
     static FString RealmName(int32 Realm);
     static FString RealmDescription(int32 Realm);
 
@@ -63,6 +70,16 @@ private:
     UPROPERTY() TObjectPtr<UPointLightComponent> LoveLight;
     UPROPERTY() TObjectPtr<AActor> TrainingTarget;
     UPROPERTY() TArray<TObjectPtr<UStaticMeshComponent>> GuideHeads;
+    UPROPERTY() TArray<TObjectPtr<USkeletalMeshComponent>> GuideBodies;
+    TArray<FVector> GuideOrigins;
+    TArray<int32> GuideIdentities;
+    TArray<FQuat> GuideBoneBaseline;
+    TArray<bool> GuidePoseChanged;
+    UPROPERTY() TObjectPtr<UStaticMeshComponent> TerrainComponent;
+    int32 TerrainChecks = 0;
+    int32 TreeCount = 0;
+    int32 FernCount = 0;
+    int32 RockCount = 0;
     TMap<int32, FVector> ReadablePositions;
     int32 CurrentRealm = 0;
     float Elapsed = 0;
@@ -76,4 +93,5 @@ private:
     void Label(FVector Position, const FString& Text, FLinearColor Color, float Size = 28);
     void Guide(FVector Position, int32 Identity);
     void Readable(FVector Position, int32 Book);
+    void BuildLandscape(uint32 Seed);
 };

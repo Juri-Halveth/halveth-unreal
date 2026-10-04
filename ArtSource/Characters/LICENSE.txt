@@ -1,0 +1,5 @@
+CC0 1.0 Universal
+
+MakeHuman core basemesh, rig, weights and named targets are CC0 assets with their retained author headers. The selected skin members come from the explicitly CC0 packs identified in SOURCES.json. Original HALVETH hair, garment, boot, eye, lapel, fabric and authored morph/idle additions in this directory are dedicated to CC0 1.0 by their author. The Python/Bash builders are MIT source; Blender itself and its parser/writer remain separately licensed software.
+
+https://creativecommons.org/publicdomain/zero/1.0/legalcode

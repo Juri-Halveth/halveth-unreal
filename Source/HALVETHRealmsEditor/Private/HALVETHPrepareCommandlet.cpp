@@ -16,6 +16,7 @@
 #include "Modules/ModuleManager.h"
 #include "Misc/PackageName.h"
 #include "Misc/Paths.h"
+#include "Misc/Parse.h"
 #include "UObject/Package.h"
 #include "UObject/SavePackage.h"
 
@@ -159,6 +160,7 @@ int32 UHALVETHPrepareCommandlet::Main(const FString& Params)
     if (!UPackage::SavePackage(Package, Material, *Filename, SaveArgs)) return 1;
     UE_LOG(LogTemp, Display, TEXT("HALVETH_PREPARE_READY: created %s"), *Filename);
     }
+    if(FParse::Param(*Params,TEXT("SurfaceOnly"))) return 0;
     const bool Cobblestone = PreparePBR(TEXT("cobblestone_floor_03"), TEXT("M_PH_CobblestoneFloor03"), TEXT("T_PH_CobblestoneFloor03"));
     const bool Forest = PreparePBR(TEXT("forest_ground_04"), TEXT("M_PH_ForestGround04"), TEXT("T_PH_ForestGround04"));
     return Cobblestone && Forest ? 0 : 1;

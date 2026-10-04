@@ -37,3 +37,60 @@ Checked 23 September 2026:
 - [Unreal Engine on GitHub](https://www.unrealengine.com/ue-on-github): separate engine-source access and MIT compatibility.
 
 The product credits reproduce Epic's prescribed notice text with the actual product name and current year. This file records the relevant notices; publication, successful packaging and acceptance by any storefront are separate release results.
+
+## Current nature and character assets
+
+Tree Small 02 (Rico Cilliers), Fern 02 (Rob Tuytel/Rico Cilliers), Rock Moss Set 01
+(Kless Gyzen) and terrain inputs use the recorded Poly Haven CC0 sources.
+MakeHuman core geometry, skeleton, weights and head targets use CC0; selected
+skin pack members and hashes are recorded in ArtSource/Characters/SOURCES.json.
+Original HALVETH character/fabric additions there are dedicated to CC0.
+The source builders are MIT. Blender and its bundled FBX parser/writer remain
+separately licensed software and are not bundled in the public source tree.
+
+Earlier local development used Epic mannequin placeholders. Current guide assets
+are generated from the above CC0 inputs and own additions. No Epic mannequin,
+engine binary, retail Morrowind asset, private save or raw runtime log is included
+in this source export.
+## Current nature and character assets
+
+Tree Small 02 (Rico Cilliers), Fern 02 (Rob Tuytel/Rico Cilliers), Rock Moss Set 01
+(Kless Gyzen) and terrain inputs use the recorded Poly Haven CC0 sources.
+MakeHuman core geometry, skeleton, weights and head targets use CC0; selected
+skin pack members and hashes are recorded in ArtSource/Characters/SOURCES.json.
+Original HALVETH character/fabric additions there are dedicated to CC0.
+The source builders are MIT. Blender and its bundled FBX parser/writer remain
+separately licensed software and are not bundled in the public source tree.
+
+Earlier local development used Epic mannequin placeholders. Current guide assets
+are generated from the above CC0 inputs and own additions. No Epic mannequin,
+engine binary, retail Morrowind asset, private save or raw runtime log is included
+in this source export.
+## Current nature and character assets
+
+Tree Small 02 (Rico Cilliers), Fern 02 (Rob Tuytel/Rico Cilliers), Rock Moss Set 01
+(Kless Gyzen) and terrain inputs use the recorded Poly Haven CC0 sources.
+MakeHuman core geometry, skeleton, weights and head targets use CC0; selected
+skin pack members and hashes are recorded in ArtSource/Characters/SOURCES.json.
+Original HALVETH character/fabric additions there are dedicated to CC0.
+The source builders are MIT. Blender and its bundled FBX parser/writer remain
+separately licensed software and are not bundled in the public source tree.
+
+Earlier local development used Epic mannequin placeholders. Current guide assets
+are generated from the above CC0 inputs and own additions. No Epic mannequin,
+engine binary, retail Morrowind asset, private save or raw runtime log is included
+in this source export.
+## Current nature and character assets
+
+Tree Small 02 (Rico Cilliers), Fern 02 (Rob Tuytel/Rico Cilliers), Rock Moss Set 01
+(Kless Gyzen) and terrain inputs use the recorded Poly Haven CC0 sources.
+MakeHuman core geometry, skeleton, weights and head targets use CC0; selected
+skin pack members and hashes are recorded in ArtSource/Characters/SOURCES.json.
+Original HALVETH character/fabric additions there are dedicated to CC0.
+The source builders are MIT. Blender and its bundled FBX parser/writer remain
+separately licensed software and are not bundled in the public source tree.
+
+Earlier local development used Epic mannequin placeholders. Current guide assets
+are generated from the above CC0 inputs and own additions. No Epic mannequin,
+engine binary, retail Morrowind asset, private save or raw runtime log is included
+in this source export.

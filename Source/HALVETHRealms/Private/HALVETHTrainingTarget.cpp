@@ -72,6 +72,10 @@ void AHALVETHTrainingTarget::BeginPlay()
 {
     Super::BeginPlay();
     Home = GetActorLocation();
+    if(auto* Crown=LoadObject<UStaticMesh>(nullptr,TEXT("/Game/Garden/CrystalCrown.CrystalCrown"))) {
+        Crystal->SetStaticMesh(Crown); LowerCrystal->SetStaticMesh(Crown);
+        for(UStaticMeshComponent* Fragment:Fragments) Fragment->SetStaticMesh(Crown);
+    }
     UMaterialInterface* Base = LoadObject<UMaterialInterface>(nullptr,
         TEXT("/Game/Materials/M_HalvethSurface.M_HalvethSurface"));
     if (!Base) Base = UMaterial::GetDefaultMaterial(MD_Surface);
@@ -128,7 +132,7 @@ void AHALVETHTrainingTarget::UpdateAppearance()
     if (Material)
     {
         Material->SetVectorParameterValue(TEXT("Tint"), Color);
-        Material->SetScalarParameterValue(TEXT("Glow"), HitFlash > 0 ? 9 : 2.2f);
+        Material->SetScalarParameterValue(TEXT("Glow"), HitFlash > 0 ? 18000 : 4400.0f);
     }
     Glow->SetLightColor(Color);
     Glow->SetIntensity(IsBroken() ? 450 : (HitFlash > 0 ? 3200 : 1300));

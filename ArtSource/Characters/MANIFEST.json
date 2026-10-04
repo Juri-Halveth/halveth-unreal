@@ -1,0 +1,141 @@
+{
+  "schema": "halveth.character-public-inventory.v1",
+  "license": "CC0-1.0",
+  "files": [
+    {
+      "path": "characters.json",
+      "bytes": 1965,
+      "sha256": "39499d82f879cf3b3fc3514a1fbee3ac92829dd215181c2efc0db07e12899fab"
+    },
+    {
+      "path": "cloth_normal.png",
+      "bytes": 48515,
+      "sha256": "154a9ea67a7d9fcef3bdb516bcf266d1e904a355833b9c724e9f0826f5f98cce"
+    },
+    {
+      "path": "cloth_weave.png",
+      "bytes": 43797,
+      "sha256": "db7cfe89ede8f9d0cff932f64a18213f007b83baa8f373ab20b4d379f875d592"
+    },
+    {
+      "path": "fbx-path-roundtrip.json",
+      "bytes": 2333,
+      "sha256": "5014782ea69a086e0765a073a984678da6caddecf4fbc1038529ef678b458122"
+    },
+    {
+      "path": "LICENSE.txt",
+      "bytes": 542,
+      "sha256": "494304bdc8e1a7e77697cd93a2302ad57c37ea2ce22f5ad4e906bdf8fe9e08c8"
+    },
+    {
+      "path": "Lucinet.fbx",
+      "bytes": 6703468,
+      "sha256": "176eb23a7e665e260b40962a8ff58398e1b22fd186887daf78ec7100cbde58ab"
+    },
+    {
+      "path": "Rachel.fbx",
+      "bytes": 6671692,
+      "sha256": "70342a4aa1e583d9439043d2649fc47862d882e31eacd1f65e2621405d230323"
+    },
+    {
+      "path": "Scarlet.fbx",
+      "bytes": 6676092,
+      "sha256": "db910cf7e78c8e154d070154b3b10edc696d870f5ce258bc8f3e194eb1ebf53c"
+    },
+    {
+      "path": "skin_female.png",
+      "bytes": 3716441,
+      "sha256": "e4547a04bab2244d8ec6bcb1d239f4cddb83f145d4ce2a5c7734ec514c8bebcf"
+    },
+    {
+      "path": "skin_male.png",
+      "bytes": 3668589,
+      "sha256": "3f94f3f6a5cab92dedf5cce392a87332312fc435f1cb44c6e7b897daef9a5fbb"
+    },
+    {
+      "path": "Sources/base.obj",
+      "bytes": 1749303,
+      "sha256": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c"
+    },
+    {
+      "path": "Sources/default.mhskel",
+      "bytes": 117790,
+      "sha256": "99f179bce0aa850b45d4191a1d0d234c5851f881c057439470ded3bddf729a24"
+    },
+    {
+      "path": "Sources/default_weights.mhw",
+      "bytes": 897521,
+      "sha256": "0f3641d651ae3d00ad6b4ccee43142edb109d3bd909d27d9e4139ef1beed8625"
+    },
+    {
+      "path": "Sources/targets/cheek/l-cheek-bones-incr.target",
+      "bytes": 1519,
+      "sha256": "244ffa39d2d2db94ff15130719346b4cae2236bf2a309c5682eac352da06be50"
+    },
+    {
+      "path": "Sources/targets/cheek/l-cheek-volume-decr.target",
+      "bytes": 3619,
+      "sha256": "527d19395f33c02caf3b32254e78702156cdf63c17e4c0e3dd79cca004fa27be"
+    },
+    {
+      "path": "Sources/targets/cheek/r-cheek-bones-incr.target",
+      "bytes": 1514,
+      "sha256": "a393f67acce21568ab832091daadab267685d464492647cb0c4e8cb5af58c4c9"
+    },
+    {
+      "path": "Sources/targets/cheek/r-cheek-volume-decr.target",
+      "bytes": 3274,
+      "sha256": "3a356f2f6434ccefa633981dff1b7866ce1feb8427918f35f81b6adffa4599b5"
+    },
+    {
+      "path": "Sources/targets/chin/chin-prominent-incr.target",
+      "bytes": 2338,
+      "sha256": "d2493ca5f69aabeb8557d77a56c49cfcf2062ff90c0cad03073d87990d11448b"
+    },
+    {
+      "path": "Sources/targets/chin/chin-width-incr.target",
+      "bytes": 3706,
+      "sha256": "deef506bfe1883d9d4c38667332c9970785226566efbae4724fd3d60c02efcf4"
+    },
+    {
+      "path": "Sources/targets/head/head-age-incr.target",
+      "bytes": 59255,
+      "sha256": "ff677345bd81e3f439bdf75496bbee620ca3c3f029955a546837afd283abf73a"
+    },
+    {
+      "path": "Sources/targets/macrodetails/caucasian-male-young.target",
+      "bytes": 396479,
+      "sha256": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5"
+    },
+    {
+      "path": "Sources/targets/macrodetails/universal-male-young-averagemuscle-averageweight.target",
+      "bytes": 604,
+      "sha256": "4ba5396ddabda448ece15650a566fbebfbb10239256ccb201e8f883429e12249"
+    },
+    {
+      "path": "Sources/targets/nose/nose-curve-convex.target",
+      "bytes": 1459,
+      "sha256": "3426e9a53c65962bc75b25aae04759a03e818d708bc5445ffc4dfb812497a7ca"
+    },
+    {
+      "path": "Sources/targets/nose/nose-point-up.target",
+      "bytes": 1672,
+      "sha256": "c8d556af4cc6fe5fbf340b1950156fffad3835524a191b47074466f244a92047"
+    },
+    {
+      "path": "Sources/targets/nose/nose-scale-depth-incr.target",
+      "bytes": 5762,
+      "sha256": "6bb03c3065e048d6e9abbcfa58961bfbe1753a307be0d3de477cac6aeaf5f750"
+    },
+    {
+      "path": "Sources/targets/sources.json",
+      "bytes": 9707,
+      "sha256": "fbaab3ae96b2b7bdfa664c3b7039de30d12492b1d83fcd7989a3ca7def0791a1"
+    },
+    {
+      "path": "SOURCES.json",
+      "bytes": 2302,
+      "sha256": "e43184e6e60069ccc78a7429ba7c4307b0f0a5067ae2bdae29d48ec7c244759d"
+    }
+  ]
+}

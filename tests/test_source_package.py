@@ -38,6 +38,25 @@ def fixture(root: Path):
 
 
 class SourcePackageTests(unittest.TestCase):
+    def test_character_source_is_exported_and_changed_bytes_are_rejected(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            fixture(root)
+            art = root / 'ArtSource/Characters'
+            art.mkdir()
+            fbx = art / 'Guide.fbx'
+            fbx.write_bytes(b'BOUND_CHARACTER_SOURCE')
+            inventory = {'license': 'CC0-1.0', 'files': [
+                {'path': 'Guide.fbx', 'bytes': fbx.stat().st_size,
+                 'sha256': hashlib.sha256(fbx.read_bytes()).hexdigest()}]}
+            (art / 'MANIFEST.json').write_text(json.dumps(inventory), encoding='utf8')
+            files, manifest = EXPORT.snapshot(root)
+            self.assertEqual(files['ArtSource/Characters/Guide.fbx'], fbx.read_bytes())
+            self.assertIn('GARDEN.sh', files)
+            fbx.write_bytes(b'CHANGED_CHARACTER_SOURCE')
+            with self.assertRaisesRegex(EXPORT.ExportError, 'Character source byte/hash mismatch'):
+                EXPORT.snapshot(root)
+
     def test_archive_contains_original_source_but_no_runtime_or_engine_data(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

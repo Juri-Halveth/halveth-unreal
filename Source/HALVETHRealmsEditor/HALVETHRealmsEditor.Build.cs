@@ -6,7 +6,7 @@ public class HALVETHRealmsEditor : ModuleRules
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
         PrivateDependencyModuleNames.AddRange(new[] {
-            "Core", "CoreUObject", "Engine", "UnrealEd", "AssetRegistry", "AssetTools", "HALVETHRealms"
+            "Core", "CoreUObject", "Engine", "UnrealEd", "AssetRegistry", "AssetTools", "HALVETHRealms", "MeshDescription", "StaticMeshDescription"
         });
     }
 }

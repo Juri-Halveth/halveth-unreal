@@ -1,5 +1,11 @@
 #include "HALVETHRealmWorld.h"
 #include "HALVETHTrainingTarget.h"
+#include "HALVETHCharacter.h"
+#include "HALVETHAdventureComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Engine/SkeletalMesh.h"
+#include "Animation/AnimSequence.h"
+#include "Animation/AnimSingleNodeInstance.h"
 #include "Engine/World.h"
 #include "RealmLayout.h"
 #include "KnowledgeSystem.h"
@@ -14,6 +20,7 @@
 #include "Materials/Material.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "UObject/ConstructorHelpers.h"
+#include "Kismet/GameplayStatics.h"
 
 namespace
 {
@@ -33,6 +40,9 @@ AHALVETHRealmWorld::AHALVETHRealmWorld()
 {
     PrimaryActorTick.bCanEverTick = true;
     SetRootComponent(CreateDefaultSubobject<USceneComponent>(TEXT("Root")));
+    // The realm origin remains fixed; animated guides/lights are movable children.
+    // Static terrain and foliage must be attached to a compatible static parent.
+    RootComponent->SetMobility(EComponentMobility::Static);
     static ConstructorHelpers::FObjectFinder<UStaticMesh> Cube(TEXT("/Engine/BasicShapes/Cube.Cube"));
     static ConstructorHelpers::FObjectFinder<UStaticMesh> Sphere(TEXT("/Engine/BasicShapes/Sphere.Sphere"));
     static ConstructorHelpers::FObjectFinder<UStaticMesh> Cylinder(TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
@@ -42,26 +52,36 @@ AHALVETHRealmWorld::AHALVETHRealmWorld()
     Sun->SetupAttachment(RootComponent);
     Sun->SetMobility(EComponentMobility::Movable);
     Sun->SetRelativeRotation(FRotator(-28, -35, 0));
-    Sun->SetIntensity(3.0f);
+    Sun->SetIntensity(48000);
+    Sun->SetLightSourceAngle(.7f);
     Sun->SetAtmosphereSunLight(true);
     Sky = CreateDefaultSubobject<USkyLightComponent>(TEXT("Sky"));
     Sky->SetupAttachment(RootComponent);
     Sky->SetMobility(EComponentMobility::Movable);
     Sky->SetRealTimeCaptureEnabled(true);
-    Sky->SetIntensity(0.6f);
+    Sky->SetIntensity(1.4f);
     Atmosphere = CreateDefaultSubobject<USkyAtmosphereComponent>(TEXT("Atmosphere"));
     Atmosphere->SetupAttachment(RootComponent);
     Fog = CreateDefaultSubobject<UExponentialHeightFogComponent>(TEXT("Fog"));
     Fog->SetupAttachment(RootComponent);
-    Fog->SetFogDensity(0.018f);
+    Fog->SetFogDensity(.007f);
+    Fog->SetFogHeightFalloff(.15f);
+    Fog->SetVolumetricFog(true);
+    Fog->SetRelativeLocation(FVector(0,0,-220));
     Fog->SetStartDistance(180);
     PostProcess = CreateDefaultSubobject<UPostProcessComponent>(TEXT("PostProcess"));
     PostProcess->SetupAttachment(RootComponent);
     PostProcess->bUnbound = true;
     PostProcess->Settings.bOverride_BloomIntensity = true;
-    PostProcess->Settings.BloomIntensity = 0.8f;
+    PostProcess->Settings.BloomIntensity = .22f;
+    PostProcess->Settings.bOverride_AutoExposureMethod=true;
+    PostProcess->Settings.AutoExposureMethod=AEM_Histogram;
+    PostProcess->Settings.bOverride_AutoExposureMinBrightness=true;
+    PostProcess->Settings.bOverride_AutoExposureMaxBrightness=true;
+    PostProcess->Settings.AutoExposureMinBrightness=12;
+    PostProcess->Settings.AutoExposureMaxBrightness=12;
     PostProcess->Settings.bOverride_VignetteIntensity = true;
-    PostProcess->Settings.VignetteIntensity = 0.25f;
+    PostProcess->Settings.VignetteIntensity = .12f;
 }
 
 FString AHALVETHRealmWorld::RealmName(int32 Realm)
@@ -104,7 +124,7 @@ UStaticMeshComponent* AHALVETHRealmWorld::Shape(UStaticMesh* Mesh, FVector Posit
     {
         UMaterialInstanceDynamic* Material = UMaterialInstanceDynamic::Create(SurfaceMaterial, Component);
         Material->SetVectorParameterValue(TEXT("Tint"), Color);
-        Material->SetScalarParameterValue(TEXT("Glow"), Glow);
+        Material->SetScalarParameterValue(TEXT("Glow"), Glow*1400);
         Component->SetMaterial(0, Material);
     }
     Component->RegisterComponent();
@@ -146,11 +166,10 @@ void AHALVETHRealmWorld::Label(FVector Position, const FString& Text, FLinearCol
 
 void AHALVETHRealmWorld::Portal(FVector Position, int32 Destination, FLinearColor Color)
 {
-    const FLinearColor Stone(0.11f, 0.10f, 0.16f);
-    Shape(CubeMesh, Position + FVector(-165, 0, 205), FVector(0.48f, 0.75f, 4.1f), Stone);
-    Shape(CubeMesh, Position + FVector(165, 0, 205), FVector(0.48f, 0.75f, 4.1f), Stone);
-    Shape(CubeMesh, Position + FVector(0, 0, 420), FVector(3.85f, 0.8f, 0.45f), Stone);
-    Shape(CubeMesh, Position + FVector(0, 0, 20), FVector(3.7f, 1.15f, 0.4f), Stone);
+    if(auto* Arch=LoadObject<UStaticMesh>(nullptr,TEXT("/Game/Garden/PortalArch.PortalArch"))) {
+        auto* Frame=Shape(Arch,Position,FVector(1),FLinearColor::White);
+        Frame->SetMaterial(0,Arch->GetMaterial(0));
+    }
     for (int32 Index = 0; Index < 7; ++Index)
     {
         const float Angle = PI * Index / 6;
@@ -171,10 +190,13 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
     if (!HalvethLayout::ValidRealm(Realm)) return;
     if (TrainingTarget) { TrainingTarget->Destroy(); TrainingTarget = nullptr; }
     GuideHeads.Empty();
+    GuideBodies.Empty(); GuideOrigins.Empty(); GuideIdentities.Empty();
+    GuideBoneBaseline.Empty();GuidePoseChanged.Empty();
     Portals.Empty(); Fireflies.Empty(); FireflyOrigins.Empty();
     LoveOrb = nullptr; LoveLight = nullptr;
     for (UActorComponent* Component : Generated) if (Component) Component->DestroyComponent();
     Generated.Empty();
+    TerrainComponent=nullptr;
     CurrentRealm = Realm;
     LoveRemaining = 0;
     Accent = RealmColor(Realm);
@@ -184,60 +206,15 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
         SurfaceMaterial = UMaterial::GetDefaultMaterial(MD_Surface);
         UE_LOG(LogTemp, Warning, TEXT("HALVETH_ASSETS_MISSING: run HALVETHPrepare before rendering or packaging."));
     }
-    Sun->SetLightColor(FMath::Lerp(FLinearColor::White, Accent, 0.24f));
-    Sun->SetIntensity(Realm == 2 ? 2.3f : 3.2f);
+    Sun->SetLightColor(FMath::Lerp(FLinearColor(1,.96,.90),Accent,.055f));
+    Sun->SetIntensity(Realm==1 ? 38000 : 48000);
     Fog->SetFogInscatteringColor(Accent * 0.035f);
-    Sky->SetLightColor(FMath::Lerp(FLinearColor::White, Accent, 0.3f));
+    Sky->SetLightColor(FMath::Lerp(FLinearColor::White,Accent,.03f));
     const FLinearColor Floor = Realm == 1 ? FLinearColor(0.065f, 0.045f, 0.070f)
         : Realm == 2 ? FLinearColor(0.026f, 0.065f, 0.09f)
         : Realm == 3 ? FLinearColor(0.13f, 0.10f, 0.045f) : FLinearColor(0.075f, 0.065f, 0.115f);
-    auto* Ground = Shape(CylinderMesh, FVector(0, 0, -75), FVector(48, 48, 1.5f), Floor);
-    const TCHAR* GroundPath = Realm == 1
-        ? TEXT("/Game/Materials/M_PH_ForestGround04.M_PH_ForestGround04")
-        : TEXT("/Game/Materials/M_PH_CobblestoneFloor03.M_PH_CobblestoneFloor03");
-    if (auto* GroundMaterial = LoadObject<UMaterialInterface>(nullptr, GroundPath)) Ground->SetMaterial(0, GroundMaterial);
-    Shape(SphereMesh, FVector(0, 0, -480), FVector(44, 44, 10), Floor * 0.6f, 0, false);
-    // These luminous rings are decorative; the cylinder remains the collision floor.
-    for (int32 Index = 0; Index < 48; ++Index)
-    {
-        const float Angle = 2 * PI * Index / 48;
-        Shape(CubeMesh, FVector(FMath::Cos(Angle) * 2210, FMath::Sin(Angle) * 2210, 12),
-            FVector(2.7f, 0.08f, 0.10f), Accent, 2, false, FRotator(0, FMath::RadiansToDegrees(Angle) + 90, 0));
-    }
-    for (int32 Index = -5; Index < 9; ++Index)
-    {
-        Shape(CubeMesh, FVector(0, Index * 150, 4), FVector(4.3f, 1.3f, 0.08f), Floor * 1.8f);
-        Shape(CubeMesh, FVector(-230, Index * 150, 12), FVector(0.05f, 0.65f, 0.05f), Accent, 3, false);
-        Shape(CubeMesh, FVector(230, Index * 150, 12), FVector(0.05f, 0.65f, 0.05f), Accent, 3, false);
-    }
+    BuildLandscape(Seed);
     const auto Layout = HalvethLayout::Build(Seed, Realm);
-    for (const HalvethLayout::Prop& Prop : Layout)
-    {
-        const FVector Base(Prop.X, Prop.Y, 0);
-        const float Height = static_cast<float>(Prop.Height);
-        if (Realm == 1)
-        {
-            Shape(CylinderMesh, Base + FVector(0, 0, Height / 2), FVector(0.16f, 0.16f, Height / 100), FLinearColor(0.18f, 0.10f, 0.11f));
-            Shape(SphereMesh, Base + FVector(0, 0, Height), FVector(1.7f, 1.7f, 0.85f), Accent * (0.25f + Prop.Variant * 0.14f), 0.18f, false);
-            Shape(SphereMesh, Base + FVector(45, 0, Height + 28), FVector(0.3f), FLinearColor(1, 0.24f, 0.18f), 4, false);
-        }
-        else if (Realm == 2)
-        {
-            Shape(ConeMesh, Base + FVector(0, 0, Height / 2), FVector(0.8f, 0.8f, Height / 100), Accent * 0.32f, 0.4f, true, FRotator(10, Prop.Rotation, 0));
-            Shape(ConeMesh, Base + FVector(70, 25, Height / 4), FVector(0.4f, 0.4f, Height / 200), Accent * 0.65f, 0.25f, true, FRotator(-18, Prop.Rotation, 0));
-        }
-        else if (Realm == 3)
-        {
-            Shape(CubeMesh, Base + FVector(0, 0, Height / 2), FVector(0.7f, 0.6f, Height / 100), Floor * 1.6f, 0, true, FRotator(0, Prop.Rotation, 0));
-            Shape(SphereMesh, Base + FVector(0, 0, Height + 35), FVector(0.5f), Accent, 3, false);
-            Shape(CubeMesh, Base + FVector(0, 0, 16), FVector(1.25f, 1.25f, 0.3f), Floor * 2);
-        }
-        else
-        {
-            Shape(CylinderMesh, Base + FVector(0, 0, Height / 2), FVector(0.45f, 0.45f, Height / 100), Floor * 1.8f);
-            Shape(SphereMesh, Base + FVector(0, 0, Height + 22), FVector(0.65f, 0.65f, 0.85f), RealmColor(1 + Prop.Variant), 1.5f, false);
-        }
-    }
     ReadablePositions.Empty();
     if (Realm == 0)
     {
@@ -257,28 +234,8 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
         Readable(FVector(720, -250, 0), Realm + 2);
         Guide(FVector(-380, -470, 0), Realm);
         Portal(FVector(0, 1180, 0), 0, RealmColor(0));
-        // A central landmark gives each destination a silhouette, not only a palette.
-        if (Realm == 1)
-        {
-            Shape(CylinderMesh, FVector(0, 200, 190), FVector(0.8f, 0.8f, 3.8f), Floor * 2);
-            Shape(SphereMesh, FVector(-85, 200, 465), FVector(2, 1.3f, 2), Accent, 0.3f, false);
-            Shape(SphereMesh, FVector(85, 200, 465), FVector(2, 1.3f, 2), Accent, 0.3f, false);
-            Shape(ConeMesh, FVector(0, 200, 365), FVector(3.2f, 1.4f, 2.7f), Accent, 0.3f, false, FRotator(180, 0, 0));
-        }
-        else if (Realm == 2)
-        {
-            for (int32 Index = 0; Index < 8; ++Index)
-                Shape(CubeMesh, FVector(0, 250, 260 + Index * 80), FVector(2.6f - Index * 0.2f, 2.6f - Index * 0.2f, 0.2f), Accent * 0.45f, 0.8f, false, FRotator(0, Index * 18, 0));
-        }
-        else
-        {
-            for (int32 Index = 0; Index < 3; ++Index)
-            {
-                Shape(CubeMesh, FVector(-200, 250, 150 + Index * 140), FVector(0.7f, 0.8f, 1.4f), Floor * 1.8f);
-                Shape(CubeMesh, FVector(200, 250, 150 + Index * 140), FVector(0.7f, 0.8f, 1.4f), Floor * 1.8f);
-                Shape(CubeMesh, FVector(0, 250, 220 + Index * 140), FVector(4.7f, 1.0f, 0.35f), Accent * 0.6f, 0.2f);
-            }
-        }
+        // Distinct destinations now have terrain, vegetation and a lake rather
+        // than primitive block towers. Their books and routes are the same game.
     }
     for (int32 Index = 0; Index < 30; ++Index)
     {
@@ -290,7 +247,7 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
     LoveOrb = Shape(SphereMesh, FVector(0, 0, 120), FVector(0.01f), FLinearColor(1, 0.1f, 0.25f), 5, false);
     LoveOrb->SetVisibility(false);
     LoveLight = Light(FVector(0, 0, 250), FLinearColor(1, 0.22f, 0.37f), 0, 1600);
-    Label(FVector(0, 1630, 650), RealmName(Realm), FLinearColor(0.96f, 0.82f, 0.55f), 55);
+
     UE_LOG(LogTemp, Display, TEXT("HALVETH_REALM_READY realm=%d seed=%u props=%d portals=%d fingerprint=%llu"),
         Realm, Seed, HalvethLayout::PropCount, Portals.Num(), static_cast<unsigned long long>(HalvethLayout::Fingerprint(Layout)));
 }
@@ -300,16 +257,44 @@ void AHALVETHRealmWorld::Guide(FVector Position, int32 Identity)
     const FLinearColor Color = RealmColor(Identity);
     const FName GuideTags[] = {TEXT("HALVETH_NPC_SCARLET"), TEXT("HALVETH_NPC_LUCINET"), TEXT("HALVETH_NPC_RACHEL")};
     const FString Names[] = {TEXT("SCARLET"), TEXT("LUCINET"), TEXT("RACHEL")};
-    auto* Body = Shape(ConeMesh, Position + FVector(0, 0, 73), FVector(0.85f, 0.65f, 1.45f), Color * 0.25f, 0.1f);
-    Body->ComponentTags.Add(GuideTags[Identity - 1]);
-    auto* Head = Shape(SphereMesh, Position + FVector(0, 0, 170), FVector(0.43f), FLinearColor(0.72f, 0.58f, 0.40f), 0.25f, false);
-    GuideHeads.Add(Head);
-    Shape(SphereMesh, Position + FVector(-7, -20, 174), FVector(0.055f), Color, 4, false);
-    Shape(SphereMesh, Position + FVector(7, -20, 174), FVector(0.055f), Color, 4, false);
+    const FString CharacterName=Identity==1?TEXT("Scarlet"):Identity==2?TEXT("Lucinet"):TEXT("Rachel");
+    const FString Path=TEXT("/Game/Characters/")+CharacterName+TEXT(".")+CharacterName;
+    auto* Body=NewObject<USkeletalMeshComponent>(this); AddInstanceComponent(Body);
+    Body->SetupAttachment(RootComponent); Body->SetMobility(EComponentMobility::Movable);
+    Body->SetSkeletalMeshAsset(LoadObject<USkeletalMesh>(nullptr,*Path));
+    Body->SetRelativeLocation(Position); Body->SetRelativeRotation(FRotator(0,-90,0));
+    Body->SetAnimationMode(EAnimationMode::AnimationSingleNode);
+    Body->VisibilityBasedAnimTickOption=EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
+    Body->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    Body->ComponentTags.Add(GuideTags[Identity-1]); Body->RegisterComponent(); Generated.Add(Body);
+    const FString IdlePath=TEXT("/Game/Characters/")+CharacterName+TEXT("Idle.")+CharacterName+TEXT("Idle");
+    auto* Idle=LoadObject<UAnimSequence>(nullptr,*IdlePath); if(Idle) Body->PlayAnimation(Idle,true);
+    GuideBodies.Add(Body); GuideOrigins.Add(Position); GuideIdentities.Add(Identity);
+    GuideBoneBaseline.Add(FQuat::Identity);GuidePoseChanged.Add(false);
+    UE_LOG(LogTemp,Display,TEXT("GARDEN_GUIDE_READY identity=%d skeletal=%d idle=%d own_clothing=true cc0_human=true morphs=%d"),Identity,Body->GetSkeletalMeshAsset()!=nullptr,Idle!=nullptr,Body->GetSkeletalMeshAsset()?Body->GetSkeletalMeshAsset()->GetMorphTargets().Num():0);
     Shape(CylinderMesh, Position + FVector(48, 0, 104), FVector(0.055f, 0.055f, 2.05f), FLinearColor(0.30f, 0.21f, 0.10f));
     Shape(SphereMesh, Position + FVector(48, 0, 216), FVector(0.24f), Color, 4, false);
     Light(Position + FVector(0, -65, 160), Color, 450, 290);
     Label(Position + FVector(0, 0, 253), Names[Identity - 1] + TEXT("  [E]"), FLinearColor(0.96f, 0.84f, 0.60f), 19);
+}
+
+bool AHALVETHRealmWorld::VerifyCharacters() const
+{
+    if(GuideBodies.Num()!=3)return false;
+    for(int32 I=0;I<GuideBodies.Num();I++) {
+        const auto* Body=GuideBodies[I].Get(); if(!Body)return false;
+        const auto* Mesh=Body->GetSkeletalMeshAsset();
+        auto* Node=Body->GetSingleNodeInstance();
+        const auto* Idle=Node?Cast<UAnimSequence>(Node->GetCurrentAsset()):nullptr;
+        const bool Bound=Mesh&&Mesh->GetSkeleton()&&Idle&&Idle->GetSkeleton()==Mesh->GetSkeleton()
+            &&Mesh->GetRefSkeleton().GetNum()>=163&&Idle->GetPlayLength()>=11.9
+            &&Mesh->FindMorphTarget(TEXT("Blink"))&&Mesh->FindMorphTarget(TEXT("Talk"))
+            &&Body->GetBoneIndex(TEXT("spine02"))!=INDEX_NONE;
+        const bool Motion=GuidePoseChanged.IsValidIndex(I)&&GuidePoseChanged[I];
+        UE_LOG(LogTemp,Display,TEXT("GARDEN_CHARACTER_AUDIT identity=%d skeleton_animation_morphs=%d sampled_internal_pose_change=%d"),GuideIdentities[I],Bound,Motion);
+        if(!Bound||!Motion)return false;
+    }
+    return true;
 }
 
 void AHALVETHRealmWorld::Readable(FVector Position, int32 Book)
@@ -384,6 +369,27 @@ void AHALVETHRealmWorld::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     Elapsed += DeltaSeconds;
+    const auto* Player=Cast<AHALVETHCharacter>(UGameplayStatics::GetPlayerPawn(this,0));
+    for(int32 I=0;I<GuideBodies.Num();I++) {
+        auto* Body=GuideBodies[I].Get(); if(!Body)continue;
+        if(Body->GetBoneIndex(TEXT("spine02"))!=INDEX_NONE) {
+            const FQuat Bone=Body->GetBoneQuaternion(TEXT("spine02"),EBoneSpaces::ComponentSpace);
+            if(GuideBoneBaseline[I].Equals(FQuat::Identity))GuideBoneBaseline[I]=Bone;
+            else if(GuideBoneBaseline[I].AngularDistance(Bone)>.0005f)GuidePoseChanged[I]=true;
+        }
+        const float Phase=FMath::Fmod(Elapsed+I*1.37f,4.8f);
+        const float Blink=Phase<.09f?Phase/.09f:Phase<.18f?( .18f-Phase)/.09f:0;
+        Body->SetMorphTarget(TEXT("Blink"),Blink);
+        if(Player) {
+            FVector Difference=Player->GetActorLocation()-(GetActorLocation()+GuideOrigins[I]);Difference.Z=0;
+            const bool Near=Difference.SizeSquared()<FMath::Square(420.f);
+            const FRotator Facing=Near?Difference.Rotation()+FRotator(0,-90,0):FRotator(0,-90,0);
+            Body->SetRelativeRotation(FMath::RInterpTo(Body->GetRelativeRotation(),Facing,DeltaSeconds,1.4f));
+            const bool Speaking=Near&&Player->GetAdventure()&&Body->ComponentTags.Num()>0
+                &&Player->GetAdventure()->IsSpeakingTo(Body->ComponentTags[0]);
+            Body->SetMorphTarget(TEXT("Talk"),Speaking?.5f*FMath::Max(0.f,FMath::Sin(Elapsed*5.2f+I)):0.f);
+        }
+    }
     for (int32 Index = 0; Index < GuideHeads.Num(); ++Index)
         if (GuideHeads[Index]) GuideHeads[Index]->SetRelativeScale3D(FVector(0.43f + FMath::Sin(Elapsed * 1.5f + Index) * 0.006f));
     LoveRemaining = FMath::Max(0.0f, LoveRemaining - DeltaSeconds);

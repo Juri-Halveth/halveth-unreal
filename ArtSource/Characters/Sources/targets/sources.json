@@ -1,0 +1,199 @@
+{
+  "recordedAtUtc": "2026-10-04T02:39:10.257193+00:00",
+  "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+  "license": "MakeHuman core graphics CC0; https://static.makehumancommunity.org/about/license.html",
+  "targets": [
+    {
+      "path": "head/head-age-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/head/head-age-incr.target",
+      "sha256": "ff677345bd81e3f439bdf75496bbee620ca3c3f029955a546837afd283abf73a",
+      "vertices": 3195,
+      "header": [
+        "# This is a target file for MakeHuman",
+        "# ",
+        "# This asset was explicitly released as CC0 in september 2020. The license",
+        "# text for CC0 can be found in the root of this repository.",
+        "#",
+        "# Original copyright (C) 2014 Manuel Bastioni ",
+        "#",
+        "# The copyright was explicitly transfered to other team members in 2016:",
+        "#",
+        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
+      ]
+    },
+    {
+      "path": "chin/chin-width-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/chin/chin-width-incr.target",
+      "sha256": "deef506bfe1883d9d4c38667332c9970785226566efbae4724fd3d60c02efcf4",
+      "vertices": 198,
+      "header": [
+        "# This is a target file for MakeHuman",
+        "# ",
+        "# This asset was explicitly released as CC0 in september 2020. The license",
+        "# text for CC0 can be found in the root of this repository.",
+        "#",
+        "# Original copyright (C) 2014 Manuel Bastioni ",
+        "#",
+        "# The copyright was explicitly transfered to other team members in 2016:",
+        "#",
+        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
+      ]
+    },
+    {
+      "path": "chin/chin-prominent-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/chin/chin-prominent-incr.target",
+      "sha256": "d2493ca5f69aabeb8557d77a56c49cfcf2062ff90c0cad03073d87990d11448b",
+      "vertices": 115,
+      "header": [
+        "# This is a target file for MakeHuman",
+        "# ",
+        "# This asset was explicitly released as CC0 in september 2020. The license",
+        "# text for CC0 can be found in the root of this repository.",
+        "#",
+        "# Original copyright (C) 2014 Manuel Bastioni ",
+        "#",
+        "# The copyright was explicitly transfered to other team members in 2016:",
+        "#",
+        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
+      ]
+    },
+    {
+      "path": "nose/nose-curve-convex.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/nose/nose-curve-convex.target",
+      "sha256": "3426e9a53c65962bc75b25aae04759a03e818d708bc5445ffc4dfb812497a7ca",
+      "vertices": 52,
+      "header": [
+        "# This is a target file for MakeHuman",
+        "# ",
+        "# This asset was explicitly released as CC0 in september 2020. The license",
+        "# text for CC0 can be found in the root of this repository.",
+        "#",
+        "# Original copyright (C) 2014 Manuel Bastioni ",
+        "#",
+        "# The copyright was explicitly transfered to other team members in 2016:",
+        "#",
+        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
+      ]
+    },
+    {
+      "path": "nose/nose-scale-depth-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/nose/nose-scale-depth-incr.target",
+      "sha256": "6bb03c3065e048d6e9abbcfa58961bfbe1753a307be0d3de477cac6aeaf5f750",
+      "vertices": 377,
+      "header": [
+        "# This is a target file for MakeHuman",
+        "# ",
+        "# This asset was explicitly released as CC0 in september 2020. The license",
+        "# text for CC0 can be found in the root of this repository.",
+        "#",
+        "# Original copyright (C) 2014 Manuel Bastioni ",
+        "#",
+        "# The copyright was explicitly transfered to other team members in 2016:",
+        "#",
+        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
+      ]
+    },
+    {
+      "path": "nose/nose-point-up.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/nose/nose-point-up.target",
+      "sha256": "c8d556af4cc6fe5fbf340b1950156fffad3835524a191b47074466f244a92047",
+      "vertices": 77,
+      "header": [
+        "# This is a target file for MakeHuman",
+        "# ",
+        "# This asset was explicitly released as CC0 in september 2020. The license",
+        "# text for CC0 can be found in the root of this repository.",
+        "#",
+        "# Original copyright (C) 2014 Manuel Bastioni ",
+        "#",
+        "# The copyright was explicitly transfered to other team members in 2016:",
+        "#",
+        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
+      ]
+    },
+    {
+      "path": "cheek/l-cheek-bones-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/cheek/l-cheek-bones-incr.target",
+      "sha256": "244ffa39d2d2db94ff15130719346b4cae2236bf2a309c5682eac352da06be50",
+      "vertices": 63,
+      "header": [
+        "# This is a target file for MakeHuman",
+        "# ",
+        "# This asset was explicitly released as CC0 in september 2020. The license",
+        "# text for CC0 can be found in the root of this repository.",
+        "#",
+        "# Original copyright (C) 2014 Manuel Bastioni ",
+        "#",
+        "# The copyright was explicitly transfered to other team members in 2016:",
+        "#",
+        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
+      ]
+    },
+    {
+      "path": "cheek/r-cheek-bones-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/cheek/r-cheek-bones-incr.target",
+      "sha256": "a393f67acce21568ab832091daadab267685d464492647cb0c4e8cb5af58c4c9",
+      "vertices": 63,
+      "header": [
+        "# This is a target file for MakeHuman",
+        "# ",
+        "# This asset was explicitly released as CC0 in september 2020. The license",
+        "# text for CC0 can be found in the root of this repository.",
+        "#",
+        "# Original copyright (C) 2014 Manuel Bastioni ",
+        "#",
+        "# The copyright was explicitly transfered to other team members in 2016:",
+        "#",
+        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
+      ]
+    },
+    {
+      "path": "cheek/l-cheek-volume-decr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/cheek/l-cheek-volume-decr.target",
+      "sha256": "527d19395f33c02caf3b32254e78702156cdf63c17e4c0e3dd79cca004fa27be",
+      "vertices": 194,
+      "header": [
+        "# This is a target file for MakeHuman",
+        "# ",
+        "# This asset was explicitly released as CC0 in september 2020. The license",
+        "# text for CC0 can be found in the root of this repository.",
+        "#",
+        "# Original copyright (C) 2014 Manuel Bastioni ",
+        "#",
+        "# The copyright was explicitly transfered to other team members in 2016:",
+        "#",
+        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
+      ]
+    },
+    {
+      "path": "cheek/r-cheek-volume-decr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/cheek/r-cheek-volume-decr.target",
+      "sha256": "3a356f2f6434ccefa633981dff1b7866ce1feb8427918f35f81b6adffa4599b5",
+      "vertices": 194,
+      "header": [
+        "# This is a target file for MakeHuman",
+        "# ",
+        "# This asset was explicitly released as CC0 in september 2020. The license",
+        "# text for CC0 can be found in the root of this repository.",
+        "#",
+        "# Original copyright (C) 2014 Manuel Bastioni ",
+        "#",
+        "# The copyright was explicitly transfered to other team members in 2016:",
+        "#",
+        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
+      ]
+    },
+    {
+      "path": "macrodetails/universal-male-young-averagemuscle-averageweight.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/universal-male-young-averagemuscle-averageweight.target",
+      "sha256": "4ba5396ddabda448ece15650a566fbebfbb10239256ccb201e8f883429e12249",
+      "vertices": 0
+    },
+    {
+      "path": "macrodetails/caucasian-male-young.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/caucasian-male-young.target",
+      "sha256": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5",
+      "vertices": 19150
+    }
+  ]
+}

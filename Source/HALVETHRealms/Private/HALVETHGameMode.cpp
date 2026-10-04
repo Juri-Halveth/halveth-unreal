@@ -54,6 +54,7 @@ void AHALVETHGameMode::BeginPlay()
     Super::BeginPlay();
     FParse::Value(FCommandLine::Get(), TEXT("HalvethSeed="), WorldSeed);
     bSmokeTest = FParse::Param(FCommandLine::Get(), TEXT("HalvethSmokeTest"));
+    bVisualTest = FParse::Param(FCommandLine::Get(), TEXT("HalvethVisual"));
     RealmWorld = GetWorld()->SpawnActor<AHALVETHRealmWorld>();
     if (!RealmWorld)
     {
@@ -145,6 +146,7 @@ void AHALVETHGameMode::ApplyQuality(int32 Quality, bool Persist)
 void AHALVETHGameMode::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    if(bVisualTest) { VisualElapsed+=DeltaSeconds; RunVisualStep(); }
     MessageRemaining = FMath::Max(0.0f, MessageRemaining - DeltaSeconds);
     TravelCooldown = FMath::Max(0.0f, TravelCooldown - DeltaSeconds);
     if (bSmokeTest && !bSmokeFailed)
@@ -168,6 +170,7 @@ void AHALVETHGameMode::RunSmokeStep()
         { FinishSmoke(false, TEXT("generated_material_missing")); return; }
         if (RealmWorld->GetPortalCount() != 3 || RealmWorld->GetCurrentRealm() != 0)
         { FinishSmoke(false, TEXT("hub_portal_count")); return; }
+        if(!RealmWorld->VerifyLandscape()) { FinishSmoke(false,TEXT("landscape_geometry_or_assets_failed")); return; }
         FHitResult Hit;
         FCollisionQueryParams Params;
         Params.AddIgnoredActor(Pawn);
@@ -181,6 +184,7 @@ void AHALVETHGameMode::RunSmokeStep()
         Interact(Pawn);
         if (RealmWorld->GetCurrentRealm() != Destination || RealmWorld->GetPortalCount() != (Destination == 0 ? 3 : 1))
         { FinishSmoke(false, TEXT("portal_roundtrip_failed")); return; }
+        if(!RealmWorld->VerifyLandscape()) { FinishSmoke(false,TEXT("destination_landscape_failed")); return; }
         // Walk the actual resource interactions across all four realms, twice per node.
         const FVector GatherPoints[] = {FVector(-320,-870,100), FVector(350,-520,100), FVector(-340,150,100), FVector(330,620,100)};
         for (int32 Local = 0; Local < 4; ++Local)
@@ -203,7 +207,7 @@ void AHALVETHGameMode::RunSmokeStep()
     {
         if (Travel(-1) || Travel(99) || RealmWorld->GetCurrentRealm() != 0)
         { FinishSmoke(false, TEXT("invalid_destination_accepted")); return; }
-        Pawn->SetActorLocation(FVector(0, 0, -900));
+        Pawn->SetActorLocation(FVector(0, 0, -12500));
     }
     else if (SmokeStep == 9)
     {
@@ -243,6 +247,7 @@ void AHALVETHGameMode::RunSmokeStep()
     }
     else if (SmokeStep == 12)
     {
+        if(!RealmWorld->VerifyCharacters()) {FinishSmoke(false,TEXT("character_skeleton_animation_morphs_or_temporal_pose_failed"));return;}
         Pawn->SetActorLocation(FVector(-380, -700, 100));
         if (!Pawn->GetAdventure()->InteractWithNearbyCharacter() || !Pawn->GetAdventure()->Dodge()
             || Pawn->GetAdventure()->GetStamina() > 73)

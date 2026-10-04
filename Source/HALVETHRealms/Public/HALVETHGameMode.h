@@ -37,4 +37,9 @@ private:
     float TravelCooldown = 0;
     void RunSmokeStep();
     void FinishSmoke(bool Success, const FString& Detail);
+    bool bVisualTest = false;
+    float VisualElapsed = 0;
+    int32 VisualStep = 0;
+    bool bVisualFailed = false;
+    void RunVisualStep();
 };

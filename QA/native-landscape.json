@@ -1,0 +1,205 @@
+{
+  "schema": "halveth.garden-native-landscape.v2",
+  "recordedAtUtc": "2026-10-04T03:23:31.458036+00:00",
+  "engine": "5.8.0-55116800+++UE5+Release-5.8",
+  "cxxBuild": "SUCCEEDED",
+  "gameplaySequence": "PASS",
+  "gameplaySteps": 31,
+  "terrainChecks": [
+    {
+      "realm": 0,
+      "rays": 441
+    },
+    {
+      "realm": 1,
+      "rays": 441
+    },
+    {
+      "realm": 0,
+      "rays": 441
+    },
+    {
+      "realm": 2,
+      "rays": 441
+    },
+    {
+      "realm": 0,
+      "rays": 441
+    },
+    {
+      "realm": 3,
+      "rays": 441
+    },
+    {
+      "realm": 0,
+      "rays": 441
+    }
+  ],
+  "crystalAfter": {
+    "healthSequence": [
+      100,
+      75,
+      50,
+      25,
+      0,
+      100
+    ],
+    "breakCount": 1,
+    "respawnSimulationSeconds": 5,
+    "renderedSequence": "PASS"
+  },
+  "characters": {
+    "identities": [
+      "Scarlet",
+      "Lucinet",
+      "Rachel"
+    ],
+    "nativeSkeletonAnimationMorphChecks": 3,
+    "sampledInternalBonePoseChanged": true,
+    "sourceManifest": {
+      "schema": "halveth.human-source.v1",
+      "geometryLicense": "CC0 MakeHuman core assets plus own authored clothing and hair",
+      "characters": [
+        {
+          "identity": 1,
+          "name": "Scarlet",
+          "vertices": 41668,
+          "bones": 163,
+          "seconds": 12,
+          "morphs": [
+            "Blink",
+            "Talk"
+          ],
+          "faceTargets": {
+            "head/head-age-incr.target": 0.25,
+            "chin/chin-prominent-incr.target": 0.22,
+            "nose/nose-point-up.target": 0.1,
+            "cheek/l-cheek-bones-incr.target": 0.35,
+            "cheek/r-cheek-bones-incr.target": 0.35
+          },
+          "fbxSha256": "db910cf7e78c8e154d070154b3b10edc696d870f5ce258bc8f3e194eb1ebf53c"
+        },
+        {
+          "identity": 2,
+          "name": "Lucinet",
+          "vertices": 42378,
+          "bones": 163,
+          "seconds": 12,
+          "morphs": [
+            "Blink",
+            "Talk"
+          ],
+          "faceTargets": {
+            "macrodetails/caucasian-male-young.target": 0.7,
+            "head/head-age-incr.target": 0.65,
+            "chin/chin-width-incr.target": 0.75,
+            "chin/chin-prominent-incr.target": 0.4,
+            "nose/nose-curve-convex.target": 0.35,
+            "nose/nose-scale-depth-incr.target": 0.35,
+            "cheek/l-cheek-volume-decr.target": 0.4,
+            "cheek/r-cheek-volume-decr.target": 0.4
+          },
+          "fbxSha256": "176eb23a7e665e260b40962a8ff58398e1b22fd186887daf78ec7100cbde58ab"
+        },
+        {
+          "identity": 3,
+          "name": "Rachel",
+          "vertices": 41668,
+          "bones": 163,
+          "seconds": 12,
+          "morphs": [
+            "Blink",
+            "Talk"
+          ],
+          "faceTargets": {
+            "head/head-age-incr.target": 0.4,
+            "chin/chin-width-incr.target": 0.2,
+            "nose/nose-point-up.target": 0.3,
+            "cheek/l-cheek-bones-incr.target": 0.15,
+            "cheek/r-cheek-bones-incr.target": 0.15
+          },
+          "fbxSha256": "70342a4aa1e583d9439043d2649fc47862d882e31eacd1f65e2621405d230323"
+        }
+      ]
+    },
+    "portableBuilder": "PASS in a separate copied source tree"
+  },
+  "rendering": {
+    "backend": "DX12/SM6",
+    "resolution": [
+      1920,
+      1080
+    ],
+    "capturedViews": 12,
+    "visuallyReviewedViews": 12,
+    "runtimeErrors": 0,
+    "captureInput": "Automated camera owns input only in -HalvethVisual; flying movement is capture-only.",
+    "images": {
+      "GARDEN_HUB.png": "15b272f1525d02b9e36a6b91f7c4376e515192d53a79adfc36d63017279727d9",
+      "GARDEN_CRYSTAL_READY.png": "e32912a4b4f215f7e563c41f491dedf9d9fc0108b824d432022a7e685c5f1579",
+      "GARDEN_CRYSTAL_BROKEN.png": "f353b639e1f3c0e42e5c27ae9dae79ffb42a7fcebd6be937dfd073226548b575",
+      "GARDEN_CRYSTAL_REFORMED.png": "7ff501344991a44d9df17d175dd989fdb9d7691f97b78c46ef195a5b560f33fa",
+      "GARDEN_LANDSCAPE.png": "e91d0d907120e7fa52467b9dc99b1703161adbc245008dd9fa41d7a311518ade",
+      "GARDEN_SCARLET.png": "d74b20079b11f2a71e71ddc40ec0a9c9f3d57c9fb0d769774c9d565564085d42",
+      "GARDEN_TIDELIGHT.png": "f2db0a342042efb1de34c735b39ad2404d9a5678a9c82fbb75b5317a7d7652f1",
+      "GARDEN_MEMORY.png": "1f5ab428a18dec6d3f32f535a448019b4a878e3cad84dd485a59e749bccec7a9",
+      "GARDEN_SCARLET_CHARACTER.png": "c01bf24f12cf79f948be4e57a2a217e3bca0b7317ab4452c90baa37fd0b948a5",
+      "GARDEN_SCARLET_FACE.png": "58a424a1062d2a2a0c179278c66cec55d2ed243ef2ba3d9df4a8f686957ee8b4",
+      "GARDEN_LUCINET_CHARACTER.png": "6601121a4c0087e5838c3700fd86c10a2c6e74f6b2d8f85e80de3f459c7ae580",
+      "GARDEN_RACHEL_CHARACTER.png": "7a9d7dfa41a74a9152aab07de2e0d2e6e8aac5a380bc0f62713124a2b96d43a3"
+    }
+  },
+  "landscapes": {
+    "realms": 4,
+    "sizeMetres": [
+      600,
+      600
+    ],
+    "verticesEach": 66049,
+    "trianglesEach": 131072,
+    "collisionFallback": "Full triangle mesh"
+  },
+  "source": {
+    "Source/HALVETHRealms/HALVETHRealms.Build.cs": "741fbce4f6290e852c9a55e02cd8ebba1c562833f6650b40f9cf54a290e1d74a",
+    "Source/HALVETHRealms/Private/GardenLandscape.cpp": "c03348a16dc13ffa2d09753de39ebc1387b5154f2d7248a25c381f3688684c63",
+    "Source/HALVETHRealms/Private/GardenVisual.cpp": "420fb19af86d75278383bafa64853d6ab0800b2dacd7988b30abc1e356c9cc22",
+    "Source/HALVETHRealms/Private/HALVETHAdventureComponent.cpp": "03548bd699dc1adc74460e3666b3d34102b7861c9ccdf196d6efea697b42d078",
+    "Source/HALVETHRealms/Private/HALVETHCharacter.cpp": "79ff2f8b9f7b903958ba817540892540935216b1c748b36649b22848e2e57a8f",
+    "Source/HALVETHRealms/Private/HALVETHGameMode.cpp": "b578bdeef1e7af933f260c680732a7f1b445e19a30bd1b6fe3d1df273b2275e2",
+    "Source/HALVETHRealms/Private/HALVETHHUD.cpp": "63bc50bb1f2ca7e9a80f7f8122408969a43f8f3373f5fcc214ff57a76c0baf91",
+    "Source/HALVETHRealms/Private/HALVETHKnowledgeComponent.cpp": "8f6a83bd8c8d058a67f6feab6abe00501a0b0bf2e97ae5793b74fdbbd4cefa1b",
+    "Source/HALVETHRealms/Private/HALVETHRealms.cpp": "d1fe417bbe96b4c41d1f9ec2858841316d041f2c849c50f3455a58dea24a750e",
+    "Source/HALVETHRealms/Private/HALVETHRealmWorld.cpp": "a4fe959f2db75664fc3dfa7c77b9049977541ba5ea5c0a4ed1e3a9c5df1461fa",
+    "Source/HALVETHRealms/Private/HALVETHTrainingTarget.cpp": "46ac9a35002194f33e61ffff4d4dcf684dbe9712e312ce836337dcd3b7d6ee03",
+    "Source/HALVETHRealms/Public/GardenField.h": "722e8f9c45353b5010615740a1afefd1ca6e66180d56d2caba4318e657ee30aa",
+    "Source/HALVETHRealms/Public/HALVETHAdventureComponent.h": "a00b28798220761818670e3026291e7106bec0b6b55b040e809ea67abb3071e6",
+    "Source/HALVETHRealms/Public/HALVETHCharacter.h": "ae14592a4e626e6e54707ece45b1581d28306fc8a1a7042e381065efe57dd12b",
+    "Source/HALVETHRealms/Public/HALVETHGameMode.h": "4cef864a78220099a78f392f476f7c54ef7bd58731b77df83dea22d13802f824",
+    "Source/HALVETHRealms/Public/HALVETHHUD.h": "17d2f28c591515219c9de7c750c8f8cdfe5e6513b24d08b4f8906e6485621dd1",
+    "Source/HALVETHRealms/Public/HALVETHKnowledgeComponent.h": "f519d53fc8a445ba315e6d9aa3d616853b0829578cdbdf027022a6e93842d371",
+    "Source/HALVETHRealms/Public/HALVETHRealmWorld.h": "d3d58f583d2117eaa83fdc942ce4b7963509ae8fcab0e846e7e2a4f3e833c3a2",
+    "Source/HALVETHRealms/Public/HALVETHTrainingTarget.h": "83018039f849eb51afab13b960d3340285a2e3c3d949e7544a62f0acd96f84c6",
+    "Source/HALVETHRealms/Public/KnowledgeSystem.h": "302e63acb44968080e234c17a15a2e2d55bde47ccb418f81871ca7b1cc5e2b15",
+    "Source/HALVETHRealms/Public/RealmLayout.h": "0e7e2bd5ec839ead58442f556592ea0305b05235351fa9e3fb20eabdbd831322",
+    "Source/HALVETHRealms.Target.cs": "22561e2804161c24cce8b86a236516612d294127c6c1830699e83760b1905d15",
+    "Source/HALVETHRealmsEditor/HALVETHRealmsEditor.Build.cs": "c14020476fd62a664322d1ac03396dffec21c01fd34aee08b847250232cc1b21",
+    "Source/HALVETHRealmsEditor/Private/GardenCharactersCommandlet.cpp": "932aa76b0ea95d6becd928a141b2c2346e722ae7f919929400c8a8aee68ccd92",
+    "Source/HALVETHRealmsEditor/Private/GardenPrepareCommandlet.cpp": "b6f16fcf913428b008573db0f79ce8045535b6295dd9f72a6983ab4a8958a421",
+    "Source/HALVETHRealmsEditor/Private/HALVETHPrepareCommandlet.cpp": "764fbd319ff3b43e02dae21609ef49ccdddd6333578c42986501fc41df253d62",
+    "Source/HALVETHRealmsEditor/Private/HALVETHRealmsEditor.cpp": "aabd1d0a3d0fe5c2def1427482dac83523bc680c57dae2df202c4f1d8ec583ac",
+    "Source/HALVETHRealmsEditor/Public/GardenCharactersCommandlet.h": "d1682466bf7a082f4ba22901e9a5ff72209e64bdea4d00b0d49c874876fd4f46",
+    "Source/HALVETHRealmsEditor/Public/GardenPrepareCommandlet.h": "aa35cb772166abe2ba378e08499d4e00dde74ce2bbc1b35f52cb74a65e3b9ed6",
+    "Source/HALVETHRealmsEditor/Public/HALVETHPrepareCommandlet.h": "5a56dc589845670dc1afdeda964393cb67988ab1d0ec39898b82c3634dcac74f",
+    "Source/HALVETHRealmsEditor.Target.cs": "20c1a705fbed123012da6b9b6f8df0527a0825a69914b425b4cf66e35e6a8a38",
+    "Config/DefaultEngine.ini": "60f30c74f3f8cbf0d7a77d976c7eaf2bdf77d23f7b47043cb6e1e912e2ecce61",
+    "Config/DefaultGame.ini": "b22b6893dd145f1ecfe6a0cf8d4c87955f8ceb10074b982671a1bea2a8abdc90",
+    "Config/DefaultInput.ini": "251764d4262d035a22e0f7c0bd8437962f10e761223d35dae38bc79d81eadae4"
+  },
+  "sourceScope": "Finite native game prototype. Character construction and time-dependent response are implemented. Whole-world art, packaged installer, multiplayer and a performance guarantee remain open.",
+  "unfinishedArt": [
+    "Fine facial sculpting, hair silhouette and cloth folds",
+    "Some simple resource/book/construction props",
+    "Further original Morrowind NPC bodies and world regions"
+  ],
+  "dataScope": "Own source, selected CC0 art and minimized result; raw logs and private saves remain local."
+}
