@@ -10,7 +10,13 @@
       "seconds": 12,
       "morphs": [
         "Blink",
-        "Talk"
+        "Talk",
+        "Breath",
+        "Smile",
+        "ClothLeft",
+        "ClothRight",
+        "HairLeft",
+        "HairRight"
       ],
       "faceTargets": {
         "head/head-age-incr.target": 0.25,
@@ -19,7 +25,7 @@
         "cheek/l-cheek-bones-incr.target": 0.35,
         "cheek/r-cheek-bones-incr.target": 0.35
       },
-      "fbxSha256": "db910cf7e78c8e154d070154b3b10edc696d870f5ce258bc8f3e194eb1ebf53c"
+      "fbxSha256": "48a5eb76e0fc051a6a4464a5fcb97ae5770b9c4f214a927918431c08cb4119dd"
     },
     {
       "identity": 2,
@@ -29,7 +35,13 @@
       "seconds": 12,
       "morphs": [
         "Blink",
-        "Talk"
+        "Talk",
+        "Breath",
+        "Smile",
+        "ClothLeft",
+        "ClothRight",
+        "HairLeft",
+        "HairRight"
       ],
       "faceTargets": {
         "macrodetails/caucasian-male-young.target": 0.7,
@@ -41,7 +53,7 @@
         "cheek/l-cheek-volume-decr.target": 0.4,
         "cheek/r-cheek-volume-decr.target": 0.4
       },
-      "fbxSha256": "176eb23a7e665e260b40962a8ff58398e1b22fd186887daf78ec7100cbde58ab"
+      "fbxSha256": "e8c172be3963141a5659a0e0898f86ee4b9002dfd7c4994d84c8adeb61de5331"
     },
     {
       "identity": 3,
@@ -51,7 +63,13 @@
       "seconds": 12,
       "morphs": [
         "Blink",
-        "Talk"
+        "Talk",
+        "Breath",
+        "Smile",
+        "ClothLeft",
+        "ClothRight",
+        "HairLeft",
+        "HairRight"
       ],
       "faceTargets": {
         "head/head-age-incr.target": 0.4,
@@ -60,7 +78,7 @@
         "cheek/l-cheek-bones-incr.target": 0.15,
         "cheek/r-cheek-bones-incr.target": 0.15
       },
-      "fbxSha256": "70342a4aa1e583d9439043d2649fc47862d882e31eacd1f65e2621405d230323"
+      "fbxSha256": "e3aa638d15eb207cb1fdf02bc21a1ba8cfbb22d17cc18cb8e83a5e6602ef987b"
     }
   ]
 }

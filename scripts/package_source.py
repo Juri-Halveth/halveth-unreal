@@ -20,7 +20,7 @@ ROOT_FILES = frozenset({
     "GARDEN.sh", "CHARACTERS.sh", "requirements-art.txt",
 })
 TREE_EXTENSIONS = {
-    "Source": {".h", ".cpp", ".cs"},
+    "Source": {".h", ".cpp", ".cs", ".lua", ".omwscripts"},
     "Config": {".ini"},
     "scripts": {".py", ".ps1"},
     "tests": {".py", ".cpp", ".json"},
@@ -32,7 +32,7 @@ TREE_EXTENSIONS = {
     "installer": {".nsi"},
 }
 EXACT_EXTRA_FILES = frozenset({"Build/Windows/Application.ico", ".github/workflows/source.yml"})
-TEXT_EXTENSIONS = {".h", ".cpp", ".cs", ".ini", ".py", ".ps1", ".json", ".md", ".txt", ".svg", ".yml", ".nsi", ".sh", ".obj", ".mhskel", ".mhw", ".target"}
+TEXT_EXTENSIONS = {".h", ".cpp", ".cs", ".ini", ".py", ".ps1", ".json", ".md", ".txt", ".svg", ".yml", ".nsi", ".sh", ".obj", ".mhskel", ".mhw", ".target", ".lua", ".omwscripts"}
 BLOCKED_PARTS = frozenset({"__pycache__", ".git", ".vs", ".idea", "node_modules"})
 SECRET_RULES = (
     ("credential_assignment", re.compile(
@@ -68,6 +68,10 @@ def allowed(relative: PurePosixPath) -> bool:
     if len(relative.parts) < 2 or relative.parts[0] not in TREE_EXTENSIONS:
         return False
     if any(part in BLOCKED_PARTS or part.startswith(".") for part in relative.parts[1:]):
+        return False
+    # Native frame sequences are local capture evidence. Publication selects
+    # reviewed root-level previews, rather than exporting every recorded frame.
+    if relative.parts[0] == "Preview" and len(relative.parts) != 2:
         return False
     return relative.suffix.lower() in TREE_EXTENSIONS[relative.parts[0]]
 

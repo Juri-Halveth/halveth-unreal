@@ -24,9 +24,9 @@ CHARACTER_ASSETS = [f'Content/Characters/{name}{suffix}.uasset'
     f'Content/Characters/{name}_{material}.uasset' for name in CHARACTERS
     for material in ['Skin','Cloth','Leather','Metal','Hair','Sclera','Iris','Pupil']]
 BOUND = GENERATED + SOURCES + ['Content/Materials/M_HalvethSurface.uasset',
-    'Content/VOID/M_Terrain.uasset', 'Content/VOID/M_Water.uasset'] + CHARACTER_INPUTS + CHARACTER_ASSETS
+    'Content/VOID/M_Terrain.uasset', 'Content/VOID/M_Water.uasset','Source/HALVETHRealms/Public/GardenSoil.h'] + CHARACTER_INPUTS + CHARACTER_ASSETS
 GEOMETRY_BINDINGS = GENERATED + SOURCES[:2] + ['Content/Materials/M_HalvethSurface.uasset',
-    'Content/VOID/M_Terrain.uasset', 'Content/VOID/M_Water.uasset']
+    'Content/VOID/M_Terrain.uasset', 'Content/VOID/M_Water.uasset','Source/HALVETHRealms/Public/GardenSoil.h']
 HUMAN_BINDINGS = CHARACTER_INPUTS + CHARACTER_ASSETS + [SOURCES[2]]
 RECEIPT = ROOT / 'Saved/GARDEN-assets-bound.json'
 sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()

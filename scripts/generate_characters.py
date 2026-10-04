@@ -173,8 +173,8 @@ for identity,name,color,haircolor,female in [(1,'Scarlet',(.19,.017,.039),(.055,
  for side in ['L','R']:
   center=d.bones['eye.'+side].head_local.copy();r=.122*SCALE
   sphere('Eye',center,(r,r,r),white,arm,'head')
-  sphere('Iris',center+Vector((0,-r*.93,0)),(r*.47,r*.12,r*.47),iris,arm,'head')
-  sphere('Pupil',center+Vector((0,-r*1.04,0)),(r*.24,r*.075,r*.24),pupil,arm,'head')
+  sphere('Iris',center+Vector((0,-r*.93,0)),(r*.47,r*.12,r*.47),iris,arm,'eye.'+side)
+  sphere('Pupil',center+Vector((0,-r*1.04,0)),(r*.24,r*.075,r*.24),pupil,arm,'eye.'+side)
  # Dense volumetric hair cap with individually raised swept strands.
  cap=[];cf=[];rows=18;cols=80
  for row in range(rows+1):
@@ -209,7 +209,32 @@ for identity,name,color,haircolor,female in [(1,'Scarlet',(.19,.017,.039),(.055,
  for side in ['L','R']:
   c=d.bones['foot.'+side].head_local
   sphere('Boot',c+Vector((0,-12,-1)),(6.7,18,8),leather,arm,'foot.'+side)
- # Bake a cyclic authored idle: breathing, slow gaze and arm release over time.
+ # Skin/cloth/hair deformation channels retain independent spatial motion.
+ # Cloth is a damped morph approximation, not a claim of cloth simulation.
+ breath=body.shape_key_add(name='Breath');smile=body.shape_key_add(name='Smile')
+ for src,new in MAP.items():
+  x,y,z=BASE_P[src]
+  if 4.6<y<6.15 and abs(x)<1.0:
+   amount=max(0,1-abs(y-5.5)/.9);breath.data[new].co.y-=.45*amount*max(0,z+.2)
+  if 6.7<y<7.0 and .16<abs(x)<.48 and z>1.15:
+   smile.data[new].co.z+=.28*max(0,1-abs(y-6.84)/.17)
+ for obj in list(scene.objects):
+  if obj.type!='MESH' or obj==body:continue
+  if not obj.data.shape_keys:obj.shape_key_add(name='Basis')
+  if obj.name.startswith(('Coat','Sleeve','Lapel','Clasp')):
+   left=obj.shape_key_add(name='ClothLeft');right=obj.shape_key_add(name='ClothRight');breathe=obj.shape_key_add(name='Breath')
+   for v in obj.data.vertices:
+    co=v.co;hem=max(0,min(1,(105-co.z)/85))**1.5;flutter=math.sin(co.x*.15+co.y*.09)
+    delta=Vector((3.5*hem,.8*hem*flutter,.55*hem*flutter))
+    left.data[v.index].co+=delta;right.data[v.index].co-=delta
+    if 110<co.z<150:breathe.data[v.index].co.y-=.6*max(0,1-abs(co.z-130)/20)
+  if obj.name.startswith(('Hair','Braid','Beard','Moustache')):
+   left=obj.shape_key_add(name='HairLeft');right=obj.shape_key_add(name='HairRight')
+   for v in obj.data.vertices:
+    amount=.18 if obj.name.startswith('HairCap') else .35 if obj.name.startswith('HairStrand') else max(.25,min(2.5,(170-v.co.z)*.08))
+    left.data[v.index].co.x+=amount;right.data[v.index].co.x-=amount
+ # Bake the base idle; runtime layers independent gaze, hands, knees, foot
+ # placement, weight transfer, gait and response onto this stable source pose.
  for frame in range(1,362,10):
   t=(frame-1)/30
   for bone in ['spine03','spine02','neck03','head']:
@@ -234,6 +259,6 @@ for identity,name,color,haircolor,female in [(1,'Scarlet',(.19,.017,.039),(.055,
  file=DEST/(name+'.fbx')
  bpy.ops.export_scene.fbx(filepath=str(file),use_selection=True,object_types={'ARMATURE','MESH'},add_leaf_bones=False,axis_forward='-Y',axis_up='Z',apply_unit_scale=True,bake_anim=True,bake_anim_use_all_actions=False,bake_anim_use_nla_strips=False,bake_anim_simplify_factor=0,use_mesh_modifiers=False,mesh_smooth_type='FACE',path_mode='RELATIVE',embed_textures=False)
  bpy.ops.wm.save_as_mainfile(filepath=str(DEST/(name+'.blend')))
- manifest.append({'identity':identity,'name':name,'vertices':sum(len(o.data.vertices) for o in scene.objects if o.type=='MESH'),'bones':len(d.bones),'seconds':12,'morphs':['Blink','Talk'],'faceTargets':FACE_TARGETS[name],'fbxSha256':hashlib.sha256(file.read_bytes()).hexdigest()})
+ manifest.append({'identity':identity,'name':name,'vertices':sum(len(o.data.vertices) for o in scene.objects if o.type=='MESH'),'bones':len(d.bones),'seconds':12,'morphs':['Blink','Talk','Breath','Smile','ClothLeft','ClothRight','HairLeft','HairRight'],'faceTargets':FACE_TARGETS[name],'fbxSha256':hashlib.sha256(file.read_bytes()).hexdigest()})
  print('HUMAN_BUILT',manifest[-1],flush=True)
 (DEST/'characters.json').write_text(json.dumps({'schema':'halveth.human-source.v1','geometryLicense':'CC0 MakeHuman core assets plus own authored clothing and hair','characters':manifest},indent=2)+'\n')

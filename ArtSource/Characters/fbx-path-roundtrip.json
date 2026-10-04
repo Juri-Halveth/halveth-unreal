@@ -4,7 +4,7 @@
     {
       "name": "Scarlet",
       "fbxVersion": 7400,
-      "numericGeometryAnimationDigest": "11babb3bef7629a5241e48194501f13c82281a0f85aa2cccd36ca1b059bd1c52",
+      "numericGeometryAnimationDigest": "ad01d01729a05cadb1561b65b81c21b319fb891adb1b7e882fa9dcb69c1ad688",
       "numericRoundtripEqual": true,
       "embeddedPathsReplaced": [
         {
@@ -20,12 +20,12 @@
           "replacement": "skin_female.png"
         }
       ],
-      "sha256": "db910cf7e78c8e154d070154b3b10edc696d870f5ce258bc8f3e194eb1ebf53c"
+      "sha256": "48a5eb76e0fc051a6a4464a5fcb97ae5770b9c4f214a927918431c08cb4119dd"
     },
     {
       "name": "Lucinet",
       "fbxVersion": 7400,
-      "numericGeometryAnimationDigest": "4bd1d97b10dd32ac82c8eaaf01b435213e45695f9dc774ff1c2db3159dc7290e",
+      "numericGeometryAnimationDigest": "786fb2287fb100a32e1975673bc67715bfb6b98b36b40085288a2c68b5e6f1b0",
       "numericRoundtripEqual": true,
       "embeddedPathsReplaced": [
         {
@@ -45,12 +45,12 @@
           "replacement": "skin_male.png"
         }
       ],
-      "sha256": "176eb23a7e665e260b40962a8ff58398e1b22fd186887daf78ec7100cbde58ab"
+      "sha256": "e8c172be3963141a5659a0e0898f86ee4b9002dfd7c4994d84c8adeb61de5331"
     },
     {
       "name": "Rachel",
       "fbxVersion": 7400,
-      "numericGeometryAnimationDigest": "a6dea4580014a473e9c987ad2d8c200aaaa961eaee7c388251a24d2d881ac9e7",
+      "numericGeometryAnimationDigest": "e3f2ebd9d27ac6d4f2fcb78605d4857cf1a3c728e787568dd216932f9c485d9c",
       "numericRoundtripEqual": true,
       "embeddedPathsReplaced": [
         {
@@ -70,7 +70,7 @@
           "replacement": "skin_female.png"
         }
       ],
-      "sha256": "70342a4aa1e583d9439043d2649fc47862d882e31eacd1f65e2621405d230323"
+      "sha256": "e3aa638d15eb207cb1fdf02bc21a1ba8cfbb22d17cc18cb8e83a5e6602ef987b"
     }
   ],
   "scope": "Embedded local authoring paths converted to relative filenames; numeric geometry, indices, skeleton and animation properties retain the same parsed digest."

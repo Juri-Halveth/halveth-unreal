@@ -15,6 +15,9 @@ class UExponentialHeightFogComponent;
 class USkyAtmosphereComponent;
 class UPostProcessComponent;
 class USkeletalMeshComponent;
+class AHALVETHGuideCharacter;
+class UProceduralMeshComponent;
+class UVolumetricCloudComponent;
 
 USTRUCT()
 struct FHALVETHPortal
@@ -44,6 +47,11 @@ public:
     float GetLoveStrength() const { return LoveRemaining / 4.0f; }
     bool VerifyLandscape();
     bool VerifyCharacters() const;
+    FVector GetGuidePosition(int32 Identity) const;
+    AHALVETHGuideCharacter* GetGuideCharacter(int32 Identity) const;
+    bool VerifyGroundDynamics() const;
+    bool VerifySkyDynamics() const;
+    double GetSkyClockUnix() const { return SkyClockUnix; }
     int32 GetTerrainChecks() const { return TerrainChecks; }
     int32 GetTreeCount() const { return TreeCount; }
     int32 GetFernCount() const { return FernCount; }
@@ -58,9 +66,11 @@ private:
     UPROPERTY() TObjectPtr<UStaticMesh> ConeMesh;
     UPROPERTY() TObjectPtr<UMaterialInterface> SurfaceMaterial;
     UPROPERTY() TObjectPtr<UDirectionalLightComponent> Sun;
+    UPROPERTY() TObjectPtr<UDirectionalLightComponent> NightFill;
     UPROPERTY() TObjectPtr<USkyLightComponent> Sky;
     UPROPERTY() TObjectPtr<UExponentialHeightFogComponent> Fog;
     UPROPERTY() TObjectPtr<USkyAtmosphereComponent> Atmosphere;
+    UPROPERTY() TObjectPtr<UVolumetricCloudComponent> Clouds;
     UPROPERTY() TObjectPtr<UPostProcessComponent> PostProcess;
     UPROPERTY() TArray<TObjectPtr<UActorComponent>> Generated;
     UPROPERTY() TArray<FHALVETHPortal> Portals;
@@ -71,10 +81,29 @@ private:
     UPROPERTY() TObjectPtr<AActor> TrainingTarget;
     UPROPERTY() TArray<TObjectPtr<UStaticMeshComponent>> GuideHeads;
     UPROPERTY() TArray<TObjectPtr<USkeletalMeshComponent>> GuideBodies;
+    UPROPERTY() TArray<TObjectPtr<AHALVETHGuideCharacter>> GuideActors;
+    UPROPERTY() TArray<TObjectPtr<UProceduralMeshComponent>> SoilComponents;
+    TArray<FVector> SoilCenters;
+    TArray<TArray<FVector>> SoilVertices;
+    TArray<TArray<FLinearColor>> SoilColors;
+    TArray<double> SoilLoads;
+    TArray<double> SoilDepths;
+    float SoilUpdateTime=0;
+    TArray<FVector> SunDirections;
+    double SkyFirstUnix=0,SkyLastUnix=0,SkyClockUnix=0,SkyTimeScale=1;
+    float SkyUpdateTime=0;
+    double SkyMinHeight=1,SkyMaxHeight=-1;
+    int32 SkyObservedSamples=0,SkyNightSamples=0,SkyDaySamples=0;
+    UPROPERTY() TArray<TObjectPtr<UStaticMeshComponent>> Stars;
     TArray<FVector> GuideOrigins;
     TArray<int32> GuideIdentities;
     TArray<FQuat> GuideBoneBaseline;
     TArray<bool> GuidePoseChanged;
+    TArray<double> GuidePatrolTime;
+    TArray<FVector> GuideHandBaseline;
+    TArray<double> GuideHandTravel;
+    TArray<FQuat> GuideHeadBaseline;
+    TArray<double> GuideHeadTravel;
     UPROPERTY() TObjectPtr<UStaticMeshComponent> TerrainComponent;
     int32 TerrainChecks = 0;
     int32 TreeCount = 0;
@@ -94,4 +123,8 @@ private:
     void Guide(FVector Position, int32 Identity);
     void Readable(FVector Position, int32 Book);
     void BuildLandscape(uint32 Seed);
+    void BuildSoil(FVector Guide);
+    void TickSoil(float Dt);
+    void InitializeEarthSky();
+    void TickEarthSky(float Dt);
 };

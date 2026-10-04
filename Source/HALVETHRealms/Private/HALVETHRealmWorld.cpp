@@ -2,6 +2,12 @@
 #include "HALVETHTrainingTarget.h"
 #include "HALVETHCharacter.h"
 #include "HALVETHAdventureComponent.h"
+#include "HALVETHGuideAnimInstance.h"
+#include "HALVETHGuideCharacter.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/WorldSettings.h"
+#include "EarthDynamicsMath.h"
+#include "CollisionShape.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Engine/SkeletalMesh.h"
 #include "Animation/AnimSequence.h"
@@ -15,6 +21,7 @@
 #include "Components/SkyLightComponent.h"
 #include "Components/ExponentialHeightFogComponent.h"
 #include "Components/SkyAtmosphereComponent.h"
+#include "Components/VolumetricCloudComponent.h"
 #include "Components/PostProcessComponent.h"
 #include "Components/TextRenderComponent.h"
 #include "Materials/Material.h"
@@ -55,6 +62,13 @@ AHALVETHRealmWorld::AHALVETHRealmWorld()
     Sun->SetIntensity(48000);
     Sun->SetLightSourceAngle(.7f);
     Sun->SetAtmosphereSunLight(true);
+    Sun->DynamicShadowDistanceMovableLight=30000;
+    Sun->SetDynamicShadowCascades(4);
+    // Authored night fill preserves navigation; it is not a NASA Moon model.
+    NightFill=CreateDefaultSubobject<UDirectionalLightComponent>(TEXT("AuthoredNightFill"));
+    NightFill->SetupAttachment(RootComponent);NightFill->SetMobility(EComponentMobility::Movable);
+    NightFill->SetRelativeRotation(FRotator(-42,75,0));NightFill->SetLightColor(FLinearColor(.35f,.48f,.72f));
+    NightFill->SetIntensity(0);NightFill->SetCastShadows(false);
     Sky = CreateDefaultSubobject<USkyLightComponent>(TEXT("Sky"));
     Sky->SetupAttachment(RootComponent);
     Sky->SetMobility(EComponentMobility::Movable);
@@ -62,6 +76,9 @@ AHALVETHRealmWorld::AHALVETHRealmWorld()
     Sky->SetIntensity(1.4f);
     Atmosphere = CreateDefaultSubobject<USkyAtmosphereComponent>(TEXT("Atmosphere"));
     Atmosphere->SetupAttachment(RootComponent);
+    Clouds=CreateDefaultSubobject<UVolumetricCloudComponent>(TEXT("Clouds"));Clouds->SetupAttachment(RootComponent);
+    Clouds->SetLayerBottomAltitude(1.2f);Clouds->SetLayerHeight(4.5f);
+    Clouds->SetMaterial(LoadObject<UMaterialInterface>(nullptr,TEXT("/Engine/EngineSky/VolumetricClouds/m_SimpleVolumetricCloud_Inst.m_SimpleVolumetricCloud_Inst")));
     Fog = CreateDefaultSubobject<UExponentialHeightFogComponent>(TEXT("Fog"));
     Fog->SetupAttachment(RootComponent);
     Fog->SetFogDensity(.007f);
@@ -189,9 +206,12 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
 {
     if (!HalvethLayout::ValidRealm(Realm)) return;
     if (TrainingTarget) { TrainingTarget->Destroy(); TrainingTarget = nullptr; }
+    for(auto GuideActor:GuideActors)if(GuideActor)GuideActor->Destroy();GuideActors.Empty();
     GuideHeads.Empty();
     GuideBodies.Empty(); GuideOrigins.Empty(); GuideIdentities.Empty();
     GuideBoneBaseline.Empty();GuidePoseChanged.Empty();
+    GuidePatrolTime.Empty();GuideHandBaseline.Empty();GuideHandTravel.Empty();GuideHeadBaseline.Empty();GuideHeadTravel.Empty();
+    SoilComponents.Empty();SoilCenters.Empty();SoilVertices.Empty();SoilColors.Empty();SoilLoads.Empty();SoilDepths.Empty();Stars.Empty();
     Portals.Empty(); Fireflies.Empty(); FireflyOrigins.Empty();
     LoveOrb = nullptr; LoveLight = nullptr;
     for (UActorComponent* Component : Generated) if (Component) Component->DestroyComponent();
@@ -214,6 +234,9 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
         : Realm == 2 ? FLinearColor(0.026f, 0.065f, 0.09f)
         : Realm == 3 ? FLinearColor(0.13f, 0.10f, 0.045f) : FLinearColor(0.075f, 0.065f, 0.115f);
     BuildLandscape(Seed);
+    GetWorld()->GetWorldSettings()->bGlobalGravitySet=true;
+    GetWorld()->GetWorldSettings()->GlobalGravityZ=-100*EarthDynamics::GravityMps2;
+    InitializeEarthSky();
     const auto Layout = HalvethLayout::Build(Seed, Realm);
     ReadablePositions.Empty();
     if (Realm == 0)
@@ -259,23 +282,39 @@ void AHALVETHRealmWorld::Guide(FVector Position, int32 Identity)
     const FString Names[] = {TEXT("SCARLET"), TEXT("LUCINET"), TEXT("RACHEL")};
     const FString CharacterName=Identity==1?TEXT("Scarlet"):Identity==2?TEXT("Lucinet"):TEXT("Rachel");
     const FString Path=TEXT("/Game/Characters/")+CharacterName+TEXT(".")+CharacterName;
-    auto* Body=NewObject<USkeletalMeshComponent>(this); AddInstanceComponent(Body);
-    Body->SetupAttachment(RootComponent); Body->SetMobility(EComponentMobility::Movable);
+    BuildSoil(Position);
+    FActorSpawnParameters Spawn;Spawn.Owner=this;Spawn.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+    auto* GuideActor=GetWorld()->SpawnActor<AHALVETHGuideCharacter>(GetActorLocation()+Position+FVector(0,0,96),FRotator::ZeroRotator,Spawn);
+    if(!GuideActor)return;GuideActors.Add(GuideActor);
+    GuideActor->GetCharacterMovement()->Mass=Identity==1?68:Identity==2?82:61;
+    auto* Body=GuideActor->GetMesh();
     Body->SetSkeletalMeshAsset(LoadObject<USkeletalMesh>(nullptr,*Path));
-    Body->SetRelativeLocation(Position); Body->SetRelativeRotation(FRotator(0,-90,0));
-    Body->SetAnimationMode(EAnimationMode::AnimationSingleNode);
+    Body->SetAnimationMode(EAnimationMode::AnimationBlueprint);
+    Body->SetAnimInstanceClass(UHALVETHGuideAnimInstance::StaticClass());
     Body->VisibilityBasedAnimTickOption=EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
     Body->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-    Body->ComponentTags.Add(GuideTags[Identity-1]); Body->RegisterComponent(); Generated.Add(Body);
+    Body->ComponentTags.Add(GuideTags[Identity-1]);GuideActor->Tags.Add(GuideTags[Identity-1]);
     const FString IdlePath=TEXT("/Game/Characters/")+CharacterName+TEXT("Idle.")+CharacterName+TEXT("Idle");
-    auto* Idle=LoadObject<UAnimSequence>(nullptr,*IdlePath); if(Idle) Body->PlayAnimation(Idle,true);
+    auto* Idle=LoadObject<UAnimSequence>(nullptr,*IdlePath);
+    if(auto* Motion=Cast<UHALVETHGuideAnimInstance>(Body->GetAnimInstance())){Motion->BaseIdle=Idle;Motion->Identity=Identity;}
     GuideBodies.Add(Body); GuideOrigins.Add(Position); GuideIdentities.Add(Identity);
     GuideBoneBaseline.Add(FQuat::Identity);GuidePoseChanged.Add(false);
+    GuidePatrolTime.Add(Identity*3.7);GuideHandBaseline.Add(FVector::ZeroVector);GuideHandTravel.Add(0);GuideHeadBaseline.Add(FQuat::Identity);GuideHeadTravel.Add(0);
     UE_LOG(LogTemp,Display,TEXT("GARDEN_GUIDE_READY identity=%d skeletal=%d idle=%d own_clothing=true cc0_human=true morphs=%d"),Identity,Body->GetSkeletalMeshAsset()!=nullptr,Idle!=nullptr,Body->GetSkeletalMeshAsset()?Body->GetSkeletalMeshAsset()->GetMorphTargets().Num():0);
-    Shape(CylinderMesh, Position + FVector(48, 0, 104), FVector(0.055f, 0.055f, 2.05f), FLinearColor(0.30f, 0.21f, 0.10f));
-    Shape(SphereMesh, Position + FVector(48, 0, 216), FVector(0.24f), Color, 4, false);
-    Light(Position + FVector(0, -65, 160), Color, 450, 290);
-    Label(Position + FVector(0, 0, 253), Names[Identity - 1] + TEXT("  [E]"), FLinearColor(0.96f, 0.84f, 0.60f), 19);
+    auto* Glow=Light(Position + FVector(0, -65, 160), Color, 180, 290);
+    Glow->AttachToComponent(Body,FAttachmentTransformRules::KeepWorldTransform);
+    Label(Position + FVector(0, 0, 213), Names[Identity - 1] + TEXT("  [E]"), FLinearColor(0.96f, 0.84f, 0.60f), 12);
+    if(auto* Name=Cast<USceneComponent>(Generated.Last()))Name->AttachToComponent(Body,FAttachmentTransformRules::KeepWorldTransform);
+}
+
+FVector AHALVETHRealmWorld::GetGuidePosition(int32 Identity) const {
+    for(int I=0;I<GuideIdentities.Num();I++)if(GuideIdentities[I]==Identity&&GuideBodies[I])return GuideBodies[I]->GetComponentLocation();
+    return FVector::ZeroVector;
+}
+
+AHALVETHGuideCharacter* AHALVETHRealmWorld::GetGuideCharacter(int32 Identity) const {
+    for(int I=0;I<GuideIdentities.Num();I++)if(GuideIdentities[I]==Identity&&GuideActors.IsValidIndex(I))return GuideActors[I];
+    return nullptr;
 }
 
 bool AHALVETHRealmWorld::VerifyCharacters() const
@@ -284,15 +323,19 @@ bool AHALVETHRealmWorld::VerifyCharacters() const
     for(int32 I=0;I<GuideBodies.Num();I++) {
         const auto* Body=GuideBodies[I].Get(); if(!Body)return false;
         const auto* Mesh=Body->GetSkeletalMeshAsset();
-        auto* Node=Body->GetSingleNodeInstance();
-        const auto* Idle=Node?Cast<UAnimSequence>(Node->GetCurrentAsset()):nullptr;
+        const auto* Anim=Cast<UHALVETHGuideAnimInstance>(Body->GetAnimInstance());
+        const auto* Idle=Anim?Anim->BaseIdle.Get():nullptr;
         const bool Bound=Mesh&&Mesh->GetSkeleton()&&Idle&&Idle->GetSkeleton()==Mesh->GetSkeleton()
             &&Mesh->GetRefSkeleton().GetNum()>=163&&Idle->GetPlayLength()>=11.9
             &&Mesh->FindMorphTarget(TEXT("Blink"))&&Mesh->FindMorphTarget(TEXT("Talk"))
-            &&Body->GetBoneIndex(TEXT("spine02"))!=INDEX_NONE;
+            &&Mesh->FindMorphTarget(TEXT("ClothLeft"))&&Mesh->FindMorphTarget(TEXT("HairRight"))&&Mesh->FindMorphTarget(TEXT("Breath"))
+            &&Body->GetBoneIndex(TEXT("spine02"))!=INDEX_NONE
+            &&Body->GetBoneIndex(TEXT("wrist_R"))!=INDEX_NONE&&Body->GetBoneIndex(TEXT("upperleg01_L"))!=INDEX_NONE
+            &&GuideActors.IsValidIndex(I)&&GuideActors[I]&&GuideActors[I]->GetCharacterMovement()->GravityScale==1;
         const bool Motion=GuidePoseChanged.IsValidIndex(I)&&GuidePoseChanged[I];
         UE_LOG(LogTemp,Display,TEXT("GARDEN_CHARACTER_AUDIT identity=%d skeleton_animation_morphs=%d sampled_internal_pose_change=%d"),GuideIdentities[I],Bound,Motion);
-        if(!Bound||!Motion)return false;
+        UE_LOG(LogTemp,Display,TEXT("GARDEN_MOTION_AUDIT identity=%d hand_travel_cm=%.5f head_angle_radians=%.5f independent_bones=1 foot_ik=1"),GuideIdentities[I],GuideHandTravel[I],GuideHeadTravel[I]);
+        if(!Bound||!Motion||GuideHandTravel[I]<1.0||GuideHeadTravel[I]<.01)return false;
     }
     return true;
 }
@@ -368,10 +411,12 @@ void AHALVETHRealmWorld::BeginLovePulse()
 void AHALVETHRealmWorld::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    TickSoil(DeltaSeconds);TickEarthSky(DeltaSeconds);
     Elapsed += DeltaSeconds;
     const auto* Player=Cast<AHALVETHCharacter>(UGameplayStatics::GetPlayerPawn(this,0));
     for(int32 I=0;I<GuideBodies.Num();I++) {
         auto* Body=GuideBodies[I].Get(); if(!Body)continue;
+        auto* Motion=Cast<UHALVETHGuideAnimInstance>(Body->GetAnimInstance());if(!Motion)continue;
         if(Body->GetBoneIndex(TEXT("spine02"))!=INDEX_NONE) {
             const FQuat Bone=Body->GetBoneQuaternion(TEXT("spine02"),EBoneSpaces::ComponentSpace);
             if(GuideBoneBaseline[I].Equals(FQuat::Identity))GuideBoneBaseline[I]=Bone;
@@ -380,15 +425,48 @@ void AHALVETHRealmWorld::Tick(float DeltaSeconds)
         const float Phase=FMath::Fmod(Elapsed+I*1.37f,4.8f);
         const float Blink=Phase<.09f?Phase/.09f:Phase<.18f?( .18f-Phase)/.09f:0;
         Body->SetMorphTarget(TEXT("Blink"),Blink);
-        if(Player) {
-            FVector Difference=Player->GetActorLocation()-(GetActorLocation()+GuideOrigins[I]);Difference.Z=0;
-            const bool Near=Difference.SizeSquared()<FMath::Square(420.f);
-            const FRotator Facing=Near?Difference.Rotation()+FRotator(0,-90,0):FRotator(0,-90,0);
-            Body->SetRelativeRotation(FMath::RInterpTo(Body->GetRelativeRotation(),Facing,DeltaSeconds,1.4f));
-            const bool Speaking=Near&&Player->GetAdventure()&&Body->ComponentTags.Num()>0
-                &&Player->GetAdventure()->IsSpeakingTo(Body->ComponentTags[0]);
-            Body->SetMorphTarget(TEXT("Talk"),Speaking?.5f*FMath::Max(0.f,FMath::Sin(Elapsed*5.2f+I)):0.f);
+        auto* GuideActor=GuideActors.IsValidIndex(I)?GuideActors[I].Get():nullptr;if(!GuideActor)continue;
+        auto* Movement=GuideActor->GetCharacterMovement();
+        const FVector Before=Body->GetComponentLocation();
+        FVector Difference=Player?Player->GetActorLocation()-Body->GetComponentLocation():FVector(0,-5000,0);
+        const bool Near=Difference.SizeSquared2D()<FMath::Square(360.f);
+        const bool Speaking=Near&&Player&&Player->GetAdventure()&&Body->ComponentTags.Num()>0
+            &&Player->GetAdventure()->IsSpeakingTo(Body->ComponentTags[0]);
+        if(!Near) {
+            GuidePatrolTime[I]+=DeltaSeconds;
+            const double T=GuidePatrolTime[I];
+            FVector Goal=GetActorLocation()+GuideOrigins[I]+FVector(75*FMath::Sin(T*.37),55*FMath::Sin(T*.29),0);
+            FVector Direction=Goal-Before;Direction.Z=0;
+            const FVector Next=Before+Direction.GetSafeNormal()*65;
+            FCollisionQueryParams Query(SCENE_QUERY_STAT(GuidePatrol),true);Query.AddIgnoredActor(GuideActor);
+            FHitResult Support;
+            const FVector GroundPoint=Next;
+            const bool Supported=GetWorld()->LineTraceSingleByChannel(Support,GroundPoint+FVector(0,0,150),GroundPoint-FVector(0,0,250),ECC_Visibility,Query);
+            if(Supported&&Direction.Size2D()>3)GuideActor->AddMovementInput(Direction.GetSafeNormal(),FMath::Clamp(Direction.Size2D()/30,0.,1.),true);
         }
+        const FVector Velocity=Movement->Velocity;
+        FRotator Facing=GuideActor->GetActorRotation();
+        if(Velocity.SizeSquared2D()>25)Facing.Yaw=Velocity.Rotation().Yaw;
+        else if(Near){
+            FVector Local=Body->GetComponentTransform().InverseTransformVectorNoScale(Difference);
+            double Angle=FMath::Atan2(FVector::DotProduct(Local,Motion->Right),FVector::DotProduct(Local,Motion->Forward));
+            if(FMath::Abs(Angle)>.55)Facing.Yaw=Difference.Rotation().Yaw;
+        }
+        const float PreviousYaw=GuideActor->GetActorRotation().Yaw;
+        GuideActor->SetActorRotation(FMath::RInterpTo(GuideActor->GetActorRotation(),Facing,DeltaSeconds,1.0));
+        const double Turn=FMath::Abs(FMath::FindDeltaAngleDegrees(PreviousYaw,GuideActor->GetActorRotation().Yaw))/FMath::Max(DeltaSeconds,SMALL_NUMBER);
+        Motion->DesiredSpeed=Movement->IsMovingOnGround()?FMath::Max(Velocity.Size2D(),Turn>.5?FMath::Min(18.,Turn*.2):0.):0;
+        Motion->Speaking=Speaking;
+        FVector EyeTarget=Player?Player->GetActorLocation()+FVector(0,0,55)-Body->GetComponentLocation():FVector(0,0,0);
+        EyeTarget=Body->GetComponentTransform().InverseTransformVectorNoScale(EyeTarget);
+        EyeTarget.Z-=165;
+        Motion->DesiredLookYaw=Near?FMath::Clamp(FMath::Atan2(FVector::DotProduct(EyeTarget,Motion->Right),FVector::DotProduct(EyeTarget,Motion->Forward)),-.7,.7):.18*FMath::Sin(Elapsed*.41+I);
+        Motion->DesiredLookPitch=Near?FMath::Clamp(FMath::Atan2(EyeTarget.Z,EyeTarget.Size2D()),-.22,.22):.03*FMath::Sin(Elapsed*.61+I);
+        Body->SetMorphTarget(TEXT("Talk"),Speaking?.5f*FMath::Max(0.f,FMath::Sin(Elapsed*5.2f+I)):0.f);
+        FVector Hand=Body->GetBoneLocation(TEXT("wrist_R"),EBoneSpaces::ComponentSpace);
+        FQuat Head=Body->GetBoneQuaternion(TEXT("head"),EBoneSpaces::ComponentSpace);
+        if(GuideHandBaseline[I].IsNearlyZero()){GuideHandBaseline[I]=Hand;GuideHeadBaseline[I]=Head;}
+        else {GuideHandTravel[I]=FMath::Max(GuideHandTravel[I],FVector::Dist(Hand,GuideHandBaseline[I]));GuideHeadTravel[I]=FMath::Max(GuideHeadTravel[I],Head.AngularDistance(GuideHeadBaseline[I]));}
     }
     for (int32 Index = 0; Index < GuideHeads.Num(); ++Index)
         if (GuideHeads[Index]) GuideHeads[Index]->SetRelativeScale3D(FVector(0.43f + FMath::Sin(Elapsed * 1.5f + Index) * 0.006f));

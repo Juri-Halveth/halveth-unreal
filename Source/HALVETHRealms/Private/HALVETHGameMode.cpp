@@ -54,7 +54,8 @@ void AHALVETHGameMode::BeginPlay()
     Super::BeginPlay();
     FParse::Value(FCommandLine::Get(), TEXT("HalvethSeed="), WorldSeed);
     bSmokeTest = FParse::Param(FCommandLine::Get(), TEXT("HalvethSmokeTest"));
-    bVisualTest = FParse::Param(FCommandLine::Get(), TEXT("HalvethVisual"));
+    bMotionCapture = FParse::Param(FCommandLine::Get(), TEXT("HalvethMotionCapture"));
+    bVisualTest = FParse::Param(FCommandLine::Get(), TEXT("HalvethVisual"))&&!bMotionCapture;
     RealmWorld = GetWorld()->SpawnActor<AHALVETHRealmWorld>();
     if (!RealmWorld)
     {
@@ -138,7 +139,9 @@ void AHALVETHGameMode::ApplyQuality(int32 Quality, bool Persist)
     };
     Set(TEXT("r.DynamicGlobalIlluminationMethod"), QualityIndex == 0 ? 0 : 1);
     Set(TEXT("r.ReflectionMethod"), QualityIndex == 0 ? 0 : 1);
-    Set(TEXT("r.Shadow.Virtual.Enable"), QualityIndex == 0 ? 0 : 1);
+    // Explicit CSM path after the moving-sun VSM/Nanite GPU page fault.
+    // Selecting Epic must not silently re-enable that failing shadow path.
+    Set(TEXT("r.Shadow.Virtual.Enable"), 0);
     Set(TEXT("r.VolumetricFog"), QualityIndex == 2 ? 1 : 0);
     Notify(QualityIndex == 0 ? TEXT("Graphics: Performance") : QualityIndex == 1 ? TEXT("Graphics: Balanced") : TEXT("Graphics: Epic"));
 }
@@ -147,6 +150,7 @@ void AHALVETHGameMode::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
     if(bVisualTest) { VisualElapsed+=DeltaSeconds; RunVisualStep(); }
+    if(bMotionCapture)RunMotionCapture(DeltaSeconds);
     MessageRemaining = FMath::Max(0.0f, MessageRemaining - DeltaSeconds);
     TravelCooldown = FMath::Max(0.0f, TravelCooldown - DeltaSeconds);
     if (bSmokeTest && !bSmokeFailed)

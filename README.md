@@ -1,10 +1,15 @@
-# HALVETH Portal Garden — native worlds and responsive characters
+# HALVETH Portal Garden — moving characters, ground response and Earth sky
 
 Four locally generated 600 × 600 metre landscapes with hills, CC0 forest scans,
 portal arches, spell practice, library, crafting and persistent construction.
 Scarlet, Lucinet and Rachel now use dressed, skinned human meshes with individual
 face targets, authored hair and eyes, a twelve-second breathing/idle animation,
-blinking, nearby-player gaze and dialogue-triggered mouth motion.
+blinking, nearby-player gaze and dialogue-triggered mouth motion. They now walk
+with capsule collision and gravity, place their feet on traced ground, transfer
+weight, move their hands/fingers and respond with hair/garment deformation.
+Ground patches deform under a declared mass/support model and update collision.
+A dated NASA/JPL Sun trajectory drives the 24-hour sky, with volumetric clouds,
+decorative stars and authored night lighting.
 
 ![Scarlet in the native Unreal game](Preview/GARDEN_SCARLET_CHARACTER.png)
 
@@ -15,11 +20,16 @@ private retail-derived clothing files are not part of this public repository.
 ## Verified current development build
 
 The C++ build and the 31-step native gameplay sequence passed. Three character
-checks verified skeleton, animation, Blink/Talk morphs and actual sampled internal
-bone pose changes. A separate DX12 run produced twelve reviewed 1920 × 1080 views.
+checks verified the skeleton, eight morph targets and sampled internal head/hand
+motion. Native motion capture additionally tested a 1.5 metre fall, walkable
+ground and deforming collision. An accelerated 24-hour sky sequence observed day
+and night using 25 dated NASA/JPL samples. The explicit current shadow path uses
+four cascades after a GPU page fault in the initial accelerated VSM/Nanite run.
+A separate DX12 run produced twelve reviewed 1920 × 1080 views.
 The crystal took four SPARK hits, broke and reformed after five simulation seconds.
 
 See [the runtime receipt](QA/native-landscape.json),
+[motion, gravity and sky](docs/MOTION-EARTH-SKY.md),
 [character construction](docs/CHARACTERS.md) and
 [world and crystal checks](docs/GARDEN-LANDSCAPE.md).
 Hair shape, detailed facial sculpting, garment folds and several props still need
@@ -40,6 +50,9 @@ Later starts reuse bound local assets. `GARDEN_ENGINE` selects the engine;
 `GARDEN_PYTHON` selects Python; `GARDEN_VOID_ROOT` selects a local VOID source tree.
 `bash GARDEN.sh check` runs native gameplay checks; `bash GARDEN.sh visual` runs
 the automated rendered capture. Bash orchestrates the native C++ game and art tools.
+`bash GARDEN.sh sky` refreshes the Sun data. The observer is a declared virtual
+site, 45° N and 0° E. Cached later days repeat the explicitly dated path; clouds,
+stars and night fill are authored, rather than a live weather or Moon service.
 
 ## Rebuild character art
 

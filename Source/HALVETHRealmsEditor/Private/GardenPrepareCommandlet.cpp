@@ -1,5 +1,6 @@
 #include "GardenPrepareCommandlet.h"
 #include "GardenField.h"
+#include "GardenSoil.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "AssetCompilingManager.h"
 #include "Engine/StaticMesh.h"
@@ -90,6 +91,8 @@ int32 UGardenPrepareCommandlet::Main(const FString& Params) {
             G.P.Add(FVector3f(WX,WY,GardenField::Height(WX,WY,Realm)));
         }
         for(int32 Y=0;Y<N-1;Y++) for(int32 X=0;X<N-1;X++) {
+            const FVector Mid=(FVector(G.P[Y*N+X])+FVector(G.P[(Y+1)*N+X+1]))*.5;
+            if(GardenSoil::Cutout(Realm,Mid.X,Mid.Y))continue;
             int32 V=Y*N+X; G.T.Append({V,V+N,V+1,V+1,V+N,V+N+1});
         }
         if(!Build(FString::Printf(TEXT("Terrain_R%d"),Realm),G,Ground,Realm)) return 3;

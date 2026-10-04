@@ -4,8 +4,8 @@
   "files": [
     {
       "path": "characters.json",
-      "bytes": 1965,
-      "sha256": "39499d82f879cf3b3fc3514a1fbee3ac92829dd215181c2efc0db07e12899fab"
+      "bytes": 2340,
+      "sha256": "171009890f158b62acfa1f90055ac8e5e4172a2f06b0942d2b901fec5ebbfacc"
     },
     {
       "path": "cloth_normal.png",
@@ -20,7 +20,7 @@
     {
       "path": "fbx-path-roundtrip.json",
       "bytes": 2333,
-      "sha256": "5014782ea69a086e0765a073a984678da6caddecf4fbc1038529ef678b458122"
+      "sha256": "cc61a82abcd978a8ea385781c7773de4a715bf638b32ff31acac67367059ca7e"
     },
     {
       "path": "LICENSE.txt",
@@ -29,18 +29,18 @@
     },
     {
       "path": "Lucinet.fbx",
-      "bytes": 6703468,
-      "sha256": "176eb23a7e665e260b40962a8ff58398e1b22fd186887daf78ec7100cbde58ab"
+      "bytes": 6971884,
+      "sha256": "e8c172be3963141a5659a0e0898f86ee4b9002dfd7c4994d84c8adeb61de5331"
     },
     {
       "path": "Rachel.fbx",
-      "bytes": 6671692,
-      "sha256": "70342a4aa1e583d9439043d2649fc47862d882e31eacd1f65e2621405d230323"
+      "bytes": 6941820,
+      "sha256": "e3aa638d15eb207cb1fdf02bc21a1ba8cfbb22d17cc18cb8e83a5e6602ef987b"
     },
     {
       "path": "Scarlet.fbx",
-      "bytes": 6676092,
-      "sha256": "db910cf7e78c8e154d070154b3b10edc696d870f5ce258bc8f3e194eb1ebf53c"
+      "bytes": 6946316,
+      "sha256": "48a5eb76e0fc051a6a4464a5fcb97ae5770b9c4f214a927918431c08cb4119dd"
     },
     {
       "path": "skin_female.png",

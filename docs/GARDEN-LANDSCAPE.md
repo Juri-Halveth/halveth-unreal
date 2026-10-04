@@ -1,8 +1,10 @@
 # Native worlds and character runtime — 4 October 2026
 
 Four continuous 600 × 600 metre landscapes replace the small circular block
-platform in the actual Unreal 5.8 runtime. Each has 66,049 authored vertices,
-131,072 triangles and full triangle collision fallback. Arrival clearings preserve
+platform in the actual Unreal 5.8 runtime. The base grid has 66,049 authored
+vertices; aligned cells near guides are now replaced by deformable meshes with
+their own updated triangle collision. Actual triangle totals are recorded in the
+current runtime receipt. Arrival clearings preserve
 book, crafting, resource and portal interactions. Tidelight includes water.
 CC0 tree, fern and rock scans provide the natural scenery.
 
@@ -10,6 +12,10 @@ Three dressed human guide meshes now replace the earlier mannequin placeholders.
 Their skeletal animation, Blink/Talk morphs and time-dependent gaze/dialogue
 response are integrated. See `CHARACTERS.md`. Some book, resource and construction
 props retain simple development geometry.
+
+The current guides walk with native gravity and floor contact. Dated NASA/JPL
+Sun data drives the sky. See `MOTION-EARTH-SKY.md` for deforming ground, the
+support-force model, night lighting and the explicit shadow-path repair.
 
 ## Crystal function
 

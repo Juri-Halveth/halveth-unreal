@@ -1,5 +1,10 @@
 # Character construction and response
 
+The current runtime adds independent head/eye/hand/finger response, world-space
+stance targets, two-bone limb placement, eight morph targets and actual
+`ACharacter` walking/falling. See [motion and ground response](MOTION-EARTH-SKY.md)
+for the current implementation, physics scope and renderer repair.
+
 Scarlet, Lucinet and Rachel use the source-bound CC0 MakeHuman body topology,
 rig, weights and individual head targets. Own meshes add coats, raised lapels,
 stitched trim, sleeves, boots, eyes, scalp and swept hair strands. Cloth color and

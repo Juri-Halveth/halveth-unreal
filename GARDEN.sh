@@ -5,7 +5,7 @@ ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
 ENGINE="${GARDEN_ENGINE:-/c/Program Files/Epic Games/UE_5.8}"
 PYTHON="${GARDEN_PYTHON:-python}"
 MODE=${1:-play}
-[[ $# -le 1 ]] || { echo 'GARDEN.sh [play|build|prepare|check|visual|status]' >&2; exit 2; }
+[[ $# -le 1 ]] || { echo 'GARDEN.sh [play|build|prepare|check|visual|status|sky]' >&2; exit 2; }
 EDITOR="$ENGINE/Engine/Binaries/Win64/UnrealEditor.exe"
 CMD="$ENGINE/Engine/Binaries/Win64/UnrealEditor-Cmd.exe"
 PROJECT="$ROOT/HALVETHRealms.uproject"
@@ -41,7 +41,9 @@ case "$MODE" in
   build) build ;;
   prepare) prepare ;;
   status) "$PYTHON" "$(cygpath -w "$ROOT/scripts/garden_assets.py")" verify ;;
+  sky) "$PYTHON" "$(cygpath -w "$ROOT/scripts/garden_sky.py")" sync ;;
   play)
+    if ! "$PYTHON" "$(cygpath -w "$ROOT/scripts/garden_sky.py")" sync; then echo 'NASA-Abruf fehlgeschlagen; datierter lokaler Himmelsverlauf wird weiter genutzt.' >&2; fi
     prepare
     exec "$EDITOR" "$NATIVE_PROJECT" -game -HalvethSeed=2026092302 -HalvethQuality=2 -windowed -borderless -ResX=2560 -ResY=1440 -NoSplash "-abslog=$(cygpath -w "$ROOT/Saved/GARDEN-play.log")" ;;
   check)
@@ -51,5 +53,5 @@ case "$MODE" in
   visual)
     prepare
     "$EDITOR" "$NATIVE_PROJECT" -game -HalvethVisual -windowed -ResX=1920 -ResY=1080 -ForceRes -NoSplash -nosound "-abslog=$(cygpath -w "$ROOT/Saved/GARDEN-visual.log")" ;;
-  *) echo 'GARDEN.sh [play|build|prepare|check|visual|status]' >&2; exit 2 ;;
+  *) echo 'GARDEN.sh [play|build|prepare|check|visual|status|sky]' >&2; exit 2 ;;
 esac
