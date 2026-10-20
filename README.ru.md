@@ -1,6 +1,6 @@
 [Original / Deutsch](README.md) · [English](README.en.md) · [Русский](README.ru.md)
 
-# HALVETH Portal Garden 0.2.0
+# Portal Garden – фэнтезийный прототип на C++ для Unreal Engine
 
 **Краткий путеводитель по проекту · EN / RU**
 
