@@ -1,0 +1,177 @@
+{
+  "schema": "halveth.native-astral-local-verification.v1",
+  "recordedAt": "2026-10-23T20:38:05.403026+00:00",
+  "baseCommit": "50c1f8ded29952a666488faae5defbc596d73bbe",
+  "platform": {
+    "engine": "Unreal Engine 5.8",
+    "configuration": "Windows Development",
+    "renderer": "D3D12",
+    "output": [
+      2560,
+      1440
+    ],
+    "qualityProfile": 1,
+    "internalResolutionPercent": 85
+  },
+  "build": {
+    "sourceFingerprintWindows": "C52188C6CF1C7CC0A6E893233FA4D808BE545C03DBD06A889465BC6ED7331184",
+    "binarySha256": "6B9A9D5D6FB426ECD718E05922DDA4A7565D4956B5218B6213F6010F3FDDFD6F",
+    "builtAt": "2026-10-23T20:26:25.1024860Z",
+    "distribution": "LOCAL_DEVELOPMENT_ONLY"
+  },
+  "sourceFiles": [
+    {
+      "path": "Source/HALVETHRealms/Public/AstralGeometry.h",
+      "sha256": "3b7362286e9b69c321fd4af7fc73c42671111e2541f172986a5fa799ce8334c5"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHAstralSanctum.h",
+      "sha256": "9d14b943c846c55451745bb040e63b6f3d73e76af103e3463cecf0224e9be25b"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHAstralSanctum.cpp",
+      "sha256": "5e8c8bbe8885ddf6db766a708fb142fcd453fc88b684fbbd1a51c83d688743ed"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHCharacter.cpp",
+      "sha256": "8c3b4f17668f3a0653eda16e241e543f4790d223e5329a16bf140b75ab0051f5"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Private/AstralPrepareCommandlet.cpp",
+      "sha256": "fa82f0e9ff216058350d94f9c09743bcd75d25a2d9a9b8b7bac95d6916812754"
+    },
+    {
+      "path": "scripts/astral.ps1",
+      "sha256": "95997dbf4522ee75d17e9cf8210682a2ccfa3856f9863115637639261bbe77da"
+    },
+    {
+      "path": "scripts/generate_astral_mineral.py",
+      "sha256": "92f298475dc705e0f1ebca53b6343b605bb71d3337ca593c60bee981158c43f5"
+    },
+    {
+      "path": "tests/astral_geometry_test.cpp",
+      "sha256": "b0c248725b9325cb35543f71afe9210b340615abe734c81d7e4e4b3f691b6e53"
+    },
+    {
+      "path": "Start-Astralis.cmd",
+      "sha256": "92f00a23e8bf7e668debc6bd13790e54a7a0f5b905abf6fd96f16c974496dd82"
+    }
+  ],
+  "portable": {
+    "assertionGroups": 32,
+    "closedSolids": 5,
+    "openSurfaceNegativeControls": 5,
+    "linkedProjectionRays": 96,
+    "displacedCameraNegativeControls": 96,
+    "frameRateComparison": [
+      30,
+      144
+    ],
+    "compiler": "MSVC C++20 /W4 /WX",
+    "result": "PASS"
+  },
+  "native": {
+    "traversal": "Normal CharacterMovement climbed all eight 20 cm steps onto the platform.",
+    "supportTraceHits": 8,
+    "portalArrivals": 2,
+    "bookOpenedAndClosed": true,
+    "flight": {
+      "forwardCm": 1670.996,
+      "riseCm": 1002.598,
+      "pathSamples": 20,
+      "gravityRestored": true
+    },
+    "existingGameplayRegression": "HALVETH_RUNTIME_SMOKE_PASS",
+    "testSaveSlot": "ISOLATED_FROM_PLAYER_SLOT",
+    "result": "PASS"
+  },
+  "render": {
+    "capturedViews": [
+      {
+        "file": "Preview/ASTRAL_APPROACH.png",
+        "sha256": "c3abffd8d354d08c5eb18930d2b983ab10955b91ed039b7553a36d3faf9096f3",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "file": "Preview/ASTRAL_CLOSED.png",
+        "sha256": "ac7d65f2a321f4d8f58f3329ac41d64a11165f05fdf82f8cc355e697ad2532d5",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "file": "Preview/ASTRAL_OPEN.png",
+        "sha256": "46a7993a149dc9f17b1522f8bbfbbd77cfc8a66fca3ab2341f09cd4e5137f2ba",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "file": "Preview/ASTRAL_ARCHIVE.png",
+        "sha256": "1591f0cf3036424d794df793e0c91de1385c90d5ea00c74adbbd7d9737d41385",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "file": "Preview/ASTRAL_FOCUS.png",
+        "sha256": "3e75277b056fe28af6c134d41ead935719232dddd169b26c45bb34f8502f9ff6",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "file": "Preview/ASTRAL_FLIGHT.png",
+        "sha256": "5ecb22134df9148d642ffa699754742747ee1eafd4067d0873a42ee7ab1ceef9",
+        "width": 2560,
+        "height": 1440
+      }
+    ],
+    "aperture": {
+      "captureFrames": 80,
+      "resolution": [
+        960,
+        540
+      ],
+      "maximumUpdateHz": 12,
+      "maximumDistanceCm": 2200,
+      "operator": "TRANSLATION_BETWEEN_SAME_ORIENTATION_INTERFACES"
+    },
+    "skyUnix": 1791133200,
+    "result": "PASS_WITH_DECLARED_LIMITS"
+  },
+  "frameIntervals": {
+    "samples": 1217,
+    "medianMs": 16.813,
+    "p95Ms": 41.216,
+    "coverage": "Monotonic wall-clock intervals during one offscreen scripted capture, simulation seconds 6 to 33; includes screenshot work; not a sustained gameplay benchmark."
+  },
+  "evidence": [
+    {
+      "kind": "native-probe-log",
+      "sha256": "622c349caa214093b6fcb8e721d2b6463cc4f57dc7e69df3f983e2518c43943b"
+    },
+    {
+      "kind": "render-capture-log",
+      "sha256": "719d82825874903394810bdf2b3dfbad3058c6da031622a90e629c7e01ee8a08"
+    },
+    {
+      "kind": "existing-gameplay-log",
+      "sha256": "9776878eb4302a6e7aaef7e76ca42976891e6944cf27b0498dd47b504bd442a6"
+    }
+  ],
+  "limitations": [
+    "This increment adds one supported area to the existing landscapes; it does not finish the requested larger open world.",
+    "Anatomical player hands, individual new companions, inhabited flying islands and ecological growth are open branches.",
+    "Portal travel requires E; no seamless crossing, rotated interfaces or recursive captures are implemented.",
+    "The auxiliary view has a smaller resolution and update rate and omits additional dynamic shadows, Lumen and volumetric fog.",
+    "No full pixel-differential or long-duration gameplay validation is claimed.",
+    "The reference illustrations remain private; all 16 are indexed separately as observations and implementation hypotheses."
+  ],
+  "normalStart": {
+    "entrypoint": "Start-Astralis.cmd",
+    "shell": "Windows PowerShell 5.1, own utility module explicitly bound",
+    "starterExitCode": 0,
+    "observedAt": "2026-10-23T20:36:58+00:00",
+    "windowTitle": "HALVETHRealms (64-bit Development PCD3D_SM6)",
+    "responding": true,
+    "scope": "Native game process visible and responsive after the ordinary starter; not a full manual play session."
+  }
+}

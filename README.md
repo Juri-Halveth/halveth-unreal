@@ -1,5 +1,35 @@
 # HALVETH Portal Garden — anatomical characters, ground response and Earth sky
 
+## Astralis · räumlicher Baukasten und begehbares Archiv
+
+Der neue [Astralbereich und seine Werkzeuge](docs/ASTRAL-TOOLKIT.md) ergänzen das
+native Startgebiet um eine massive Steintreppe, eine Pforte mit drei
+ausrichtbaren Ringen, eine obere Archivterrasse, ein lesbares Buch sowie
+freischaltbare Levitation mit einer Spur aus der tatsächlichen Flugbahn.
+Durch die geöffnete Pforte erscheint eine zusätzliche, an die Spielerkamera
+gebundene Live-Ansicht des Archivs.
+`Start-Astralis.cmd` baut bei Bedarf das lokale Windows-Paket und startet es.
+Eigene periodische Mineralkarten erzeugen Materialrelief; die 16 privaten
+Gestaltungsreferenzen werden als getrennte Beobachtungen und technische
+Rezepte erschlossen. Der Code und die eigenen Materialien stehen unter MIT.
+
+![Astralis: geöffnete Pforte mit Live-Ansicht im nativen Spiel](Preview/ASTRAL_OPEN.png)
+
+Der [datierte lokale Prüfstand](QA/native-astral.json) trennt den nativen
+Funktionstest, die gerenderten Ansichten und die begrenzte Framezeitmessung.
+
+Die anschließende [Kamera- und Nachtkorrektur](QA/native-free-look-sky.json)
+entfernt den vertikalen Blickanschlag und ersetzt das regelmäßige Sternmuster
+durch 1.800 unterschiedlich helle, weich auslaufende Lichtpunkte in einem Mesh.
+Sonne und Nacht-Hilfslicht besitzen getrennte Atmosphärenkanäle; das Hilfslicht
+erzeugt keine sichtbare Himmelskörperscheibe. Nachtlampen und Belichtung sind
+aufeinander abgestimmt. `Start-Astralis.cmd` verwendet das neue lokale Paket,
+während das vorherige Paket getrennt erhalten bleibt.
+
+![Nachtansicht aus dem korrigierten nativen Windows-Paket](Preview/NIGHT_GATE.png)
+
+---
+
 Four locally generated 600 × 600 metre landscapes with hills, CC0 forest scans,
 portal arches, spell practice, library, crafting and persistent construction.
 Scarlet, Lucinet and Rachel now use dressed, skinned human meshes with individual

@@ -38,6 +38,25 @@ def fixture(root: Path):
 
 
 class SourcePackageTests(unittest.TestCase):
+    def test_synthetic_mineral_sources_bind_generator_and_pixels(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary)
+            fixture(root)
+            art=root/'ArtSource/Astral'
+            art.mkdir()
+            generator=root/'scripts/generate_astral_mineral.py'
+            generator.write_bytes(b'# SYNTHETIC_TEST_GENERATOR\n')
+            names=('mineral_normal.png','mineral_roughness.png')
+            for name in names:(art/name).write_bytes(PNG)
+            inventory={'license':'MIT','size':1,'generatorSha256':hashlib.sha256(generator.read_bytes()).hexdigest(),
+                       'files':{name:hashlib.sha256(PNG).hexdigest() for name in names}}
+            (art/'SOURCE.json').write_text(json.dumps(inventory),encoding='utf8')
+            files,_=EXPORT.snapshot(root)
+            self.assertIn('ArtSource/Astral/mineral_normal.png',files)
+            (art/'mineral_normal.png').write_bytes(PNG+b'CHANGED')
+            with self.assertRaisesRegex(EXPORT.ExportError,'Synthetic mineral byte/hash mismatch'):
+                EXPORT.snapshot(root)
+
     def test_sky_source_is_staged_for_native_package_and_export(self):
         sky = ROOT / "Content/sky/ephemeris.json"
         self.assertEqual(sky.read_bytes(), (ROOT / "assets/sky/ephemeris.json").read_bytes())

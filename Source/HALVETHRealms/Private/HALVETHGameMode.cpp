@@ -1,10 +1,13 @@
 #include "HALVETHGameMode.h"
 #include "HALVETHCharacter.h"
+#include "HALVETHPlayerController.h"
+#include "HALVETHViewProbe.h"
 #include "HALVETHAdventureComponent.h"
 #include "HALVETHKnowledgeComponent.h"
 #include "HALVETHTrainingTarget.h"
 #include "HALVETHHUD.h"
 #include "HALVETHRealmWorld.h"
+#include "HALVETHAstralSanctum.h"
 #include "RealmLayout.h"
 #include "Camera/PlayerCameraManager.h"
 #include "Engine/Engine.h"
@@ -45,6 +48,7 @@ namespace
 AHALVETHGameMode::AHALVETHGameMode()
 {
     DefaultPawnClass = AHALVETHCharacter::StaticClass();
+    PlayerControllerClass=AHALVETHPlayerController::StaticClass();
     HUDClass = AHALVETHHUD::StaticClass();
     PrimaryActorTick.bCanEverTick = true;
 }
@@ -66,6 +70,8 @@ void AHALVETHGameMode::BeginPlay()
     if (auto* Pawn = Cast<AHALVETHCharacter>(UGameplayStatics::GetPlayerPawn(this, 0)))
     {
         Pawn->ResetToSpawn();
+        if(FParse::Param(FCommandLine::Get(),TEXT("HalvethAstralStart"))||FParse::Param(FCommandLine::Get(),TEXT("HalvethAstralCapture"))||FParse::Param(FCommandLine::Get(),TEXT("HalvethAstralProbe")))
+            if(auto* Sanctum=RealmWorld->GetAstralSanctum())Pawn->SetActorLocation(Sanctum->Entrance(),false,nullptr,ETeleportType::TeleportPhysics);
         if (Pawn->GetKnowledge()) Pawn->GetKnowledge()->InitializeWorld(static_cast<uint32>(WorldSeed), 0);
         if (Pawn->GetKnowledge() && FParse::Param(FCommandLine::Get(), TEXT("HalvethLibrary"))) Pawn->GetKnowledge()->ToggleReading();
         int32 InitialPanel = 0;
@@ -79,6 +85,7 @@ void AHALVETHGameMode::BeginPlay()
     int32 RequestedQuality = SavedQualityProfile(GEngine ? GEngine->GetGameUserSettings() : nullptr);
     FParse::Value(FCommandLine::Get(), TEXT("HalvethQuality="), RequestedQuality);
     ApplyQuality(FMath::Clamp(RequestedQuality, 0, 2), false);
+    if(FParse::Param(FCommandLine::Get(),TEXT("HalvethViewProbe"))||FParse::Param(FCommandLine::Get(),TEXT("HalvethNightCapture")))GetWorld()->SpawnActor<AHALVETHViewProbe>();
     Notify(TEXT("Welcome home. B opens your living library. E gathers, speaks or enters a portal. L sends LOVE."));
 }
 

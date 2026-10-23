@@ -17,6 +17,8 @@ public:
     virtual void Tick(float DeltaSeconds) override;
     virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
     void ResetToSpawn();
+    bool ToggleAstralFlight();
+    bool IsAstralFlying() const {return bAstralFlight;}
     bool IsHelpVisible() const { return bHelpVisible; }
     bool IsCreditsVisible() const { return bCreditsVisible; }
     int32 GetReaderPanel() const { return ReaderPanel; }
@@ -30,6 +32,10 @@ private:
     bool bHelpVisible = false;
     bool bCreditsVisible = false;
     int32 ReaderPanel = 0;
+    bool bAstralFlight=false,bFlightAscend=false,bFlightDescend=false;
+    void FlightToggle();
+    void StopJumpOrAscend();
+    void StopDescend();
     void Forward(float Value);
     void Right(float Value);
     void Turn(float Value);

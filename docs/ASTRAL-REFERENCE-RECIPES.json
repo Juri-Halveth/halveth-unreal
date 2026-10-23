@@ -1,0 +1,281 @@
+{
+  "schema": "halveth.astral-reference-recipes.v1",
+  "source_count": 16,
+  "coverage": "All 16 supplied still images; no motion, hidden geometry or source-code inference.",
+  "measurement": "sRGB decoded to relative linear luminance after a declared 384x256 thumbnail; not physical scene illuminance.",
+  "original_media_transfer": "NONE",
+  "images": [
+    {
+      "file": "1F7DF442-83F4-4E44-9288-3487BF8FD617.PNG",
+      "sha256": "fdc070d3c6bf0303bea6cd47d765bd751eb8292145334b0337ce6ea3891594d0",
+      "width": 1672,
+      "height": 941,
+      "theme": "industry",
+      "observed_visual_features": "Interlocking production levels, bridges, active work and visible transport.",
+      "implementation_hypothesis": "A connected activity graph; settlements exchange materials through physical routes.",
+      "implementation_state": "RESEARCH_BRANCH_OPEN",
+      "implemented_subset": "No new implementation for this reference theme in this increment.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.00327,
+        "50": 0.01901,
+        "90": 0.09595,
+        "99": 0.32763
+      }
+    },
+    {
+      "file": "3D29929A-7CA9-4133-A108-5F510D7BD795.PNG",
+      "sha256": "d603acc8622c54a0ed8553c038588a3b805bfee881fe9a7380b4bd3e1b131287",
+      "width": 1536,
+      "height": 1024,
+      "theme": "library",
+      "observed_visual_features": "Tall shelves, alcoves, a central spatial catalogue and labelled activities.",
+      "implementation_hypothesis": "A walkable archive linked to the existing book/recall system; many spatially separated destinations.",
+      "implementation_state": "PARTIAL_LOCAL_IMPLEMENTATION",
+      "implemented_subset": "Supported upper archive, individually varied volumes, existing book reader.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.00284,
+        "50": 0.01065,
+        "90": 0.06344,
+        "99": 0.19291
+      }
+    },
+    {
+      "file": "5AD7289B-B8F4-4D26-9DEF-DB7F71450D6B.PNG",
+      "sha256": "2ec59c7fc13f3755ea079a3250e25dca93c7724e1e863a78d996b736950ea5db",
+      "width": 1535,
+      "height": 1024,
+      "theme": "door-sequence",
+      "observed_visual_features": "Six panels depict approach, an artifact, activation and an opening door.",
+      "implementation_hypothesis": "An explicit alignment state machine, animated thick leaves, clear arrival and cooldown.",
+      "implementation_state": "PARTIAL_LOCAL_IMPLEMENTATION",
+      "implemented_subset": "Three-step alignment, colliding sliding leaves, checked two-way travel.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.00115,
+        "50": 0.00577,
+        "90": 0.15305,
+        "99": 0.57846
+      }
+    },
+    {
+      "file": "15DB530B-9326-4556-8A8E-3E776FF2927D.PNG",
+      "sha256": "89ac73b807188645690d744dd1fe45053a6e3e8e2636ad83be2ae6dfcdbb33d2",
+      "width": 1448,
+      "height": 1086,
+      "theme": "gate-detail",
+      "observed_visual_features": "Stone mouldings, metal inlays, ivy and local warm practical lights.",
+      "implementation_hypothesis": "Closed arch voussoirs, bevelled pilasters, separate metal roughness and local lights.",
+      "implementation_state": "PARTIAL_LOCAL_IMPLEMENTATION",
+      "implemented_subset": "Closed arch stones, fluted piers, brass inlays and local movable lights.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.00147,
+        "50": 0.01273,
+        "90": 0.12533,
+        "99": 0.50514
+      }
+    },
+    {
+      "file": "31CDB56D-A6F8-4782-A8CD-7B4E73729182.PNG",
+      "sha256": "be965b1fc69f4c673eb821eeb11e254e417df7009145c8c867873aa6cd1d0f79",
+      "width": 1672,
+      "height": 941,
+      "theme": "arrival",
+      "observed_visual_features": "A readable central route through near, middle and far architecture.",
+      "implementation_hypothesis": "A continuous colliding path, guard walls, repeated lamps and a dominant entrance silhouette.",
+      "implementation_state": "PARTIAL_LOCAL_IMPLEMENTATION",
+      "implemented_subset": "A grounded approach, physical stairs and an upper vaulted archive.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.00362,
+        "50": 0.02405,
+        "90": 0.17871,
+        "99": 0.62944
+      }
+    },
+    {
+      "file": "A8751685-7EA6-4173-8BC1-D5CF353BD338.PNG",
+      "sha256": "9293744d09aad906b3e542508c1a7cd8e7fc07844b98017a39989c3aa19dddb5",
+      "width": 1536,
+      "height": 1024,
+      "theme": "threshold",
+      "observed_visual_features": "A dark workroom frames a sunlit outside world; notes remain in the room.",
+      "implementation_hypothesis": "Interior/exterior exposure transition, an actual doorframe and diegetic workspace.",
+      "implementation_state": "PARTIAL_LOCAL_IMPLEMENTATION",
+      "implemented_subset": "A perspective-linked live view and controlled transition between lower gate and upper archive.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.00191,
+        "50": 0.0132,
+        "90": 0.38284,
+        "99": 0.73709
+      }
+    },
+    {
+      "file": "BD42FE4F-AE8A-4D57-BA41-12281B073D69.PNG",
+      "sha256": "dff2f38d34eba4875f659ab3bfda92b1192d3b9b8985919e17888f7fd5303a90",
+      "width": 1448,
+      "height": 1086,
+      "theme": "orbital-depth",
+      "observed_visual_features": "Nested rings, stepped approach and figures supply depth and scale.",
+      "implementation_hypothesis": "True toroidal geometry in independent planes, stable shared origin and bounded rotation.",
+      "implementation_state": "PARTIAL_LOCAL_IMPLEMENTATION",
+      "implemented_subset": "Three rotating rings with one stable scene-space origin.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.01271,
+        "50": 0.08221,
+        "90": 0.26915,
+        "99": 0.59076
+      }
+    },
+    {
+      "file": "D2D37318-0AC8-4CE9-A547-A9EAA9317669.PNG",
+      "sha256": "6f413a91109a348d80b0dfde3d17950c59cddd2b3ceacf018c30175bc1beba46",
+      "width": 1672,
+      "height": 941,
+      "theme": "first-person",
+      "observed_visual_features": "Foreground hands and wrist sigils frame an extensive landscape.",
+      "implementation_hypothesis": "View-relative casting focus triggered by actual spell success; anatomical player hands remain future work.",
+      "implementation_state": "PARTIAL_LOCAL_IMPLEMENTATION",
+      "implemented_subset": "Success-triggered spatial focus; anatomical hands are still open.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.00781,
+        "50": 0.05249,
+        "90": 0.28824,
+        "99": 0.66143
+      }
+    },
+    {
+      "file": "D58F5C31-6A4D-4F03-964A-13CCB0662491.PNG",
+      "sha256": "b1ad5ac4ad459fef52eae8c344e7ae0b125baea28dc84f466733b7f3a71562e5",
+      "width": 1535,
+      "height": 1024,
+      "theme": "floor",
+      "observed_visual_features": "Uneven stone, fine inlays, joints and shoes anchor the viewpoint.",
+      "implementation_hypothesis": "Solid foundation beneath staggered bevelled pavers; inlays follow the same support plane.",
+      "implementation_state": "PARTIAL_LOCAL_IMPLEMENTATION",
+      "implemented_subset": "Solid foundation, closed bevelled pavers and three-dimensional inlays.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.00193,
+        "50": 0.00938,
+        "90": 0.05573,
+        "99": 0.21703
+      }
+    },
+    {
+      "file": "E92A5D33-74D3-4E63-A554-9D2F43E649C8.PNG",
+      "sha256": "53a0e80e3481c2ebd8b5604ef0f258cbe42bf237196c245eaa2f81df35394284",
+      "width": 1448,
+      "height": 1086,
+      "theme": "workshop",
+      "observed_visual_features": "Many devices occupy specific benches and overhead supports.",
+      "implementation_hypothesis": "Reusable parameterised devices with a placement/support contract and explicit operating state.",
+      "implementation_state": "RESEARCH_BRANCH_OPEN",
+      "implemented_subset": "No new implementation for this reference theme in this increment.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.00582,
+        "50": 0.04964,
+        "90": 0.20615,
+        "99": 0.48414
+      }
+    },
+    {
+      "file": "E825C5CB-55D0-441C-BDFC-00EF87AE005E.PNG",
+      "sha256": "ca3ee33e412cba58bc967389103a72ba494957d4bfe280dd05aeb70e79df1fbb",
+      "width": 1448,
+      "height": 1086,
+      "theme": "flight",
+      "observed_visual_features": "Trails align with flying figures and a visible destination.",
+      "implementation_hypothesis": "Movement-derived ribbons with spawn, lifetime, arc-length spacing and an explicit particle budget.",
+      "implementation_state": "PARTIAL_LOCAL_IMPLEMENTATION",
+      "implemented_subset": "Unlockable capsule flight; 20 Hz sampled closed-tube trail, 1.2 second lifetime.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.01542,
+        "50": 0.06359,
+        "90": 0.26191,
+        "99": 0.52572
+      }
+    },
+    {
+      "file": "F657EEA4-19BA-40F0-80AD-2C079CEBB2A3.PNG",
+      "sha256": "542ec3a38506203f2dac50d6324c954c353806707952ea12d8a229ee2c430e80",
+      "width": 1448,
+      "height": 1086,
+      "theme": "quiet-room",
+      "observed_visual_features": "Wood, cloth, clutter, vegetation and small light sources suggest habitation.",
+      "implementation_hypothesis": "A quiet, navigable home with varied book placement, roughness and local lighting.",
+      "implementation_state": "RESEARCH_BRANCH_OPEN",
+      "implemented_subset": "No new implementation for this reference theme in this increment.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.00177,
+        "50": 0.00721,
+        "90": 0.04085,
+        "99": 0.25013
+      }
+    },
+    {
+      "file": "E20CDDDC-A273-4247-99C0-A84394B1701C.PNG",
+      "sha256": "49660a3ca6f79d3b4d224cb2558c65b8d5d6f504d9483cd36e440db17945e621",
+      "width": 1448,
+      "height": 1086,
+      "theme": "routes",
+      "observed_visual_features": "Readable paths and signposts lead toward distinct places.",
+      "implementation_hypothesis": "Walkable route topology and destination signs; signs use gameplay destinations.",
+      "implementation_state": "PARTIAL_LOCAL_IMPLEMENTATION",
+      "implemented_subset": "Local destination signs and a walkable stair route.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.00221,
+        "50": 0.02253,
+        "90": 0.23245,
+        "99": 0.73248
+      }
+    },
+    {
+      "file": "25FA6943-2101-4057-8F15-9954D6CC6563.PNG",
+      "sha256": "046e506897f1dfe1f7097d847faa7bb4f768918c095d31b636c38e53979a362a",
+      "width": 1448,
+      "height": 1086,
+      "theme": "convergence",
+      "observed_visual_features": "A stepped gate combines ring geometry, pillars and central light.",
+      "implementation_hypothesis": "Three aligned rings open colliding doors; further use travels to a checked archive landing.",
+      "implementation_state": "PARTIAL_LOCAL_IMPLEMENTATION",
+      "implemented_subset": "Alignment state and two-way portal destination.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.01169,
+        "50": 0.05291,
+        "90": 0.21432,
+        "99": 0.57592
+      }
+    },
+    {
+      "file": "82103AFF-E118-4C65-9050-D79CC3266525.PNG",
+      "sha256": "84b3ee6279296d247f5e439898dc5644f5719bc903632a58d492de6db5c46fb6",
+      "width": 1448,
+      "height": 1086,
+      "theme": "identities",
+      "observed_visual_features": "Named figures have distinct silhouettes, materials and colours.",
+      "implementation_hypothesis": "Stable character IDs and individual art direction; existing guides remain the current characters.",
+      "implementation_state": "RESEARCH_BRANCH_OPEN",
+      "implemented_subset": "No new implementation for this reference theme in this increment.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.00956,
+        "50": 0.05284,
+        "90": 0.24962,
+        "99": 0.58227
+      }
+    },
+    {
+      "file": "F0045D82-3295-4119-BE3D-8190360BA4C0.PNG",
+      "sha256": "c191f3a8aa70538b1a1aef5786c1f9829b3715f45391362a631deddffc2c2042",
+      "width": 1448,
+      "height": 1086,
+      "theme": "terraces",
+      "observed_visual_features": "Layered inhabited terraces and spell-marked hands supply vertical depth.",
+      "implementation_hypothesis": "Supported upper archive terrace, thick slabs, guard walls, local spell geometry.",
+      "implementation_state": "PARTIAL_LOCAL_IMPLEMENTATION",
+      "implemented_subset": "Supported upper archive terrace and protective parapets.",
+      "relative_linear_luminance_percentiles": {
+        "10": 0.01015,
+        "50": 0.05253,
+        "90": 0.23631,
+        "99": 0.58461
+      }
+    }
+  ]
+}
