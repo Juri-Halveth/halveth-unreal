@@ -1,0 +1,164 @@
+{
+  "schema": "halveth.native-astral-local-verification.v1",
+  "recordedAt": "2026-10-23T20:18:55.809706+00:00",
+  "baseCommit": "50c1f8ded29952a666488faae5defbc596d73bbe",
+  "platform": {
+    "engine": "Unreal Engine 5.8",
+    "configuration": "Windows Development",
+    "renderer": "D3D12",
+    "output": [
+      2560,
+      1440
+    ],
+    "qualityProfile": 1,
+    "internalResolutionPercent": 85
+  },
+  "build": {
+    "sourceFingerprintWindows": "9BC3E74A39B7117ADBBE731476FB38C6F1A7194151ACD5099F702467A8D3CB2D",
+    "binarySha256": "919BBF5329C8A085675397FAF8F9696BA2D08154EC43629F62C321B7E829BE38",
+    "builtAt": "2026-10-23T20:13:18.9539884Z",
+    "distribution": "LOCAL_DEVELOPMENT_ONLY"
+  },
+  "sourceFiles": [
+    {
+      "path": "Source/HALVETHRealms/Public/AstralGeometry.h",
+      "sha256": "02946d9ca3ab3258a0036ac8cdd9e980e8b301bac870f30b49bbf68930214d68"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHAstralSanctum.h",
+      "sha256": "9d14b943c846c55451745bb040e63b6f3d73e76af103e3463cecf0224e9be25b"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHAstralSanctum.cpp",
+      "sha256": "5e8c8bbe8885ddf6db766a708fb142fcd453fc88b684fbbd1a51c83d688743ed"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHCharacter.cpp",
+      "sha256": "8c3b4f17668f3a0653eda16e241e543f4790d223e5329a16bf140b75ab0051f5"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Private/AstralPrepareCommandlet.cpp",
+      "sha256": "fa82f0e9ff216058350d94f9c09743bcd75d25a2d9a9b8b7bac95d6916812754"
+    },
+    {
+      "path": "scripts/astral.ps1",
+      "sha256": "48445f33d71a762fc54c18f067b751488a8fae4937e74565dfdfb5191cfa8059"
+    },
+    {
+      "path": "scripts/generate_astral_mineral.py",
+      "sha256": "92f298475dc705e0f1ebca53b6343b605bb71d3337ca593c60bee981158c43f5"
+    },
+    {
+      "path": "tests/astral_geometry_test.cpp",
+      "sha256": "b0c248725b9325cb35543f71afe9210b340615abe734c81d7e4e4b3f691b6e53"
+    }
+  ],
+  "portable": {
+    "assertionGroups": 32,
+    "closedSolids": 5,
+    "openSurfaceNegativeControls": 5,
+    "linkedProjectionRays": 96,
+    "displacedCameraNegativeControls": 96,
+    "frameRateComparison": [
+      30,
+      144
+    ],
+    "compiler": "MSVC C++20 /W4 /WX",
+    "result": "PASS"
+  },
+  "native": {
+    "traversal": "Normal CharacterMovement climbed all eight 20 cm steps onto the platform.",
+    "supportTraceHits": 8,
+    "portalArrivals": 2,
+    "bookOpenedAndClosed": true,
+    "flight": {
+      "forwardCm": 1685.167,
+      "riseCm": 1011.1,
+      "pathSamples": 24,
+      "gravityRestored": true
+    },
+    "existingGameplayRegression": "HALVETH_RUNTIME_SMOKE_PASS",
+    "testSaveSlot": "ISOLATED_FROM_PLAYER_SLOT",
+    "result": "PASS"
+  },
+  "render": {
+    "capturedViews": [
+      {
+        "file": "Preview/ASTRAL_APPROACH.png",
+        "sha256": "9b7ec06d243eb18049e4eb4a8fc8470d69c68c54636c512b186d46a997191c47",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "file": "Preview/ASTRAL_CLOSED.png",
+        "sha256": "a16fd77af1695b760b0b5a30807739380ce58817f41b7661e151707ec92bac79",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "file": "Preview/ASTRAL_OPEN.png",
+        "sha256": "11a4dd5985c89a19f83283a3a79003fc6666f3886d5492439f81b5891b81465f",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "file": "Preview/ASTRAL_ARCHIVE.png",
+        "sha256": "ab41924e042b097e6c8d9211a7af613de2a0fde266d866c6e2e8f3c9ff8171e9",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "file": "Preview/ASTRAL_FOCUS.png",
+        "sha256": "3e0197a839eaa227c1029206c6aa78e364115f0cbe2cf27605c322ad0bd0aaaf",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "file": "Preview/ASTRAL_FLIGHT.png",
+        "sha256": "7526bf7c23b818796c05365df2b1422c17aa56ed302b73e723593c97620f421d",
+        "width": 2560,
+        "height": 1440
+      }
+    ],
+    "aperture": {
+      "captureFrames": 91,
+      "resolution": [
+        960,
+        540
+      ],
+      "maximumUpdateHz": 12,
+      "maximumDistanceCm": 2200,
+      "operator": "TRANSLATION_BETWEEN_SAME_ORIENTATION_INTERFACES"
+    },
+    "skyUnix": 1791133200,
+    "result": "PASS_WITH_DECLARED_LIMITS"
+  },
+  "frameIntervals": {
+    "samples": 1514,
+    "medianMs": 16.664,
+    "p95Ms": 26.43,
+    "coverage": "Monotonic wall-clock intervals during one offscreen scripted capture, simulation seconds 6 to 33; includes screenshot work; not a sustained gameplay benchmark."
+  },
+  "evidence": [
+    {
+      "kind": "native-probe-log",
+      "sha256": "39488d1594ad1599c1fbe4cbac4a3e3bc6bb22f08570d82ef0c15b1e5912cf94"
+    },
+    {
+      "kind": "render-capture-log",
+      "sha256": "d3b472549a2327a3c62b4a4573d9d78ed0170c1beb33c0aa0c5746f8bdd3051b"
+    },
+    {
+      "kind": "existing-gameplay-log",
+      "sha256": "a4763d025e1571f5abf5ba6da0ebff632439e5ebe63eb4c1888f7879562431c0"
+    }
+  ],
+  "limitations": [
+    "This increment adds one supported area to the existing landscapes; it does not finish the requested larger open world.",
+    "Anatomical player hands, individual new companions, inhabited flying islands and ecological growth are open branches.",
+    "Portal travel requires E; no seamless crossing, rotated interfaces or recursive captures are implemented.",
+    "The auxiliary view has a smaller resolution and update rate and omits additional dynamic shadows, Lumen and volumetric fog.",
+    "No full pixel-differential or long-duration gameplay validation is claimed.",
+    "The reference illustrations remain private; all 16 are indexed separately as observations and implementation hypotheses."
+  ]
+}

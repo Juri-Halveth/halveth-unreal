@@ -20,6 +20,7 @@ class USkeletalMeshComponent;
 class AHALVETHGuideCharacter;
 class UProceduralMeshComponent;
 class UVolumetricCloudComponent;
+class AHALVETHAstralSanctum;
 
 struct FHALVETHBodyLineage {
     FString Digest,Genome,JournalPath;
@@ -66,10 +67,12 @@ public:
     int32 GetTreeCount() const { return TreeCount; }
     int32 GetFernCount() const { return FernCount; }
     int32 GetRockCount() const { return RockCount; }
+    AHALVETHAstralSanctum* GetAstralSanctum() const {return AstralSanctum;}
     static FString RealmName(int32 Realm);
     static FString RealmDescription(int32 Realm);
 
 private:
+    UPROPERTY() TObjectPtr<AHALVETHAstralSanctum> AstralSanctum;
     UPROPERTY() TObjectPtr<UStaticMesh> CubeMesh;
     UPROPERTY() TObjectPtr<UStaticMesh> SphereMesh;
     UPROPERTY() TObjectPtr<UStaticMesh> CylinderMesh;

@@ -17,7 +17,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 ROOT_FILES = frozenset({
     "HALVETHRealms.uproject", "README.md", "LICENSE", "THIRD-PARTY-NOTICES.md", ".gitignore", ".gitattributes",
-    "GARDEN.sh", "CHARACTERS.sh", "requirements-art.txt",
+    "GARDEN.sh", "CHARACTERS.sh", "requirements-art.txt", "Start-Astralis.cmd",
 })
 TREE_EXTENSIONS = {
     "Source": {".h", ".cpp", ".cs", ".lua", ".omwscripts"},
@@ -32,7 +32,7 @@ TREE_EXTENSIONS = {
     "installer": {".nsi"},
 }
 EXACT_EXTRA_FILES = frozenset({"Build/Windows/Application.ico", ".github/workflows/source.yml", "Content/sky/ephemeris.json"})
-TEXT_EXTENSIONS = {".h", ".cpp", ".cs", ".ini", ".py", ".ps1", ".json", ".md", ".txt", ".svg", ".yml", ".nsi", ".sh", ".obj", ".mhskel", ".mhw", ".mhclo", ".mhmat", ".target", ".lua", ".omwscripts"}
+TEXT_EXTENSIONS = {".h", ".cpp", ".cs", ".ini", ".py", ".ps1", ".json", ".md", ".txt", ".svg", ".yml", ".nsi", ".sh", ".cmd", ".obj", ".mhskel", ".mhw", ".mhclo", ".mhmat", ".target", ".lua", ".omwscripts"}
 BLOCKED_PARTS = frozenset({"__pycache__", ".git", ".vs", ".idea", "node_modules"})
 SECRET_RULES = (
     ("credential_assignment", re.compile(
@@ -179,13 +179,35 @@ def validate_art(files: dict[str, bytes]) -> dict:
                 raise ExportError("Character source byte/hash mismatch: " + name)
         if declared | {character_manifest} != character_files:
             raise ExportError("Every character source asset must belong to its bound inventory")
-    actual = {name for name in files if name.startswith("ArtSource/") and not name.startswith(character_prefix) and name.lower().endswith(".png")}
+    astral_prefix = 'ArtSource/Astral/'
+    astral_pngs = {name for name in files if name.startswith(astral_prefix) and name.lower().endswith('.png')}
+    if astral_pngs:
+        try:
+            astral = json.loads(files[astral_prefix+'SOURCE.json'].decode('utf8'))
+            bound = astral['files']
+            generator = files['scripts/generate_astral_mineral.py']
+        except (KeyError, ValueError) as error:
+            raise ExportError('Synthetic mineral inventory is missing or invalid') from error
+        if astral.get('license') != 'MIT' or astral.get('generatorSha256') != sha256(generator):
+            raise ExportError('Synthetic mineral generator/license mismatch')
+        expected = {'mineral_normal.png', 'mineral_roughness.png'}
+        if set(bound) != expected or astral_pngs != {astral_prefix+name for name in expected}:
+            raise ExportError('Synthetic mineral inventory coverage mismatch')
+        for name, digest in bound.items():
+            raw = files[astral_prefix+name]
+            if sha256(raw) != digest or raw[:8] != PNG_SIGNATURE:
+                raise ExportError('Synthetic mineral byte/hash mismatch')
+            if struct.unpack('>II', raw[16:24]) != (astral['size'],astral['size']):
+                raise ExportError('Synthetic mineral dimensions mismatch')
+    actual = {name for name in files if name.startswith("ArtSource/") and not name.startswith(character_prefix) and name.lower().endswith(".png")} - astral_pngs
     if listed != actual or not listed:
         raise ExportError("Every source-art PNG must belong to the reviewed Poly Haven manifest")
     if len(listed) != manifest.get("filesCount") or byte_count != manifest.get("downloadedMapBytes"):
         raise ExportError("Source-art manifest totals do not match the files")
     return {"license": "CC0-1.0", "files": len(listed), "bytes": byte_count,
-            "manifestSha256": sha256(files[manifest_name]), "characterSourceFiles": len(character_files)}
+            "licenseScope": "PolyHaven source set; character and synthetic sets have separate declarations",
+            "manifestSha256": sha256(files[manifest_name]), "characterSourceFiles": len(character_files),
+            "syntheticMineral": {"license": "MIT", "files": len(astral_pngs)}}
 
 
 def snapshot(root: Path = ROOT, maximum_bytes: int = 512 * 1024 * 1024) -> tuple[dict[str, bytes], dict]:

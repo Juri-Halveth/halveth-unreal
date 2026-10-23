@@ -81,6 +81,9 @@ void AHALVETHRealmWorld::BuildLandscape(uint32 Seed) {
         if(Groups.IsEmpty()) return;
         for(int32 I=0;I<Attempts;I++) {
             double X=RNG.FRandRange(-28500,28500),Y=RNG.FRandRange(-28500,28500);
+            // Reserve the actual new sanctum footprint before scattering; plants
+            // cannot grow through its shelves, stairs or upper archive floor.
+            if(CurrentRealm==0&&X>1350&&X<3650&&Y>-1650&&Y<3500)continue;
             FHitResult Ground;
             if(!TraceSurface(X,Y,Ground)) continue;
             double Z=Ground.ImpactPoint.Z;

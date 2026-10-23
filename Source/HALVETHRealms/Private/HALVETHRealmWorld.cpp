@@ -1,4 +1,5 @@
 #include "HALVETHRealmWorld.h"
+#include "HALVETHAstralSanctum.h"
 #include "HALVETHTrainingTarget.h"
 #include "HALVETHCharacter.h"
 #include "HALVETHAdventureComponent.h"
@@ -231,6 +232,7 @@ void AHALVETHRealmWorld::Portal(FVector Position, int32 Destination, FLinearColo
 void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
 {
     if (!HalvethLayout::ValidRealm(Realm)) return;
+    if(AstralSanctum){AstralSanctum->Destroy();AstralSanctum=nullptr;}
     if(BodyOrigin.IsEmpty()){
         if(!FParse::Value(FCommandLine::Get(),TEXT("HalvethBodyOrigin="),BodyOrigin))BodyOrigin=FString::Printf(TEXT("HALVETH/body-origin/v1/seed/%u"),Seed);
     }
@@ -268,6 +270,15 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
     GetWorld()->GetWorldSettings()->bGlobalGravitySet=true;
     GetWorld()->GetWorldSettings()->GlobalGravityZ=-100*EarthDynamics::GravityMps2;
     InitializeEarthSky();
+    if(Realm==0){
+        FHitResult Ground;FCollisionQueryParams Query(SCENE_QUERY_STAT(AstralFoundation),true);
+        FVector Origin(2500,0,0);
+        if(TerrainComponent&&TerrainComponent->LineTraceComponent(Ground,Origin+FVector(0,0,12000),Origin-FVector(0,0,12000),Query)){
+            Origin.Z=Ground.ImpactPoint.Z;
+            AstralSanctum=GetWorld()->SpawnActor<AHALVETHAstralSanctum>(Origin,FRotator::ZeroRotator);
+            if(AstralSanctum)AstralSanctum->Build(Seed);
+        }
+    }
     const auto Layout = HalvethLayout::Build(Seed, Realm);
     ReadablePositions.Empty();
     if (Realm == 0)

@@ -1,0 +1,12 @@
+{
+  "author": "Juri Janovski",
+  "license": "MIT",
+  "method": "Periodic integer-frequency Fourier field and wrapped central differences; synthetic mineral appearance.",
+  "generatorSha256": "92f298475dc705e0f1ebca53b6343b605bb71d3337ca593c60bee981158c43f5",
+  "seed": 2301026,
+  "size": 1024,
+  "files": {
+    "mineral_normal.png": "c1d8daa8de4a701a42c7c317c23159a021294e02285054b31f61824a029a3c4a",
+    "mineral_roughness.png": "90a2827d138591138a5e484bed70742d34fe46c29b888fc1d577ffeec6df672e"
+  }
+}

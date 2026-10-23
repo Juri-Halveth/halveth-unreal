@@ -239,7 +239,9 @@ void UHALVETHKnowledgeComponent::InitializeWorld(uint32 Seed, int32 Realm)
     bReading = bDirty = bPreserveInvalidSave = false;
     bSmokeSlot = FParse::Param(FCommandLine::Get(), TEXT("HalvethSmokeTest"))
         || FParse::Param(FCommandLine::Get(), TEXT("HalvethKnowledgeSmokeTest"))
-        || FParse::Param(FCommandLine::Get(), TEXT("HalvethVisual"));
+        || FParse::Param(FCommandLine::Get(), TEXT("HalvethVisual"))
+        || FParse::Param(FCommandLine::Get(), TEXT("HalvethAstralCapture"))
+        || FParse::Param(FCommandLine::Get(), TEXT("HalvethAstralProbe"));
     // Smoke runs begin from deterministic fresh state and never load the player's slot.
     if (!bSmokeSlot) ReloadProgress();
     RefreshBuiltActors();
