@@ -18,6 +18,10 @@ ursprünglichen Quellcode. Die beschriebenen Mechanismen sind unser Entwurf.
 ## Spiel und Bedienung
 
 `Start-Astralis.cmd` startet das lokale Windows-Spiel an der neuen Treppe.
+Er ruft Windows PowerShell über deren eindeutigen Systempfad auf, damit ein
+anders aufgelöster Befehl im Suchpfad den Start nicht verändert. Das Hilfsskript
+bindet außerdem deren eigenes Utility-Modul, damit ein von einer anderen
+Anwendung geerbter Modulsuchpfad den Hashvergleich nicht verhindert.
 Beim ersten Start baut der Helfer bei Bedarf das Paket. Dafür werden dieselben
 UE-5.8-/Windows-C++-Voraussetzungen und vorhandenen Assetquellen wie im
 Hauptprojekt verwendet. Spätere Starts vergleichen den Quellfingerprint.

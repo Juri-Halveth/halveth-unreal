@@ -4,6 +4,11 @@ param(
     [string]$EngineRoot='C:\Program Files\Epic Games\UE_5.8'
 )
 $ErrorActionPreference='Stop'
+# Bind the utility module to the running Windows shell, rather than inheriting
+# an incompatible module search path from a parent application.
+if($PSVersionTable.PSEdition -eq 'Desktop'){
+    Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
+}
 $astralRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $package=Join-Path $astralRoot '.local\astral-package\Windows'
 $receipt=Join-Path $astralRoot '.local\astral-build.json'

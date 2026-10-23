@@ -1,6 +1,6 @@
 {
   "schema": "halveth.native-astral-local-verification.v1",
-  "recordedAt": "2026-10-23T20:30:23.818121+00:00",
+  "recordedAt": "2026-10-23T20:38:05.403026+00:00",
   "baseCommit": "50c1f8ded29952a666488faae5defbc596d73bbe",
   "platform": {
     "engine": "Unreal Engine 5.8",
@@ -42,7 +42,7 @@
     },
     {
       "path": "scripts/astral.ps1",
-      "sha256": "48445f33d71a762fc54c18f067b751488a8fae4937e74565dfdfb5191cfa8059"
+      "sha256": "95997dbf4522ee75d17e9cf8210682a2ccfa3856f9863115637639261bbe77da"
     },
     {
       "path": "scripts/generate_astral_mineral.py",
@@ -51,6 +51,10 @@
     {
       "path": "tests/astral_geometry_test.cpp",
       "sha256": "b0c248725b9325cb35543f71afe9210b340615abe734c81d7e4e4b3f691b6e53"
+    },
+    {
+      "path": "Start-Astralis.cmd",
+      "sha256": "92f00a23e8bf7e668debc6bd13790e54a7a0f5b905abf6fd96f16c974496dd82"
     }
   ],
   "portable": {
@@ -160,5 +164,14 @@
     "The auxiliary view has a smaller resolution and update rate and omits additional dynamic shadows, Lumen and volumetric fog.",
     "No full pixel-differential or long-duration gameplay validation is claimed.",
     "The reference illustrations remain private; all 16 are indexed separately as observations and implementation hypotheses."
-  ]
+  ],
+  "normalStart": {
+    "entrypoint": "Start-Astralis.cmd",
+    "shell": "Windows PowerShell 5.1, own utility module explicitly bound",
+    "starterExitCode": 0,
+    "observedAt": "2026-10-23T20:36:58+00:00",
+    "windowTitle": "HALVETHRealms (64-bit Development PCD3D_SM6)",
+    "responding": true,
+    "scope": "Native game process visible and responsive after the ordinary starter; not a full manual play session."
+  }
 }
