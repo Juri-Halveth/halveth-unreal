@@ -44,7 +44,10 @@ inline Mesh ring(double radius,double tube,int n=128,int sides=8){
     if(radius<=tube||tube<=0||n<12||sides<3)throw std::invalid_argument("invalid torus");
     Mesh m;
     for(int i=0;i<n;i++)for(int j=0;j<sides;j++){double a=2*Pi*i/n,b=2*Pi*j/sides;m.p.push_back({(radius+tube*std::cos(b))*std::cos(a),(radius+tube*std::cos(b))*std::sin(a),tube*std::sin(b)});}
-    for(int i=0;i<n;i++)for(int j=0;j<sides;j++){int a=i*sides+j,b=((i+1)%n)*sides+j,c=((i+1)%n)*sides+(j+1)%sides,d=i*sides+(j+1)%sides;m.t.insert(m.t.end(),{a,b,c,a,c,d});}return m;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<sides;j++){int a=i*sides+j,b=((i+1)%n)*sides+j,c=((i+1)%n)*sides+(j+1)%sides,d=i*sides+(j+1)%sides;m.t.insert(m.t.end(),{a,b,c,a,c,d});}
+    }
+    return m;
 }
 inline Mesh sector(double inner,double outer,double a,double b,double depth){
     if(inner<0||outer<=inner||b<=a||b-a>=Pi||depth<=0)throw std::invalid_argument("invalid arch sector");

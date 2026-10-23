@@ -1,6 +1,6 @@
 {
   "schema": "halveth.native-astral-local-verification.v1",
-  "recordedAt": "2026-10-23T20:18:55.809706+00:00",
+  "recordedAt": "2026-10-23T20:30:23.818121+00:00",
   "baseCommit": "50c1f8ded29952a666488faae5defbc596d73bbe",
   "platform": {
     "engine": "Unreal Engine 5.8",
@@ -14,15 +14,15 @@
     "internalResolutionPercent": 85
   },
   "build": {
-    "sourceFingerprintWindows": "9BC3E74A39B7117ADBBE731476FB38C6F1A7194151ACD5099F702467A8D3CB2D",
-    "binarySha256": "919BBF5329C8A085675397FAF8F9696BA2D08154EC43629F62C321B7E829BE38",
-    "builtAt": "2026-10-23T20:13:18.9539884Z",
+    "sourceFingerprintWindows": "C52188C6CF1C7CC0A6E893233FA4D808BE545C03DBD06A889465BC6ED7331184",
+    "binarySha256": "6B9A9D5D6FB426ECD718E05922DDA4A7565D4956B5218B6213F6010F3FDDFD6F",
+    "builtAt": "2026-10-23T20:26:25.1024860Z",
     "distribution": "LOCAL_DEVELOPMENT_ONLY"
   },
   "sourceFiles": [
     {
       "path": "Source/HALVETHRealms/Public/AstralGeometry.h",
-      "sha256": "02946d9ca3ab3258a0036ac8cdd9e980e8b301bac870f30b49bbf68930214d68"
+      "sha256": "3b7362286e9b69c321fd4af7fc73c42671111e2541f172986a5fa799ce8334c5"
     },
     {
       "path": "Source/HALVETHRealms/Public/HALVETHAstralSanctum.h",
@@ -72,9 +72,9 @@
     "portalArrivals": 2,
     "bookOpenedAndClosed": true,
     "flight": {
-      "forwardCm": 1685.167,
-      "riseCm": 1011.1,
-      "pathSamples": 24,
+      "forwardCm": 1670.996,
+      "riseCm": 1002.598,
+      "pathSamples": 20,
       "gravityRestored": true
     },
     "existingGameplayRegression": "HALVETH_RUNTIME_SMOKE_PASS",
@@ -85,43 +85,43 @@
     "capturedViews": [
       {
         "file": "Preview/ASTRAL_APPROACH.png",
-        "sha256": "9b7ec06d243eb18049e4eb4a8fc8470d69c68c54636c512b186d46a997191c47",
+        "sha256": "c3abffd8d354d08c5eb18930d2b983ab10955b91ed039b7553a36d3faf9096f3",
         "width": 2560,
         "height": 1440
       },
       {
         "file": "Preview/ASTRAL_CLOSED.png",
-        "sha256": "a16fd77af1695b760b0b5a30807739380ce58817f41b7661e151707ec92bac79",
+        "sha256": "ac7d65f2a321f4d8f58f3329ac41d64a11165f05fdf82f8cc355e697ad2532d5",
         "width": 2560,
         "height": 1440
       },
       {
         "file": "Preview/ASTRAL_OPEN.png",
-        "sha256": "11a4dd5985c89a19f83283a3a79003fc6666f3886d5492439f81b5891b81465f",
+        "sha256": "46a7993a149dc9f17b1522f8bbfbbd77cfc8a66fca3ab2341f09cd4e5137f2ba",
         "width": 2560,
         "height": 1440
       },
       {
         "file": "Preview/ASTRAL_ARCHIVE.png",
-        "sha256": "ab41924e042b097e6c8d9211a7af613de2a0fde266d866c6e2e8f3c9ff8171e9",
+        "sha256": "1591f0cf3036424d794df793e0c91de1385c90d5ea00c74adbbd7d9737d41385",
         "width": 2560,
         "height": 1440
       },
       {
         "file": "Preview/ASTRAL_FOCUS.png",
-        "sha256": "3e0197a839eaa227c1029206c6aa78e364115f0cbe2cf27605c322ad0bd0aaaf",
+        "sha256": "3e75277b056fe28af6c134d41ead935719232dddd169b26c45bb34f8502f9ff6",
         "width": 2560,
         "height": 1440
       },
       {
         "file": "Preview/ASTRAL_FLIGHT.png",
-        "sha256": "7526bf7c23b818796c05365df2b1422c17aa56ed302b73e723593c97620f421d",
+        "sha256": "5ecb22134df9148d642ffa699754742747ee1eafd4067d0873a42ee7ab1ceef9",
         "width": 2560,
         "height": 1440
       }
     ],
     "aperture": {
-      "captureFrames": 91,
+      "captureFrames": 80,
       "resolution": [
         960,
         540
@@ -134,23 +134,23 @@
     "result": "PASS_WITH_DECLARED_LIMITS"
   },
   "frameIntervals": {
-    "samples": 1514,
-    "medianMs": 16.664,
-    "p95Ms": 26.43,
+    "samples": 1217,
+    "medianMs": 16.813,
+    "p95Ms": 41.216,
     "coverage": "Monotonic wall-clock intervals during one offscreen scripted capture, simulation seconds 6 to 33; includes screenshot work; not a sustained gameplay benchmark."
   },
   "evidence": [
     {
       "kind": "native-probe-log",
-      "sha256": "39488d1594ad1599c1fbe4cbac4a3e3bc6bb22f08570d82ef0c15b1e5912cf94"
+      "sha256": "622c349caa214093b6fcb8e721d2b6463cc4f57dc7e69df3f983e2518c43943b"
     },
     {
       "kind": "render-capture-log",
-      "sha256": "d3b472549a2327a3c62b4a4573d9d78ed0170c1beb33c0aa0c5746f8bdd3051b"
+      "sha256": "719d82825874903394810bdf2b3dfbad3058c6da031622a90e629c7e01ee8a08"
     },
     {
       "kind": "existing-gameplay-log",
-      "sha256": "a4763d025e1571f5abf5ba6da0ebff632439e5ebe63eb4c1888f7879562431c0"
+      "sha256": "9776878eb4302a6e7aaef7e76ca42976891e6944cf27b0498dd47b504bd442a6"
     }
   ],
   "limitations": [
