@@ -291,8 +291,15 @@
     "entryPoint": "Start-Astralis.cmd",
     "candidatePackage": ".local/astral-sky-package/Windows",
     "previousPackage": ".local/astral-package/Windows",
-    "previousUserSession": "PRESERVED",
-    "candidateInteractiveStartup": "PENDING_USER_SWITCH"
+    "previousUserSession": "USER_AUTHORIZED_SWITCH_OLD_PROCESS_ALREADY_ABSENT_AT_SWITCH",
+    "candidateInteractiveStartup": "OBSERVED_NORMAL_STARTER_WINDOW_RUNNING",
+    "observedAt": "2026-10-23T22:25:33.888605+00:00",
+    "startedAt": "2026-10-24T00:22:12+02:00",
+    "windowResponding": true,
+    "entryMethod": "cmd /d /c Start-Astralis.cmd",
+    "testFlags": false,
+    "physicalMouseAcceptance": "USER_TEST_PENDING",
+    "immutablePrivateLogSha256": "e01f014e9e50f3fdeb43d9edaf9ad69b48a259de48a1ab5522afa98423f960e8"
   },
   "knownFrontiers": [
     "No raw mouse telemetry in the supplied recording.",
