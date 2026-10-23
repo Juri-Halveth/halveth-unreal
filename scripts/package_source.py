@@ -31,7 +31,7 @@ TREE_EXTENSIONS = {
     "QA": {".json"},
     "installer": {".nsi"},
 }
-EXACT_EXTRA_FILES = frozenset({"Build/Windows/Application.ico", ".github/workflows/source.yml"})
+EXACT_EXTRA_FILES = frozenset({"Build/Windows/Application.ico", ".github/workflows/source.yml", "Content/sky/ephemeris.json"})
 TEXT_EXTENSIONS = {".h", ".cpp", ".cs", ".ini", ".py", ".ps1", ".json", ".md", ".txt", ".svg", ".yml", ".nsi", ".sh", ".obj", ".mhskel", ".mhw", ".mhclo", ".mhmat", ".target", ".lua", ".omwscripts"}
 BLOCKED_PARTS = frozenset({"__pycache__", ".git", ".vs", ".idea", "node_modules"})
 SECRET_RULES = (

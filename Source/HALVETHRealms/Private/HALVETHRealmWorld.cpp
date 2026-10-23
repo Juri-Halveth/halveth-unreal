@@ -77,7 +77,7 @@ AHALVETHRealmWorld::AHALVETHRealmWorld()
     Sun->SetupAttachment(RootComponent);
     Sun->SetMobility(EComponentMobility::Movable);
     Sun->SetRelativeRotation(FRotator(-28, -35, 0));
-    Sun->SetIntensity(48000);
+    Sun->SetIntensity(42000);
     Sun->SetLightSourceAngle(.7f);
     Sun->SetAtmosphereSunLight(true);
     Sun->DynamicShadowDistanceMovableLight=30000;
@@ -91,7 +91,7 @@ AHALVETHRealmWorld::AHALVETHRealmWorld()
     Sky->SetupAttachment(RootComponent);
     Sky->SetMobility(EComponentMobility::Movable);
     Sky->SetRealTimeCaptureEnabled(true);
-    Sky->SetIntensity(1.4f);
+    Sky->SetIntensity(1.65f);
     Atmosphere = CreateDefaultSubobject<USkyAtmosphereComponent>(TEXT("Atmosphere"));
     Atmosphere->SetupAttachment(RootComponent);
     Clouds=CreateDefaultSubobject<UVolumetricCloudComponent>(TEXT("Clouds"));Clouds->SetupAttachment(RootComponent);
@@ -108,7 +108,15 @@ AHALVETHRealmWorld::AHALVETHRealmWorld()
     PostProcess->SetupAttachment(RootComponent);
     PostProcess->bUnbound = true;
     PostProcess->Settings.bOverride_BloomIntensity = true;
-    PostProcess->Settings.BloomIntensity = .22f;
+    PostProcess->Settings.BloomIntensity = .12f;
+    // Compress harsh midday highlights and lift deep shade without a color LUT.
+    // Keep this grade shared by every realm and camera, including normal play.
+    PostProcess->Settings.bOverride_FilmSlope = true;
+    PostProcess->Settings.FilmSlope = .72f;
+    PostProcess->Settings.bOverride_FilmToe = true;
+    PostProcess->Settings.FilmToe = .62f;
+    PostProcess->Settings.bOverride_FilmShoulder = true;
+    PostProcess->Settings.FilmShoulder = .38f;
     PostProcess->Settings.bOverride_AutoExposureMethod=true;
     PostProcess->Settings.AutoExposureMethod=AEM_Histogram;
     PostProcess->Settings.bOverride_AutoExposureMinBrightness=true;
@@ -250,7 +258,7 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
         UE_LOG(LogTemp, Warning, TEXT("HALVETH_ASSETS_MISSING: run HALVETHPrepare before rendering or packaging."));
     }
     Sun->SetLightColor(FMath::Lerp(FLinearColor(1,.96,.90),Accent,.055f));
-    Sun->SetIntensity(Realm==1 ? 38000 : 48000);
+    Sun->SetIntensity(Realm==1 ? 34000 : 42000);
     Fog->SetFogInscatteringColor(Accent * 0.035f);
     Sky->SetLightColor(FMath::Lerp(FLinearColor::White,Accent,.03f));
     const FLinearColor Floor = Realm == 1 ? FLinearColor(0.065f, 0.045f, 0.070f)

@@ -31,7 +31,18 @@ inline FVector Normal(double X,double Y,int32 Realm) {
     return FVector(-(Height(X+E,Y,Realm)-Height(X-E,Y,Realm))/(2*E),-(Height(X,Y+E,Realm)-Height(X,Y-E,Realm))/(2*E),1).GetSafeNormal();
 }
 inline FVector4f Color(double X,double Y,int32 Realm) {
-    float Rock=FMath::Clamp(float((1-Normal(X,Y,Realm).Z)*4.5+(Height(X,Y,Realm)-2300)/5000),0.0f,.85f);
-    return FVector4f(Rock,.92f*(1-Rock),0,1);
+    // M_Terrain blends sand -> grass with GREEN, then adds rock with RED.
+    // Keep the vertex weights tied to the same field used by the collision
+    // surface, so soil patches and the generated terrain share their biome.
+    const double Elevation=Height(X,Y,Realm);
+    const double Slope=1.0-Normal(X,Y,Realm).Z;
+    const double Moisture=FMath::Clamp(.58+.32*Noise(X/4500.0,Y/4500.0,Realm+31)
+        +.18*Noise(X/1600.0,Y/1600.0,Realm+53),0.0,1.0);
+    const double RealmGrass=Realm==2?.94:Realm==1?.82:Realm==3?.57:.87;
+    const float Grass=FMath::Clamp(float(RealmGrass+.38*(Moisture-.5)
+        -.26*FMath::Clamp((Elevation-2400.0)/3000.0,0.0,1.0)-2.2*Slope),.08f,.96f);
+    const float Rock=FMath::Clamp(float(3.4*FMath::Max(0.0,Slope-.07)
+        +.34*FMath::Clamp((Elevation-3000.0)/3200.0,0.0,1.0)),0.0f,.82f);
+    return FVector4f(Rock,Grass,0,1);
 }
 }

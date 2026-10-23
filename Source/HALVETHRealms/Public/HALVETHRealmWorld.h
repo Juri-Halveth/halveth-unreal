@@ -129,6 +129,9 @@ private:
     int32 TreeCount = 0;
     int32 FernCount = 0;
     int32 RockCount = 0;
+    int32 GroundedTreeCount = 0;
+    int32 GroundedFernCount = 0;
+    int32 GroundedRockCount = 0;
     TMap<int32, FVector> ReadablePositions;
     int32 CurrentRealm = 0;
     float Elapsed = 0;
