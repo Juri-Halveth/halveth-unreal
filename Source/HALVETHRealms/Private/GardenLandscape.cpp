@@ -10,6 +10,7 @@
 
 void AHALVETHRealmWorld::BuildLandscape(uint32 Seed) {
     TreeCount=FernCount=RockCount=0;
+    GroundedTreeCount=GroundedFernCount=GroundedRockCount=0;
     // Leaves remain traversable; a separate simple trunk blocks actual movement.
     // Collision uses instancing as the visible forest does, rather than one actor per tree.
     TreeTrunks=nullptr;
@@ -59,7 +60,13 @@ void AHALVETHRealmWorld::BuildLandscape(uint32 Seed) {
         UE_LOG(LogTemp,Error,TEXT("GARDEN_NATURE_MANIFEST_MISSING")); return;
     }
     FRandomStream RNG(int32(Seed)^int32((CurrentRealm+1)*7919));
-    auto Scatter=[this,&RNG,&Doc](const FString& Key,int32 Attempts,bool Solid) {
+    // Query the rendered/colliding triangle surface, not the analytic height
+    // used to author its vertices. The two differ between grid vertices.
+    auto TraceSurface=[this](double X,double Y,FHitResult& Hit) {
+        FCollisionQueryParams Params(SCENE_QUERY_STAT(GardenSurfacePlacement),true);
+        return TerrainComponent->LineTraceComponent(Hit,FVector(X,Y,12000),FVector(X,Y,-12000),Params);
+    };
+    auto Scatter=[this,&RNG,&Doc,&TraceSurface](const FString& Key,int32 Attempts,bool Solid) {
         const TArray<TSharedPtr<FJsonValue>>* Items=nullptr;
         if(!Doc->TryGetArrayField(Key,Items)) return;
         TArray<UHierarchicalInstancedStaticMeshComponent*> Groups;
@@ -74,8 +81,17 @@ void AHALVETHRealmWorld::BuildLandscape(uint32 Seed) {
         if(Groups.IsEmpty()) return;
         for(int32 I=0;I<Attempts;I++) {
             double X=RNG.FRandRange(-28500,28500),Y=RNG.FRandRange(-28500,28500);
-            double Z=GardenField::Height(X,Y,CurrentRealm);
-            if(Z<0 || GardenField::Normal(X,Y,CurrentRealm).Z<.72) continue;
+            FHitResult Ground;
+            if(!TraceSurface(X,Y,Ground)) continue;
+            double Z=Ground.ImpactPoint.Z;
+            if(Z<0 || Ground.ImpactNormal.Z<.72) continue;
+            // Vegetation follows the same moisture/grass/rock field that colors
+            // the terrain. This produces coherent groves and open stony ground.
+            const FVector4f Soil=GardenField::Color(X,Y,CurrentRealm);
+            if(Key==TEXT("tree_small_02") && RNG.FRand()>
+                FMath::Clamp((double(Soil.Y)-.28)*1.6*(1.-.7*Soil.X),.0,1.)) continue;
+            if(Key==TEXT("fern_02") && RNG.FRand()>
+                FMath::Clamp((double(Soil.Y)-.23)*1.55*(1.-.8*Soil.X),.0,1.)) continue;
             auto* C=Groups[RNG.RandRange(0,Groups.Num()-1)];
             float Scale=Key==TEXT("tree_small_02")?RNG.FRandRange(2.4f,4.8f):Key==TEXT("fern_02")?RNG.FRandRange(1.0f,2.5f):RNG.FRandRange(1.0f,4.8f);
             FBox Bounds=C->GetStaticMesh()->GetBoundingBox();
@@ -88,21 +104,31 @@ void AHALVETHRealmWorld::BuildLandscape(uint32 Seed) {
             FVector Anchor=Rotation.RotateVector(FVector(Center.X,Center.Y,Bounds.Min.Z)*Scale);
             if(Key==TEXT("rock_moss_set_01")) {
                 FVector E=Bounds.GetExtent()*Scale;
+                double Lowest=Z,Highest=Z;
+                bool bSupported=true;
                 for(FVector2D Offset:{FVector2D(E.X,0),FVector2D(-E.X,0),FVector2D(0,E.Y),FVector2D(0,-E.Y)}) {
                     FVector R=Rotation.RotateVector(FVector(Offset.X,Offset.Y,0));
-                    Z=FMath::Min(Z,GardenField::Height(X+R.X,Y+R.Y,CurrentRealm));
+                    FHitResult Support;
+                    if(!TraceSurface(X+R.X,Y+R.Y,Support)) { bSupported=false; break; }
+                    Lowest=FMath::Min(Lowest,Support.ImpactPoint.Z);
+                    Highest=FMath::Max(Highest,Support.ImpactPoint.Z);
                 }
-                Z-=Bounds.GetSize().Z*Scale*.18;
+                // A rigid boulder cannot rest on a steep four-corner footprint
+                // without hovering or disappearing into the hill.
+                if(!bSupported || Highest-Lowest>80) continue;
+                Z=Lowest-FMath::Min(16.,Bounds.GetSize().Z*Scale*.07);
             }
             const FTransform Placement(Rotation,FVector(X,Y,Z)-Anchor-FVector(0,0,4),FVector(Scale));
             C->AddInstance(Placement);
+            const FVector Root=Placement.TransformPosition(FVector(Center.X,Center.Y,Bounds.Min.Z));
             if(Key==TEXT("tree_small_02")&&TreeTrunks) {
-                const FVector Base=Placement.TransformPosition(FVector(0,0,Bounds.Min.Z));
                 const double Radius=FMath::Clamp(Bounds.GetExtent().Size2D()*.045,8.,24.)*Scale;
                 const double Height=FMath::Clamp(Bounds.GetSize().Z*Scale*.45,180.,1400.);
-                TreeTrunks->AddInstance(FTransform(FRotator::ZeroRotator,Base+FVector(0,0,Height*.5),FVector(Radius/50.,Radius/50.,Height/100.)));
+                TreeTrunks->AddInstance(FTransform(FRotator::ZeroRotator,Root+FVector(0,0,Height*.5),FVector(Radius/50.,Radius/50.,Height/100.)));
             }
-            if(Key==TEXT("tree_small_02")) TreeCount++; else if(Key==TEXT("fern_02")) FernCount++; else RockCount++;
+            if(Key==TEXT("tree_small_02")) { TreeCount++; if(FMath::Abs(Root.Z-Ground.ImpactPoint.Z)<6) GroundedTreeCount++; }
+            else if(Key==TEXT("fern_02")) { FernCount++; if(FMath::Abs(Root.Z-Ground.ImpactPoint.Z)<6) GroundedFernCount++; }
+            else { RockCount++; if(Root.Z<=Ground.ImpactPoint.Z && Ground.ImpactPoint.Z-Root.Z<110) GroundedRockCount++; }
         }
     };
     Scatter(TEXT("tree_small_02"),CurrentRealm==1?1700:1050,false);
@@ -110,10 +136,12 @@ void AHALVETHRealmWorld::BuildLandscape(uint32 Seed) {
     Scatter(TEXT("rock_moss_set_01"),550,true);
     UE_LOG(LogTemp,Display,TEXT("GARDEN_LANDSCAPE_READY realm=%d extent_m=600 trees=%d ferns=%d rocks=%d"),CurrentRealm,TreeCount,FernCount,RockCount);
     UE_LOG(LogTemp,Display,TEXT("GARDEN_FOREST_PHYSICS realm=%d visual_trees=%d colliding_trunks=%d"),CurrentRealm,TreeCount,TreeTrunks?TreeTrunks->GetInstanceCount():0);
+    UE_LOG(LogTemp,Display,TEXT("GARDEN_SUBSTRATE_CONTACT realm=%d trees=%d/%d ferns=%d/%d rocks=%d/%d terrain=triangle_trace biome=soil_color_moisture"),CurrentRealm,GroundedTreeCount,TreeCount,GroundedFernCount,FernCount,GroundedRockCount,RockCount);
 }
 
 bool AHALVETHRealmWorld::VerifyLandscape() {
     if(!TerrainComponent || !TreeCount || !FernCount || !RockCount || !TreeTrunks || TreeTrunks->GetInstanceCount()!=TreeCount) return false;
+    if(GroundedTreeCount!=TreeCount || GroundedFernCount!=FernCount || GroundedRockCount!=RockCount) return false;
     FCollisionQueryParams TrunkQuery(SCENE_QUERY_STAT(GardenTrunkCollision),false);
     int32 TrunkChecks=0;
     for(int32 Instance:{0,TreeCount/2,TreeCount-1}) {
@@ -124,6 +152,11 @@ bool AHALVETHRealmWorld::VerifyLandscape() {
         FHitResult Hit;
         if(!TreeTrunks->LineTraceComponent(Hit,Centre-FVector(Radius*2+25,0,0),Centre+FVector(Radius*2+25,0,0),TrunkQuery)) {
             UE_LOG(LogTemp,Error,TEXT("GARDEN_TRUNK_RAY_FAILED realm=%d instance=%d"),CurrentRealm,Instance);return false;
+        }
+        FHitResult Ground;
+        if(!TerrainComponent->LineTraceComponent(Ground,FVector(Centre.X,Centre.Y,12000),FVector(Centre.X,Centre.Y,-12000),TrunkQuery) ||
+            FMath::Abs(Centre.Z-Pose.GetScale3D().Z*50.-Ground.ImpactPoint.Z)>12) {
+            UE_LOG(LogTemp,Error,TEXT("GARDEN_TRUNK_GROUND_GAP realm=%d instance=%d"),CurrentRealm,Instance);return false;
         }
         TrunkChecks++;
     }
