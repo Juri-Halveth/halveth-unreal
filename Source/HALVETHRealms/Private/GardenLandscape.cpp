@@ -36,8 +36,26 @@ void AHALVETHRealmWorld::BuildLandscape(uint32 Seed) {
         }
     }
     FString Raw; TSharedPtr<FJsonObject> Doc;
-    if(!FFileHelper::LoadFileToString(Raw,*(FPaths::ProjectSavedDir()/TEXT("Garden-imports.json"))) ||
-        !FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Raw),Doc) || !Doc.IsValid()) {
+    if(!FFileHelper::LoadFileToString(Raw,*(FPaths::ProjectSavedDir()/TEXT("Garden-imports.json")))) {
+        // Packaged games have no editor-side import receipt under Saved.
+        // These are the fixed public CC0 imports used by GardenPrepare.
+        Raw=TEXT(R"garden({
+            "tree_small_02":["/Game/VOID/Models/tree_small_02/tree_small_02_2k/StaticMeshes/tree_small_02_2k.tree_small_02_2k"],
+            "fern_02":[
+                "/Game/VOID/Models/fern_02/fern_02_2k/StaticMeshes/fern_02_a.fern_02_a",
+                "/Game/VOID/Models/fern_02/fern_02_2k/StaticMeshes/fern_02_b.fern_02_b",
+                "/Game/VOID/Models/fern_02/fern_02_2k/StaticMeshes/fern_02_c.fern_02_c",
+                "/Game/VOID/Models/fern_02/fern_02_2k/StaticMeshes/fern_02_d.fern_02_d"],
+            "rock_moss_set_01":[
+                "/Game/VOID/Models/rock_moss_set_01/rock_moss_set_01_2k/StaticMeshes/rock_moss_set_01_rock01.rock_moss_set_01_rock01",
+                "/Game/VOID/Models/rock_moss_set_01/rock_moss_set_01_2k/StaticMeshes/rock_moss_set_01_rock02.rock_moss_set_01_rock02",
+                "/Game/VOID/Models/rock_moss_set_01/rock_moss_set_01_2k/StaticMeshes/rock_moss_set_01_rock03.rock_moss_set_01_rock03",
+                "/Game/VOID/Models/rock_moss_set_01/rock_moss_set_01_2k/StaticMeshes/rock_moss_set_01_rock04.rock_moss_set_01_rock04",
+                "/Game/VOID/Models/rock_moss_set_01/rock_moss_set_01_2k/StaticMeshes/rock_moss_set_01_rock05.rock_moss_set_01_rock05",
+                "/Game/VOID/Models/rock_moss_set_01/rock_moss_set_01_2k/StaticMeshes/rock_moss_set_01_rock06.rock_moss_set_01_rock06"]
+        })garden");
+    }
+    if(!FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Raw),Doc) || !Doc.IsValid()) {
         UE_LOG(LogTemp,Error,TEXT("GARDEN_NATURE_MANIFEST_MISSING")); return;
     }
     FRandomStream RNG(int32(Seed)^int32((CurrentRealm+1)*7919));
