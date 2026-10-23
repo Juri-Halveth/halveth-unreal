@@ -1,5 +1,7 @@
 #include "HALVETHGameMode.h"
 #include "HALVETHCharacter.h"
+#include "HALVETHPlayerController.h"
+#include "HALVETHViewProbe.h"
 #include "HALVETHAdventureComponent.h"
 #include "HALVETHKnowledgeComponent.h"
 #include "HALVETHTrainingTarget.h"
@@ -46,6 +48,7 @@ namespace
 AHALVETHGameMode::AHALVETHGameMode()
 {
     DefaultPawnClass = AHALVETHCharacter::StaticClass();
+    PlayerControllerClass=AHALVETHPlayerController::StaticClass();
     HUDClass = AHALVETHHUD::StaticClass();
     PrimaryActorTick.bCanEverTick = true;
 }
@@ -82,6 +85,7 @@ void AHALVETHGameMode::BeginPlay()
     int32 RequestedQuality = SavedQualityProfile(GEngine ? GEngine->GetGameUserSettings() : nullptr);
     FParse::Value(FCommandLine::Get(), TEXT("HalvethQuality="), RequestedQuality);
     ApplyQuality(FMath::Clamp(RequestedQuality, 0, 2), false);
+    if(FParse::Param(FCommandLine::Get(),TEXT("HalvethViewProbe"))||FParse::Param(FCommandLine::Get(),TEXT("HalvethNightCapture")))GetWorld()->SpawnActor<AHALVETHViewProbe>();
     Notify(TEXT("Welcome home. B opens your living library. E gathers, speaks or enters a portal. L sends LOVE."));
 }
 

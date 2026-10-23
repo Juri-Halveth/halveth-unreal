@@ -81,6 +81,7 @@ AHALVETHRealmWorld::AHALVETHRealmWorld()
     Sun->SetIntensity(42000);
     Sun->SetLightSourceAngle(.7f);
     Sun->SetAtmosphereSunLight(true);
+    Sun->SetAtmosphereSunLightIndex(0);
     Sun->DynamicShadowDistanceMovableLight=30000;
     Sun->SetDynamicShadowCascades(4);
     // Authored night fill preserves navigation; it is not a NASA Moon model.
@@ -88,6 +89,11 @@ AHALVETHRealmWorld::AHALVETHRealmWorld()
     NightFill->SetupAttachment(RootComponent);NightFill->SetMobility(EComponentMobility::Movable);
     NightFill->SetRelativeRotation(FRotator(-42,75,0));NightFill->SetLightColor(FLinearColor(.35f,.48f,.72f));
     NightFill->SetIntensity(0);NightFill->SetCastShadows(false);
+    // UE defaults every directional light to atmosphere slot 0 and a white disk.
+    // Keep the authored night scattering separate from the sampled Sun and do
+    // not invent a fixed visible Moon from this navigation light.
+    NightFill->SetAtmosphereSunLight(true);NightFill->SetAtmosphereSunLightIndex(1);
+    NightFill->SetAtmosphereSunDiskColorScale(FLinearColor::Black);
     Sky = CreateDefaultSubobject<USkyLightComponent>(TEXT("Sky"));
     Sky->SetupAttachment(RootComponent);
     Sky->SetMobility(EComponentMobility::Movable);
@@ -244,7 +250,7 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
     GuidePatrolTime.Empty();GuideSpatialTravel.Empty();GuideHandBaseline.Empty();GuideHandTravel.Empty();GuideHeadBaseline.Empty();GuideHeadTravel.Empty();
     GuideChoices.Empty();GuideGoals.Empty();GuideDecisionAt.Empty();GuideRestUntil.Empty();GuideBlockedTime.Empty();GuideDecisionCount.Empty();
     GuideProfiles.Empty();GuideBodyStates.Empty();
-    SoilComponents.Empty();SoilCenters.Empty();SoilVertices.Empty();SoilColors.Empty();SoilLoads.Empty();SoilDepths.Empty();Stars.Empty();
+    SoilComponents.Empty();SoilCenters.Empty();SoilVertices.Empty();SoilColors.Empty();SoilLoads.Empty();SoilDepths.Empty();StarField=nullptr;StarMaterial=nullptr;StarCount=0;
     Portals.Empty(); Fireflies.Empty(); FireflyOrigins.Empty();
     LoveOrb = nullptr; LoveLight = nullptr;
     for (UActorComponent* Component : Generated) if (Component) Component->DestroyComponent();

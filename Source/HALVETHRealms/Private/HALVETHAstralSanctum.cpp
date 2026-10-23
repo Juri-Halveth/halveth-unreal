@@ -55,7 +55,7 @@ UProceduralMeshComponent* AHALVETHAstralSanctum::Mesh(const Astral::Mesh& Data,c
     UpdateGeometry(C,Data,Solid);
     auto* Base=LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/Materials/M_AstralSurface.M_AstralSurface"));
     if(!Base)Base=LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/Materials/M_HalvethSurface.M_HalvethSurface"));
-    if(Base){auto* M=UMaterialInstanceDynamic::Create(Base,C);M->SetVectorParameterValue(TEXT("Tint"),Tint);M->SetScalarParameterValue(TEXT("Metallic"),Metallic);M->SetScalarParameterValue(TEXT("Roughness"),Roughness);M->SetScalarParameterValue(TEXT("Glow"),Glow);C->SetMaterial(0,M);}
+    if(Base){auto* M=UMaterialInstanceDynamic::Create(Base,C);M->SetVectorParameterValue(TEXT("Tint"),Tint);M->SetScalarParameterValue(TEXT("Metallic"),Metallic);M->SetScalarParameterValue(TEXT("Roughness"),Roughness);M->SetScalarParameterValue(TEXT("Glow"),Glow*RadianceScale);C->SetMaterial(0,M);if(Glow>0){GlowMaterials.Add(M);GlowBase.Add(Glow);}}
     C->SetCastShadow(Glow<30);C->RegisterComponent();Parts.Add(C);if(Solid)SolidTriangles+=int32(Data.t.size()/3);return C;
 }
 void AHALVETHAstralSanctum::UpdateGeometry(UProceduralMeshComponent* C,const Astral::Mesh& Data,bool Solid){
@@ -78,7 +78,12 @@ void AHALVETHAstralSanctum::UpdateGeometry(UProceduralMeshComponent* C,const Ast
 void AHALVETHAstralSanctum::Lamp(FVector At,FLinearColor Color,float Intensity,float Radius){
     auto* L=NewObject<UPointLightComponent>(this);AddInstanceComponent(L);L->SetupAttachment(RootComponent);L->SetRelativeLocation(At);
     L->SetMobility(EComponentMobility::Movable);
-    L->SetIntensityUnits(ELightUnits::Lumens);L->SetIntensity(Intensity);L->SetLightColor(Color);L->SetAttenuationRadius(Radius);L->SetSourceRadius(25);L->SetCastShadows(false);L->RegisterComponent();Lamps.Add(L);
+    L->SetIntensityUnits(ELightUnits::Lumens);L->SetIntensity(Intensity);L->SetLightColor(Color);L->SetAttenuationRadius(Radius);L->SetSourceRadius(25);L->SetCastShadows(false);L->RegisterComponent();Lamps.Add(L);LampBase.Add(Intensity);
+}
+void AHALVETHAstralSanctum::SetDaylight(double Day){
+    const float Blend=float(FMath::Clamp(Day,0.,1.));RadianceScale=FMath::Lerp(.18f,1.f,Blend);
+    for(int32 I=0;I<Lamps.Num();I++)Lamps[I]->SetIntensity(LampBase[I]*FMath::Lerp(.08f,1.f,Blend));
+    for(int32 I=0;I<GlowMaterials.Num();I++)GlowMaterials[I]->SetScalarParameterValue(TEXT("Glow"),GlowBase[I]*RadianceScale);
 }
 void AHALVETHAstralSanctum::Sign(FVector At,const FString& Text,float Size){
     auto* C=NewObject<UTextRenderComponent>(this);AddInstanceComponent(C);C->SetupAttachment(RootComponent);C->SetRelativeLocation(At);C->SetRelativeRotation(FRotator(0,-90,0));
@@ -313,9 +318,9 @@ void AHALVETHAstralSanctum::Tick(float Dt){
         Rings[I]->SetRelativeRotation(FRotator(Aligned?0:28*FMath::Sin(Time*.4+I),Spin,90+I*21*(1-Aligned)));
     }
     for(int I=0;I<Doors.Num();I++)Doors[I]->SetRelativeLocation(FVector((I==0?-1:1)*(181+380*Gate.openness),900,490));
-    if(RuneMaterial)RuneMaterial->SetScalarParameterValue(TEXT("Glow"),150+Gate.openness*650);
+    if(RuneMaterial)RuneMaterial->SetScalarParameterValue(TEXT("Glow"),(150+Gate.openness*650)*RadianceScale);
     FocusRemaining=FMath::Max(0.,FocusRemaining-Dt);
-    if(Focus){Focus->SetVisibility(FocusRemaining>0);Focus->AddLocalRotation(FRotator(0,0,Dt*100));if(FocusMaterial)FocusMaterial->SetScalarParameterValue(TEXT("Glow"),800*FMath::Min(1.,FocusRemaining*3));}
+    if(Focus){Focus->SetVisibility(FocusRemaining>0);Focus->AddLocalRotation(FRotator(0,0,Dt*100));if(FocusMaterial)FocusMaterial->SetScalarParameterValue(TEXT("Glow"),800*FMath::Min(1.,FocusRemaining*3)*RadianceScale);}
     UpdateTrail();
     UpdateAperture();
     if(FParse::Param(FCommandLine::Get(),TEXT("HalvethAstralProbe"))&&!ProbeFinished){

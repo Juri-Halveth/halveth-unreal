@@ -33,7 +33,7 @@ prepare() {
   build
   local astral_digest
   astral_digest=$({ sha256sum "$ROOT/Source/HALVETHRealmsEditor/Private/AstralPrepareCommandlet.cpp"; sha256sum "$ROOT"/ArtSource/Astral/*.png; } | sha256sum | cut -d ' ' -f 1)
-  if [[ ! -f "$ROOT/Content/Materials/M_AstralSurface.uasset" || ! -f "$ROOT/Content/Materials/M_AstralAperture.uasset" || ! -f "$ROOT/Saved/ASTRAL-material.sha256" || "$(cat "$ROOT/Saved/ASTRAL-material.sha256")" != "$astral_digest" ]]; then
+  if [[ ! -f "$ROOT/Content/Materials/M_AstralSurface.uasset" || ! -f "$ROOT/Content/Materials/M_AstralAperture.uasset" || ! -f "$ROOT/Content/Materials/M_AngularStars.uasset" || ! -f "$ROOT/Saved/ASTRAL-material.sha256" || "$(cat "$ROOT/Saved/ASTRAL-material.sha256")" != "$astral_digest" ]]; then
     "$CMD" "$NATIVE_PROJECT" -run=AstralPrepare -unattended -nop4 -nosound "-abslog=$(cygpath -w "$ROOT/Saved/ASTRAL-material.log")"
     printf '%s\n' "$astral_digest" > "$ROOT/Saved/ASTRAL-material.sha256"
   fi

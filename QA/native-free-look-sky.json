@@ -1,0 +1,305 @@
+{
+  "schema": "halveth.native-free-look-sky.v1",
+  "recordedAt": "2026-10-23T22:18:17.969817+00:00",
+  "baseCommit": "129c2c3f1157135abadd2e8f2f2cd720e62cc93c",
+  "sourceFiles": [
+    {
+      "path": ".github/workflows/source.yml",
+      "sha256": "572b301c36d74b656b6c967e8d6eadac1f4b0a8d4d28d08cb812b96cab897838"
+    },
+    {
+      "path": "GARDEN.sh",
+      "sha256": "d6e56b8d56d4b3b53ebdb86e354a6cac62a53a554646a067c885ef07c178e16f"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/GardenEarthSky.cpp",
+      "sha256": "7513d923af271bd728fda5959b31bcc0219aed11e630fd063d47abb6db8d8dcb"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHAstralSanctum.cpp",
+      "sha256": "fef208c1a72deccbdd77ae3be30bc09a9f1a3e437607cf934b4b2a09dd6bef55"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHGameMode.cpp",
+      "sha256": "8423a062aa66abb489cabce33f998e0188015f5b35ee6d966ed71ae53e07e2fa"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHKnowledgeComponent.cpp",
+      "sha256": "9172740d0ade87c92512e37b57a0924c7c246bc61c652a56cdf16cc43a1413ff"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHPlayerController.cpp",
+      "sha256": "5396813bad45b47a552eae614f9eb5b720754a63f2912133f927a0ea86a1e6e3"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHRealmWorld.cpp",
+      "sha256": "ca2f22f8cc04f0d63b8bff83011414c800685e86c1bd6458cdaed8be603b3308"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHViewProbe.cpp",
+      "sha256": "bb4d2c21df77d7be9578e2b896638a0825a4deb4f07cf16c974c64055a806987"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHAstralSanctum.h",
+      "sha256": "e734bb5ef4f7dd8c7cbdf95c6a9b737052ee84a98d404ffcc35056621ea41971"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHPlayerController.h",
+      "sha256": "b3f307e0f5d2f32a751646ff4b7b3c4fbcc2b5922c0658a4c490c9a00c168477"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHRealmWorld.h",
+      "sha256": "3beb4d13052ef1f60a8b0d62cdccc148a51289da079c2448d6bba984a69dd6a4"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHViewProbe.h",
+      "sha256": "96eaab0e3b2733581da939b9b304d37972080f8521cbbe74434b9e61206187d3"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/ViewSkyMath.h",
+      "sha256": "66cefe0a74299975861b3d05ae5e3b5758a3ba05400c25a138936a8066dc497e"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Private/AstralPrepareCommandlet.cpp",
+      "sha256": "e65e72f6dd7eb1ecd6282359af4db403ed46cfea76f12d6261247589cf110cff"
+    },
+    {
+      "path": "scripts/astral.ps1",
+      "sha256": "b3d712691d1ba3d10b912d85c8c91cdb4bf4107c1e0934a1412098d0ae0d6564"
+    },
+    {
+      "path": "tests/view_sky_test.cpp",
+      "sha256": "4701934ea275f8278b4c9d7dff2f6f7f33096016bb3913d3f0784a2d70ea1586"
+    }
+  ],
+  "build": {
+    "schema": "halveth.astral-local-package.v1",
+    "builtAt": "2026-10-23T22:12:00.6814564Z",
+    "sourceDigest": "A74286C176CF4217F63A64D21426B82D12DE670FF387D77F4435AD9BEDDF4C38",
+    "launcherSha256": "AB3F1C19FFED772018B938DAC66ADEAB425CBAAF76A52245098B45D749D8B134",
+    "binarySha256": "530AB9FFA6E772F89DACF95647225B11DAED25D0D68FD4E337E5BC1F8635FF3E",
+    "distribution": "LOCAL_DEVELOPMENT_ONLY"
+  },
+  "cookedContainers": [
+    {
+      "name": "global.ucas",
+      "sha256": "e7b59696726c447878e13b630033ccccbe677b48be8a88d1fdbcca1632cde518",
+      "bytes": 3214576
+    },
+    {
+      "name": "global.utoc",
+      "sha256": "a932c57e22657d7a65f9fe66d506999d74a07e5608b5afb0d17fb5e5f25d8800",
+      "bytes": 794
+    },
+    {
+      "name": "HALVETHRealms-Windows.pak",
+      "sha256": "9d3a6b925b843c1f27760a27854dd374f1aab4927c07faa29ecbbd551c3714cf",
+      "bytes": 11232572
+    },
+    {
+      "name": "HALVETHRealms-Windows.ucas",
+      "sha256": "5d29ae36963da370ff23d240f9081b093a01e1c3f0273c4877c9c69ca1dc81bb",
+      "bytes": 352670160
+    },
+    {
+      "name": "HALVETHRealms-Windows.utoc",
+      "sha256": "9e07ddf1b8d851160100b7ce4d102ba9ee3f74c8f6aca387350b855388ae97dd",
+      "bytes": 273758
+    }
+  ],
+  "platform": {
+    "engine": "5.8",
+    "os": "Windows",
+    "configuration": "Development",
+    "renderedApi": "D3D12",
+    "output": [
+      2560,
+      1440
+    ],
+    "quality": 1,
+    "internalResolutionPercent": 85
+  },
+  "userVideo": {
+    "sha256": "9fd2f238d22074af9d7a73c2e7578795a3ce9a37c4754716e263d44907404d58",
+    "durationSeconds": 87.266633,
+    "sourceFrameRate": 30,
+    "sourceDimensions": [
+      2558,
+      1438
+    ],
+    "review": {
+      "mode": "ONE_SECOND_SAMPLES_PLUS_TARGETED_FULL_RESOLUTION",
+      "samples": 87,
+      "timelineCoveredSeconds": [
+        0,
+        87.266633
+      ],
+      "allDecodedFramesReviewed": false,
+      "rawMouseTelemetry": "NOT_AVAILABLE",
+      "audioAnalysis": "MONO_PCM_VOLUME_MEAN_AND_MAX_MINUS_91_DB_EFFECTIVELY_SILENT",
+      "audioListened": false,
+      "samplingIsContinuousFrameCoverage": false
+    },
+    "originalVideoAndExtracts": "PRIVATE_NOT_EXPORTED"
+  },
+  "camera": {
+    "nativeControllerInput": "PASS",
+    "accumulatedPitchDegrees": 2950.0,
+    "accumulatedYawDegrees": 2950.0,
+    "zenithPassages": 8,
+    "nadirPassages": 9,
+    "maxMeasuredStepDegrees": 10.0,
+    "minimumBodyUpDot": 1.0,
+    "explicitRebaseErrorDegrees": 2e-06,
+    "oldPitchClampCounterexampleRejected": true,
+    "componentAndCameraCacheAgreement": "CHECKED_AFTER_UPDATE",
+    "physicalMouseAndForegroundHumanPlay": "NOT_OBSERVED_IN_THIS_CYCLE"
+  },
+  "sky": {
+    "starPoints": 1800,
+    "components": 1,
+    "pointProfile": "RADIAL_ZERO_AT_QUAD_EDGE",
+    "placement": "SEEDED_UNIFORM_WHOLE_SPHERE",
+    "realStarCatalogue": false,
+    "observerTranslation": "FOLLOWED",
+    "observerLookRotation": "NOT_FOLLOWED",
+    "clockRotation": "AUTHORED_SIDEREAL_RATE",
+    "sunAtmosphereSlot": 0,
+    "nightFillAtmosphereSlot": 1,
+    "nightFillDisk": "BLACK_RGB",
+    "nightFillLux": 100,
+    "minimumNightExposureEV100": 7.5,
+    "nightLampRatio": 0.08,
+    "nightEmissiveRatio": 0.18,
+    "astronomicalMoonModel": false
+  },
+  "portable": {
+    "test": "tests/view_sky_test.cpp",
+    "localCompiler": "MSVC /std:c++20 /W4 /WX",
+    "result": "PASS",
+    "pitchLoops": 100,
+    "zenithPassages": 100,
+    "nadirPassages": 100,
+    "clampControl": "DETECTED",
+    "starsNorth": 892,
+    "starsSouth": 908
+  },
+  "nativeRuns": [
+    {
+      "mode": "ViewProbe",
+      "result": "PASS",
+      "privateLogSha256": "0a932671eff39cdb3c916d56ecdf5c75ac084a3dae626adc835d7fbee16c35ab"
+    },
+    {
+      "mode": "Probe",
+      "result": "PASS",
+      "privateLogSha256": "b7a9ca9a17608a71f028c28d381f1d804a62d739fcc5b8895315be23693b6e03"
+    },
+    {
+      "mode": "NightCapture",
+      "result": "PASS",
+      "privateLogSha256": "ca4e0714a9dd754beefdc221cbc12f3425c478d2d203809256690de1cc98145a"
+    },
+    {
+      "mode": "Capture",
+      "result": "PASS",
+      "privateLogSha256": "15492c407932c1f2947f43c43782be3bc892d5861532f889bf080c820d02b620"
+    },
+    {
+      "mode": "31_STEP_GAMEPLAY_SMOKE",
+      "result": "PASS",
+      "privateLogSha256": "a43d5972882913aab5a3b48844f7aaeda0bc42a245280af6c64133b5636042f9"
+    }
+  ],
+  "renderedReview": {
+    "nightShots": [
+      {
+        "path": "Preview/NIGHT_GATE.png",
+        "sha256": "0ae6ec05a21a37994c14d8bca6b8ef4e4c0fb6d551820d9d9b1caf5de71e684e",
+        "bytes": 5242108
+      },
+      {
+        "path": "Preview/NIGHT_GROUND.png",
+        "sha256": "21a8ecc717e560cdd08098f33fa33f7a27828c3036c1f95628fdb9efe8b0b5b8",
+        "bytes": 4766619
+      },
+      {
+        "path": "Preview/NIGHT_HORIZON.png",
+        "sha256": "16d8d367cdca0f8422f6064b326294f2810d341ce7b83dc9561b501d4842965a",
+        "bytes": 4920848
+      },
+      {
+        "path": "Preview/NIGHT_OVER_ZENITH.png",
+        "sha256": "42959ddf0c7aa9e943fd9a5ba55af4bd91861722d6b238279911483147df00cf",
+        "bytes": 2223748
+      },
+      {
+        "path": "Preview/NIGHT_REVERSE.png",
+        "sha256": "af0ffd01f2b0bcabfd47fada765f0aaf2fa80478d12b2928283645c2d078057e",
+        "bytes": 4982900
+      },
+      {
+        "path": "Preview/NIGHT_ZENITH.png",
+        "sha256": "a5ba4dcb9244b14e0a7d62cf2d53db6d90e0a490a5a8a1982945133ab5a02ac6",
+        "bytes": 1279577
+      }
+    ],
+    "reviewer": "ASSISTANT_VISUAL_INSPECTION",
+    "claimCeiling": "LOCAL_RENDERED_REVIEW_NOT_USER_VISUAL_ACCEPTANCE",
+    "dayShotNames": [
+      "ASTRAL_APPROACH",
+      "ASTRAL_CLOSED",
+      "ASTRAL_OPEN",
+      "ASTRAL_ARCHIVE",
+      "ASTRAL_FOCUS",
+      "ASTRAL_FLIGHT"
+    ],
+    "dayShots": [
+      {
+        "name": "ASTRAL_APPROACH",
+        "privateOriginalSha256": "7f65bc3ccb112eb390920720b80dbda6f30c5e51a3f409f84bc90ab6ea30dfcd"
+      },
+      {
+        "name": "ASTRAL_CLOSED",
+        "privateOriginalSha256": "bd69aa120bc99e1e181bb812bd4e1ceafd8347de8c880f3a75b82691119435e7"
+      },
+      {
+        "name": "ASTRAL_OPEN",
+        "privateOriginalSha256": "5153c72a35d9cca5df29dfa887e732395b2a8f7ffdf02c336cfc7e13bcb7477a"
+      },
+      {
+        "name": "ASTRAL_ARCHIVE",
+        "privateOriginalSha256": "6ea38ef9eecda68fde8cd70dd7506e057c2754b2b00f7d71f58e998fc81b26d8"
+      },
+      {
+        "name": "ASTRAL_FOCUS",
+        "privateOriginalSha256": "9daa58d5ecb94e689e03e86cf5db03b1649866f3f0ed6b3224050b54c493c1e6"
+      },
+      {
+        "name": "ASTRAL_FLIGHT",
+        "privateOriginalSha256": "80a8a467ab131ea24e9b6f43c183159ffe3c72960dc0f8a8a3904d43f629b177"
+      }
+    ],
+    "dayFrameSample": {
+      "intervals": 1261,
+      "medianMilliseconds": 18.118,
+      "p95Milliseconds": 39.69,
+      "scope": "OFFSCREEN_AFTER_6_SECONDS_NOT_SUSTAINED_PLAY"
+    }
+  },
+  "normalStart": {
+    "entryPoint": "Start-Astralis.cmd",
+    "candidatePackage": ".local/astral-sky-package/Windows",
+    "previousPackage": ".local/astral-package/Windows",
+    "previousUserSession": "PRESERVED",
+    "candidateInteractiveStartup": "PENDING_USER_SWITCH"
+  },
+  "knownFrontiers": [
+    "No raw mouse telemetry in the supplied recording.",
+    "No full 30-fps frame-by-frame video review.",
+    "Stars, night fill and rotation are authored; no astronomical Moon or real star catalogue.",
+    "Existing mineral tiling, foliage density, world scale and portal sampling quality remain separate art and rendering work.",
+    "Offscreen frame intervals are not a sustained interactive benchmark.",
+    "Previous QA/native-astral.json remains a historical source/package receipt."
+  ]
+}

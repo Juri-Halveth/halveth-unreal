@@ -19,6 +19,8 @@
 #include "Materials/MaterialExpressionConstant.h"
 #include "Materials/MaterialExpressionTextureSampleParameter2D.h"
 #include "Materials/MaterialExpressionScreenPosition.h"
+#include "Materials/MaterialExpressionCustom.h"
+#include "Materials/MaterialExpressionCameraPositionWS.h"
 #include "Misc/PackageName.h"
 #include "Misc/Paths.h"
 #include "HAL/FileManager.h"
@@ -80,5 +82,24 @@ int32 UAstralPrepareCommandlet::Main(const FString& Params){
     FAssetRegistryModule::AssetCreated(Portal);
     const FString PortalFile=FPackageName::LongPackageNameToFilename(PortalPackage->GetName(),FPackageName::GetAssetPackageExtension());
     const bool Saved=UPackage::SavePackage(PortalPackage,Portal,*PortalFile,Args);
-    UE_LOG(LogTemp,Display,TEXT("ASTRAL_MATERIAL result=%s world_space_noise=true live_aperture=true"),Saved?TEXT("PASS"):TEXT("FAIL"));return Saved?0:1;
+    if(!Saved)return 1;
+    auto* Stars=LoadObject<UMaterial>(nullptr,TEXT("/Game/Materials/M_AngularStars.M_AngularStars"));
+    auto* StarPackage=Stars?Stars->GetOutermost():CreatePackage(TEXT("/Game/Materials/M_AngularStars"));
+    if(!Stars)Stars=NewObject<UMaterial>(StarPackage,TEXT("M_AngularStars"),RF_Public|RF_Standalone);
+    Stars->PreEditChange(nullptr);Stars->GetExpressionCollection().Empty();Stars->SetShadingModel(MSM_Unlit);Stars->BlendMode=BLEND_Additive;Stars->TwoSided=true;Stars->bApplyCloudFogging=true;
+    auto StarAdd=[Stars](UMaterialExpression* E){Stars->GetExpressionCollection().AddExpression(E);};
+    auto* StarUV=NewObject<UMaterialExpressionTextureCoordinate>(Stars);StarAdd(StarUV);
+    auto* StarColor=NewObject<UMaterialExpressionVertexColor>(Stars);StarAdd(StarColor);
+    auto* StarPosition=NewObject<UMaterialExpressionWorldPosition>(Stars);StarAdd(StarPosition);
+    auto* Eye=NewObject<UMaterialExpressionCameraPositionWS>(Stars);StarAdd(Eye);
+    auto* Visibility=NewObject<UMaterialExpressionScalarParameter>(Stars);Visibility->ParameterName=TEXT("NightVisibility");Visibility->DefaultValue=0;StarAdd(Visibility);
+    auto* Profile=NewObject<UMaterialExpressionCustom>(Stars);Profile->OutputType=CMOT_Float1;Profile->Inputs.Empty();
+    Profile->Code=TEXT("float2 p=UV*2-1; float r2=dot(p,p); return exp(-5*r2)*pow(saturate(1-r2),2)*smoothstep(-.02,.09,normalize(Position-Eye).z)*Night*Brightness;");
+    for(const auto& Input:TArray<TPair<FName,UMaterialExpression*>>{{TEXT("UV"),StarUV},{TEXT("Position"),StarPosition},{TEXT("Eye"),Eye},{TEXT("Night"),Visibility},{TEXT("Brightness"),StarColor}}){FCustomInput I;I.InputName=Input.Key;I.Input.Expression=Input.Value;if(Input.Key==TEXT("Brightness"))I.Input.OutputIndex=4;Profile->Inputs.Add(I);}StarAdd(Profile);
+    auto* Radiance=NewObject<UMaterialExpressionMultiply>(Stars);Radiance->A.Expression=StarColor;Radiance->ConstB=240;StarAdd(Radiance);
+    Stars->GetEditorOnlyData()->EmissiveColor.Expression=Radiance;Stars->GetEditorOnlyData()->Opacity.Expression=Profile;
+    Stars->PostEditChange();StarPackage->MarkPackageDirty();FAssetRegistryModule::AssetCreated(Stars);
+    const FString StarFile=FPackageName::LongPackageNameToFilename(StarPackage->GetName(),FPackageName::GetAssetPackageExtension());
+    const bool StarSaved=UPackage::SavePackage(StarPackage,Stars,*StarFile,Args);
+    UE_LOG(LogTemp,Display,TEXT("ASTRAL_MATERIAL result=%s world_space_noise=true live_aperture=true angular_stars=true"),StarSaved?TEXT("PASS"):TEXT("FAIL"));return StarSaved?0:1;
 }

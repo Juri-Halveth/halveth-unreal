@@ -25,9 +25,13 @@ Anwendung geerbter Modulsuchpfad den Hashvergleich nicht verhindert.
 Beim ersten Start baut der Helfer bei Bedarf das Paket. Dafür werden dieselben
 UE-5.8-/Windows-C++-Voraussetzungen und vorhandenen Assetquellen wie im
 Hauptprojekt verwendet. Spätere Starts vergleichen den Quellfingerprint.
-Das lokale Entwicklungspaket liegt unter `.local/astral-package/Windows`.
+Das aktuelle lokale Entwicklungspaket liegt unter `.local/astral-sky-package/Windows`.
+Der Vorgänger unter `.local/astral-package/Windows` bleibt getrennt erhalten.
 
 - WASD/Maus: gehen und schauen; Leertaste: springen.
+- Der Blick kann den Zenit und Nadir durchqueren. Die Kamerarotation bleibt als
+  Quaternion erhalten; die Kapsel der gehenden Figur bleibt aufrecht.
+  Nach einer vollständigen Drehung liegt dieselbe Blickrichtung wieder vor.
 - Auf der Plattform vor der Pforte dreimal mit Abstand **E** drücken.
   Jeweils ein Ring wird ausgerichtet; die massiven Türflügel öffnen sich.
 - Nach dem Öffnen erneut **E**: ins obere Archiv wechseln.
@@ -111,7 +115,52 @@ keine geometrisch ausgegrabenen Bodenschichten.
 ./scripts/astral.ps1 -Mode Build
 ./scripts/astral.ps1 -Mode Probe
 ./scripts/astral.ps1 -Mode Capture
+./scripts/astral.ps1 -Mode ViewProbe
+./scripts/astral.ps1 -Mode NightCapture
 ```
+
+## Durchgehender Blick und Nachthimmel
+
+Die Video-Rückmeldung vom 23.10. zeigte ab etwa Sekunde 42 denselben regelmäßig
+verteilten Sternbereich. Der alte Renderer verteilte 240 leuchtende Kugeln nach
+einem Fibonacci-Muster in einer oberen Halbkugel. Der Standard-Kameramanager
+begrenzte zusätzlich den vertikalen Blick auf knapp unter 90 Grad. Das Video
+enthält keine gemessenen Mausdeltas; die Zuordnung des Anschlags wird deshalb
+zusätzlich über den nativen Controller-Eingabepfad geprüft.
+
+`ViewSkyMath.h` enthält die fortlaufende Quaternion-Rotation und einen
+deterministischen Zufallsgenerator für 1.800 Sternrichtungen auf der ganzen
+Kugel. Ein einziges kollisionsfreies Mesh bündelt die Lichtpunkte. Das
+Sternmaterial blendet jeden Punkt radial bis zum Rand aus; der quadratische
+Träger wird dort vollständig durchsichtig. Entfernung und Winkelgröße sind
+getrennt: Die virtuelle Geometrie liegt zehn Kilometer entfernt und übernimmt
+die Kameraverschiebung, während ihre Rotation von der Spielzeit abhängt.
+Die Blickdrehung wird nicht auf die Sterne übertragen.
+
+Das ist ein gestalteter Sternhimmel, kein realer Sternkatalog. Sein langsamer
+Zeitverlauf und die bläuliche Nachtaufhellung sind gestalterische Modelle.
+Die datierte Sonnenbahn bleibt separat gebunden. Die Nachtbelichtung hat eine
+untere Grenze von EV100 7,5; die Umgebung erhält 100 Lux gerichtetes Hilfslicht.
+Die Pfortenlampen sinken nachts auf acht Prozent ihrer Tagesintensität,
+emittierende Pfortenmaterialien auf 18 Prozent. Diese Werte dienen der
+Lesbarkeit und werden nicht als gemessene Mondbeleuchtung ausgegeben.
+Die Sonne verwendet Atmosphärenkanal 0, das Nacht-Hilfslicht Kanal 1 ohne
+sichtbare Scheibe. Der Engine-Standard hatte beide Richtungslichter in Kanal 0
+mit weißer Scheibe eingetragen und damit einen festen Lichtfleck erzeugt.
+
+`ViewProbe` führt echte Controller-Eingaben aus, misst die resultierende
+Kamera und vergleicht die Kamerakomponente erst nach deren Aktualisierung.
+Es verlangt mehrere Polüberquerungen, durchgehende vertikale und horizontale
+Drehung, aufrechte Körperkollision und die Übernahme einer explizit neu
+gesetzten Blickrichtung. Die alte Engine-Begrenzung dient als Gegenprobe.
+`NightCapture` erzeugt sechs gerenderte Ansichten mit festem Zeitanker,
+einschließlich einer Überquerung des Zenits über denselben Eingabepfad.
+Die Modi verwenden den Test-Spielstand; neue Figurenjournale haben eigene IDs.
+Eine erfolgreiche Testsequenz ersetzt nicht die Sichtprüfung mit der Maus
+oder die menschliche Abnahme der Grafik.
+
+Der eigene Nachweis ist `QA/native-free-look-sky.json`. Frühere
+Astralis-Nachweise behalten ihren damaligen Quell- und Paketbezug.
 
 Quellcode und eigene Mineralbilder stehen unter der MIT-Lizenz des Projekts.
 Die ursprünglichen Illustrierungsdateien sind kein Bestandteil der

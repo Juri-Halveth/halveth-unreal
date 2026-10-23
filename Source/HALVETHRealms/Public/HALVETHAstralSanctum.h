@@ -18,6 +18,7 @@ class HALVETHREALMS_API AHALVETHAstralSanctum : public AActor {
 public:
     AHALVETHAstralSanctum();
     void Build(uint32 Seed);
+    void SetDaylight(double Day);
     virtual void Tick(float Dt) override;
     bool Interact(AHALVETHCharacter* Player);
     void CastFocus(AHALVETHCharacter* Player);
@@ -31,6 +32,9 @@ private:
     UPROPERTY() TArray<TObjectPtr<UProceduralMeshComponent>> Rings;
     UPROPERTY() TArray<TObjectPtr<UProceduralMeshComponent>> Doors;
     UPROPERTY() TArray<TObjectPtr<UPointLightComponent>> Lamps;
+    UPROPERTY() TArray<TObjectPtr<UMaterialInstanceDynamic>> GlowMaterials;
+    TArray<float> LampBase,GlowBase;
+    float RadianceScale=1;
     UPROPERTY() TObjectPtr<UProceduralMeshComponent> Focus;
     UPROPERTY() TObjectPtr<UProceduralMeshComponent> FlightTrail;
     UPROPERTY() TObjectPtr<UProceduralMeshComponent> Aperture;

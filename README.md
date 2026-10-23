@@ -18,6 +18,16 @@ Rezepte erschlossen. Der Code und die eigenen Materialien stehen unter MIT.
 Der [datierte lokale Prüfstand](QA/native-astral.json) trennt den nativen
 Funktionstest, die gerenderten Ansichten und die begrenzte Framezeitmessung.
 
+Die anschließende [Kamera- und Nachtkorrektur](QA/native-free-look-sky.json)
+entfernt den vertikalen Blickanschlag und ersetzt das regelmäßige Sternmuster
+durch 1.800 unterschiedlich helle, weich auslaufende Lichtpunkte in einem Mesh.
+Sonne und Nacht-Hilfslicht besitzen getrennte Atmosphärenkanäle; das Hilfslicht
+erzeugt keine sichtbare Himmelskörperscheibe. Nachtlampen und Belichtung sind
+aufeinander abgestimmt. `Start-Astralis.cmd` verwendet das neue lokale Paket,
+während das vorherige Paket getrennt erhalten bleibt.
+
+![Nachtansicht aus dem korrigierten nativen Windows-Paket](Preview/NIGHT_GATE.png)
+
 ---
 
 Four locally generated 600 × 600 metre landscapes with hills, CC0 forest scans,

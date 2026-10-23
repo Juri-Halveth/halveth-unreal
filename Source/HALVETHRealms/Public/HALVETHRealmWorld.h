@@ -107,7 +107,9 @@ private:
     float SkyUpdateTime=0;
     double SkyMinHeight=1,SkyMaxHeight=-1;
     int32 SkyObservedSamples=0,SkyNightSamples=0,SkyDaySamples=0;
-    UPROPERTY() TArray<TObjectPtr<UStaticMeshComponent>> Stars;
+    UPROPERTY() TObjectPtr<UProceduralMeshComponent> StarField;
+    UPROPERTY() TObjectPtr<UMaterialInstanceDynamic> StarMaterial;
+    int32 StarCount=0;
     TArray<FVector> GuideOrigins;
     TArray<int32> GuideIdentities;
     TArray<FQuat> GuideBoneBaseline;
@@ -153,5 +155,6 @@ private:
     void BuildSoil(FVector Guide);
     void TickSoil(float Dt);
     void InitializeEarthSky();
+    void BuildNightStars();
     void TickEarthSky(float Dt);
 };
