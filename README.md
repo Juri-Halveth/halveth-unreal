@@ -9,6 +9,14 @@ Ein eigenständiger C++-Spielprototyp für Unreal Engine. Portalwelten, eine int
 [**Projekt öffnen →**](https://github.com/Juri-Halveth/halveth-unreal/releases) · [Arbeitsproben](https://juri-halveth.github.io/koennen/) · [Portfolio](https://juri-halveth.github.io/)
 
 
+## Körperkontinuität und elastischer Träger
+
+Der neue [Körperträger](docs/BODY-CONTINUITY.md) erhält sichtbare Bewohner,
+statt sie durch eine neue Rangliste auszutauschen. Ein kleiner räumlicher
+Gewebesolver übergibt nachgiebige Restbewegungen an die GPU-Oberfläche.
+Das ist ein nativer Entwicklungskandidat mit vorläufig wiederverwendeten
+Charakterformen; individuelle Anatomie und biologische Zellen sind noch offen.
+
 ## Entspanntere Figuren und verlässlicher Bodenkontakt
 
 Die [aktuelle Bewohnerbewegung](docs/RESIDENT-MOTION.md) ergänzt entspanntere

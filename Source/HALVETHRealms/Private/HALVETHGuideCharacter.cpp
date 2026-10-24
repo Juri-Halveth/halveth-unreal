@@ -1,4 +1,5 @@
 #include "HALVETHGuideCharacter.h"
+#include "HALVETHTissueComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -22,4 +23,5 @@ AHALVETHGuideCharacter::AHALVETHGuideCharacter(){
     Movement->SetWalkableFloorAngle(46);
     Movement->bOrientRotationToMovement=false;
     bUseControllerRotationYaw=false;
+    CreateDefaultSubobject<UHALVETHTissueComponent>(TEXT("TissueCarrier"));
 }

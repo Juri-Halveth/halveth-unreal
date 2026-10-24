@@ -23,6 +23,13 @@
 #include "Misc/PackageName.h"
 #include "UObject/SavePackage.h"
 #include "HAL/IConsoleManager.h"
+#include "TissueField.h"
+#include "Materials/MaterialExpressionCustom.h"
+#include "Materials/MaterialExpressionTextureObjectParameter.h"
+#include "Materials/MaterialExpressionScalarParameter.h"
+#include "Materials/MaterialExpressionWorldPosition.h"
+#include "Materials/MaterialExpressionVectorParameter.h"
+#include "Materials/MaterialExpressionAdd.h"
 
 namespace {
 bool Save(UObject* O) {
@@ -60,6 +67,22 @@ UMaterial* Material(const FString& Name,FLinearColor Color,float Metallic,float 
     if(Normal){auto* T=E<UMaterialExpressionTextureSample>(M);T->Texture=Normal;T->SamplerType=SAMPLERTYPE_Normal;M->GetEditorOnlyData()->Normal.Expression=T;}
     if(Hair&&Tex){auto* T=E<UMaterialExpressionTextureSample>(M);T->Texture=Tex;T->SamplerType=SAMPLERTYPE_Color;M->GetEditorOnlyData()->OpacityMask.Expression=T;M->GetEditorOnlyData()->OpacityMask.OutputIndex=4;}
     if(Skin){auto* C=E<UMaterialExpressionConstant3Vector>(M);C->Constant=FLinearColor(.6f,.22f,.12f);M->GetEditorOnlyData()->SubsurfaceColor.Expression=C;auto* A=E<UMaterialExpressionConstant>(M);A->R=.24f;M->GetEditorOnlyData()->Opacity.Expression=A;}
+    const bool Probe=Name==TEXT("M_TissueFieldProbe");
+    if(Skin||Name.EndsWith(TEXT("_Cloth"))||Name.EndsWith(TEXT("_Leather"))||Probe){
+        auto* Field=E<UMaterialExpressionTextureObjectParameter>(M);Field->ParameterName=TEXT("TissueField");Field->Texture=LoadObject<UTexture2D>(nullptr,TEXT("/Engine/EngineResources/DefaultTexture.DefaultTexture"));Field->SamplerType=SAMPLERTYPE_Color;
+        auto* Enabled=E<UMaterialExpressionScalarParameter>(M);Enabled->ParameterName=TEXT("TissueEnabled");Enabled->DefaultValue=0;
+        auto* Softness=E<UMaterialExpressionScalarParameter>(M);Softness->ParameterName=TEXT("TissueSoftness");Softness->DefaultValue=Skin?1.f:.65f;
+        UMaterialExpression* Position=nullptr;
+        if(Probe){auto* P=E<UMaterialExpressionVectorParameter>(M);P->ParameterName=TEXT("TissueProbePosition");Position=P;}
+        else {auto* P=E<UMaterialExpressionWorldPosition>(M);P->WorldPositionShaderOffset=WPT_ExcludeAllShaderOffsets;Position=P;}
+        auto* Deform=E<UMaterialExpressionCustom>(M);Deform->Code=UTF8_TO_TCHAR(HalvethTissueField::Shader);Deform->OutputType=CMOT_Float3;
+        for(auto Pair:{TPair<FName,UMaterialExpression*>(TEXT("Field"),Field),TPair<FName,UMaterialExpression*>(TEXT("Enabled"),Enabled),TPair<FName,UMaterialExpression*>(TEXT("Softness"),Softness),TPair<FName,UMaterialExpression*>(TEXT("Position"),Position)}){FCustomInput Input;Input.InputName=Pair.Key;Input.Input.Expression=Pair.Value;Deform->Inputs.Add(Input);}
+        if(Probe){
+            M->SetShadingModel(MSM_Unlit);
+            auto* Scale=E<UMaterialExpressionMultiply>(M);Scale->A.Expression=Deform;Scale->ConstB=.05f;
+            auto* Encode=E<UMaterialExpressionAdd>(M);Encode->A.Expression=Scale;Encode->ConstB=.5f;M->GetEditorOnlyData()->EmissiveColor.Expression=Encode;
+        }else M->GetEditorOnlyData()->WorldPositionOffset.Expression=Deform;
+    }
     M->PreEditChange(nullptr);M->PostEditChange();if(Created)FAssetRegistryModule::AssetCreated(M);Save(M);return M;
 }
 }
@@ -132,5 +155,6 @@ int32 UGardenCharactersCommandlet::Main(const FString& Params) {
         UE_LOG(LogTemp,Display,TEXT("GARDEN_CHARACTER_READY %s bones=%d morphs=%d duration=%f"),*N,Mesh->GetRefSkeleton().GetNum(),Mesh->GetMorphTargets().Num(),Idle->GetPlayLength());
         for(const auto& Morph:Mesh->GetMorphTargets())UE_LOG(LogTemp,Display,TEXT("GARDEN_CHARACTER_MORPH %s"),*Morph->GetName());
     }
+    if(!Material(TEXT("M_TissueFieldProbe"),FLinearColor::Black,0,1))return 7;
     FAssetCompilingManager::Get().FinishAllCompilation();return 0;
 }
