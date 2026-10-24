@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import sys
 import tempfile
+import threading
 import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -12,6 +13,9 @@ ART = ROOT / "ArtSource"
 MANIFEST = json.loads((ART / "ASSETS.json").read_text(encoding="utf-8"))
 MAX_ASSET_BYTES = 200_000_000
 CHUNK_SIZE = 1024 * 1024
+# Windows can reject two simultaneous renames onto the same destination.
+# Serialize publication only; response reads and owned temporary writes stay parallel.
+PUBLICATION_LOCK = threading.Lock()
 
 def target(record):
     p = (ART / record["file"]).resolve()
@@ -87,7 +91,8 @@ def download(record):
             output.flush()
         if count != size or temporary.stat().st_size != size or digest.hexdigest() != record["sha256"]:
             raise ValueError("asset bytes do not match pinned digest: " + record["file"])
-        temporary.replace(p)
+        with PUBLICATION_LOCK:
+            temporary.replace(p)
     finally:
         temporary.unlink(missing_ok=True)
 

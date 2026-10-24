@@ -1,0 +1,2671 @@
+{
+  "schema": "halveth.native-resident-motion.v1",
+  "recordedAt": "2026-10-24T15:32:48.547837+00:00",
+  "baseRevision": "a8bc9485429f0974d02165bc44827242edabbeb6",
+  "candidate": "Git commit containing this receipt; exact changed-source bytes bound below",
+  "changedSourceFiles": [
+    {
+      "path": "Source/HALVETHRealms/Public/GuideMotionMath.h",
+      "sha256": "a07cc658b9cc38a2deffffa378625bc4c4107791ad89d12696b9dd08a83daf11"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHGuideAnimInstance.h",
+      "sha256": "ff03ff05afb4b20f85d2635642b9725d05f0779fff267af9888db963a323e4f4"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHGuideAnimInstance.cpp",
+      "sha256": "bf100a356f5cb4f6eafb93a8d121198ff1977cae5ea4b21c2130b0232c861541"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHCitizen.cpp",
+      "sha256": "4dbb880685e4607b8477ba9bf1c85bb86b9cf6b7e7af05b9d539ebc4a5168cd8"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHGuideCharacter.cpp",
+      "sha256": "78629fc0a4588b91771dc2c8e8091f6f29271d4fcace3239dc668f2edf8fdbe4"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHLivingWorld.cpp",
+      "sha256": "744e817a0c1fb9a5339f46b515f318363c2e7d00f6b2d547d7b302892ed6938f"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/LivingWorldProbe.cpp",
+      "sha256": "f112ec06e54728dce2918f9766e94abdf9f978111203cfb45b56877f54afc268"
+    },
+    {
+      "path": "tests/motion_math_test.cpp",
+      "sha256": "85852321793e6f48c632beadb69234b251bb43090264a4b3cc5baa1d612b010e"
+    }
+  ],
+  "package": {
+    "schema": "halveth.astral-local-package.v2",
+    "builtAt": "2026-10-24T15:28:14.4012126Z",
+    "sourceDigest": "E2BC4B869A580D3735EFB7AFBBDA3D169724430F7B4211B76CEA17F6C749B1F2",
+    "launcherSha256": "AB3F1C19FFED772018B938DAC66ADEAB425CBAAF76A52245098B45D749D8B134",
+    "binarySha256": "63FE6FAB99D6A5FD47BE266A3292675F50679F78717FE0C65D133FC2DD3A353D",
+    "cookedPayload": [
+      {
+        "name": "global.ucas",
+        "bytes": 3215952,
+        "sha256": "51C727CEFBE005380836D4AFD521BD32BA28A31BB4320CC0C77C7A552AED0456"
+      },
+      {
+        "name": "global.utoc",
+        "bytes": 794,
+        "sha256": "2C24D7CE52C94FB22E6C44AE226A646EC9D5885F437CC53A0114FF223CB86386"
+      },
+      {
+        "name": "HALVETHRealms-Windows.pak",
+        "bytes": 11234937,
+        "sha256": "3C97F591A873AE0AB7DF7378BEACBBBC3AC945595A363ABDB06478DBDA45BB2C"
+      },
+      {
+        "name": "HALVETHRealms-Windows.ucas",
+        "bytes": 363414288,
+        "sha256": "BAEE3387815B2B88ED78EB0CB7D92E55F4945B1FA24FFD0557C5D83B6925DA54"
+      },
+      {
+        "name": "HALVETHRealms-Windows.utoc",
+        "bytes": 277957,
+        "sha256": "C7144E4F5049DBDA80BE5AFC04C883193FD067CEB2033D23DA51AE5CB1C24CED"
+      }
+    ],
+    "distribution": "LOCAL_DEVELOPMENT_ONLY"
+  },
+  "nativePose": {
+    "log": ".local/resident-proof-motion.log",
+    "logSha256": "8a807cc4bcb4d9bf6a4d6965d6fe6f7658332de6ccda1a61a633a1b270148ff6",
+    "armSamples": 1800,
+    "elbowRangeDeg": [
+      25.0,
+      44.99996
+    ],
+    "unloadedIdleSamples": 0,
+    "ankleSamples": 1800,
+    "maxAnkleTargetErrorCm": 0.0,
+    "binding": "Last completed skeletal evaluation in component space; sampled three guides sharing resident animation class",
+    "limits": "Ankle-to-IK-target error is not an all-terrain foot-sliding or human-naturalness score."
+  },
+  "nativeMotionFixture": {
+    "nativeMotionPassed": true,
+    "requestedFrames": 300,
+    "simulationSeconds": 20.0,
+    "nominalSamplingHz": 24,
+    "timingFile": "motion-frames.tsv",
+    "scope": "Native walking, proximity stop, dialogue and gaze sequence"
+  },
+  "render": {
+    "resolution": [
+      1280,
+      720
+    ],
+    "fixedSimulationFps": 30,
+    "nominalRequestedSamplingHz": 24,
+    "actualRequestIntervalSeconds": 0.06666667,
+    "qualityProfile": 2,
+    "noAudio": true,
+    "sourceTimingFile": "QA/motion-frames.tsv",
+    "sourceTimingSha256": "7f586b294ff28f82d0b578a21d0ce8ff3b1d4343aa70ec581a1b5aab25f033d9",
+    "frames": [
+      {
+        "index": 0,
+        "requestedSimulationSeconds": 2.61e-07,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00000.png",
+        "skyUnix": 1791115205.0,
+        "sha256": "e7258dc4446031298395d48085214a3c6640d743933c2ad0eea26fb54fe35662"
+      },
+      {
+        "index": 1,
+        "requestedSimulationSeconds": 0.066666931,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00001.png",
+        "skyUnix": 1791115205.067,
+        "sha256": "be886c78f9eec602216d11c537c3ee05b39f71ee9c3876d74af49cde8659f22c"
+      },
+      {
+        "index": 2,
+        "requestedSimulationSeconds": 0.133333601,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00002.png",
+        "skyUnix": 1791115205.133,
+        "sha256": "56e419d5fe43cb9232809fd0817256fbab2a3b50d2f3a8ff54fbeeea9bf82eb4"
+      },
+      {
+        "index": 3,
+        "requestedSimulationSeconds": 0.200000271,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00003.png",
+        "skyUnix": 1791115205.2,
+        "sha256": "6a0c6fb0b424517a36aa4e66fb34c3d77c92ae80cb262ad2f693a2f540942c7a"
+      },
+      {
+        "index": 4,
+        "requestedSimulationSeconds": 0.266666941,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00004.png",
+        "skyUnix": 1791115205.267,
+        "sha256": "1304eb2a7c5928de3595f46ff8c5589775a307123c0e237cc01492b43ebd6fb3"
+      },
+      {
+        "index": 5,
+        "requestedSimulationSeconds": 0.333333611,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00005.png",
+        "skyUnix": 1791115205.333,
+        "sha256": "7201fa3cc5f4049131b168cb7193ebd559473abef4505e1ae9d935005c14a5bd"
+      },
+      {
+        "index": 6,
+        "requestedSimulationSeconds": 0.400000282,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00006.png",
+        "skyUnix": 1791115205.4,
+        "sha256": "1fb53a6b45da21a79df6a9720c5e51350344757dfa7d0c629c46dcc0fd8a6e06"
+      },
+      {
+        "index": 7,
+        "requestedSimulationSeconds": 0.466666952,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00007.png",
+        "skyUnix": 1791115205.467,
+        "sha256": "4080ff022021852314ee523671df4a6277f1b989459468da5c152e25430a1cd1"
+      },
+      {
+        "index": 8,
+        "requestedSimulationSeconds": 0.533333622,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00008.png",
+        "skyUnix": 1791115205.533,
+        "sha256": "867016ff3ffb1b64c7cda539f597c45c8d8efd01b7f9b1391035fbc2f34442ee"
+      },
+      {
+        "index": 9,
+        "requestedSimulationSeconds": 0.600000292,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00009.png",
+        "skyUnix": 1791115205.6,
+        "sha256": "ad0aac3ec70832e5e7a26fb6a000f6bc768a01315a4d99cae88de54c31ae5b15"
+      },
+      {
+        "index": 10,
+        "requestedSimulationSeconds": 0.666666962,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00010.png",
+        "skyUnix": 1791115205.667,
+        "sha256": "2150299de5c2055df1cd5d62d0599eaed4f06335affa9b7de1f5ab892fa81b1a"
+      },
+      {
+        "index": 11,
+        "requestedSimulationSeconds": 0.733333632,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00011.png",
+        "skyUnix": 1791115205.733,
+        "sha256": "c35cf9ae26916e3c810fb9e81216a93535b4a16cf94c71cbcab0698eca69d770"
+      },
+      {
+        "index": 12,
+        "requestedSimulationSeconds": 0.800000302,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00012.png",
+        "skyUnix": 1791115205.8,
+        "sha256": "12443301dc6a2e28b6668c1e08976e075f45245faa982dddd27264792b89f773"
+      },
+      {
+        "index": 13,
+        "requestedSimulationSeconds": 0.866666973,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00013.png",
+        "skyUnix": 1791115205.867,
+        "sha256": "883d4f4c484eb7f08683a72ffc14e7860846300dde5e3445f168f8067688ec21"
+      },
+      {
+        "index": 14,
+        "requestedSimulationSeconds": 0.933333643,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00014.png",
+        "skyUnix": 1791115205.933,
+        "sha256": "737319efb6ff1162092ac628a46bdfa4d74b93b0295654698800007ea0dc4f34"
+      },
+      {
+        "index": 15,
+        "requestedSimulationSeconds": 1.000000313,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00015.png",
+        "skyUnix": 1791115206.0,
+        "sha256": "9f7a9b82ad5d99fe696ea796b51e603bd2f2384ddd849105226882d30dd1c684"
+      },
+      {
+        "index": 16,
+        "requestedSimulationSeconds": 1.066666983,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00016.png",
+        "skyUnix": 1791115206.067,
+        "sha256": "1ca44c32af52912f425ec4d4e93bf989a6aa729715138766f30845bb4121279f"
+      },
+      {
+        "index": 17,
+        "requestedSimulationSeconds": 1.133333653,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00017.png",
+        "skyUnix": 1791115206.133,
+        "sha256": "6bcf107322e047fd6b6857725ab7769a88a2e726f84cb15bbaf93aa67e682e81"
+      },
+      {
+        "index": 18,
+        "requestedSimulationSeconds": 1.200000323,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00018.png",
+        "skyUnix": 1791115206.2,
+        "sha256": "4e0bdd9305d78d15ee13ecc629f444c0fd1ffad5b5ea78e6f8e085219b99656a"
+      },
+      {
+        "index": 19,
+        "requestedSimulationSeconds": 1.266666993,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00019.png",
+        "skyUnix": 1791115206.267,
+        "sha256": "3d20cfb0a94f4789d9e99030c7a5c5439ca81e4d45a53e44cda2329d8df03fce"
+      },
+      {
+        "index": 20,
+        "requestedSimulationSeconds": 1.333333664,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00020.png",
+        "skyUnix": 1791115206.333,
+        "sha256": "81dd7118859baecf579de0be21ed75ffc5b52360f01fcd922e3d0a591adcf12f"
+      },
+      {
+        "index": 21,
+        "requestedSimulationSeconds": 1.400000334,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00021.png",
+        "skyUnix": 1791115206.4,
+        "sha256": "75fe2169f3f60d67104fed58871c69b44402d751ffbb88a6b4eb0cebc1de2039"
+      },
+      {
+        "index": 22,
+        "requestedSimulationSeconds": 1.466667004,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00022.png",
+        "skyUnix": 1791115206.467,
+        "sha256": "534d4084b87127bb899a1c404d835d52e5428a0d24958eac966215801be6d711"
+      },
+      {
+        "index": 23,
+        "requestedSimulationSeconds": 1.533333674,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00023.png",
+        "skyUnix": 1791115206.533,
+        "sha256": "29ad3313cb960b55b5c2c8a65e74d1d4fb68c744a2ffa430629d4eba82218ad3"
+      },
+      {
+        "index": 24,
+        "requestedSimulationSeconds": 1.600000344,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00024.png",
+        "skyUnix": 1791115206.6,
+        "sha256": "1ed002fa7cbf0b7daa400414f3774aa0010117a8e0e73b16c2721cf7e87bdae2"
+      },
+      {
+        "index": 25,
+        "requestedSimulationSeconds": 1.666667014,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00025.png",
+        "skyUnix": 1791115206.667,
+        "sha256": "f994842c05c84913845454d64c35295680c1306ea6661027c341bef732a6ea1b"
+      },
+      {
+        "index": 26,
+        "requestedSimulationSeconds": 1.733333685,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00026.png",
+        "skyUnix": 1791115206.733,
+        "sha256": "257b019b28932d849ada767d3a3a7efe82ba201e50900a38776afd6209e5e064"
+      },
+      {
+        "index": 27,
+        "requestedSimulationSeconds": 1.800000355,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00027.png",
+        "skyUnix": 1791115206.8,
+        "sha256": "8afbf14d61a2ad9af8c143a051b57344047e5221d849b1556b10d2cbd8c73904"
+      },
+      {
+        "index": 28,
+        "requestedSimulationSeconds": 1.866667025,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00028.png",
+        "skyUnix": 1791115206.867,
+        "sha256": "c8eddb9438bde843c4a2bc3b1c46ba9662008202e22cde3d758bbb59b9096ca3"
+      },
+      {
+        "index": 29,
+        "requestedSimulationSeconds": 1.933333695,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00029.png",
+        "skyUnix": 1791115206.933,
+        "sha256": "8ad38acfa6536f212f41fc21573752f0f69f58703bdf422470074d55e708b227"
+      },
+      {
+        "index": 30,
+        "requestedSimulationSeconds": 2.000000365,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00030.png",
+        "skyUnix": 1791115207.0,
+        "sha256": "0fa015c3af6ea2e978d72ffafefd5063f6d065ea5fcd1becda0ff041de25d6da"
+      },
+      {
+        "index": 31,
+        "requestedSimulationSeconds": 2.066667035,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00031.png",
+        "skyUnix": 1791115207.067,
+        "sha256": "5ea98a6593f0a69c8e9cc0ed9ab45cfcc90915e4d059a2b0f5ee229c45bd5de4"
+      },
+      {
+        "index": 32,
+        "requestedSimulationSeconds": 2.133333705,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00032.png",
+        "skyUnix": 1791115207.133,
+        "sha256": "10717d61a659a552e51b71984e680aaea15b5288e64813e8dcc57cd52afd7719"
+      },
+      {
+        "index": 33,
+        "requestedSimulationSeconds": 2.200000376,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00033.png",
+        "skyUnix": 1791115207.2,
+        "sha256": "17ab92560a52405d0733d746b2981555fb76110fe69c91789b10ac3879203f58"
+      },
+      {
+        "index": 34,
+        "requestedSimulationSeconds": 2.266667046,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00034.png",
+        "skyUnix": 1791115207.267,
+        "sha256": "4953699ed24dc14e9a133103770c2073f0b1a84733f6fd7afc363336b5fb3c1f"
+      },
+      {
+        "index": 35,
+        "requestedSimulationSeconds": 2.333333716,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00035.png",
+        "skyUnix": 1791115207.333,
+        "sha256": "4e4a4503c9b6b09983add08be89ab9809df2a576fb7751244e64a9e280a470a9"
+      },
+      {
+        "index": 36,
+        "requestedSimulationSeconds": 2.400000386,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00036.png",
+        "skyUnix": 1791115207.4,
+        "sha256": "aa9105762a47281addb40de029b5790c6fef493b8bb3b98a4de08222bc3921c7"
+      },
+      {
+        "index": 37,
+        "requestedSimulationSeconds": 2.466667056,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00037.png",
+        "skyUnix": 1791115207.467,
+        "sha256": "3e3c1c6b888140bf4b262d454f0b4e6ef12b8fc1c4b5a6cd8c7cf31cb298fd93"
+      },
+      {
+        "index": 38,
+        "requestedSimulationSeconds": 2.533333726,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00038.png",
+        "skyUnix": 1791115207.533,
+        "sha256": "5aa07726a543b02667149d9f1d20e09cd0fb60a9d09ce685a0f7c05b0f068e7d"
+      },
+      {
+        "index": 39,
+        "requestedSimulationSeconds": 2.600000396,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00039.png",
+        "skyUnix": 1791115207.6,
+        "sha256": "df006eac0496cd038f4b5bed55fcbbedf437e7a7e305b9a2fc7809b7558bbd44"
+      },
+      {
+        "index": 40,
+        "requestedSimulationSeconds": 2.666667067,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00040.png",
+        "skyUnix": 1791115207.667,
+        "sha256": "5b55e85ef419fad4b9bca2468cbef2b6ded436e28a3af227b91080e8b57c8b74"
+      },
+      {
+        "index": 41,
+        "requestedSimulationSeconds": 2.733333737,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00041.png",
+        "skyUnix": 1791115207.733,
+        "sha256": "0e2fb357baed7c18a285ecd345f979e8ada125019c03fb236356c1b443c0ed99"
+      },
+      {
+        "index": 42,
+        "requestedSimulationSeconds": 2.800000407,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00042.png",
+        "skyUnix": 1791115207.8,
+        "sha256": "94e9daab4a0b145008da954713747ddb72c8ec24f5d5367f728ef209e1f56a37"
+      },
+      {
+        "index": 43,
+        "requestedSimulationSeconds": 2.866667077,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00043.png",
+        "skyUnix": 1791115207.867,
+        "sha256": "692a32e696a21337754b69169862cfa721ce0562f5094fc58699e37416470709"
+      },
+      {
+        "index": 44,
+        "requestedSimulationSeconds": 2.933333747,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00044.png",
+        "skyUnix": 1791115207.933,
+        "sha256": "1657350dd508246f59e96238129cccc999077f7339b2ff11ae115cdf0491bbc3"
+      },
+      {
+        "index": 45,
+        "requestedSimulationSeconds": 3.000000417,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00045.png",
+        "skyUnix": 1791115208.0,
+        "sha256": "5f9f17b128859c10f4acbf9fe9cbbcf288947e2addf34a92874c512b59a928ff"
+      },
+      {
+        "index": 46,
+        "requestedSimulationSeconds": 3.066667087,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00046.png",
+        "skyUnix": 1791115208.067,
+        "sha256": "97c2d7af1c2b28a0255badefaac998f59d8102c70096f93586182229fab44ae0"
+      },
+      {
+        "index": 47,
+        "requestedSimulationSeconds": 3.133333758,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00047.png",
+        "skyUnix": 1791115208.133,
+        "sha256": "b45268eef9001f82abcab927b287021c94d16ee9581dad088a55ac6f92e0add3"
+      },
+      {
+        "index": 48,
+        "requestedSimulationSeconds": 3.200000428,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00048.png",
+        "skyUnix": 1791115208.2,
+        "sha256": "6a6193defcd0703ec03dc09c407ecb30505231f7837a51023e314b5c9f130bb7"
+      },
+      {
+        "index": 49,
+        "requestedSimulationSeconds": 3.266667098,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00049.png",
+        "skyUnix": 1791115208.267,
+        "sha256": "2b1eaca2bbb8239d92b0041734b9e9a3b588b54fdb61805ed4dbb6cc4097350b"
+      },
+      {
+        "index": 50,
+        "requestedSimulationSeconds": 3.333333768,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00050.png",
+        "skyUnix": 1791115208.333,
+        "sha256": "33d77b6af662adfa2b3e8db31956caca846f79ee3c1a4e08632e8affebe51430"
+      },
+      {
+        "index": 51,
+        "requestedSimulationSeconds": 3.400000438,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00051.png",
+        "skyUnix": 1791115208.4,
+        "sha256": "2f5d74b88d7df2f4f5a606236492f243c1674d29a5f92573d250f9e6aeff6b5a"
+      },
+      {
+        "index": 52,
+        "requestedSimulationSeconds": 3.466667108,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00052.png",
+        "skyUnix": 1791115208.467,
+        "sha256": "1cacb354bba6851192c61428850cfd5ad71ddca93342cc278c730ad9abffb07a"
+      },
+      {
+        "index": 53,
+        "requestedSimulationSeconds": 3.533333778,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00053.png",
+        "skyUnix": 1791115208.533,
+        "sha256": "f602162984539828fb5e3871aac769c9de4f122c9530595ff12cacfbc3fa1d1a"
+      },
+      {
+        "index": 54,
+        "requestedSimulationSeconds": 3.600000449,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00054.png",
+        "skyUnix": 1791115208.6,
+        "sha256": "d7967a19b48143070e8c506bd237b4ab0fce1e071106f54a706591555bf16adc"
+      },
+      {
+        "index": 55,
+        "requestedSimulationSeconds": 3.666667119,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00055.png",
+        "skyUnix": 1791115208.667,
+        "sha256": "cbcf310c872ed344e98287be84962c7c3f31d17b8915315550595079f997abb6"
+      },
+      {
+        "index": 56,
+        "requestedSimulationSeconds": 3.733333789,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00056.png",
+        "skyUnix": 1791115208.733,
+        "sha256": "45a19fbb1a00bd36eaf6618aeb73719a20d87bb01c279d6f137eb24d71a3bb1b"
+      },
+      {
+        "index": 57,
+        "requestedSimulationSeconds": 3.800000459,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00057.png",
+        "skyUnix": 1791115208.8,
+        "sha256": "a3889ceafde61d4089b7875645e7138154f86cbd887503932350da3dbea4425b"
+      },
+      {
+        "index": 58,
+        "requestedSimulationSeconds": 3.866667129,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00058.png",
+        "skyUnix": 1791115208.867,
+        "sha256": "85af220b0b9db1573431cbdaa4ee72c3bd17e9871f2447a339a07035bdf40c6c"
+      },
+      {
+        "index": 59,
+        "requestedSimulationSeconds": 3.933333799,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00059.png",
+        "skyUnix": 1791115208.933,
+        "sha256": "98824d36acbc83d975cf08c133806049c4d869c4ab4e9c08500bb99e50fcae15"
+      },
+      {
+        "index": 60,
+        "requestedSimulationSeconds": 4.000000469,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00060.png",
+        "skyUnix": 1791115209.0,
+        "sha256": "748782a42b06b4caa4ebe14148f611d9b5f922e49e8a5f14d3183929bbbcc40e"
+      },
+      {
+        "index": 61,
+        "requestedSimulationSeconds": 4.06666714,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00061.png",
+        "skyUnix": 1791115209.067,
+        "sha256": "cd83d3393a4cdc64009e324aaa350c2c793452aa36643a49ee6cde953ebdcd12"
+      },
+      {
+        "index": 62,
+        "requestedSimulationSeconds": 4.13333381,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00062.png",
+        "skyUnix": 1791115209.133,
+        "sha256": "ec9dcfa68299ea4f2b8bc38513f67f2ebcb1ec659685783512a5ef0992ca5e8f"
+      },
+      {
+        "index": 63,
+        "requestedSimulationSeconds": 4.20000048,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00063.png",
+        "skyUnix": 1791115209.2,
+        "sha256": "d31b4755fad88c0dc8151dd6564c7579b3110f68d41a69ab6ea804475b6f22a4"
+      },
+      {
+        "index": 64,
+        "requestedSimulationSeconds": 4.26666715,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00064.png",
+        "skyUnix": 1791115209.267,
+        "sha256": "f24295bb82ce27ebe59f85990ec8be71e5a0d579b61cd26a646246f03de0cd2d"
+      },
+      {
+        "index": 65,
+        "requestedSimulationSeconds": 4.33333382,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00065.png",
+        "skyUnix": 1791115209.333,
+        "sha256": "be96687b18345c9eccc4f590747fedda65d0cb6cb8859248d0102386a431b6b6"
+      },
+      {
+        "index": 66,
+        "requestedSimulationSeconds": 4.40000049,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00066.png",
+        "skyUnix": 1791115209.4,
+        "sha256": "1dd446ed8a6042abc53b328d66893ee646f028b1e27ed7417d1cd4d4ff62308c"
+      },
+      {
+        "index": 67,
+        "requestedSimulationSeconds": 4.46666716,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00067.png",
+        "skyUnix": 1791115209.467,
+        "sha256": "f5c1038fc85db1ef8f75ff155f8687a2766f4dc8fa8f66d5ddf49bb8129c51b8"
+      },
+      {
+        "index": 68,
+        "requestedSimulationSeconds": 4.533333831,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00068.png",
+        "skyUnix": 1791115209.533,
+        "sha256": "d3fd5de07c1726d5c59ab30d27857885e8f51391c10ce7a0bbf03f7a71a9f195"
+      },
+      {
+        "index": 69,
+        "requestedSimulationSeconds": 4.600000501,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00069.png",
+        "skyUnix": 1791115209.6,
+        "sha256": "be715403d9b0fb7b69590f026310dcee8f7d768352e854dfa1f5506dffc51ac3"
+      },
+      {
+        "index": 70,
+        "requestedSimulationSeconds": 4.666667171,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00070.png",
+        "skyUnix": 1791115209.667,
+        "sha256": "22e695b195da31be5006b7fed0c60915a814dd4050245e1f2c506ef56a8dcf57"
+      },
+      {
+        "index": 71,
+        "requestedSimulationSeconds": 4.733333841,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00071.png",
+        "skyUnix": 1791115209.733,
+        "sha256": "b6e342c451c646b7421fc7968e86ab417f299f31e43e54a220c39d8fcc2caf2f"
+      },
+      {
+        "index": 72,
+        "requestedSimulationSeconds": 4.800000511,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00072.png",
+        "skyUnix": 1791115209.8,
+        "sha256": "a8da6f9c68fff3867a3b7cf7c9c4d5e2030203ca71138df293909bf3f21746ac"
+      },
+      {
+        "index": 73,
+        "requestedSimulationSeconds": 4.866667181,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00073.png",
+        "skyUnix": 1791115209.867,
+        "sha256": "e3fb3d183bbfe0842137f8fbcb1048e1a6a33ae495a16c502fa2ec0d488bab14"
+      },
+      {
+        "index": 74,
+        "requestedSimulationSeconds": 4.933333851,
+        "stage": 0,
+        "path": "Preview/Motion/frame-00074.png",
+        "skyUnix": 1791115209.933,
+        "sha256": "28f680d142763141aba6dfba14ab419f7794b119da5359d80015dcae0400269e"
+      },
+      {
+        "index": 75,
+        "requestedSimulationSeconds": 5.000000522,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00075.png",
+        "skyUnix": 1791115210.0,
+        "sha256": "1c37068b3e6fc3eea94586b5f63ce710f5aa4c554553df7c44124c4c025fc822"
+      },
+      {
+        "index": 76,
+        "requestedSimulationSeconds": 5.066667192,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00076.png",
+        "skyUnix": 1791115210.067,
+        "sha256": "8109da387a3c4eb4ec623afcec2ee5a507a6afa4e47b745de3f5b3f86d1fb14d"
+      },
+      {
+        "index": 77,
+        "requestedSimulationSeconds": 5.133333862,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00077.png",
+        "skyUnix": 1791115210.133,
+        "sha256": "9a943af6cb83fb23187f16631bfe5246c89fc32f9076a051e0d710a10812cecf"
+      },
+      {
+        "index": 78,
+        "requestedSimulationSeconds": 5.200000532,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00078.png",
+        "skyUnix": 1791115210.2,
+        "sha256": "2b7b36c5d3bf76cdce68612e798793ebabcc9528276059b20d696ac5ae9ab4da"
+      },
+      {
+        "index": 79,
+        "requestedSimulationSeconds": 5.266667202,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00079.png",
+        "skyUnix": 1791115210.267,
+        "sha256": "50e54455853e64ca9e712de080031d0a16f9025b256e8852debaaa57a3d9416a"
+      },
+      {
+        "index": 80,
+        "requestedSimulationSeconds": 5.333333872,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00080.png",
+        "skyUnix": 1791115210.333,
+        "sha256": "a12b381498aec5f81a981028b9512b77382056ae513a56a213a98ea8c754eff8"
+      },
+      {
+        "index": 81,
+        "requestedSimulationSeconds": 5.400000542,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00081.png",
+        "skyUnix": 1791115210.4,
+        "sha256": "7b7fc8bd30c0447998ab9e5c7024c108a2843e8b339f7a80c9d9de739f9bbf12"
+      },
+      {
+        "index": 82,
+        "requestedSimulationSeconds": 5.466667213,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00082.png",
+        "skyUnix": 1791115210.467,
+        "sha256": "e1b8dde68605d9b24a53c934593680650037c85e27d03cd166e2a99c1be63254"
+      },
+      {
+        "index": 83,
+        "requestedSimulationSeconds": 5.533333883,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00083.png",
+        "skyUnix": 1791115210.533,
+        "sha256": "709113f7bb0e68836b5fd2dda12bc6c6bb128155253a89c19cb51c9f4577a0ff"
+      },
+      {
+        "index": 84,
+        "requestedSimulationSeconds": 5.600000553,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00084.png",
+        "skyUnix": 1791115210.6,
+        "sha256": "61fc07be43e06ac00d6b3589a331ff0bcd7226d07027dd23cb45fc9f723ca651"
+      },
+      {
+        "index": 85,
+        "requestedSimulationSeconds": 5.666667223,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00085.png",
+        "skyUnix": 1791115210.667,
+        "sha256": "51dc73a651c667d9a61a745fd94bae4521f22d6028dd3f8ef21c79a1366ad354"
+      },
+      {
+        "index": 86,
+        "requestedSimulationSeconds": 5.733333893,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00086.png",
+        "skyUnix": 1791115210.733,
+        "sha256": "62707424d461c115148db0d52fb619a016a5f3cebcb53d187afaa4b4f7d6c319"
+      },
+      {
+        "index": 87,
+        "requestedSimulationSeconds": 5.800000563,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00087.png",
+        "skyUnix": 1791115210.8,
+        "sha256": "d78c8c15613a0ea4ffd8994a3c8029e16ec1af474a3088be9c8890e98b54d83c"
+      },
+      {
+        "index": 88,
+        "requestedSimulationSeconds": 5.866667233,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00088.png",
+        "skyUnix": 1791115210.867,
+        "sha256": "b2a00fe1b438305de59720f6e8b054cf7b31795b0a784f36c108b6624b01b7b6"
+      },
+      {
+        "index": 89,
+        "requestedSimulationSeconds": 5.933333904,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00089.png",
+        "skyUnix": 1791115210.933,
+        "sha256": "4ef7d57a0cbbb95ef771e3d5c7ed5316b27b81ddee6cfab63913abaeec9ff0ca"
+      },
+      {
+        "index": 90,
+        "requestedSimulationSeconds": 6.000000574,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00090.png",
+        "skyUnix": 1791115211.0,
+        "sha256": "0ae71849c2115459c72d3e6d4af37bff758bfb69c9c29dd96fb1cdc3c5b9cbce"
+      },
+      {
+        "index": 91,
+        "requestedSimulationSeconds": 6.066667244,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00091.png",
+        "skyUnix": 1791115211.067,
+        "sha256": "0747f2ec2984d79b3fec06615b97cf80b2321d102ad14d20a24f014579e3868b"
+      },
+      {
+        "index": 92,
+        "requestedSimulationSeconds": 6.133333914,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00092.png",
+        "skyUnix": 1791115211.133,
+        "sha256": "642105188f5b00ef21f7bd4a39e4fd699260896345994a940157690b0d4fd003"
+      },
+      {
+        "index": 93,
+        "requestedSimulationSeconds": 6.200000584,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00093.png",
+        "skyUnix": 1791115211.2,
+        "sha256": "ef11b9b1d1bd19cc7a7305b4cca7c3657a4b7e90a1d7d241a69a9562c4fd63ba"
+      },
+      {
+        "index": 94,
+        "requestedSimulationSeconds": 6.266667254,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00094.png",
+        "skyUnix": 1791115211.267,
+        "sha256": "b9ef63d9f90961a7ac2e6c75c2036e234436be248daf708713d78da07e771bd2"
+      },
+      {
+        "index": 95,
+        "requestedSimulationSeconds": 6.333333924,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00095.png",
+        "skyUnix": 1791115211.333,
+        "sha256": "947d8c8d6d76cbc9032d8a3abb095ce313d4777a2f0ed5f99351a84d92ff78c6"
+      },
+      {
+        "index": 96,
+        "requestedSimulationSeconds": 6.400000595,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00096.png",
+        "skyUnix": 1791115211.4,
+        "sha256": "c3fdf5454a7737d008472fd8ad9257d6e237d6f85610702caf77a84e872217bb"
+      },
+      {
+        "index": 97,
+        "requestedSimulationSeconds": 6.466667265,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00097.png",
+        "skyUnix": 1791115211.467,
+        "sha256": "e75238668d07df150a189f27df5f74d1964c96ae70655f6780903e05178d5377"
+      },
+      {
+        "index": 98,
+        "requestedSimulationSeconds": 6.533333935,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00098.png",
+        "skyUnix": 1791115211.533,
+        "sha256": "7a664218cb1c6f2123ba9b37d2e508f4f0fffc023fd237a1ffa9786e8c1a0c1d"
+      },
+      {
+        "index": 99,
+        "requestedSimulationSeconds": 6.600000605,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00099.png",
+        "skyUnix": 1791115211.6,
+        "sha256": "243138156ce5fb1726c9d59ca744a65f1d09cd0003db517a24361bf40301339e"
+      },
+      {
+        "index": 100,
+        "requestedSimulationSeconds": 6.666667275,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00100.png",
+        "skyUnix": 1791115211.667,
+        "sha256": "6fe53cbb4c18e6a1e4f1fddb644b457a3dd63f8575cb6127ec51ca5435803174"
+      },
+      {
+        "index": 101,
+        "requestedSimulationSeconds": 6.733333945,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00101.png",
+        "skyUnix": 1791115211.733,
+        "sha256": "9151c6c730d60f269391d1da9e5d52164089b8fca4948185d53c8c0092f63a19"
+      },
+      {
+        "index": 102,
+        "requestedSimulationSeconds": 6.800000615,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00102.png",
+        "skyUnix": 1791115211.8,
+        "sha256": "ce8f288a86351aea61710dcefe91577999c662d81c838dd8eff9b5eb1a1efba1"
+      },
+      {
+        "index": 103,
+        "requestedSimulationSeconds": 6.866667286,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00103.png",
+        "skyUnix": 1791115211.867,
+        "sha256": "cec00971ca4cff512cb33e95e19a3c862dbfe5221011ece322586505df5ff67c"
+      },
+      {
+        "index": 104,
+        "requestedSimulationSeconds": 6.933333956,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00104.png",
+        "skyUnix": 1791115211.933,
+        "sha256": "f78620637867e40dd5236ad37bd2b98b9a84447d79cd8eff8fe349ce8a9a6206"
+      },
+      {
+        "index": 105,
+        "requestedSimulationSeconds": 7.000000626,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00105.png",
+        "skyUnix": 1791115212.0,
+        "sha256": "e1ca9b1639471d8d82db44ec3e7f3afe5c41129cb04935c51709a77298559a7d"
+      },
+      {
+        "index": 106,
+        "requestedSimulationSeconds": 7.066667296,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00106.png",
+        "skyUnix": 1791115212.067,
+        "sha256": "535f55c4a778d230148e78ce9bcd76e361587e71ca53c5f3100582e88130f06c"
+      },
+      {
+        "index": 107,
+        "requestedSimulationSeconds": 7.133333966,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00107.png",
+        "skyUnix": 1791115212.133,
+        "sha256": "e5a42f5d2a98f086c2108bfa98e28c608fc66739d3c1d5c5d4e001246a1b25df"
+      },
+      {
+        "index": 108,
+        "requestedSimulationSeconds": 7.200000636,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00108.png",
+        "skyUnix": 1791115212.2,
+        "sha256": "2cc5a06f22a05a651cbd092f81889ae81af6834ee99ec96198ad5c38848d26aa"
+      },
+      {
+        "index": 109,
+        "requestedSimulationSeconds": 7.266667306,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00109.png",
+        "skyUnix": 1791115212.267,
+        "sha256": "70127b42b4b6beb25f7e57f3ecee1d7711cba5bd58170ce56da7322f42ab819f"
+      },
+      {
+        "index": 110,
+        "requestedSimulationSeconds": 7.333333977,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00110.png",
+        "skyUnix": 1791115212.333,
+        "sha256": "b21f55701b3f84b731f6fa990c5a76e765948299ebf9011baec6d86a59093cfb"
+      },
+      {
+        "index": 111,
+        "requestedSimulationSeconds": 7.400000647,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00111.png",
+        "skyUnix": 1791115212.4,
+        "sha256": "84ac2070d2ea456f064a19644a2b4dcc0937027a3ddfdfb1c7037b4896082171"
+      },
+      {
+        "index": 112,
+        "requestedSimulationSeconds": 7.466667317,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00112.png",
+        "skyUnix": 1791115212.467,
+        "sha256": "7bbe052e73d1a4bbd62de9b4a3b8a8c67b6253b50052e044335ee20c724c0332"
+      },
+      {
+        "index": 113,
+        "requestedSimulationSeconds": 7.533333987,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00113.png",
+        "skyUnix": 1791115212.533,
+        "sha256": "3dafe9764a28acd462538c10616d1526cbc0856c10f326d098a97700f4ede7e3"
+      },
+      {
+        "index": 114,
+        "requestedSimulationSeconds": 7.600000657,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00114.png",
+        "skyUnix": 1791115212.6,
+        "sha256": "bf4146837f49ff44364493176069345a61721a18cd08c6a381992a102152958a"
+      },
+      {
+        "index": 115,
+        "requestedSimulationSeconds": 7.666667327,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00115.png",
+        "skyUnix": 1791115212.667,
+        "sha256": "f6795392516b4e5f826ddf164df78a854bb9fc466c16fb1eb1eb48f5d4f3972e"
+      },
+      {
+        "index": 116,
+        "requestedSimulationSeconds": 7.733333997,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00116.png",
+        "skyUnix": 1791115212.733,
+        "sha256": "7abd9bf462091fd1ad22335a774ebd939c4919086ea1c31a9b113461cab97922"
+      },
+      {
+        "index": 117,
+        "requestedSimulationSeconds": 7.800000668,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00117.png",
+        "skyUnix": 1791115212.8,
+        "sha256": "dc0dc5153d328eba20f3201bd0e430e85ca626abb197e353c92e41856e09ca9a"
+      },
+      {
+        "index": 118,
+        "requestedSimulationSeconds": 7.866667338,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00118.png",
+        "skyUnix": 1791115212.867,
+        "sha256": "d7353c15a7d9bff00bec36420bd8d12275efdd29075bbe5d929ff51777625f2c"
+      },
+      {
+        "index": 119,
+        "requestedSimulationSeconds": 7.933334008,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00119.png",
+        "skyUnix": 1791115212.933,
+        "sha256": "358f83476ccd1ab039575dbcd0bd63c30e0412740444c84e79b83457d74d0738"
+      },
+      {
+        "index": 120,
+        "requestedSimulationSeconds": 8.000000678,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00120.png",
+        "skyUnix": 1791115213.0,
+        "sha256": "a016b6d64efdc1b896bc12a7a155028e9105147eac6861952c8a9af47f5d3228"
+      },
+      {
+        "index": 121,
+        "requestedSimulationSeconds": 8.066667348,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00121.png",
+        "skyUnix": 1791115213.067,
+        "sha256": "2a4322328a26ecc6b94c95ee42f6fb00674ee21c3fb33b7098d370888a90833d"
+      },
+      {
+        "index": 122,
+        "requestedSimulationSeconds": 8.133334018,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00122.png",
+        "skyUnix": 1791115213.133,
+        "sha256": "2b4e9d5f6a18b6cc1aa5866dac585c6bdf52898035176f87f383b04a1cce4be9"
+      },
+      {
+        "index": 123,
+        "requestedSimulationSeconds": 8.200000688,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00123.png",
+        "skyUnix": 1791115213.2,
+        "sha256": "09b08ee8081949dd2efea67b5cc77c9291ebaac09a5009252cd491d678b705fa"
+      },
+      {
+        "index": 124,
+        "requestedSimulationSeconds": 8.266667359,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00124.png",
+        "skyUnix": 1791115213.267,
+        "sha256": "a22f248328ad4419e548f2028572200ea3f975ab9e88516f4d8b9143b39431d9"
+      },
+      {
+        "index": 125,
+        "requestedSimulationSeconds": 8.333334029,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00125.png",
+        "skyUnix": 1791115213.333,
+        "sha256": "6ffd4510ae37d8ee49e06429f9ca9aff71aed4bb2836f85dc9c013ebe229b084"
+      },
+      {
+        "index": 126,
+        "requestedSimulationSeconds": 8.400000699,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00126.png",
+        "skyUnix": 1791115213.4,
+        "sha256": "e492747c843b68ad4cc2f2982d62210fbb64ea84d20f6167de6d11c8aa72ec1d"
+      },
+      {
+        "index": 127,
+        "requestedSimulationSeconds": 8.466667369,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00127.png",
+        "skyUnix": 1791115213.467,
+        "sha256": "285d65146bd6a288368a70ad1746f5d720515052de5f5323f7835239c5bc2f62"
+      },
+      {
+        "index": 128,
+        "requestedSimulationSeconds": 8.533334039,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00128.png",
+        "skyUnix": 1791115213.533,
+        "sha256": "0e45c91eaf90b3d4c584a8dfcef147887fd4acb8a4c0208a0489c1b10cf55199"
+      },
+      {
+        "index": 129,
+        "requestedSimulationSeconds": 8.600000709,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00129.png",
+        "skyUnix": 1791115213.6,
+        "sha256": "34bf90c57aee00e54f8af19244b4c917fe73932c7e411957c749fe5fa53aa52d"
+      },
+      {
+        "index": 130,
+        "requestedSimulationSeconds": 8.666667379,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00130.png",
+        "skyUnix": 1791115213.667,
+        "sha256": "c5f5e2d5ef10a88a3710a830e7eb130e0034bff6258672a52651372b5f4774eb"
+      },
+      {
+        "index": 131,
+        "requestedSimulationSeconds": 8.73333405,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00131.png",
+        "skyUnix": 1791115213.733,
+        "sha256": "3a60a778b5d2628ae3060dac5f0e7f54a3cefc16d6d09d9408789a75094de1c0"
+      },
+      {
+        "index": 132,
+        "requestedSimulationSeconds": 8.80000072,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00132.png",
+        "skyUnix": 1791115213.8,
+        "sha256": "3ca34565dc4121ae8dfa7b474dd0a5f1238e0bd1c8d6e13f6e3ab308b659be9c"
+      },
+      {
+        "index": 133,
+        "requestedSimulationSeconds": 8.86666739,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00133.png",
+        "skyUnix": 1791115213.867,
+        "sha256": "938ab596e065144ce42b5b3d1d22a39907855c6eac6ae95758ddaeb16d5f79b0"
+      },
+      {
+        "index": 134,
+        "requestedSimulationSeconds": 8.93333406,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00134.png",
+        "skyUnix": 1791115213.933,
+        "sha256": "79327c435d619bc428eb9eb48195f42e312b885eb54f7490d6522459004c3fe6"
+      },
+      {
+        "index": 135,
+        "requestedSimulationSeconds": 9.00000073,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00135.png",
+        "skyUnix": 1791115214.0,
+        "sha256": "82c03cd939ae343872957ef509db639c3d499f89e0d7cb388eabe8fca8778edd"
+      },
+      {
+        "index": 136,
+        "requestedSimulationSeconds": 9.0666674,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00136.png",
+        "skyUnix": 1791115214.067,
+        "sha256": "3f32bef8db4c213bc3408191f49fc9c122c5a4656cf13e0573297748914abaae"
+      },
+      {
+        "index": 137,
+        "requestedSimulationSeconds": 9.13333407,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00137.png",
+        "skyUnix": 1791115214.133,
+        "sha256": "97c95af1f7cb99ac8e3a923b1b6600a294f6e995ab4cfe2b64908e199c1cc691"
+      },
+      {
+        "index": 138,
+        "requestedSimulationSeconds": 9.200000741,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00138.png",
+        "skyUnix": 1791115214.2,
+        "sha256": "16a8d53fd0a334a79655699912d51f18095ec2a418328a895e4616b705bbaf33"
+      },
+      {
+        "index": 139,
+        "requestedSimulationSeconds": 9.266667411,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00139.png",
+        "skyUnix": 1791115214.267,
+        "sha256": "15662abe38e28b090abb59844a1e1598a92784229bea7b4d7a0b6910a507d8d8"
+      },
+      {
+        "index": 140,
+        "requestedSimulationSeconds": 9.333334081,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00140.png",
+        "skyUnix": 1791115214.333,
+        "sha256": "8e023324d7b8adba0ce852484329087dcc0f0503b7e1e62448dcc0603b09db90"
+      },
+      {
+        "index": 141,
+        "requestedSimulationSeconds": 9.400000751,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00141.png",
+        "skyUnix": 1791115214.4,
+        "sha256": "9f8987f5a26b04ae52d14988d34c124ae404b276612f437b63b2e6c8ff274d6f"
+      },
+      {
+        "index": 142,
+        "requestedSimulationSeconds": 9.466667421,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00142.png",
+        "skyUnix": 1791115214.467,
+        "sha256": "c4b3a66b0b519015d6aa4a200744579a2a61b5a7083fd8780dfd24240f2dc770"
+      },
+      {
+        "index": 143,
+        "requestedSimulationSeconds": 9.533334091,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00143.png",
+        "skyUnix": 1791115214.533,
+        "sha256": "37fc1ca7b4913b9435fa914bec204a90ff405a418ef46fea9c5d94198402b6d6"
+      },
+      {
+        "index": 144,
+        "requestedSimulationSeconds": 9.600000761,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00144.png",
+        "skyUnix": 1791115214.6,
+        "sha256": "3dc6e68896dc7d27ce1c61110fddc330f810f920a7afed8b7224353b858aaa7a"
+      },
+      {
+        "index": 145,
+        "requestedSimulationSeconds": 9.666667432,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00145.png",
+        "skyUnix": 1791115214.667,
+        "sha256": "73b11d27545c8b9f999eba75c6576a3a0a2da6a04899a50b858791359f2dac90"
+      },
+      {
+        "index": 146,
+        "requestedSimulationSeconds": 9.733334102,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00146.png",
+        "skyUnix": 1791115214.733,
+        "sha256": "97b79f66e75949d8841a6b6e43d40083b63d5e682604e3c8be82608b34546970"
+      },
+      {
+        "index": 147,
+        "requestedSimulationSeconds": 9.800000772,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00147.png",
+        "skyUnix": 1791115214.8,
+        "sha256": "a46e5b80fff0765260006180b66f399b8a044ed383aa0c1486ab06cc774df5db"
+      },
+      {
+        "index": 148,
+        "requestedSimulationSeconds": 9.866667442,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00148.png",
+        "skyUnix": 1791115214.867,
+        "sha256": "a0c25023b62305527cc706b9e264406456c1fa4c2f7efbe7f52f2999e210ee82"
+      },
+      {
+        "index": 149,
+        "requestedSimulationSeconds": 9.933334112,
+        "stage": 1,
+        "path": "Preview/Motion/frame-00149.png",
+        "skyUnix": 1791115214.933,
+        "sha256": "89e006073847f3872dcb08b618ed3baff5c26672802a3daaa1b9a14dddf678eb"
+      },
+      {
+        "index": 150,
+        "requestedSimulationSeconds": 10.000000782,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00150.png",
+        "skyUnix": 1791115215.0,
+        "sha256": "b23e310f5a833a13bd1275641b4afb7640b65cee1613f2a3378dd66686b9692d"
+      },
+      {
+        "index": 151,
+        "requestedSimulationSeconds": 10.066667452,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00151.png",
+        "skyUnix": 1791115215.067,
+        "sha256": "a19008d414a87c65c54fbe9ba4ff109b7841ffc90b852206ee49037d67566f0d"
+      },
+      {
+        "index": 152,
+        "requestedSimulationSeconds": 10.133334123,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00152.png",
+        "skyUnix": 1791115215.133,
+        "sha256": "c884dc806ff594e4e7cb74081bc6a980ba8a0a774e282bbeae326181fd4a8b3f"
+      },
+      {
+        "index": 153,
+        "requestedSimulationSeconds": 10.200000793,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00153.png",
+        "skyUnix": 1791115215.2,
+        "sha256": "b990be716bc2723d035ce7fd5e858a38290e39f96dae9395b678180c28928a72"
+      },
+      {
+        "index": 154,
+        "requestedSimulationSeconds": 10.266667463,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00154.png",
+        "skyUnix": 1791115215.267,
+        "sha256": "8fd4149df27712bfbc7a1c3b7c3467dc4c58b955744dba6e362a75fb9b491476"
+      },
+      {
+        "index": 155,
+        "requestedSimulationSeconds": 10.333334133,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00155.png",
+        "skyUnix": 1791115215.333,
+        "sha256": "8925a1a014aef3658ab2fcb641f334b879411975a8dc0b038b3e3088710b755f"
+      },
+      {
+        "index": 156,
+        "requestedSimulationSeconds": 10.400000803,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00156.png",
+        "skyUnix": 1791115215.4,
+        "sha256": "02996bb059f7b4c5e26de8de438906e71c27eb28e8c2e97090de7df2eb21aa59"
+      },
+      {
+        "index": 157,
+        "requestedSimulationSeconds": 10.466667473,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00157.png",
+        "skyUnix": 1791115215.467,
+        "sha256": "2328e50606666b6e535146b5ed5cc5577ad6c876e0ea612ce74cb8bbca6ecc7f"
+      },
+      {
+        "index": 158,
+        "requestedSimulationSeconds": 10.533334143,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00158.png",
+        "skyUnix": 1791115215.533,
+        "sha256": "95b5ffbae32c070f531ed730dc1d50dd3a2da85e07fdc26f790017fb23f30de0"
+      },
+      {
+        "index": 159,
+        "requestedSimulationSeconds": 10.600000814,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00159.png",
+        "skyUnix": 1791115215.6,
+        "sha256": "556fb62cbaa57f6e57794643715cb65e533c7d5a85b02467204da52f868d715b"
+      },
+      {
+        "index": 160,
+        "requestedSimulationSeconds": 10.666667484,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00160.png",
+        "skyUnix": 1791115215.667,
+        "sha256": "b2c2861b3f93beb9e1e7ac5caa3f9302f925bb42353225a4f5d22d78b98a37ef"
+      },
+      {
+        "index": 161,
+        "requestedSimulationSeconds": 10.733334154,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00161.png",
+        "skyUnix": 1791115215.733,
+        "sha256": "d45f42f9369ae0632830f30e482b47a06ff6a956885bb8976af22c059aa8ade6"
+      },
+      {
+        "index": 162,
+        "requestedSimulationSeconds": 10.800000824,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00162.png",
+        "skyUnix": 1791115215.8,
+        "sha256": "3f2cb158cb62bdec3ba79e2e4e5cccd01b602e9e67e5c394490fff4962535766"
+      },
+      {
+        "index": 163,
+        "requestedSimulationSeconds": 10.866667494,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00163.png",
+        "skyUnix": 1791115215.867,
+        "sha256": "e53271d397ff9796a99278e47ba7b4c86b9297e4ed617cdfcdceba4e69aa2161"
+      },
+      {
+        "index": 164,
+        "requestedSimulationSeconds": 10.933334164,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00164.png",
+        "skyUnix": 1791115215.933,
+        "sha256": "7c2ae3368c60dc632d021089e5b49c003fe5819aef121e7e32c175c4d1adc5c0"
+      },
+      {
+        "index": 165,
+        "requestedSimulationSeconds": 11.000000834,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00165.png",
+        "skyUnix": 1791115216.0,
+        "sha256": "d72d644075a378e6a5100eff82e97c60f81e594691505cc8195d4b1b2fddf7df"
+      },
+      {
+        "index": 166,
+        "requestedSimulationSeconds": 11.066667505,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00166.png",
+        "skyUnix": 1791115216.067,
+        "sha256": "44629499c6e3262918559d8fcea68af5813814ed4b5da182eafa415ba9c7f345"
+      },
+      {
+        "index": 167,
+        "requestedSimulationSeconds": 11.133334175,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00167.png",
+        "skyUnix": 1791115216.133,
+        "sha256": "c3827b77f13a2959e24f9d2bc87b67ccf893c2f07bff4ff5334a4c42208c0db7"
+      },
+      {
+        "index": 168,
+        "requestedSimulationSeconds": 11.200000845,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00168.png",
+        "skyUnix": 1791115216.2,
+        "sha256": "0be28787dd6ed6798bdfe2859e587ada75c1cb86fc5bb49cc811b7bfbe5fc70b"
+      },
+      {
+        "index": 169,
+        "requestedSimulationSeconds": 11.266667515,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00169.png",
+        "skyUnix": 1791115216.267,
+        "sha256": "c6b069a78770cab6a9d0ac98c08be609b308c9b5f6c58a521630a345af577600"
+      },
+      {
+        "index": 170,
+        "requestedSimulationSeconds": 11.333334185,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00170.png",
+        "skyUnix": 1791115216.333,
+        "sha256": "89503effe6a394f6941074842bdc9724a70408bfb3da674594abc2eb597f6b0d"
+      },
+      {
+        "index": 171,
+        "requestedSimulationSeconds": 11.400000855,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00171.png",
+        "skyUnix": 1791115216.4,
+        "sha256": "80b586dd4551f186a71589cd4ca922d060f592c9701a914fcac1b88dc84f2f07"
+      },
+      {
+        "index": 172,
+        "requestedSimulationSeconds": 11.466667525,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00172.png",
+        "skyUnix": 1791115216.467,
+        "sha256": "d3dcb614d2a8e533a9654dee92a35b0bbe44ff997e3f4907aa2bc6a70202c0c3"
+      },
+      {
+        "index": 173,
+        "requestedSimulationSeconds": 11.533334196,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00173.png",
+        "skyUnix": 1791115216.533,
+        "sha256": "55804392f82985039f5a56892d62a2c2a20feee4b5e904cdec95dfaefec868b8"
+      },
+      {
+        "index": 174,
+        "requestedSimulationSeconds": 11.600000866,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00174.png",
+        "skyUnix": 1791115216.6,
+        "sha256": "6479d1a1bb6c40431baedba7ca302660cd04dc15f269346f53a11f8febf6db95"
+      },
+      {
+        "index": 175,
+        "requestedSimulationSeconds": 11.666667536,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00175.png",
+        "skyUnix": 1791115216.667,
+        "sha256": "efae6898172c78d16e6fe3d230080a2bf2ea82ae6b03c51c80b1cb632a054435"
+      },
+      {
+        "index": 176,
+        "requestedSimulationSeconds": 11.733334206,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00176.png",
+        "skyUnix": 1791115216.733,
+        "sha256": "d0069e1223ffb236125871ab58d75e32d2e46f48e26666e934acce8759c29683"
+      },
+      {
+        "index": 177,
+        "requestedSimulationSeconds": 11.800000876,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00177.png",
+        "skyUnix": 1791115216.8,
+        "sha256": "90c026ae2fcf27fb7a658f1e1171f4fe9a882a4fb6befae460a9192f32783d1f"
+      },
+      {
+        "index": 178,
+        "requestedSimulationSeconds": 11.866667546,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00178.png",
+        "skyUnix": 1791115216.867,
+        "sha256": "cedba4dbe0e158de793bff04be8807c8a8a6cd74861067835ef41a48262f1819"
+      },
+      {
+        "index": 179,
+        "requestedSimulationSeconds": 11.933334216,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00179.png",
+        "skyUnix": 1791115216.933,
+        "sha256": "88e0327c6963724f1eb069956f5afbc1463e04689efb55425b93baa52f1953b3"
+      },
+      {
+        "index": 180,
+        "requestedSimulationSeconds": 12.000000887,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00180.png",
+        "skyUnix": 1791115217.0,
+        "sha256": "9dfaa25f71259ca5f55fca0e444b781cc11737891ca19df7201649ddfd7f3fd8"
+      },
+      {
+        "index": 181,
+        "requestedSimulationSeconds": 12.066667557,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00181.png",
+        "skyUnix": 1791115217.067,
+        "sha256": "5e9549a844bb660f6413d831da31343601f640b42ada8da40bc9f4595f672d1b"
+      },
+      {
+        "index": 182,
+        "requestedSimulationSeconds": 12.133334227,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00182.png",
+        "skyUnix": 1791115217.133,
+        "sha256": "ae97455fc06400b23bf25c2e11b54f5e4aa33ce68b114c421490901764952512"
+      },
+      {
+        "index": 183,
+        "requestedSimulationSeconds": 12.200000897,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00183.png",
+        "skyUnix": 1791115217.2,
+        "sha256": "1cf2f3e8d61243cf853d758584e217cef13ff4fba4c16de8013b56d01b092704"
+      },
+      {
+        "index": 184,
+        "requestedSimulationSeconds": 12.266667567,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00184.png",
+        "skyUnix": 1791115217.267,
+        "sha256": "4309d3f3f0c2c6567a4133cae57c04a064add2e3b0ef21d348e5a7df279a44a3"
+      },
+      {
+        "index": 185,
+        "requestedSimulationSeconds": 12.333334237,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00185.png",
+        "skyUnix": 1791115217.333,
+        "sha256": "310119c5385ffb662160c02cdc501b854f29588905a94bf696ed145227bf5b0c"
+      },
+      {
+        "index": 186,
+        "requestedSimulationSeconds": 12.400000907,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00186.png",
+        "skyUnix": 1791115217.4,
+        "sha256": "82dbb5a58934db97af9db8bee8a424d51001ffae1ee9b4f929cb6114ac1e44f3"
+      },
+      {
+        "index": 187,
+        "requestedSimulationSeconds": 12.466667578,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00187.png",
+        "skyUnix": 1791115217.467,
+        "sha256": "9deee3acab9234dc3b013c3eb5235d6c812668a149e4a0ef4dec48b1ef578708"
+      },
+      {
+        "index": 188,
+        "requestedSimulationSeconds": 12.533334248,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00188.png",
+        "skyUnix": 1791115217.533,
+        "sha256": "3084235f2ad9c2135174dfccaa381de5bd7ffbcdf4796b10f5f0144b385c8f91"
+      },
+      {
+        "index": 189,
+        "requestedSimulationSeconds": 12.600000918,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00189.png",
+        "skyUnix": 1791115217.6,
+        "sha256": "bd716ff7865bd50525c43f07295cddee83832abe5c26c35af47c9f1ee6059276"
+      },
+      {
+        "index": 190,
+        "requestedSimulationSeconds": 12.666667588,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00190.png",
+        "skyUnix": 1791115217.667,
+        "sha256": "1cdc26255dbd0d841d5cb14653260efbe3d0554706a6e06fdf6fb250b8c3724e"
+      },
+      {
+        "index": 191,
+        "requestedSimulationSeconds": 12.733334258,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00191.png",
+        "skyUnix": 1791115217.733,
+        "sha256": "0dd3ccf923e2e1558c022a25dcdb8a315a12a38fae60d825571619948c2038b4"
+      },
+      {
+        "index": 192,
+        "requestedSimulationSeconds": 12.800000928,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00192.png",
+        "skyUnix": 1791115217.8,
+        "sha256": "20a91e2f34b79f936be4185ee7762303bba9ecfe86e1f48c89bb1d12f4176eed"
+      },
+      {
+        "index": 193,
+        "requestedSimulationSeconds": 12.866667598,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00193.png",
+        "skyUnix": 1791115217.867,
+        "sha256": "b66b7cb559ab5a0b30992e4580d8fac522408f4639a0c87c01580803e4c659d3"
+      },
+      {
+        "index": 194,
+        "requestedSimulationSeconds": 12.933334269,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00194.png",
+        "skyUnix": 1791115217.933,
+        "sha256": "df6716c4748725811d7191749c4a6b2aae944016628fab90d779d22b9ab5d099"
+      },
+      {
+        "index": 195,
+        "requestedSimulationSeconds": 13.000000939,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00195.png",
+        "skyUnix": 1791115218.0,
+        "sha256": "6aaa065f64fd81042ad016d8a82b849b839aaa0b4f087e71142a49970de2abe2"
+      },
+      {
+        "index": 196,
+        "requestedSimulationSeconds": 13.066667609,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00196.png",
+        "skyUnix": 1791115218.067,
+        "sha256": "5f9da96181452ac6cb504acb2dc7d28c74a68172436c53ec6dd9b261829abd8e"
+      },
+      {
+        "index": 197,
+        "requestedSimulationSeconds": 13.133334279,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00197.png",
+        "skyUnix": 1791115218.133,
+        "sha256": "3095b557bffcc9c59a140718207050f8f11862ffd831ee6d625075670a4afa26"
+      },
+      {
+        "index": 198,
+        "requestedSimulationSeconds": 13.200000949,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00198.png",
+        "skyUnix": 1791115218.2,
+        "sha256": "67a3977542ffff99da65f9e05391ef7d908f2d1276da361b07b892e877872512"
+      },
+      {
+        "index": 199,
+        "requestedSimulationSeconds": 13.266667619,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00199.png",
+        "skyUnix": 1791115218.267,
+        "sha256": "de47a132056f7789c8a2b856f248f46401d088da47e7a04769356884eb71eefb"
+      },
+      {
+        "index": 200,
+        "requestedSimulationSeconds": 13.333334289,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00200.png",
+        "skyUnix": 1791115218.333,
+        "sha256": "e7858e4e6ac9fd22fd6ac62bf071d509ec68b96859e47d340527e2f9fc13b167"
+      },
+      {
+        "index": 201,
+        "requestedSimulationSeconds": 13.40000096,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00201.png",
+        "skyUnix": 1791115218.4,
+        "sha256": "7a45ab40d1cf0016c70199acd69652016584c96d7f5d23c61b3377bd137412f6"
+      },
+      {
+        "index": 202,
+        "requestedSimulationSeconds": 13.46666763,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00202.png",
+        "skyUnix": 1791115218.467,
+        "sha256": "c10077f0a7211014d0a22ae0d054abf94b1778893ef4a709920b9a42f1483162"
+      },
+      {
+        "index": 203,
+        "requestedSimulationSeconds": 13.5333343,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00203.png",
+        "skyUnix": 1791115218.533,
+        "sha256": "e4adccf3b928c912f51626f550d254d35d8f92506c425996ce3a21faea68ffd2"
+      },
+      {
+        "index": 204,
+        "requestedSimulationSeconds": 13.60000097,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00204.png",
+        "skyUnix": 1791115218.6,
+        "sha256": "a10a1b69ff3630f1203f1d28b637b9cf461b7caf6fb07d68c27a8d4483e5e340"
+      },
+      {
+        "index": 205,
+        "requestedSimulationSeconds": 13.66666764,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00205.png",
+        "skyUnix": 1791115218.667,
+        "sha256": "de2ee2a068dcffbefd842b4f733cc7f7152718956ee48fff18c734c90bdc77a5"
+      },
+      {
+        "index": 206,
+        "requestedSimulationSeconds": 13.73333431,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00206.png",
+        "skyUnix": 1791115218.733,
+        "sha256": "da4cf784b7375e28e5080925a138210a694c9ec29286b2c4ee0484cafc770cc9"
+      },
+      {
+        "index": 207,
+        "requestedSimulationSeconds": 13.80000098,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00207.png",
+        "skyUnix": 1791115218.8,
+        "sha256": "e586320cc30d3236994ed99afbe1fab0b0d2d3bad1c33b5b3c7f6856ea3ffc63"
+      },
+      {
+        "index": 208,
+        "requestedSimulationSeconds": 13.866667651,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00208.png",
+        "skyUnix": 1791115218.867,
+        "sha256": "324281342af88b9fb4875843776381cd34e438ad280cd7d09edaa9615f680022"
+      },
+      {
+        "index": 209,
+        "requestedSimulationSeconds": 13.933334321,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00209.png",
+        "skyUnix": 1791115218.933,
+        "sha256": "420fe6efefc6ed2ee3d1e7dcfdc958da658a587a2a777cfbd454b68ae22b2459"
+      },
+      {
+        "index": 210,
+        "requestedSimulationSeconds": 14.000000991,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00210.png",
+        "skyUnix": 1791115219.0,
+        "sha256": "c2c5c7096290aed37aaf49a13f569d195440c117b7aaa918528dac357f98c438"
+      },
+      {
+        "index": 211,
+        "requestedSimulationSeconds": 14.066667661,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00211.png",
+        "skyUnix": 1791115219.067,
+        "sha256": "5c528af7c8ccc9f370dc1cb3a64ee2e57500b549928935fb85c4435ca06746af"
+      },
+      {
+        "index": 212,
+        "requestedSimulationSeconds": 14.133334331,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00212.png",
+        "skyUnix": 1791115219.133,
+        "sha256": "fff1e17bbec3f7bd41db7d6a1174e2f0f5f6c57f05693147711c1451bf7f5949"
+      },
+      {
+        "index": 213,
+        "requestedSimulationSeconds": 14.200001001,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00213.png",
+        "skyUnix": 1791115219.2,
+        "sha256": "d62709d081470330c417c9ea249235c4033ffe3d04bd736722f059f9e91dd9e8"
+      },
+      {
+        "index": 214,
+        "requestedSimulationSeconds": 14.266667672,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00214.png",
+        "skyUnix": 1791115219.267,
+        "sha256": "b7bf28f08458e7193c50bc8ffa71f95779d5d9de625b8d063d72d7c28f03dbe9"
+      },
+      {
+        "index": 215,
+        "requestedSimulationSeconds": 14.333334342,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00215.png",
+        "skyUnix": 1791115219.333,
+        "sha256": "56e34555f6cd59c8588f9589623c587e0a42f2e4a769b64dab24bcfdf3753d0e"
+      },
+      {
+        "index": 216,
+        "requestedSimulationSeconds": 14.400001012,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00216.png",
+        "skyUnix": 1791115219.4,
+        "sha256": "8fa49ca689c5de8cbe94259efe5272d8ad53b24a5b765376f67c2a9b7e2de4c8"
+      },
+      {
+        "index": 217,
+        "requestedSimulationSeconds": 14.466667682,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00217.png",
+        "skyUnix": 1791115219.467,
+        "sha256": "2300eb6b74c9e0e8ea4c4932d602a9f14f1ac51c45218ec58fc74c4698d0ecb8"
+      },
+      {
+        "index": 218,
+        "requestedSimulationSeconds": 14.533334352,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00218.png",
+        "skyUnix": 1791115219.533,
+        "sha256": "4652f129b0b0af1f7bcadee8b144ca6cee728f0a8f5a0b373362fd692e69a919"
+      },
+      {
+        "index": 219,
+        "requestedSimulationSeconds": 14.600001022,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00219.png",
+        "skyUnix": 1791115219.6,
+        "sha256": "e6a3f2740d1f076f570c5c486debf5bfd7c143f508c3c87886463a1bb2a2c8eb"
+      },
+      {
+        "index": 220,
+        "requestedSimulationSeconds": 14.666667692,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00220.png",
+        "skyUnix": 1791115219.667,
+        "sha256": "9a23ab92fd6fb5e1462418db445cd2dcee3f5736683901f858cc598fca8f9941"
+      },
+      {
+        "index": 221,
+        "requestedSimulationSeconds": 14.733334363,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00221.png",
+        "skyUnix": 1791115219.733,
+        "sha256": "59c03dee55d3cb31b86c9a9a1237bd4cbe6adebade8669d54c6950b8e0556447"
+      },
+      {
+        "index": 222,
+        "requestedSimulationSeconds": 14.800001033,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00222.png",
+        "skyUnix": 1791115219.8,
+        "sha256": "b72ebd0c48acf57c77e43ba30bd53f8a0010ac6778f064a3d4ba6ec72129c39f"
+      },
+      {
+        "index": 223,
+        "requestedSimulationSeconds": 14.866667703,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00223.png",
+        "skyUnix": 1791115219.867,
+        "sha256": "825a72a507e9a42c5955ed782c6f2c05d25cee83c5e23f33136234aab476415e"
+      },
+      {
+        "index": 224,
+        "requestedSimulationSeconds": 14.933334373,
+        "stage": 2,
+        "path": "Preview/Motion/frame-00224.png",
+        "skyUnix": 1791115219.933,
+        "sha256": "42cae972c6f554fd711de7d80ed8c5f698096e3ca923af3f457af7d9bc2bc54a"
+      },
+      {
+        "index": 225,
+        "requestedSimulationSeconds": 15.000001043,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00225.png",
+        "skyUnix": 1791115220.0,
+        "sha256": "bdc4b3528b09d701078598ab66237684e5e825b1cad013ba22c77751b2a4fe6f"
+      },
+      {
+        "index": 226,
+        "requestedSimulationSeconds": 15.066667713,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00226.png",
+        "skyUnix": 1791115220.067,
+        "sha256": "636679a6d345b300a5866eacb7a22495d7caaa9388d3bbec052bc8ed404fe89e"
+      },
+      {
+        "index": 227,
+        "requestedSimulationSeconds": 15.133334383,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00227.png",
+        "skyUnix": 1791115220.133,
+        "sha256": "eacaec9efd68a6dccc2eee407f5529afced8432bbec3e01fb67ed282dd12f2cb"
+      },
+      {
+        "index": 228,
+        "requestedSimulationSeconds": 15.200001054,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00228.png",
+        "skyUnix": 1791115220.2,
+        "sha256": "67737f8e95bde89ed81935254fe0f8ca657ea7f9653247f225033fc8bba2894f"
+      },
+      {
+        "index": 229,
+        "requestedSimulationSeconds": 15.266667724,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00229.png",
+        "skyUnix": 1791115220.267,
+        "sha256": "9aebd1d96e42fc748c777c819532da5be2f695c4a2833085bc5413abe425ec46"
+      },
+      {
+        "index": 230,
+        "requestedSimulationSeconds": 15.333334394,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00230.png",
+        "skyUnix": 1791115220.333,
+        "sha256": "1cf6ad44ee478232af7f02e4501157e8689e70f621f4bab14a7fcfa4c394ff13"
+      },
+      {
+        "index": 231,
+        "requestedSimulationSeconds": 15.400001064,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00231.png",
+        "skyUnix": 1791115220.4,
+        "sha256": "ef3432690a59e6ea74dc001aff06582a1dcf8f97b95789f0b9ed683b03942ece"
+      },
+      {
+        "index": 232,
+        "requestedSimulationSeconds": 15.466667734,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00232.png",
+        "skyUnix": 1791115220.467,
+        "sha256": "de32f58c25292005b983880ba35419f0f5b100228518557e8f7087c46b75a4d5"
+      },
+      {
+        "index": 233,
+        "requestedSimulationSeconds": 15.533334404,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00233.png",
+        "skyUnix": 1791115220.533,
+        "sha256": "d7320bb0b76a0bc4de3f9ab9f2e00b5c99e1768494e68a2c09dfc5becebf045a"
+      },
+      {
+        "index": 234,
+        "requestedSimulationSeconds": 15.600001074,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00234.png",
+        "skyUnix": 1791115220.6,
+        "sha256": "3d4dea356354269334fbbd0c321c251e4a1fb9b0ec27d6af6d3b5f8a20deca28"
+      },
+      {
+        "index": 235,
+        "requestedSimulationSeconds": 15.666667745,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00235.png",
+        "skyUnix": 1791115220.667,
+        "sha256": "e491a35152846aafb1d3b252c5fb9293d81aa0e5972051017304e7ac75d0d6ba"
+      },
+      {
+        "index": 236,
+        "requestedSimulationSeconds": 15.733334415,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00236.png",
+        "skyUnix": 1791115220.733,
+        "sha256": "c561c700530e54b60dc0a63d3699859488300a2de8bb82d2800901bbc7b5f6f6"
+      },
+      {
+        "index": 237,
+        "requestedSimulationSeconds": 15.800001085,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00237.png",
+        "skyUnix": 1791115220.8,
+        "sha256": "eeaa037937ed33a1828173afbf7c666aa99df39bff7a5a2ef3f157fc55850b4a"
+      },
+      {
+        "index": 238,
+        "requestedSimulationSeconds": 15.866667755,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00238.png",
+        "skyUnix": 1791115220.867,
+        "sha256": "623bbb8435c8ffe402bcb7272437966f7d9ef22e6c40a03afa4d0920b170706c"
+      },
+      {
+        "index": 239,
+        "requestedSimulationSeconds": 15.933334425,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00239.png",
+        "skyUnix": 1791115220.933,
+        "sha256": "aa264ffc8759b66ac8f4dfae93ec3267ad21c84ec70bdcf05a56d419db750364"
+      },
+      {
+        "index": 240,
+        "requestedSimulationSeconds": 16.000001095,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00240.png",
+        "skyUnix": 1791115221.0,
+        "sha256": "4296f2daf3d77fc7b6cd9eaa30380d280f83ff3a053b1debb30800dacc7c8378"
+      },
+      {
+        "index": 241,
+        "requestedSimulationSeconds": 16.066667765,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00241.png",
+        "skyUnix": 1791115221.067,
+        "sha256": "31da4ea1d564d8e821f61580e018219dd43c2355cc93c0c4cd686e0cbb516255"
+      },
+      {
+        "index": 242,
+        "requestedSimulationSeconds": 16.133334436,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00242.png",
+        "skyUnix": 1791115221.133,
+        "sha256": "9c7fe30698264ad148eaebbdaafb128d10842c7588035e9921df37f8053a11c0"
+      },
+      {
+        "index": 243,
+        "requestedSimulationSeconds": 16.200001106,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00243.png",
+        "skyUnix": 1791115221.2,
+        "sha256": "cdc64ba7c43924ba94c1e2f3e02ba940868b153f86f53af694d7f247d8619dc1"
+      },
+      {
+        "index": 244,
+        "requestedSimulationSeconds": 16.266667776,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00244.png",
+        "skyUnix": 1791115221.267,
+        "sha256": "6f62389b23a612177948f3fd858e10044b4f12c8ea04c75e64b82f0d887ddae3"
+      },
+      {
+        "index": 245,
+        "requestedSimulationSeconds": 16.333334446,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00245.png",
+        "skyUnix": 1791115221.333,
+        "sha256": "f17f4321944aad9833b44ce28cf38b11682ee0f07c49934739fea7dd1c280086"
+      },
+      {
+        "index": 246,
+        "requestedSimulationSeconds": 16.400001116,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00246.png",
+        "skyUnix": 1791115221.4,
+        "sha256": "3bc1c300317c095331ea980b1080d5b1e2e350c78b8b53fb1cad955e1f8b4c56"
+      },
+      {
+        "index": 247,
+        "requestedSimulationSeconds": 16.466667786,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00247.png",
+        "skyUnix": 1791115221.467,
+        "sha256": "a7e58147f785b2cc90839c025319964e958d9ad47aaa96274c13fcc88196e3dc"
+      },
+      {
+        "index": 248,
+        "requestedSimulationSeconds": 16.533334456,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00248.png",
+        "skyUnix": 1791115221.533,
+        "sha256": "384739beb3df9ed7c9f15332f4d67aa5cfa939c2cfe4b9c54c5f516d8ebd8acb"
+      },
+      {
+        "index": 249,
+        "requestedSimulationSeconds": 16.600001127,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00249.png",
+        "skyUnix": 1791115221.6,
+        "sha256": "fa9f939261de5c78d1f14e12b32bf9142aa9d1571b5fd48ad8801cd6620aa682"
+      },
+      {
+        "index": 250,
+        "requestedSimulationSeconds": 16.666667797,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00250.png",
+        "skyUnix": 1791115221.667,
+        "sha256": "8a1ef27318afd29d225e99ed610f47461a65e3d20448806ae262038d412805b2"
+      },
+      {
+        "index": 251,
+        "requestedSimulationSeconds": 16.733334467,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00251.png",
+        "skyUnix": 1791115221.733,
+        "sha256": "08ed83bafbc6ca0c3e080d77bfc8cbc0e9625cdb5852da5d17552dc5cd06483a"
+      },
+      {
+        "index": 252,
+        "requestedSimulationSeconds": 16.800001137,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00252.png",
+        "skyUnix": 1791115221.8,
+        "sha256": "b9adc6ce30f45a7e94b57309156cba11291ebde7aca393e74ca67eadd98c2d47"
+      },
+      {
+        "index": 253,
+        "requestedSimulationSeconds": 16.866667807,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00253.png",
+        "skyUnix": 1791115221.867,
+        "sha256": "56887f1aeb97d44fc36169fc6a26873f86e0ef03dd8b831957365c9d1a76f245"
+      },
+      {
+        "index": 254,
+        "requestedSimulationSeconds": 16.933334477,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00254.png",
+        "skyUnix": 1791115221.933,
+        "sha256": "bfb76575564c3d849b1e069fce9f8076768013d24a4ba8298ab23c71212e2ffc"
+      },
+      {
+        "index": 255,
+        "requestedSimulationSeconds": 17.000001147,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00255.png",
+        "skyUnix": 1791115222.0,
+        "sha256": "0403b2886b72002b8f9d3dade0c51a1f7e487780a373ac512fbf25bea1d387f1"
+      },
+      {
+        "index": 256,
+        "requestedSimulationSeconds": 17.066667818,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00256.png",
+        "skyUnix": 1791115222.067,
+        "sha256": "b17410eab4526a4d5e2a5cd5f5af5e62ec2a72cbdf379cf07449ec5c991abec7"
+      },
+      {
+        "index": 257,
+        "requestedSimulationSeconds": 17.133334488,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00257.png",
+        "skyUnix": 1791115222.133,
+        "sha256": "58bf6963915d8bb3604b7f31067cd37ce28d357c889fb8339e40b3d8d34b7364"
+      },
+      {
+        "index": 258,
+        "requestedSimulationSeconds": 17.200001158,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00258.png",
+        "skyUnix": 1791115222.2,
+        "sha256": "fcdb7cfd78df1f38a19610e77060449b93ea54f2b7e43ca2184ef022b0fcd408"
+      },
+      {
+        "index": 259,
+        "requestedSimulationSeconds": 17.266667828,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00259.png",
+        "skyUnix": 1791115222.267,
+        "sha256": "3c0ea61a95ed2db95aaef01748f70141e3eb7e4eab558447b2f86517955a39ed"
+      },
+      {
+        "index": 260,
+        "requestedSimulationSeconds": 17.333334498,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00260.png",
+        "skyUnix": 1791115222.333,
+        "sha256": "bb535640fe2a70bc579624736e177acf8bcd0aa8d9bda1c7b790caf81ca1b5ba"
+      },
+      {
+        "index": 261,
+        "requestedSimulationSeconds": 17.400001168,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00261.png",
+        "skyUnix": 1791115222.4,
+        "sha256": "8aa59faec732fd2253cc51c7f3009e8688a9b0390541fa206acb018b9e5ab3cd"
+      },
+      {
+        "index": 262,
+        "requestedSimulationSeconds": 17.466667838,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00262.png",
+        "skyUnix": 1791115222.467,
+        "sha256": "f226758d7ee21670d188b63efe9b165e53c5b693e4cf876349f3fc7390aa663f"
+      },
+      {
+        "index": 263,
+        "requestedSimulationSeconds": 17.533334509,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00263.png",
+        "skyUnix": 1791115222.533,
+        "sha256": "07751ceb82f6eb5bf307d95354dd761a7fc53b506d10fa7edace49626d4f72b6"
+      },
+      {
+        "index": 264,
+        "requestedSimulationSeconds": 17.600001179,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00264.png",
+        "skyUnix": 1791115222.6,
+        "sha256": "ce45263fdcb069ad6a2d571108afa82af7125500afa1ec3382b23629f6fb6b6a"
+      },
+      {
+        "index": 265,
+        "requestedSimulationSeconds": 17.666667849,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00265.png",
+        "skyUnix": 1791115222.667,
+        "sha256": "720582906f7974fd875475381551cacbc6ab9ed7a5ab442ede95356af05c719d"
+      },
+      {
+        "index": 266,
+        "requestedSimulationSeconds": 17.733334519,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00266.png",
+        "skyUnix": 1791115222.733,
+        "sha256": "75358287392a8fec8ed3a1bb1004b7fe495595c40d7c5f57a31d42880758bf8b"
+      },
+      {
+        "index": 267,
+        "requestedSimulationSeconds": 17.800001189,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00267.png",
+        "skyUnix": 1791115222.8,
+        "sha256": "30c222c619c703af8fc22ca76b6b8db88e1e0ff3080d2b89b841b9a70311bef3"
+      },
+      {
+        "index": 268,
+        "requestedSimulationSeconds": 17.866667859,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00268.png",
+        "skyUnix": 1791115222.867,
+        "sha256": "7311c734b29539b1654af69d5601b4bca3332f36ddba529f84b0fec1f22fbe23"
+      },
+      {
+        "index": 269,
+        "requestedSimulationSeconds": 17.933334529,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00269.png",
+        "skyUnix": 1791115222.933,
+        "sha256": "d33e155753940e26b45271666d3c71b31f90fe90e1665efda5eb4a16e1e3be14"
+      },
+      {
+        "index": 270,
+        "requestedSimulationSeconds": 18.0000012,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00270.png",
+        "skyUnix": 1791115223.0,
+        "sha256": "2acb1e3539e321042e5b8b821098341e75b8051de4df1d839b73ea1e49ecc704"
+      },
+      {
+        "index": 271,
+        "requestedSimulationSeconds": 18.06666787,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00271.png",
+        "skyUnix": 1791115223.067,
+        "sha256": "0fddc519054cd0690f0b5c2cab433921c3bd05e58e89fde7e9de9995cf0a42a4"
+      },
+      {
+        "index": 272,
+        "requestedSimulationSeconds": 18.13333454,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00272.png",
+        "skyUnix": 1791115223.133,
+        "sha256": "75998fc857361610e855f69f49485995f3ee3a9f0aa207735f0ff050dce2abf8"
+      },
+      {
+        "index": 273,
+        "requestedSimulationSeconds": 18.20000121,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00273.png",
+        "skyUnix": 1791115223.2,
+        "sha256": "180a8bc25f1efa22933ea901598d5018c8c91b499a1febf534720c3ebd71bf49"
+      },
+      {
+        "index": 274,
+        "requestedSimulationSeconds": 18.26666788,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00274.png",
+        "skyUnix": 1791115223.267,
+        "sha256": "a7725865a407a0734c8322a6bbbeddaeabc4df031a49cf0deac055d38582f1f9"
+      },
+      {
+        "index": 275,
+        "requestedSimulationSeconds": 18.33333455,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00275.png",
+        "skyUnix": 1791115223.333,
+        "sha256": "8fbb59591c3b0710300ec1880982553c5e533b10009417ddce94c142dd9d55fc"
+      },
+      {
+        "index": 276,
+        "requestedSimulationSeconds": 18.40000122,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00276.png",
+        "skyUnix": 1791115223.4,
+        "sha256": "c78d8c1b46fcdeed8a6266e2b1a2c925181cb0e6c47c9dd6f03d269de4d7b99f"
+      },
+      {
+        "index": 277,
+        "requestedSimulationSeconds": 18.466667891,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00277.png",
+        "skyUnix": 1791115223.467,
+        "sha256": "ea5eb86f9ce3a4bc65e4e46992b56f0fd6c740582332bb1776ff8a9647f1b348"
+      },
+      {
+        "index": 278,
+        "requestedSimulationSeconds": 18.533334561,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00278.png",
+        "skyUnix": 1791115223.533,
+        "sha256": "82e541e6fd357f7ab335064856d757548c9b44aecd3b36dce2c2224517b0fa89"
+      },
+      {
+        "index": 279,
+        "requestedSimulationSeconds": 18.600001231,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00279.png",
+        "skyUnix": 1791115223.6,
+        "sha256": "207d86428584b6f67a33b6af537e4718cdc67a19936ca099e51760223cf71173"
+      },
+      {
+        "index": 280,
+        "requestedSimulationSeconds": 18.666667901,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00280.png",
+        "skyUnix": 1791115223.667,
+        "sha256": "55b9cda95fcc6228ecdb9f10f79058973176821f74a57b7aff43cb5ba2943e9f"
+      },
+      {
+        "index": 281,
+        "requestedSimulationSeconds": 18.733334571,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00281.png",
+        "skyUnix": 1791115223.733,
+        "sha256": "fb5bc5c72aa21a72eb3c924ae38383e5b242e7e16be241a585f0829f5bcdb3c6"
+      },
+      {
+        "index": 282,
+        "requestedSimulationSeconds": 18.800001241,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00282.png",
+        "skyUnix": 1791115223.8,
+        "sha256": "3342af583398c3b5511428f1c6f5b6fe025cee9795d41ba9f6fb857815cfe22c"
+      },
+      {
+        "index": 283,
+        "requestedSimulationSeconds": 18.866667911,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00283.png",
+        "skyUnix": 1791115223.867,
+        "sha256": "27ea9d38a49dce0ace52f26db4fbcd2c4fe6d14136f60d1ed4ea8ed1efac71f7"
+      },
+      {
+        "index": 284,
+        "requestedSimulationSeconds": 18.933334582,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00284.png",
+        "skyUnix": 1791115223.933,
+        "sha256": "aa00297ee8637b4a5b43ba23cf3495c534ecff86ed1c4852d0a1990a3eaa356d"
+      },
+      {
+        "index": 285,
+        "requestedSimulationSeconds": 19.000001252,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00285.png",
+        "skyUnix": 1791115224.0,
+        "sha256": "c00aded35e47bf252b56df70e26f1d58cd7fa9a216a8f400e215c83cd8c316f1"
+      },
+      {
+        "index": 286,
+        "requestedSimulationSeconds": 19.066667922,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00286.png",
+        "skyUnix": 1791115224.067,
+        "sha256": "88d6230f365ba8f881d3a726f1537cda0744ead7b8897d7f9e74201b2716b842"
+      },
+      {
+        "index": 287,
+        "requestedSimulationSeconds": 19.133334592,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00287.png",
+        "skyUnix": 1791115224.133,
+        "sha256": "333cb0222f8e32e699db1d9c8db0320bbe25fe503b332eab89068ed3b5bc0848"
+      },
+      {
+        "index": 288,
+        "requestedSimulationSeconds": 19.200001262,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00288.png",
+        "skyUnix": 1791115224.2,
+        "sha256": "c0d4668e281af8553351455a481945820f5ede7a453c119e76de722c6f65334d"
+      },
+      {
+        "index": 289,
+        "requestedSimulationSeconds": 19.266667932,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00289.png",
+        "skyUnix": 1791115224.267,
+        "sha256": "8b398cb7f9a7e9facf16436220a62e706e099ae4c524386c807647ce8543144d"
+      },
+      {
+        "index": 290,
+        "requestedSimulationSeconds": 19.333334602,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00290.png",
+        "skyUnix": 1791115224.333,
+        "sha256": "06d2f31fe75fa9e8936b5ad40c6b34cef3b8eac7eba754d81c87df035ddad33c"
+      },
+      {
+        "index": 291,
+        "requestedSimulationSeconds": 19.400001273,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00291.png",
+        "skyUnix": 1791115224.4,
+        "sha256": "eaea9177234b09fe4211fdc04a620ff4bf973ecbd1c44cb60903d4c42158a784"
+      },
+      {
+        "index": 292,
+        "requestedSimulationSeconds": 19.466667943,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00292.png",
+        "skyUnix": 1791115224.467,
+        "sha256": "5d142a876cac3b21844e07dba49efced545d0c7fff00f4f3012ad55cb13c0ac6"
+      },
+      {
+        "index": 293,
+        "requestedSimulationSeconds": 19.533334613,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00293.png",
+        "skyUnix": 1791115224.533,
+        "sha256": "ce3053c62a4253b53d7a00f05b1b1e9912ea4e87d10b2493f90215036c16bfd4"
+      },
+      {
+        "index": 294,
+        "requestedSimulationSeconds": 19.600001283,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00294.png",
+        "skyUnix": 1791115224.6,
+        "sha256": "2bc9c1f8059c9e219f7dad62f400e44e1636fdf06d6d391caf34b714acc3faeb"
+      },
+      {
+        "index": 295,
+        "requestedSimulationSeconds": 19.666667953,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00295.png",
+        "skyUnix": 1791115224.667,
+        "sha256": "d31aaac5468114a6b89cf5efce9e727fa02be1cb893eace4cdea4e07e80e44ef"
+      },
+      {
+        "index": 296,
+        "requestedSimulationSeconds": 19.733334623,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00296.png",
+        "skyUnix": 1791115224.733,
+        "sha256": "2f0f7ecaa208e79b28fbbf28953f581e954eec61516e8627557bcab03a2809ed"
+      },
+      {
+        "index": 297,
+        "requestedSimulationSeconds": 19.800001293,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00297.png",
+        "skyUnix": 1791115224.8,
+        "sha256": "a7407696dc4d0ffe44178af423256d1293bd06da6171cc25dcce629566dc145b"
+      },
+      {
+        "index": 298,
+        "requestedSimulationSeconds": 19.866667964,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00298.png",
+        "skyUnix": 1791115224.867,
+        "sha256": "41e57a9a12345dcdedd66ef3332a1f63f64ef7ea8101e0dc47aad43c6097ed41"
+      },
+      {
+        "index": 299,
+        "requestedSimulationSeconds": 19.933334634,
+        "stage": 3,
+        "path": "Preview/Motion/frame-00299.png",
+        "skyUnix": 1791115224.933,
+        "sha256": "80fa935a226adf8b5960b7460f5ad6e80a13ba10caead681372a23a261f8d950"
+      }
+    ],
+    "limit": "Native screenshot requests expose a later rendered frame. Authored stages include a150cm gravity-drop fixture, near conversation, side view and wide walking. This is not a frame-rate benchmark or identically reproduced whole-world state."
+  },
+  "livingRegression": {
+    "log": ".local/resident-final-living.log",
+    "logSha256": "b95dbc9e956b24d6d6251ad45197f2e02343b10c19bc83bd6fdf26c5b57832e7",
+    "physicalResidents": 14,
+    "movedResidents": 13,
+    "pawnMovementBases": 0,
+    "characterSteppingRejected": true,
+    "engineAllowStepNegativeControlObserved": true,
+    "freeFlight": true,
+    "indoorFlight": true,
+    "occlusion": true,
+    "warningHoldRelease": true,
+    "health": 100,
+    "guardChaseCm": 427.226,
+    "limit": "One isolated authored native witness run; not every future crowd arrangement."
+  },
+  "portableTests": {
+    "marker": "MOTION_EARTH_MATH_PASS",
+    "chainSamples": 10000,
+    "maximumEndpointErrorCm": 2.16103e-14,
+    "compiler": "LLVM23.1.2 C++17 O2 Wall Wextra Werror pedantic",
+    "countermodels": [
+      "Original phase velocity jump rejected",
+      "Locally smooth curve with world-space sliding rejected",
+      "Former near-straight resting-hand target distinguished"
+    ],
+    "python": "50pass,1existingWindowslinkskip; local transcript .local/resident-python.log"
+  },
+  "media": [
+    {
+      "path": "Preview/RESIDENT_MOTION.gif",
+      "bytes": 4640110,
+      "sha256": "b4e8b63fb725cec5c59b0ecd8450084b232469b0a1037a22d832b5cc39b5a883"
+    },
+    {
+      "path": "Preview/RESIDENT_POSTURE.png",
+      "bytes": 1856719,
+      "sha256": "e1ca9b1639471d8d82db44ec3e7f3afe5c41129cb04935c51709a77298559a7d"
+    },
+    {
+      "path": "Preview/RESIDENT_WALK.png",
+      "bytes": 1824842,
+      "sha256": "bb535640fe2a70bc579624736e177acf8bcd0aa8d9bda1c7b790caf81ca1b5ba"
+    }
+  ],
+  "gifRecipe": {
+    "sourceIndices": [
+      225,
+      269
+    ],
+    "sourceFps": 15,
+    "outputFps": 10,
+    "outputResolution": [
+      640,
+      360
+    ],
+    "paletteColors": 96,
+    "interpolation": "No generated in-between poses; frame dropping/palette conversion only"
+  },
+  "localVideo": {
+    "path": ".local/RESIDENT_MOTION_20s.mp4",
+    "sha256": "97c2fdf3dca3dfcb3a2f300d905867096d785aa06797dbcaa23f577499042536",
+    "seconds": 20,
+    "resolution": [
+      800,
+      450
+    ],
+    "fps": 15,
+    "audio": false
+  },
+  "rejectedMaterialTrial": {
+    "change": "Skin?MSM_Subsurface:MSM_DefaultLit using unchanged authored inputs",
+    "decision": "REJECTED_AFTER_VISUAL_REVIEW",
+    "reason": "Face lighting became too bright and lost visible definition; final material source remains unchanged from base. Same recipe did not make all actor poses identical.",
+    "trialImageSha256": "c149621e6f451b44f1ec7c56dc717f4e140de66ac3e78b131ea8dc52f31c7bb3",
+    "retainedDefaultLitImageSha256": "29a74c996d50a213bded9898be371a94a356fa019432f0327e50305ddf285dda",
+    "privateTrialBindings": [
+      ".local/motion-defaultlit/package-binding.json",
+      ".local/motion-subsurface-trial/package-binding.json"
+    ]
+  },
+  "limits": [
+    "No cartilage/soft-tissue physiology simulation",
+    "Existing three shared meshes, costumes and skin maps retained",
+    "Skin detail roughness/normal maps, facial expression variety and vertical pelvis settling remain open",
+    "Analytical C1 contact checks assume flat ground, constant speed and constant blend weight; native samples do not prove those conditions globally",
+    "No full cloth simulation or universal natural motion claim",
+    "Earlier meadow package and running game preserved in separate checkout"
+  ],
+  "installedPackage": {
+    "schema": "halveth.astral-local-package.v2",
+    "builtAt": "2026-10-24T15:38:07.4514178Z",
+    "sourceDigest": "E2BC4B869A580D3735EFB7AFBBDA3D169724430F7B4211B76CEA17F6C749B1F2",
+    "launcherSha256": "AB3F1C19FFED772018B938DAC66ADEAB425CBAAF76A52245098B45D749D8B134",
+    "binarySha256": "2DFA08EA9864DB4098FFD38C788F80A1E2E906A418C9B257AFB8D73AC1447689",
+    "cookedPayload": [
+      {
+        "name": "global.ucas",
+        "bytes": 3215952,
+        "sha256": "51C727CEFBE005380836D4AFD521BD32BA28A31BB4320CC0C77C7A552AED0456"
+      },
+      {
+        "name": "global.utoc",
+        "bytes": 794,
+        "sha256": "2C24D7CE52C94FB22E6C44AE226A646EC9D5885F437CC53A0114FF223CB86386"
+      },
+      {
+        "name": "HALVETHRealms-Windows.pak",
+        "bytes": 11234937,
+        "sha256": "3C97F591A873AE0AB7DF7378BEACBBBC3AC945595A363ABDB06478DBDA45BB2C"
+      },
+      {
+        "name": "HALVETHRealms-Windows.ucas",
+        "bytes": 363414288,
+        "sha256": "BAEE3387815B2B88ED78EB0CB7D92E55F4945B1FA24FFD0557C5D83B6925DA54"
+      },
+      {
+        "name": "HALVETHRealms-Windows.utoc",
+        "bytes": 277957,
+        "sha256": "C7144E4F5049DBDA80BE5AFC04C883193FD067CEB2033D23DA51AE5CB1C24CED"
+      }
+    ],
+    "distribution": "LOCAL_DEVELOPMENT_ONLY"
+  },
+  "installedPackageWitness": {
+    "recordedAt": "2026-10-24T15:51:38.365373+00:00",
+    "log": ".local/resident-installed-motion.log",
+    "logSha256": "0da931b44f37a456aced97fbdcb6de49e8ff545d4f9de89bb2d8a0845524cd1e",
+    "armSamples": 240,
+    "elbowRangeDeg": [
+      25.0,
+      44.99003
+    ],
+    "idleMissingSamples": 0,
+    "threeLoadedSkeletalAnimations": true,
+    "gravityDropPassed": true,
+    "sourceDigestMatchesMediaPackage": true,
+    "cookedPayloadMatchesMediaPackage": true,
+    "binaryMatchesMediaPackage": false,
+    "limit": "A subsequent explicit Build run relinked the binary. Media remain bound to their original package; current executable was separately rendered and sampled."
+  },
+  "supportingDownloadFix": {
+    "path": "experiments/void-native/scripts/assets.py",
+    "sha256": "2087dfd8f0bf632735d957c2dffef984dee5378d09540203be793b6ee39d8736",
+    "scope": "Only atomic publication is serialized to prevent simultaneous Windows renames onto one target; input validation, budgets, hashes and cleanup unchanged",
+    "tests": "Existing50Python tests pass locally with1knownWindowslinkskip; same-target concurrent test passes64additionalrepetitions. FirstCIrevision exposed this Windowsrace; corrected PR workflow subsequently succeeded."
+  },
+  "startRoute": {
+    "entry": "Start-Astralis.cmd",
+    "desktopShortcut": "HALVETH Portal Garden.lnk",
+    "target": "Separate resident-motion checkout",
+    "backupVerified": true,
+    "cachedNativeProbe": ".local/resident-cached-probe.log",
+    "cachedNativeProbeSha256": "52975ef4a5ea6259b0ef944d743d0d0c030cdcbb60078198038970be8e258977",
+    "missingEngineSentinelUsed": true,
+    "result": "ASTRAL_NATIVE_PROBE result=PASS",
+    "normalUIClaim": "Shortcut metadata and native packaged execution checked separately; active older play window requires restart for new executable."
+  }
+}

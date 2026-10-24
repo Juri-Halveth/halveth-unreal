@@ -6,6 +6,8 @@
 AHALVETHGuideCharacter::AHALVETHGuideCharacter(){
     GetCapsuleComponent()->InitCapsuleSize(28,92);
     GetCapsuleComponent()->SetCollisionProfileName(TEXT("Pawn"));
+    // A person is an obstacle, not a staircase or moving floor.
+    GetCapsuleComponent()->CanCharacterStepUpOn=ECB_No;
     GetMesh()->SetRelativeLocation(FVector(0,0,-94.15));
     GetMesh()->SetRelativeRotation(FRotator(0,-90,0));
     GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);

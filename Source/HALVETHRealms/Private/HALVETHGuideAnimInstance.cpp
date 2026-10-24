@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #include "HALVETHGuideAnimInstance.h"
 #include "Animation/AnimInstanceProxy.h"
 #include "Animation/AnimSequence.h"
@@ -19,6 +20,7 @@ struct FGuideProxy : FAnimInstanceProxy {
     UAnimSequence* Idle=nullptr;
     double Time=0,Phase=0;
     float Walk=0,Yaw=0,Pitch=0,Gesture=0;
+    double HandForward[2]={3,3},WeightShift=0;
     FVector Forward,Right,Feet[2],Normals[2];float Ground[2]={0,0};
     virtual void PostEvaluate(UAnimInstance* I) override {
         FAnimInstanceProxy::PostEvaluate(I);
@@ -31,6 +33,7 @@ struct FGuideProxy : FAnimInstanceProxy {
         auto* A=CastChecked<UHALVETHGuideAnimInstance>(I);
         Idle=A->BaseIdle;Time=A->Time;Phase=A->GaitPhase;Walk=A->WalkWeight;
         Yaw=A->LookYaw;Pitch=A->LookPitch;Gesture=A->Gesture;
+        HandForward[0]=A->HandForward[0];HandForward[1]=A->HandForward[1];WeightShift=A->WeightShift;
         Forward=A->Forward;Right=A->Right;
         for(int S=0;S<2;S++){Feet[S]=A->FootTargets[S];Normals[S]=A->GroundNormals[S];Ground[S]=A->GroundCorrections[S];}
     }
@@ -56,7 +59,8 @@ struct FGuideProxy : FAnimInstanceProxy {
         // Support height comes from the authored leg lengths and traced feet.
         // A permanent crouch offset previously compressed both knees at rest.
         const double Breath=FMath::Sin(Time*1.45),Sway=FMath::Sin(Time*.71);
-        Shift(TEXT("root"),Right*(.3*Sway+1.15*Walk*FMath::Sin(Phase*2*PI)));
+        // Restrained lateral weight transfer; leg support is solved AFTER it.
+        Shift(TEXT("root"),Right*WeightShift);
         double PelvisHeight=TNumericLimits<double>::Max();
         for(int S=0;S<2;S++){
             const FString Side=S==0?TEXT("L"):TEXT("R");
@@ -105,7 +109,6 @@ struct FGuideProxy : FAnimInstanceProxy {
         };
         for(int S=0;S<2;S++){
             FString Side=S==0?TEXT("L"):TEXT("R");double Sign=S==0?-1:1;
-            auto Step=HalvethMotion::Footstep(Phase+S*.5);
             FVector Goal=Feet[S];
             Limb(TEXT("upperleg"),TEXT("lowerleg"),TEXT("foot"),Side,Goal,Forward);
             auto Foot=Index(FName(*(TEXT("foot.")+Side)));if(Foot!=INDEX_NONE){
@@ -120,13 +123,12 @@ struct FGuideProxy : FAnimInstanceProxy {
                 const FVector A=CS.GetComponentSpaceTransform(Shoulder).GetLocation();
                 const FVector B=CS.GetComponentSpaceTransform(Elbow).GetLocation();
                 const FVector C=CS.GetComponentSpaceTransform(Hand).GetLocation();
-                const double Length=FVector::Distance(A,B)+FVector::Distance(B,C);
                 double TalkWave=Gesture*(.65+.35*FMath::Sin(Time*2.0+S));
-                // Hands rest beside the hips. The shoulder-relative target
-                // avoids inheriting the elevated elbows of the source A-pose.
-                FVector GoalHand=A-FVector::UpVector*(Length*(.993-.12*TalkWave))
-                    +Forward*(3+20*TalkWave+14*Walk*FMath::Sin(Phase*2*PI+S*PI))
-                    +Right*(Sign*(3+5*TalkWave));
+                const auto Offset=HalvethMotion::RelaxedHandOffset(FVector::Distance(A,B),FVector::Distance(B,C),HandForward[S],Sign*(3+5*TalkWave),TalkWave);
+                // Normalize again after the rig-basis mapping: inferred forward
+                // and right need not be perfectly orthogonal. Keep the reach.
+                const FVector Direction=Forward*Offset.x+Right*Offset.y+FVector::UpVector*Offset.z;
+                const FVector GoalHand=A+Direction.GetSafeNormal()*Offset.length();
                 Limb(TEXT("upperarm"),TEXT("lowerarm"),TEXT("wrist"),Side,GoalHand,Right*(Sign*.7)-FVector::UpVector+Forward*.2);
                 Rotate(FName(*(TEXT("wrist.")+Side)),Forward,Sign*(.07+.13*TalkWave));
             }
@@ -155,20 +157,35 @@ void UHALVETHGuideAnimInstance::NativeInitializeAnimation(){
         RefFeet[S].X=Centre.X+(RefFeet[S].X-Centre.X)*.55;
         RefFeet[S].Y=Centre.Y+(RefFeet[S].Y-Centre.Y)*.55;
         FootTargets[S]=RefFeet[S];
+        HandSprings[S].position=3;HandSprings[S].velocity=0;HandForward[S]=3;
+        Planted[S]=false;
     }
+    WeightShiftSpring=HalvethMotion::Spring{};WeightShift=0;
     UE_LOG(LogTemp,Display,TEXT("GARDEN_MOTION_RIG left_foot=%s right_foot=%s forward=%s right=%s"),*RefFeet[0].ToString(),*RefFeet[1].ToString(),*Forward.ToString(),*Right.ToString());
     static bool Printed=false;if(!Printed){Printed=true;FString Names;for(int I=0;I<Local.Num();I++)Names+=Ref.GetBoneName(I).ToString()+TEXT(",");UE_LOG(LogTemp,Display,TEXT("GARDEN_MOTION_BONES %s"),*Names);}
 }
 void UHALVETHGuideAnimInstance::NativeUpdateAnimation(float Dt){
     Super::NativeUpdateAnimation(Dt);if(!FMath::IsFinite(Dt)||Dt<=0)return;
+    auto* Body=GetSkelMeshComponent();if(!Body)return;
+    auto* Pawn=Cast<ACharacter>(Body->GetOwner());
+    auto* Movement=Pawn?Pawn->GetCharacterMovement():nullptr;
+    // Both residents and guides are ACharacters. Read actual grounded speed
+    // each animation update; non-character guide owners retain their input.
+    if(Movement)DesiredSpeed=Movement->IsMovingOnGround()?Movement->Velocity.Size2D():0;
+    const bool Supported=!Movement||Movement->IsMovingOnGround();
     Time+=Dt;
     WalkSpring.update(FMath::Clamp(DesiredSpeed/FMath::Max(1.,CruiseSpeed),0.,1.),Dt,7);WalkWeight=WalkSpring.position;
     GaitPhase+=.6*DesiredSpeed/(48.*FMath::Max(.08f,WalkWeight))*Dt;
     YawSpring.update(DesiredLookYaw,Dt,1.1/FMath::Max(.12,ResponseSeconds));LookYaw=YawSpring.position;
     PitchSpring.update(DesiredLookPitch,Dt,1.3/FMath::Max(.12,ResponseSeconds));LookPitch=PitchSpring.position;
     GestureSpring.update(Speaking?1:0,Dt,5);Gesture=GestureSpring.position;
-    auto* Body=GetSkelMeshComponent();if(!Body)return;
-    auto* Pawn=Cast<ACharacter>(Body->GetOwner());const bool Supported=!Pawn||Pawn->GetCharacterMovement()->IsMovingOnGround();
+    WeightShiftSpring.update(.3*FMath::Sin(Time*.71)+.85*WalkWeight*FMath::Sin(GaitPhase*2*PI),Dt,9);
+    WeightShift=WeightShiftSpring.position;
+    for(int S=0;S<2;S++){
+        const double TalkWave=Gesture*(.65+.35*FMath::Sin(Time*2.+S));
+        HandSprings[S].update(3.+20.*TalkWave+10.*WalkWeight*FMath::Sin(GaitPhase*2*PI+S*PI),Dt,11);
+        HandForward[S]=HandSprings[S].position;
+    }
     for(int S=0;S<2;S++){
         auto Step=HalvethMotion::Footstep(GaitPhase+S*.5);
         if(!Supported){FootTargets[S]=RefFeet[S];Planted[S]=false;GroundNormals[S]=FVector::UpVector;continue;}
@@ -211,6 +228,11 @@ void UHALVETHGuideAnimInstance::LogPoseAudit(const TCHAR* Context) const {
         const FVector B=Body->GetBoneLocation(FName(*(TEXT("lowerleg01_")+Side)),EBoneSpaces::ComponentSpace);
         const FVector C=Body->GetBoneLocation(FName(*(TEXT("foot_")+Side)),EBoneSpaces::ComponentSpace);
         const double Bend=FMath::RadiansToDegrees(FMath::Acos(FMath::Clamp(FVector::DotProduct((B-A).GetSafeNormal(),(C-B).GetSafeNormal()),-1.,1.)));
+        const FVector Shoulder=Body->GetBoneLocation(FName(*(TEXT("upperarm01_")+Side)),EBoneSpaces::ComponentSpace);
+        const FVector Elbow=Body->GetBoneLocation(FName(*(TEXT("lowerarm01_")+Side)),EBoneSpaces::ComponentSpace);
+        const FVector Hand=Body->GetBoneLocation(FName(*(TEXT("wrist_")+Side)),EBoneSpaces::ComponentSpace);
+        const double ElbowBend=FMath::RadiansToDegrees(FMath::Acos(FMath::Clamp(FVector::DotProduct((Elbow-Shoulder).GetSafeNormal(),(Hand-Elbow).GetSafeNormal()),-1.,1.)));
+        UE_LOG(LogTemp,Display,TEXT("GARDEN_ARM_SAMPLE context=%s identity=%d side=%s elbow_bend_deg=%.5f idle_loaded=%d"),Context,Identity,*Side,ElbowBend,BaseIdle!=nullptr);
         UE_LOG(LogTemp,Display,TEXT("GARDEN_POSTURE_SAMPLE context=%s identity=%d side=%s speed_cm_s=%.5f walk_weight=%.5f knee_bend_deg=%.5f ankle_target_error_cm=%.5f upper_length_cm=%.5f lower_length_cm=%.5f target_binding=last_completed_evaluation"),Context,Identity,*Side,DesiredSpeed,WalkWeight,Bend,FVector::Distance(C,EvaluatedFootTargets[S]),FVector::Distance(A,B),FVector::Distance(B,C));
     }
 }

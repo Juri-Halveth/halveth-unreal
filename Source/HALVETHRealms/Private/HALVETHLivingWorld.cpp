@@ -60,7 +60,7 @@ bool AHALVETHLivingWorld::Supported(FVector& Location,const AActor* Ignore) cons
     FCollisionQueryParams Q(SCENE_QUERY_STAT(ResidentFloor),false);if(Ignore)Q.AddIgnoredActor(Ignore);
     for(const auto& B:Bodies)if(B.Actor)Q.AddIgnoredActor(B.Actor);
     if(auto* P=UGameplayStatics::GetPlayerPawn(this,0))Q.AddIgnoredActor(P);
-    FHitResult Hit;if(!GetWorld()->LineTraceSingleByChannel(Hit,Location+FVector(0,0,600),Location-FVector(0,0,1800),ECC_Visibility,Q)||Hit.ImpactNormal.Z<.7)return false;
+    FHitResult Hit;if(!GetWorld()->LineTraceSingleByObjectType(Hit,Location+FVector(0,0,600),Location-FVector(0,0,1800),FCollisionObjectQueryParams(ECC_WorldStatic),Q)||Hit.ImpactNormal.Z<.7)return false;
     Location.Z=Hit.ImpactPoint.Z+94;return true;
 }
 void AHALVETHLivingWorld::RefreshBodies(){
@@ -89,7 +89,7 @@ void AHALVETHLivingWorld::RefreshBodies(){
         auto& Resident=Residents[C.Id];FVector At(Resident.position.x*100,Resident.position.y*100,0);
         if(Resident.guard)At=FVector(2500+(C.Id<4?-300:300),-450,0);
         if(!Supported(At))continue;
-        FActorSpawnParameters Params;Params.Owner=this;Params.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButDontSpawnIfColliding;
+        FActorSpawnParameters Params;Params.Owner=this;Params.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::DontSpawnIfColliding;
         auto* Actor=GetWorld()->SpawnActor<AHALVETHCitizen>(At,FRotator(0,-90,0),Params);if(!Actor)continue;
         FHALVETHResidentBody B;B.Id=C.Id;B.Actor=Actor;B.Origin=Actor->GetActorLocation();B.Goal=B.Origin;
         const TCHAR* AssetNames[]={TEXT("Scarlet"),TEXT("Lucinet"),TEXT("Rachel")};const FString Asset=AssetNames[Resident.guard?1:Resident.seed%3];
@@ -201,11 +201,11 @@ bool AHALVETHLivingWorld::Interact(AHALVETHCharacter* P){
     if(!Nearest)return false;auto& R=Residents[Nearest->Id];Nearest->TalkUntil=Time+4;Nearest->Steering=FVector::ZeroVector;
     const TCHAR* Lines[]={TEXT("Hey! Schoen, dich zu sehen. Wohin fliegst du?"),TEXT("He, Luftpirat! Pass auf die Leute auf, dann ist alles gut."),TEXT("Ich brauche gerade etwas Ruhe. Danke."),TEXT("Wie lenkst du eigentlich in der Luft? Das will ich lernen!")};
     FString Text=R.guard?TEXT("Fliegen ist erlaubt, auch im Archiv. Neben Leuten bitte langsam. Wir verwarnen, wenn es gefaehrlich wird."):FString(Lines[int(R.temper)]);
-    if(auto* Mode=Cast<AHALVETHGameMode>(UGameplayStatics::GetGameMode(this)))Mode->Notify(ResidentName(Nearest->Id)+TEXT(": ")+Text+TEXT(" · ")+TaskName(R.task));
+    if(auto* Mode=Cast<AHALVETHGameMode>(UGameplayStatics::GetGameMode(this)))Mode->Notify(ResidentName(Nearest->Id)+TEXT(": ")+Text+TEXT(" Â· ")+TaskName(R.task));
     return true;
 }
 FString AHALVETHLivingWorld::GetStatus() const{
-    return FString::Printf(TEXT("J frei fliegen  ·  %d Menschen in der Naehe  ·  E sprechen"),Bodies.Num());
+    return FString::Printf(TEXT("J frei fliegen  Â·  %d Menschen in der Naehe  Â·  E sprechen"),Bodies.Num());
 }
 void AHALVETHLivingWorld::Tick(float Dt){
     Super::Tick(Dt);if(!Realm||Residents.empty()||!FMath::IsFinite(Dt)||Dt<=0)return;Time+=Dt;

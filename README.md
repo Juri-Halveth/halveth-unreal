@@ -9,6 +9,13 @@ Ein eigenständiger C++-Spielprototyp für Unreal Engine. Portalwelten, eine int
 [**Projekt öffnen →**](https://github.com/Juri-Halveth/halveth-unreal/releases) · [Arbeitsproben](https://juri-halveth.github.io/koennen/) · [Portfolio](https://juri-halveth.github.io/)
 
 
+## Entspanntere Figuren und verlässlicher Bodenkontakt
+
+Die [aktuelle Bewohnerbewegung](docs/RESIDENT-MOTION.md) ergänzt entspanntere
+Ellenbogen, eine kurze Nachbewegung der Hände und durchgängige Schrittphasen.
+Menschen dienen anderen Figuren nicht mehr als Treppen oder Boden.
+[Native Gehaufnahme ansehen](Preview/RESIDENT_MOTION.gif).
+
 ## Wiese, Wind und ein tatsächlich aktueller Start
 
 ![Native Spielaufnahme: Wiesenhalme und Blüten bewegen sich vor der Archivtreppe](Preview/MEADOW_WIND.gif)
