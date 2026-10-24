@@ -1,6 +1,6 @@
 # Unreal Engine notices — HALVETH Portal Garden
 
-These notices apply to the Unreal Engine edition of HALVETH Portal Garden. The project's original source code is licensed separately under MIT. Assets are covered only by the license assigned to each asset in the project's asset inventory. Neither license changes the terms governing Unreal Engine or other third-party material.
+These notices apply to the Unreal Engine edition of HALVETH Portal Garden. Existing original source retains MIT. Only the six new Meadow files expressly mapped in LICENSES.md assign their original new contributions to HALVETH PIRL 2.0; earlier MIT grants and overlapping MIT portions remain available. Assets are covered only by the license assigned to each asset in the project's asset inventory. Neither project license changes the terms governing Unreal Engine or other third-party material.
 
 ## Product credits
 

@@ -14,9 +14,12 @@ The exporter reads only these surfaces:
 | `assets` | Original icon and associated asset/license files |
 | `ArtSource` | Source PNGs and their source/license records |
 | `installer` | NSIS source files |
-| Exact extra paths | `Build/Windows/Application.ico`, `.github/workflows/source.yml` |
+| Exact extra paths | `Build/Windows/Application.ico`, `.github/workflows/source.yml`, `Content/sky/ephemeris.json` |
+| VOID build dependency | The 30 exact public paths enumerated by `VOID_SOURCE_FILES` in `scripts/package_source.py`: project, `VOID.sh`, MIT license, README, art manifest/credits/direction, current owned C++/C# sources, INI configuration and Python helpers |
 
-Each tree has an explicit extension allowlist. Hidden subdirectories, environment files and compiled artifacts are not admitted. `Saved`, generated `Content`, `Binaries`, `Intermediate`, `Builds`, `DerivedDataCache`, `Engine` and repository internals are never traversed by this export. Unreal's generated texture import metadata therefore remains outside the public source ZIP.
+Each tree has an explicit extension allowlist. Hidden subdirectories, environment files and compiled artifacts are not admitted. `Saved`, generated `Content`, `Binaries`, `Intermediate`, `Builds`, `DerivedDataCache`, `Engine` and repository internals are never traversed by this export; the sky JSON above is an exact source-data exception. Unreal's generated texture import metadata therefore remains outside the public source ZIP.
+
+The VOID paths are required members of `EXACT_EXTRA_FILES`, so a missing build dependency stops export. They preserve the fresh Garden bootstrap's `download`/`prepare` source dependency and make the downloader regression tests usable from the source package. This is not an `experiments` tree allowlist: previews, QA captures, generated/imported Content, downloaded media and unrelated experiments remain excluded. Adding a new VOID source requires an explicit path-list update. Building and preparing still require the separately installed Unreal Engine and the pinned asset download.
 
 The exporter rejects symlinks/junctions in admitted source locations, credential assignments in admitted text, recognizable private-key/token forms and absolute personal-directory paths. Error messages identify the file and rule without printing the matching value. This is a bounded automated gate, not a substitute for reviewing screenshots or determining asset rights.
 

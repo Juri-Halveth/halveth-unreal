@@ -125,7 +125,7 @@ void AHALVETHHUD::DrawHUD()
         const float X = Width * 0.1f, Y = Height * 0.30f;
         DrawRect(FLinearColor(0.015f, 0.012f, 0.027f, 0.98f), X, Y, Width * 0.8f, 265 * Scale);
         float Line = Wrapped(TEXT("HALVETH PORTAL GARDEN  /  CREDITS"), X + 22, Y + 20, Width * 0.8f - 44, Gold, Scale);
-        Line = Wrapped(TEXT("Original project code: MIT. Original Scarlet Heart icon: HALVETH Realms contributors. PBR textures: Poly Haven, CC0."), X + 22, Line + 12, Width * 0.8f - 44, White, 0.85f * Scale);
+        Line = Wrapped(TEXT("Projektcode: MIT-Bestand und neue PIRL-Beitraege laut LICENSES.md. Scarlet-Heart-Icon: HALVETH Realms contributors. PBR-Texturen: Poly Haven, CC0."), X + 22, Line + 12, Width * 0.8f - 44, White, 0.85f * Scale);
         Line = Wrapped(TEXT("HALVETH Portal Garden uses Unreal\u00ae Engine. Unreal\u00ae is a trademark or registered trademark of Epic Games, Inc. in the United States of America and elsewhere."), X + 22, Line + 12, Width * 0.8f - 44, White, 0.85f * Scale);
         Line = Wrapped(TEXT("Unreal\u00ae Engine, Copyright 1998 - 2026, Epic Games, Inc. All rights reserved."), X + 22, Line + 12, Width * 0.8f - 44, White, 0.85f * Scale);
         Wrapped(TEXT("F10 closes credits. Full licenses accompany the build."), X + 22, Line + 12, Width * 0.8f - 44, Gold, 0.8f * Scale);

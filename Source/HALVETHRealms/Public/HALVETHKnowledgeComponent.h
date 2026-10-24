@@ -39,6 +39,7 @@ public:
     UFUNCTION(BlueprintCallable, Category="HALVETH|Knowledge") bool GatherNearby();
     UFUNCTION(BlueprintCallable, Category="HALVETH|Knowledge") bool SaveProgress();
     UFUNCTION(BlueprintCallable, Category="HALVETH|Knowledge") bool ReloadProgress();
+    bool UsesIsolatedSave() const { return bSmokeSlot; }
     UFUNCTION(BlueprintPure, Category="HALVETH|Knowledge") TArray<FString> GetPanelLines() const;
     UFUNCTION(BlueprintPure, Category="HALVETH|Knowledge") TArray<FString> GetBookLines() const;
     UFUNCTION(BlueprintPure, Category="HALVETH|Knowledge") TArray<FString> GetWorkshopLines(int32 Panel = 0) const;

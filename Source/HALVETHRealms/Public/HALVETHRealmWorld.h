@@ -56,6 +56,7 @@ public:
     int32 GetCurrentRealm() const { return CurrentRealm; }
     float GetLoveStrength() const { return LoveRemaining / 4.0f; }
     bool VerifyLandscape();
+    bool TraceMeadowGround(double X,double Y,FVector& Position,FVector& Normal) const;
     bool VerifyCharacters() const;
     bool VerifyGuidePatrol() const;
     FVector GetGuidePosition(int32 Identity) const;
