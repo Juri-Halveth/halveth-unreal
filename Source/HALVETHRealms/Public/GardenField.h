@@ -43,6 +43,6 @@ inline FVector4f Color(double X,double Y,int32 Realm) {
         -.26*FMath::Clamp((Elevation-2400.0)/3000.0,0.0,1.0)-2.2*Slope),.08f,.96f);
     const float Rock=FMath::Clamp(float(3.4*FMath::Max(0.0,Slope-.07)
         +.34*FMath::Clamp((Elevation-3000.0)/3200.0,0.0,1.0)),0.0f,.82f);
-    return FVector4f(Rock,Grass,0,1);
+    return FVector4f(Rock,Grass,float(Moisture),1);
 }
 }

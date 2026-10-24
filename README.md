@@ -1,4 +1,33 @@
-# HALVETH Portal Garden — anatomical characters, ground response and Earth sky
+<!-- HUB_LANGUAGES_V1 -->
+[Original / Deutsch](README.md) · [English](README.en.md) · [Русский](README.ru.md)
+<!-- /HUB_LANGUAGES_V1 -->
+
+# HALVETH Portal Garden — begehbare Welt, freie Levitation und Wissen
+
+Ein eigenständiger C++-Spielprototyp für Unreal Engine. Portalwelten, eine interaktive Bibliothek und Bau- und Rezeptsysteme verbinden Gestaltung mit nativer Spielentwicklung.
+
+[**Projekt öffnen →**](https://github.com/Juri-Halveth/halveth-unreal/releases) · [Arbeitsproben](https://juri-halveth.github.io/koennen/) · [Portfolio](https://juri-halveth.github.io/)
+
+
+## Wiese, Wind und ein tatsächlich aktueller Start
+
+![Native Spielaufnahme: Wiesenhalme und Blüten bewegen sich vor der Archivtreppe](Preview/MEADOW_WIND.gif)
+
+Das native Windows-Spiel verbindet vier Landschaften, ein begehbares Archiv,
+freie Levitation und lokale Bewohner. Die neue Wiese besteht aus gekrümmten
+Geometriehalmen mit festen Wurzeln, verschiedenen Windphasen und kleinen
+Blüten. Ein begrenztes Fenster mit höchstens 3.844 Instanzen folgt den
+besuchten Weltzellen; zurückkehrende Zellen erhalten dieselbe Platzierung.
+
+**Start:** `Start-Astralis.cmd` · **Fliegen:** J · **Bewegen:** WASD ·
+**Interagieren:** E · **Bibliothek:** B.
+
+Die [Wiesenwerkzeuge und der aktuelle Prüfstand](docs/MEADOW-AND-START.md)
+trennen native Aufnahmen, Bodenmessung, Funktionstests und noch offene
+Darstellungsarbeit. Das ist ein spielbarer Entwicklungsstand mit begrenzter
+Welt und wiederverwendeten Baum-/Charaktermodellen.
+
+![Dichte Halme, Blüten und die Bodentextur im nativen Paket](Preview/MEADOW_ROOTS.png)
 
 ## Astralis · räumlicher Baukasten und begehbares Archiv
 
@@ -11,7 +40,8 @@ gebundene Live-Ansicht des Archivs.
 `Start-Astralis.cmd` baut bei Bedarf das lokale Windows-Paket und startet es.
 Eigene periodische Mineralkarten erzeugen Materialrelief; die 16 privaten
 Gestaltungsreferenzen werden als getrennte Beobachtungen und technische
-Rezepte erschlossen. Der Code und die eigenen Materialien stehen unter MIT.
+Rezepte erschlossen. Die [Datei- und Versionskarte](LICENSES.md) trennt den
+bestehenden MIT-Stand von den neuen, eng zugeordneten PIRL-Meadow-Beiträgen.
 
 ![Astralis: geöffnete Pforte mit Live-Ansicht im nativen Spiel](Preview/ASTRAL_OPEN.png)
 
@@ -177,7 +207,11 @@ To build, select a structure with **T**, close the library with **B**, face clea
 
 ## Licenses and source
 
-Original HALVETH C++/Bash/Python source is MIT. MakeHuman core basemesh, rig,
+Existing HALVETH C++/Bash/Python source retains MIT. Six new Meadow source/test
+files assign only their original new contributions to PIRL 2.0; see
+[LICENSES.md](LICENSES.md) for the exact scope and earlier-grant exceptions.
+Commercial permission for those assigned contributions requires the separate
+written agreement described there. MakeHuman core basemesh, rig,
 weights and target assets are CC0. The selected skins use the expressly CC0 pack
 members recorded in [SOURCES.json](ArtSource/Characters/SOURCES.json). Authored CC0 clothing, footwear and hair retain their license headers and hashes in [wardrobe-sources.json](ArtSource/Characters/wardrobe-sources.json). Own eyes, fabric and animation additions are dedicated to CC0.
 See [MakeHuman's asset license](https://static.makehumancommunity.org/about/license.html)

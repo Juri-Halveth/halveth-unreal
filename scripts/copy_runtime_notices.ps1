@@ -86,6 +86,9 @@ foreach ($name in @('README.md', 'MANIFEST.json')) {
 }
 $projectNotices = @(
     @{Source='LICENSE'; Destination='LICENSE'},
+    @{Source='LICENSES.md'; Destination='LICENSES.md'},
+    @{Source='LICENSE-HALVETH-PIRL-2.0.md'; Destination='LICENSE-HALVETH-PIRL-2.0.md'},
+    @{Source='HALVETH-RIGHTS.json'; Destination='HALVETH-RIGHTS.json'},
     @{Source='THIRD-PARTY-NOTICES.md'; Destination='THIRD-PARTY-NOTICES.md'},
     @{Source='assets/ICON-LICENSE.txt'; Destination='ICON-LICENSE.txt'},
     @{Source='docs/ICON-PROVENANCE.md'; Destination='ICON-PROVENANCE.md'},

@@ -21,7 +21,10 @@ def fixture(root: Path):
     for name in EXPORT.ROOT_FILES | EXPORT.EXACT_EXTRA_FILES:
         path = root / name
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text("public fixture\n", encoding="utf-8")
+        if name in EXPORT.VOID_SOURCE_FILES:
+            path.write_bytes((ROOT / name).read_bytes())
+        else:
+            path.write_text("public fixture\n", encoding="utf-8")
     (root / "Config/DefaultGame.ini").write_text(
         "[/Script/EngineSettings.GeneralProjectSettings]\nProjectVersion=1.2.3\n", encoding="utf-8")
     (root / "Source/Layout.h").write_text("// original fixture source\n", encoding="utf-8")
@@ -38,6 +41,53 @@ def fixture(root: Path):
 
 
 class SourcePackageTests(unittest.TestCase):
+    def test_exact_void_build_sources_are_exported_and_importable(self):
+        prefix = "experiments/void-native/"
+        void = ROOT / prefix
+        expected = {prefix + name for name in (
+            "HALVETHVoid.uproject", "VOID.sh", "LICENSE", "README.md",
+            "ArtSource/ASSETS.json", "ArtSource/CREDITS.txt", "ArtSource/ART_DIRECTION.txt",
+        )}
+        for folder, suffixes in (("Source", {".h", ".cpp", ".cs"}), ("Config", {".ini"}), ("scripts", {".py"})):
+            expected.update(path.relative_to(ROOT).as_posix() for path in (void / folder).rglob("*")
+                            if path.is_file() and path.suffix in suffixes)
+        self.assertEqual(EXPORT.VOID_SOURCE_FILES, expected)
+        self.assertLessEqual(expected, EXPORT.EXACT_EXTRA_FILES)
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            fixture(root)
+            blocked = [prefix + name for name in (
+                "Preview/frame.png", "QA/receipt.json", "Content/Imported.uasset",
+                "ArtSource/models/downloaded.bin", "ArtSource/IMAGE_CHECKS.json",
+                "Source/Future.cpp", "Config/private.ini", "scripts/unreviewed.py",
+            )] + ["experiments/unrelated/Source/Other.cpp"]
+            for name in blocked:
+                path = root / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(b"UNRELATED_EXPERIMENT_SENTINEL")
+                self.assertFalse(EXPORT.allowed(PurePosixPath(name)))
+            test_name = "tests/test_void_assets.py"
+            (root / test_name).write_bytes((ROOT / test_name).read_bytes())
+            files, _ = EXPORT.snapshot(root)
+            self.assertIn(test_name, files)
+            for name in expected:
+                self.assertEqual(files[name], (ROOT / name).read_bytes())
+            self.assertTrue(set(blocked).isdisjoint(files))
+            spec = importlib.util.spec_from_file_location("exported_void_assets", root / prefix / "scripts/assets.py")
+            assets = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(assets)
+            records = assets.admit_manifest(assets.MANIFEST)
+            self.assertEqual((len(records), sum(record["size"] for record in records), assets.MANIFEST["byte_cap"]),
+                             (31, 189251328, 200000000))
+
+    def test_missing_required_void_source_stops_export(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            fixture(root)
+            (root / "experiments/void-native/Source/HALVETHVoid/Public/VoidField.h").unlink()
+            with self.assertRaisesRegex(EXPORT.ExportError, "Required public source is missing"):
+                EXPORT.snapshot(root)
+
     def test_synthetic_mineral_sources_bind_generator_and_pixels(self):
         with tempfile.TemporaryDirectory() as temporary:
             root=Path(temporary)

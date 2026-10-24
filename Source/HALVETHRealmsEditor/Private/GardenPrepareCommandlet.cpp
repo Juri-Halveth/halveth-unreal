@@ -1,6 +1,7 @@
 #include "GardenPrepareCommandlet.h"
 #include "GardenField.h"
 #include "GardenSoil.h"
+#include "MeadowPrepare.h"
 #include "AssetRegistry/AssetRegistryModule.h"
 #include "AssetCompilingManager.h"
 #include "Engine/StaticMesh.h"
@@ -80,7 +81,7 @@ bool Build(const FString& Name,const Geometry& G,UMaterialInterface* Material,in
 }
 UGardenPrepareCommandlet::UGardenPrepareCommandlet() { IsClient=false; IsServer=false; IsEditor=true; LogToConsole=true; }
 int32 UGardenPrepareCommandlet::Main(const FString& Params) {
-    auto* Ground=LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/VOID/M_Terrain.M_Terrain"));
+    auto* Ground=PrepareMeadowAssets();
     auto* Surface=LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/Materials/M_HalvethSurface.M_HalvethSurface"));
     auto* Rock=LoadObject<UStaticMesh>(nullptr,TEXT("/Game/VOID/Models/rock_moss_set_01/rock_moss_set_01_2k/StaticMeshes/rock_moss_set_01_rock01.rock_moss_set_01_rock01"));
     if(!Ground||!Surface||!Rock) { UE_LOG(LogTemp,Error,TEXT("GARDEN_REQUIRED_ASSETS_MISSING")); return 2; }

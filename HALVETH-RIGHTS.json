@@ -1,0 +1,49 @@
+{
+  "schema": "halveth.file-version-rights.v1",
+  "licensor": "Juri Janovski, Projekt HALVETH, to the extent rights exist and are controlled by him",
+  "licenseId": "LicenseRef-HALVETH-PIRL-2.0",
+  "licenseFile": "LICENSE-HALVETH-PIRL-2.0.md",
+  "licenseTextSha256": "4e222f3dbcfe32682b6fc59329ad61d5fba83966ec545aa7a975b971ef0a6e6a",
+  "priorMitBase": "5c2260f85d5275c15082c5c7d38ae51a143a5688",
+  "scope": "Only new original protectable contributions in the exact six files below. Earlier effective grants and overlapping MIT portions retain their permissions.",
+  "commercialUse": "Separate prior written agreement where legally required; no automatic debt or participation from access/download/fork.",
+  "contact": "security@halveth.de",
+  "tdmReservation": {
+    "reserved": true,
+    "scope": "Assigned protectable material only, to the extent legally reservable. Statutory exceptions, earlier effective licenses and hosting terms remain unaffected."
+  },
+  "excluded": [
+    "Third-party material",
+    "Unreal Engine technology and APIs",
+    "CC0 assets",
+    "Facts and measurement data",
+    "General ideas and mathematical methods",
+    "Names and trademarks"
+  ],
+  "files": [
+    {
+      "path": "Source/HALVETHRealms/Public/MeadowModel.h",
+      "sha256": "56759b0fe9ca12c916e17f47e0c3b93eb40937fa2ebb6a2d78571eded63a3b85"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHMeadow.h",
+      "sha256": "a94f40cb6f282680b6bbdef9fa0e80ad21ee052d56f4f70979d4936271a2cbe8"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHMeadow.cpp",
+      "sha256": "0ac164a8c759f7580542a3f5378acb7b1a7b784eaa24c90cdc54e53d170a4787"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Public/MeadowPrepare.h",
+      "sha256": "89370b7c4a513ce3b72fa01196b8826131cb0b4c7fdece3613340aaeecced548"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Private/MeadowPrepare.cpp",
+      "sha256": "b089c04118e445cd71a3e1ee7f112070c800b063a00b6752bc36daf4976173be"
+    },
+    {
+      "path": "tests/meadow_model_test.cpp",
+      "sha256": "f834b604290341fa0ed8e3326a74ada7fc2b834d74778f5f75c9220503bb56b1"
+    }
+  ]
+}

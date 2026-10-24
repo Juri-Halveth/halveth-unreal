@@ -17,6 +17,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 ROOT_FILES = frozenset({
     "HALVETHRealms.uproject", "README.md", "LICENSE", "THIRD-PARTY-NOTICES.md", ".gitignore", ".gitattributes",
+    "LICENSES.md", "LICENSE-HALVETH-PIRL-2.0.md", "HALVETH-RIGHTS.json",
     "GARDEN.sh", "CHARACTERS.sh", "requirements-art.txt", "Start-Astralis.cmd",
 })
 TREE_EXTENSIONS = {
@@ -27,11 +28,45 @@ TREE_EXTENSIONS = {
     "docs": {".md", ".txt", ".json", ".png", ".jpg", ".jpeg", ".svg"},
     "assets": {".svg", ".png", ".ico", ".md", ".txt", ".json"},
     "ArtSource": {".png", ".md", ".txt", ".json", ".fbx", ".obj", ".mhskel", ".mhw", ".mhclo", ".mhmat", ".target"},
-    "Preview": {".png"},
+    "Preview": {".png", ".gif"},
     "QA": {".json"},
     "installer": {".nsi"},
 }
-EXACT_EXTRA_FILES = frozenset({"Build/Windows/Application.ico", ".github/workflows/source.yml", "Content/sky/ephemeris.json"})
+VOID_SOURCE_FILES = frozenset({
+    "experiments/void-native/HALVETHVoid.uproject",
+    "experiments/void-native/VOID.sh",
+    "experiments/void-native/LICENSE",
+    "experiments/void-native/README.md",
+    "experiments/void-native/ArtSource/ASSETS.json",
+    "experiments/void-native/ArtSource/CREDITS.txt",
+    "experiments/void-native/ArtSource/ART_DIRECTION.txt",
+    "experiments/void-native/Config/DefaultEngine.ini",
+    "experiments/void-native/Config/DefaultGame.ini",
+    "experiments/void-native/Config/DefaultInput.ini",
+    "experiments/void-native/scripts/assets.py",
+    "experiments/void-native/scripts/soulseed.py",
+    "experiments/void-native/Source/HALVETHVoid.Target.cs",
+    "experiments/void-native/Source/HALVETHVoidEditor.Target.cs",
+    "experiments/void-native/Source/HALVETHVoid/HALVETHVoid.Build.cs",
+    "experiments/void-native/Source/HALVETHVoid/Private/HALVETHVoid.cpp",
+    "experiments/void-native/Source/HALVETHVoid/Private/VoidCharacter.cpp",
+    "experiments/void-native/Source/HALVETHVoid/Private/VoidGameMode.cpp",
+    "experiments/void-native/Source/HALVETHVoid/Private/VoidHUD.cpp",
+    "experiments/void-native/Source/HALVETHVoid/Private/VoidWorld.cpp",
+    "experiments/void-native/Source/HALVETHVoid/Public/VoidCharacter.h",
+    "experiments/void-native/Source/HALVETHVoid/Public/VoidField.h",
+    "experiments/void-native/Source/HALVETHVoid/Public/VoidGameMode.h",
+    "experiments/void-native/Source/HALVETHVoid/Public/VoidHUD.h",
+    "experiments/void-native/Source/HALVETHVoid/Public/VoidSoul.h",
+    "experiments/void-native/Source/HALVETHVoid/Public/VoidWorld.h",
+    "experiments/void-native/Source/HALVETHVoidEditor/HALVETHVoidEditor.Build.cs",
+    "experiments/void-native/Source/HALVETHVoidEditor/Private/HALVETHVoidEditor.cpp",
+    "experiments/void-native/Source/HALVETHVoidEditor/Private/VoidPrepareCommandlet.cpp",
+    "experiments/void-native/Source/HALVETHVoidEditor/Public/VoidPrepareCommandlet.h",
+})
+EXACT_EXTRA_FILES = frozenset({
+    "Build/Windows/Application.ico", ".github/workflows/source.yml", "Content/sky/ephemeris.json",
+}) | VOID_SOURCE_FILES
 TEXT_EXTENSIONS = {".h", ".cpp", ".cs", ".ini", ".py", ".ps1", ".json", ".md", ".txt", ".svg", ".yml", ".nsi", ".sh", ".cmd", ".obj", ".mhskel", ".mhw", ".mhclo", ".mhmat", ".target", ".lua", ".omwscripts"}
 BLOCKED_PARTS = frozenset({"__pycache__", ".git", ".vs", ".idea", "node_modules"})
 SECRET_RULES = (

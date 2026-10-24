@@ -7,3 +7,8 @@
 docs/NSIS-COPYING.txt -text -whitespace
 ArtSource/PolyHaven/LICENSE-CC0-1.0.txt -text -whitespace
 ArtSource/Characters/** -text -whitespace
+
+# Preserve measured JSON byte evidence and runtime rights binding.
+HALVETH-RIGHTS.json -text -whitespace
+QA/meadow-source-scene.json -text -whitespace
+QA/native-meadow.json -text

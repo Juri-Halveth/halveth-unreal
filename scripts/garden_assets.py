@@ -8,7 +8,10 @@ ENGINE = Path(os.environ.get('GARDEN_ENGINE', 'C:/Program Files/Epic Games/UE_5.
 if str(ENGINE).startswith('/c/'):
     ENGINE = Path('C:/' + str(ENGINE)[3:])
 GENERATED = [f'Content/Garden/Terrain_R{i}.uasset' for i in range(4)] + [
-    'Content/Garden/PortalArch.uasset', 'Content/Garden/CrystalCrown.uasset']
+    'Content/Garden/PortalArch.uasset', 'Content/Garden/CrystalCrown.uasset'] + [
+    f'Content/Garden/Meadow_{i}.uasset' for i in range(4)] + [
+    'Content/Garden/M_LivingGround.uasset','Content/Garden/M_MeadowLeaf.uasset'] + [
+    f'Content/Garden/T_MeadowSoil_{kind}.uasset' for kind in ['D','N','R']]
 SOURCES = ['Source/HALVETHRealms/Public/GardenField.h',
            'Source/HALVETHRealmsEditor/Private/GardenPrepareCommandlet.cpp',
            'Source/HALVETHRealmsEditor/Private/GardenCharactersCommandlet.cpp']
@@ -31,7 +34,13 @@ CHARACTER_ASSETS += [f'Content/Characters/T_{name}Hair.uasset' for name in CHARA
 BOUND = GENERATED + SOURCES + ['Content/Materials/M_HalvethSurface.uasset',
     'Content/VOID/M_Terrain.uasset', 'Content/VOID/M_Water.uasset','Source/HALVETHRealms/Public/GardenSoil.h'] + CHARACTER_INPUTS + CHARACTER_ASSETS
 GEOMETRY_BINDINGS = GENERATED + SOURCES[:2] + ['Content/Materials/M_HalvethSurface.uasset',
-    'Content/VOID/M_Terrain.uasset', 'Content/VOID/M_Water.uasset','Source/HALVETHRealms/Public/GardenSoil.h']
+    'Content/VOID/M_Terrain.uasset', 'Content/VOID/M_Water.uasset','Source/HALVETHRealms/Public/GardenSoil.h',
+    'Source/HALVETHRealms/Public/MeadowModel.h','Source/HALVETHRealmsEditor/Private/MeadowPrepare.cpp']
+BOUND += GEOMETRY_BINDINGS[-2:]
+MEADOW_INPUTS = [f'ArtSource/PolyHaven/forest_ground_04/forest_ground_04_{kind}_2k.png'
+                 for kind in ['diff','nor_dx','rough']]
+BOUND += MEADOW_INPUTS
+GEOMETRY_BINDINGS += MEADOW_INPUTS
 HUMAN_BINDINGS = CHARACTER_INPUTS + CHARACTER_ASSETS + [SOURCES[2]]
 RECEIPT = ROOT / 'Saved/GARDEN-assets-bound.json'
 sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
@@ -67,7 +76,7 @@ def bootstrap():
         shutil.copy2(void/'Saved/VOID-imports.json', ROOT/'Saved/Garden-imports.json')
 
 def archive_generated():
-    # Six exact authored assets, no recursive deletion or retail data access.
+    # Exact authored assets, no recursive deletion or retail data access.
     base = (ROOT/'Content/Garden').resolve()
     history = ROOT/'Saved/history'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
     for rel in GENERATED:

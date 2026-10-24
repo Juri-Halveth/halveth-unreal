@@ -1,0 +1,808 @@
+{
+  "schema": "halveth.native-meadow-receipt.v1",
+  "recordedAt": "2026-10-24T14:46:56.004229+00:00",
+  "baseRevision": "5c2260f85d5275c15082c5c7d38ae51a143a5688",
+  "candidate": "Git commit containing this receipt; source bytes separately bound below",
+  "package": {
+    "schema": "halveth.astral-local-package.v2",
+    "builtAt": "2026-10-24T14:29:10.9025448Z",
+    "sourceDigest": "62E5A30326A22BC2427E963D14C58116ACAF89759515D9019BAEC5D41B8CD3A8",
+    "launcherSha256": "AB3F1C19FFED772018B938DAC66ADEAB425CBAAF76A52245098B45D749D8B134",
+    "binarySha256": "B35DBA022A97745E57EB525BF1DF2FAAFB8B1070C6D45D266488A1CEB4CC38BC",
+    "cookedPayload": [
+      {
+        "name": "global.ucas",
+        "bytes": 3215952,
+        "sha256": "51C727CEFBE005380836D4AFD521BD32BA28A31BB4320CC0C77C7A552AED0456"
+      },
+      {
+        "name": "global.utoc",
+        "bytes": 794,
+        "sha256": "2C24D7CE52C94FB22E6C44AE226A646EC9D5885F437CC53A0114FF223CB86386"
+      },
+      {
+        "name": "HALVETHRealms-Windows.pak",
+        "bytes": 11234937,
+        "sha256": "15EFC49C93A1D771C6968694B533B4EC48123A5272F6B1787ABACBB14F730995"
+      },
+      {
+        "name": "HALVETHRealms-Windows.ucas",
+        "bytes": 363414288,
+        "sha256": "29E3733F58D7A8DCCC0DB4F2103BE855474419C08424DC5C6625B078863B5A7A"
+      },
+      {
+        "name": "HALVETHRealms-Windows.utoc",
+        "bytes": 277957,
+        "sha256": "F44A199ED658E7985D0E76FC98B122797574F5C2CCFE0BA7A3573041EAEC670D"
+      }
+    ],
+    "distribution": "LOCAL_DEVELOPMENT_ONLY"
+  },
+  "packageInputFiles": [
+    {
+      "path": "ArtSource/Astral/mineral_normal.png",
+      "bytes": 2156480,
+      "sha256": "c1d8daa8de4a701a42c7c317c23159a021294e02285054b31f61824a029a3c4a",
+      "gitBlobSha256": "c1d8daa8de4a701a42c7c317c23159a021294e02285054b31f61824a029a3c4a"
+    },
+    {
+      "path": "ArtSource/Astral/mineral_roughness.png",
+      "bytes": 647960,
+      "sha256": "90a2827d138591138a5e484bed70742d34fe46c29b888fc1d577ffeec6df672e",
+      "gitBlobSha256": "90a2827d138591138a5e484bed70742d34fe46c29b888fc1d577ffeec6df672e"
+    },
+    {
+      "path": "ArtSource/Astral/SOURCE.json",
+      "bytes": 515,
+      "sha256": "9c1a74fc2525e1a8353984df1e4e0b4e69f8d3194c273e002ad4fcbc9aad2252",
+      "gitBlobSha256": "2599b80d7585d0e648887e686ad566e289e236e84a81641ee87e222be2ad559b"
+    },
+    {
+      "path": "Config/DefaultEngine.ini",
+      "bytes": 1045,
+      "sha256": "8e949a09dee6b6db8c2bd02ccb1b789a68ba55bebeb69c3855d13c8d41373519",
+      "gitBlobSha256": "8e949a09dee6b6db8c2bd02ccb1b789a68ba55bebeb69c3855d13c8d41373519"
+    },
+    {
+      "path": "Config/DefaultGame.ini",
+      "bytes": 1009,
+      "sha256": "ff1f082974f3d1e4377437710d479c970c60fabbc9a6a42c60c81226115cbb1f",
+      "gitBlobSha256": "ff1f082974f3d1e4377437710d479c970c60fabbc9a6a42c60c81226115cbb1f"
+    },
+    {
+      "path": "Config/DefaultInput.ini",
+      "bytes": 2154,
+      "sha256": "80b47b0035b1e3438cb62cf67a3d586eca5224ffcb8a4746b835ad8ca80ad32b",
+      "gitBlobSha256": "80b47b0035b1e3438cb62cf67a3d586eca5224ffcb8a4746b835ad8ca80ad32b"
+    },
+    {
+      "path": "Content/sky/ephemeris.json",
+      "bytes": 4876,
+      "sha256": "5407359bdbdbe948bfdffb8ad5c87aa89ff8bf52f2adbf98df8951645f6519dc",
+      "gitBlobSha256": "5407359bdbdbe948bfdffb8ad5c87aa89ff8bf52f2adbf98df8951645f6519dc"
+    },
+    {
+      "path": "GARDEN.sh",
+      "bytes": 5036,
+      "sha256": "d6e56b8d56d4b3b53ebdb86e354a6cac62a53a554646a067c885ef07c178e16f",
+      "gitBlobSha256": "d6e56b8d56d4b3b53ebdb86e354a6cac62a53a554646a067c885ef07c178e16f"
+    },
+    {
+      "path": "HALVETH-RIGHTS.json",
+      "bytes": 2186,
+      "sha256": "b2087e393befffa647add10c2d1c698b33c2969571a404e07a40ae51d9413a8e",
+      "gitBlobSha256": "b2087e393befffa647add10c2d1c698b33c2969571a404e07a40ae51d9413a8e"
+    },
+    {
+      "path": "HALVETHRealms.uproject",
+      "bytes": 517,
+      "sha256": "ecd613130c0abf27e6f4da31059d9e4d93e5dac9fead0b3dbdecab42a5e55afe",
+      "gitBlobSha256": "ecd613130c0abf27e6f4da31059d9e4d93e5dac9fead0b3dbdecab42a5e55afe"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1069,
+      "sha256": "ef174d3d27a321fa76cc73692872f58e79b241ac9a40f54cabcec3309db1cfe4",
+      "gitBlobSha256": "ef174d3d27a321fa76cc73692872f58e79b241ac9a40f54cabcec3309db1cfe4"
+    },
+    {
+      "path": "LICENSE-HALVETH-PIRL-2.0.md",
+      "bytes": 3820,
+      "sha256": "4e222f3dbcfe32682b6fc59329ad61d5fba83966ec545aa7a975b971ef0a6e6a",
+      "gitBlobSha256": "4e222f3dbcfe32682b6fc59329ad61d5fba83966ec545aa7a975b971ef0a6e6a"
+    },
+    {
+      "path": "LICENSES.md",
+      "bytes": 3825,
+      "sha256": "8abd9f571e958f7f497037003133c2598b09b4214ca8512d82e25d74505ada96",
+      "gitBlobSha256": "8abd9f571e958f7f497037003133c2598b09b4214ca8512d82e25d74505ada96"
+    },
+    {
+      "path": "scripts/garden_assets.py",
+      "bytes": 6715,
+      "sha256": "9a1fbae1360f9a74b6bb027cd742dcbbd4b4d705e29181b3f55fbbea562cbef4",
+      "gitBlobSha256": "9a1fbae1360f9a74b6bb027cd742dcbbd4b4d705e29181b3f55fbbea562cbef4"
+    },
+    {
+      "path": "scripts/garden_sky.py",
+      "bytes": 6157,
+      "sha256": "3b6168d2d7f7c4f001d1d301ec0ac0bf3d08d3e96573e7bfb1ae7cb884a0d5b2",
+      "gitBlobSha256": "3b6168d2d7f7c4f001d1d301ec0ac0bf3d08d3e96573e7bfb1ae7cb884a0d5b2"
+    },
+    {
+      "path": "Source/HALVETHRealms/HALVETHRealms.Build.cs",
+      "bytes": 492,
+      "sha256": "1fa6dfb6f71b68c10b921c52e9ba66482b8a04fe9d87038626ca46f28ccb5c73",
+      "gitBlobSha256": "1fa6dfb6f71b68c10b921c52e9ba66482b8a04fe9d87038626ca46f28ccb5c73"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/GardenEarthSky.cpp",
+      "bytes": 8287,
+      "sha256": "7513d923af271bd728fda5959b31bcc0219aed11e630fd063d47abb6db8d8dcb",
+      "gitBlobSha256": "7513d923af271bd728fda5959b31bcc0219aed11e630fd063d47abb6db8d8dcb"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/GardenLandscape.cpp",
+      "bytes": 12874,
+      "sha256": "fe394f69d957ffdf169947abddde0ee85c18193e50ed8de7b9dd8a6fede54f09",
+      "gitBlobSha256": "fe394f69d957ffdf169947abddde0ee85c18193e50ed8de7b9dd8a6fede54f09"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/GardenSoil.cpp",
+      "bytes": 5372,
+      "sha256": "2e40c959eef2915f47e2a3907ce957ee4586b036deb8c3c6c4efeea8bea1ba5e",
+      "gitBlobSha256": "2e40c959eef2915f47e2a3907ce957ee4586b036deb8c3c6c4efeea8bea1ba5e"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/GardenVisual.cpp",
+      "bytes": 5804,
+      "sha256": "9dffc9e9185001f09ff098cc9307a3816f5c6cd269b8da92f6065308ec2d5b10",
+      "gitBlobSha256": "9dffc9e9185001f09ff098cc9307a3816f5c6cd269b8da92f6065308ec2d5b10"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/GuideMotionCapture.cpp",
+      "bytes": 5179,
+      "sha256": "49a6290a2d51da30e043aed689bc84dcdab0671d0dcbf936406ac35f4c14f5e7",
+      "gitBlobSha256": "49a6290a2d51da30e043aed689bc84dcdab0671d0dcbf936406ac35f4c14f5e7"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHAdventureComponent.cpp",
+      "bytes": 19493,
+      "sha256": "03548bd699dc1adc74460e3666b3d34102b7861c9ccdf196d6efea697b42d078",
+      "gitBlobSha256": "03548bd699dc1adc74460e3666b3d34102b7861c9ccdf196d6efea697b42d078"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHAstralSanctum.cpp",
+      "bytes": 32643,
+      "sha256": "fef208c1a72deccbdd77ae3be30bc09a9f1a3e437607cf934b4b2a09dd6bef55",
+      "gitBlobSha256": "fef208c1a72deccbdd77ae3be30bc09a9f1a3e437607cf934b4b2a09dd6bef55"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHCharacter.cpp",
+      "bytes": 14109,
+      "sha256": "96e998bccf35297ab22dfd13c803b04ecab2d94deb42f239a38383fe93fdd445",
+      "gitBlobSha256": "96e998bccf35297ab22dfd13c803b04ecab2d94deb42f239a38383fe93fdd445"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHCitizen.cpp",
+      "bytes": 975,
+      "sha256": "d279add5651962cfe07912e6d6b3b77ea3916251a8b65fddeb2e2413b0ae5831",
+      "gitBlobSha256": "d279add5651962cfe07912e6d6b3b77ea3916251a8b65fddeb2e2413b0ae5831"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHGameMode.cpp",
+      "bytes": 22481,
+      "sha256": "89faf4386ce1da6ed80781f5aca61f77bb33b0d40739f17c532d043e8b851d9c",
+      "gitBlobSha256": "89faf4386ce1da6ed80781f5aca61f77bb33b0d40739f17c532d043e8b851d9c"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHGuideAnimInstance.cpp",
+      "bytes": 15326,
+      "sha256": "518d601a93e23b576f4f5e687fe91d251abaa908ef9ff30ec115ccf168b6e262",
+      "gitBlobSha256": "518d601a93e23b576f4f5e687fe91d251abaa908ef9ff30ec115ccf168b6e262"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHGuideCharacter.cpp",
+      "bytes": 948,
+      "sha256": "566c077e90e1328225c315c2edc30cbaa3346aced6b2047ebc1286f39e7a6485",
+      "gitBlobSha256": "566c077e90e1328225c315c2edc30cbaa3346aced6b2047ebc1286f39e7a6485"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHHUD.cpp",
+      "bytes": 9027,
+      "sha256": "53be562b491f37b5a0767fbfb540415ba57820262d3b772f422b765884049ffa",
+      "gitBlobSha256": "53be562b491f37b5a0767fbfb540415ba57820262d3b772f422b765884049ffa"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHKnowledgeComponent.cpp",
+      "bytes": 40036,
+      "sha256": "8fe1292d05a9554cd8b9954bb74cca76f7aa82cb23a1b95cfd868ea955cac031",
+      "gitBlobSha256": "8fe1292d05a9554cd8b9954bb74cca76f7aa82cb23a1b95cfd868ea955cac031"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHLivingWorld.cpp",
+      "bytes": 18692,
+      "sha256": "d5c4021ad80e194b72bf214f1332f2770dd7eb4eb6e0bf608cfde0d39b280867",
+      "gitBlobSha256": "d5c4021ad80e194b72bf214f1332f2770dd7eb4eb6e0bf608cfde0d39b280867"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHMeadow.cpp",
+      "bytes": 12949,
+      "sha256": "0ac164a8c759f7580542a3f5378acb7b1a7b784eaa24c90cdc54e53d170a4787",
+      "gitBlobSha256": "0ac164a8c759f7580542a3f5378acb7b1a7b784eaa24c90cdc54e53d170a4787"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHPlayerController.cpp",
+      "bytes": 846,
+      "sha256": "5396813bad45b47a552eae614f9eb5b720754a63f2912133f927a0ea86a1e6e3",
+      "gitBlobSha256": "5396813bad45b47a552eae614f9eb5b720754a63f2912133f927a0ea86a1e6e3"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHRealms.cpp",
+      "bytes": 123,
+      "sha256": "d1fe417bbe96b4c41d1f9ec2858841316d041f2c849c50f3455a58dea24a750e",
+      "gitBlobSha256": "d1fe417bbe96b4c41d1f9ec2858841316d041f2c849c50f3455a58dea24a750e"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHRealmWorld.cpp",
+      "bytes": 40206,
+      "sha256": "ca2f22f8cc04f0d63b8bff83011414c800685e86c1bd6458cdaed8be603b3308",
+      "gitBlobSha256": "ca2f22f8cc04f0d63b8bff83011414c800685e86c1bd6458cdaed8be603b3308"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHTrainingTarget.cpp",
+      "bytes": 8255,
+      "sha256": "46ac9a35002194f33e61ffff4d4dcf684dbe9712e312ce836337dcd3b7d6ee03",
+      "gitBlobSha256": "46ac9a35002194f33e61ffff4d4dcf684dbe9712e312ce836337dcd3b7d6ee03"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHViewProbe.cpp",
+      "bytes": 6446,
+      "sha256": "bb4d2c21df77d7be9578e2b896638a0825a4deb4f07cf16c974c64055a806987",
+      "gitBlobSha256": "bb4d2c21df77d7be9578e2b896638a0825a4deb4f07cf16c974c64055a806987"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/LivingWorldProbe.cpp",
+      "bytes": 10251,
+      "sha256": "240fb2c7c0249ead0273fe60b97f1755a63a58480c21cbc68cfd4f880f6b371b",
+      "gitBlobSha256": "240fb2c7c0249ead0273fe60b97f1755a63a58480c21cbc68cfd4f880f6b371b"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/AstralGeometry.h",
+      "bytes": 6029,
+      "sha256": "3b7362286e9b69c321fd4af7fc73c42671111e2541f172986a5fa799ce8334c5",
+      "gitBlobSha256": "3b7362286e9b69c321fd4af7fc73c42671111e2541f172986a5fa799ce8334c5"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/EarthDynamicsMath.h",
+      "bytes": 587,
+      "sha256": "6699c505db5a302de1247be09793f99b75ffeff8cbf44cbb54178538151832d0",
+      "gitBlobSha256": "6699c505db5a302de1247be09793f99b75ffeff8cbf44cbb54178538151832d0"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/GardenField.h",
+      "bytes": 2548,
+      "sha256": "438109649f1ec5e368d9b0b7314e37fa08dbf85636e049d0ec9fd0ae1da02967",
+      "gitBlobSha256": "438109649f1ec5e368d9b0b7314e37fa08dbf85636e049d0ec9fd0ae1da02967"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/GardenSoil.h",
+      "bytes": 712,
+      "sha256": "1d5d109cc3ec01c45de4a0bd25fc51490aea868adeab14fc1466fa45c922e390",
+      "gitBlobSha256": "1d5d109cc3ec01c45de4a0bd25fc51490aea868adeab14fc1466fa45c922e390"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/GuideBodyModel.h",
+      "bytes": 2002,
+      "sha256": "4b1f4d5316238107d6aea1504c6936aa838e699257d01d83a540f5b1c4e98ea5",
+      "gitBlobSha256": "4b1f4d5316238107d6aea1504c6936aa838e699257d01d83a540f5b1c4e98ea5"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/GuideGenome.h",
+      "bytes": 954,
+      "sha256": "fa854ae6ffda84fa537dd6b2facde10fe69b27861dd99d70da244ed6c2ce7f7f",
+      "gitBlobSha256": "fa854ae6ffda84fa537dd6b2facde10fe69b27861dd99d70da244ed6c2ce7f7f"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/GuideMotionMath.h",
+      "bytes": 2382,
+      "sha256": "0d8c71c8a69035680f63807572b5e36ac667a6573e903d1da7e8dee3da1f0987",
+      "gitBlobSha256": "0d8c71c8a69035680f63807572b5e36ac667a6573e903d1da7e8dee3da1f0987"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHAdventureComponent.h",
+      "bytes": 4823,
+      "sha256": "a00b28798220761818670e3026291e7106bec0b6b55b040e809ea67abb3071e6",
+      "gitBlobSha256": "a00b28798220761818670e3026291e7106bec0b6b55b040e809ea67abb3071e6"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHAstralSanctum.h",
+      "bytes": 2941,
+      "sha256": "e734bb5ef4f7dd8c7cbdf95c6a9b737052ee84a98d404ffcc35056621ea41971",
+      "gitBlobSha256": "e734bb5ef4f7dd8c7cbdf95c6a9b737052ee84a98d404ffcc35056621ea41971"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHCharacter.h",
+      "bytes": 2500,
+      "sha256": "b8b3156c5505fa2efdae7c12ae1c9abf8834e68a2ac3de1f27b47fe5293f8b48",
+      "gitBlobSha256": "b8b3156c5505fa2efdae7c12ae1c9abf8834e68a2ac3de1f27b47fe5293f8b48"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHCitizen.h",
+      "bytes": 276,
+      "sha256": "36fb60ea091e7ff2beed560c4063b9b9e5bc1bdb113c4e0f96dcdf881a9419f6",
+      "gitBlobSha256": "36fb60ea091e7ff2beed560c4063b9b9e5bc1bdb113c4e0f96dcdf881a9419f6"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHGameMode.h",
+      "bytes": 1974,
+      "sha256": "1566fe31541a3c90c92c241c00b6a38b4a6cb75c121421625645bbb3e731f719",
+      "gitBlobSha256": "1566fe31541a3c90c92c241c00b6a38b4a6cb75c121421625645bbb3e731f719"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHGuideAnimInstance.h",
+      "bytes": 1446,
+      "sha256": "116fed969102e4289df7bead41561db6fdb72bddeb9f5740147986a4afcd0600",
+      "gitBlobSha256": "116fed969102e4289df7bead41561db6fdb72bddeb9f5740147986a4afcd0600"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHGuideCharacter.h",
+      "bytes": 338,
+      "sha256": "8b7f5fe25b34848f95b963715453a81b100ff741e5c2d38cb9b01569c49c05ab",
+      "gitBlobSha256": "8b7f5fe25b34848f95b963715453a81b100ff741e5c2d38cb9b01569c49c05ab"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHHUD.h",
+      "bytes": 235,
+      "sha256": "17d2f28c591515219c9de7c750c8f8cdfe5e6513b24d08b4f8906e6485621dd1",
+      "gitBlobSha256": "17d2f28c591515219c9de7c750c8f8cdfe5e6513b24d08b4f8906e6485621dd1"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHKnowledgeComponent.h",
+      "bytes": 4426,
+      "sha256": "2de028d1453d41641e10467da9c1ed8c77ce31cdcd7df486be8bf3185154845a",
+      "gitBlobSha256": "2de028d1453d41641e10467da9c1ed8c77ce31cdcd7df486be8bf3185154845a"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHLivingWorld.h",
+      "bytes": 2772,
+      "sha256": "dfd5a9f96060fafdb74801aa3a50d794c10563598213d0b6b5cfca5a029683ee",
+      "gitBlobSha256": "dfd5a9f96060fafdb74801aa3a50d794c10563598213d0b6b5cfca5a029683ee"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHMeadow.h",
+      "bytes": 1383,
+      "sha256": "a94f40cb6f282680b6bbdef9fa0e80ad21ee052d56f4f70979d4936271a2cbe8",
+      "gitBlobSha256": "a94f40cb6f282680b6bbdef9fa0e80ad21ee052d56f4f70979d4936271a2cbe8"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHPlayerController.h",
+      "bytes": 714,
+      "sha256": "b3f307e0f5d2f32a751646ff4b7b3c4fbcc2b5922c0658a4c490c9a00c168477",
+      "gitBlobSha256": "b3f307e0f5d2f32a751646ff4b7b3c4fbcc2b5922c0658a4c490c9a00c168477"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHRealmWorld.h",
+      "bytes": 6683,
+      "sha256": "8c00ce9563c8bb8abbafe5a2a481920d8ae2787084c1991142fd2f5103b095d9",
+      "gitBlobSha256": "8c00ce9563c8bb8abbafe5a2a481920d8ae2787084c1991142fd2f5103b095d9"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHTrainingTarget.h",
+      "bytes": 1686,
+      "sha256": "83018039f849eb51afab13b960d3340285a2e3c3d949e7544a62f0acd96f84c6",
+      "gitBlobSha256": "83018039f849eb51afab13b960d3340285a2e3c3d949e7544a62f0acd96f84c6"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHViewProbe.h",
+      "bytes": 702,
+      "sha256": "96eaab0e3b2733581da939b9b304d37972080f8521cbbe74434b9e61206187d3",
+      "gitBlobSha256": "96eaab0e3b2733581da939b9b304d37972080f8521cbbe74434b9e61206187d3"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/KnowledgeSystem.h",
+      "bytes": 34301,
+      "sha256": "302e63acb44968080e234c17a15a2e2d55bde47ccb418f81871ca7b1cc5e2b15",
+      "gitBlobSha256": "302e63acb44968080e234c17a15a2e2d55bde47ccb418f81871ca7b1cc5e2b15"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/LivingWorldModel.h",
+      "bytes": 4257,
+      "sha256": "5936816fca3d931f97aaa082ffb68ac573d43fc598a36519d6c6389c0653303f",
+      "gitBlobSha256": "5936816fca3d931f97aaa082ffb68ac573d43fc598a36519d6c6389c0653303f"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/MeadowModel.h",
+      "bytes": 5677,
+      "sha256": "56759b0fe9ca12c916e17f47e0c3b93eb40937fa2ebb6a2d78571eded63a3b85",
+      "gitBlobSha256": "56759b0fe9ca12c916e17f47e0c3b93eb40937fa2ebb6a2d78571eded63a3b85"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/RealmLayout.h",
+      "bytes": 2786,
+      "sha256": "0e7e2bd5ec839ead58442f556592ea0305b05235351fa9e3fb20eabdbd831322",
+      "gitBlobSha256": "0e7e2bd5ec839ead58442f556592ea0305b05235351fa9e3fb20eabdbd831322"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/ViewSkyMath.h",
+      "bytes": 1902,
+      "sha256": "66cefe0a74299975861b3d05ae5e3b5758a3ba05400c25a138936a8066dc497e",
+      "gitBlobSha256": "66cefe0a74299975861b3d05ae5e3b5758a3ba05400c25a138936a8066dc497e"
+    },
+    {
+      "path": "Source/HALVETHRealms.Target.cs",
+      "bytes": 385,
+      "sha256": "22561e2804161c24cce8b86a236516612d294127c6c1830699e83760b1905d15",
+      "gitBlobSha256": "22561e2804161c24cce8b86a236516612d294127c6c1830699e83760b1905d15"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/HALVETHRealmsEditor.Build.cs",
+      "bytes": 432,
+      "sha256": "c14020476fd62a664322d1ac03396dffec21c01fd34aee08b847250232cc1b21",
+      "gitBlobSha256": "c14020476fd62a664322d1ac03396dffec21c01fd34aee08b847250232cc1b21"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Private/AstralPrepareCommandlet.cpp",
+      "bytes": 9677,
+      "sha256": "e65e72f6dd7eb1ecd6282359af4db403ed46cfea76f12d6261247589cf110cff",
+      "gitBlobSha256": "e65e72f6dd7eb1ecd6282359af4db403ed46cfea76f12d6261247589cf110cff"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Private/GardenCharactersCommandlet.cpp",
+      "bytes": 10487,
+      "sha256": "b699e6f43b7252f2f925d6f5ef08c43b77fa7c29477860ed0dfb9b080b3dc3b5",
+      "gitBlobSha256": "b699e6f43b7252f2f925d6f5ef08c43b77fa7c29477860ed0dfb9b080b3dc3b5"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Private/GardenPrepareCommandlet.cpp",
+      "bytes": 7344,
+      "sha256": "0e8ad250d5c71796c5c67c74c1a435e64ad7e095b447cbee38a3377ed0307388",
+      "gitBlobSha256": "0e8ad250d5c71796c5c67c74c1a435e64ad7e095b447cbee38a3377ed0307388"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Private/HALVETHPrepareCommandlet.cpp",
+      "bytes": 8258,
+      "sha256": "764fbd319ff3b43e02dae21609ef49ccdddd6333578c42986501fc41df253d62",
+      "gitBlobSha256": "764fbd319ff3b43e02dae21609ef49ccdddd6333578c42986501fc41df253d62"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Private/HALVETHRealmsEditor.cpp",
+      "bytes": 95,
+      "sha256": "aabd1d0a3d0fe5c2def1427482dac83523bc680c57dae2df202c4f1d8ec583ac",
+      "gitBlobSha256": "aabd1d0a3d0fe5c2def1427482dac83523bc680c57dae2df202c4f1d8ec583ac"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Private/MeadowPrepare.cpp",
+      "bytes": 13145,
+      "sha256": "b089c04118e445cd71a3e1ee7f112070c800b063a00b6752bc36daf4976173be",
+      "gitBlobSha256": "b089c04118e445cd71a3e1ee7f112070c800b063a00b6752bc36daf4976173be"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Public/AstralPrepareCommandlet.h",
+      "bytes": 304,
+      "sha256": "281bf608065133c7678cca5823b13f72ca068e7948d0d7beef38abc2328b0198",
+      "gitBlobSha256": "281bf608065133c7678cca5823b13f72ca068e7948d0d7beef38abc2328b0198"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Public/GardenCharactersCommandlet.h",
+      "bytes": 313,
+      "sha256": "d1682466bf7a082f4ba22901e9a5ff72209e64bdea4d00b0d49c874876fd4f46",
+      "gitBlobSha256": "d1682466bf7a082f4ba22901e9a5ff72209e64bdea4d00b0d49c874876fd4f46"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Public/GardenPrepareCommandlet.h",
+      "bytes": 304,
+      "sha256": "aa35cb772166abe2ba378e08499d4e00dde74ce2bbc1b35f52cb74a65e3b9ed6",
+      "gitBlobSha256": "aa35cb772166abe2ba378e08499d4e00dde74ce2bbc1b35f52cb74a65e3b9ed6"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Public/HALVETHPrepareCommandlet.h",
+      "bytes": 309,
+      "sha256": "5a56dc589845670dc1afdeda964393cb67988ab1d0ec39898b82c3634dcac74f",
+      "gitBlobSha256": "5a56dc589845670dc1afdeda964393cb67988ab1d0ec39898b82c3634dcac74f"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor/Public/MeadowPrepare.h",
+      "bytes": 197,
+      "sha256": "89370b7c4a513ce3b72fa01196b8826131cb0b4c7fdece3613340aaeecced548",
+      "gitBlobSha256": "89370b7c4a513ce3b72fa01196b8826131cb0b4c7fdece3613340aaeecced548"
+    },
+    {
+      "path": "Source/HALVETHRealmsEditor.Target.cs",
+      "bytes": 437,
+      "sha256": "20c1a705fbed123012da6b9b6f8df0527a0825a69914b425b4cf66e35e6a8a38",
+      "gitBlobSha256": "20c1a705fbed123012da6b9b6f8df0527a0825a69914b425b4cf66e35e6a8a38"
+    },
+    {
+      "path": "Source/OpenMW/scripts/veyra_live_motion/npc.lua",
+      "bytes": 2288,
+      "sha256": "80e9a7f767675775636f562042832167563b50236106fe0c02aaba70edc6433d",
+      "gitBlobSha256": "80e9a7f767675775636f562042832167563b50236106fe0c02aaba70edc6433d"
+    },
+    {
+      "path": "Source/OpenMW/veyra-live-motion.omwscripts",
+      "bytes": 39,
+      "sha256": "13de9f218029d37cc9c22b664353913fae1673658f66a94a2f0be34e8301b4ac",
+      "gitBlobSha256": "13de9f218029d37cc9c22b664353913fae1673658f66a94a2f0be34e8301b4ac"
+    }
+  ],
+  "media": [
+    {
+      "path": "Preview/MEADOW_FIELD.png",
+      "bytes": 8262845,
+      "sha256": "525c75c42971705c79d6cb4d1283957f8bbfe18d73733e59b85424a8c7d037c9",
+      "format": "PNG",
+      "captureKind": "NATIVE_UE_RENDER"
+    },
+    {
+      "path": "Preview/MEADOW_FLIGHT.png",
+      "bytes": 6840452,
+      "sha256": "20a12d1c36f6e7c8d15ac228094add527377e5bdc9eb483e4bb9ff3975cda1ff",
+      "format": "PNG",
+      "captureKind": "NATIVE_UE_RENDER"
+    },
+    {
+      "path": "Preview/MEADOW_GATE.png",
+      "bytes": 7685785,
+      "sha256": "f43ec5251c0551d7719c154c64e30034617f6d57520f6e1d4fd140ff7c76421d",
+      "format": "PNG",
+      "captureKind": "NATIVE_UE_RENDER"
+    },
+    {
+      "path": "Preview/MEADOW_ROOTS.png",
+      "bytes": 7770455,
+      "sha256": "bdfa135eccf2f887a2efbf62512eda318fa67d4a85ca43652e99b78ea65f3808",
+      "format": "PNG",
+      "captureKind": "NATIVE_UE_RENDER"
+    },
+    {
+      "path": "Preview/MEADOW_WIND.gif",
+      "bytes": 4078478,
+      "sha256": "ca238d6b0fb0a41bbb25bf75a1ee57e8660d2dc6daa50d449b461850271ae14c",
+      "format": "GIF",
+      "captureKind": "NATIVE_UE_RENDER"
+    }
+  ],
+  "windSequence": {
+    "schema": "halveth.native-sequence-selection.v1",
+    "sourceLog": ".local/Astral-MeadowSequence-a3fbb1ed4bb94f09ab539f8c09b97a9c.log",
+    "packageBinding": "meadow-final-source-binding.json",
+    "frames": [
+      {
+        "path": "Preview/MeadowWind/WIND_000.png",
+        "requestedSimulationSeconds": 4.321762,
+        "sha256": "c89d208ee8cc5589312871ceac2122b032ebc3a5cb2b34752c6f01fdb2b08311"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_001.png",
+        "requestedSimulationSeconds": 4.457201,
+        "sha256": "496a2f66e30f1a1c8d7fa94be36fc4568d33b028eefe831af3ce9892921f675c"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_002.png",
+        "requestedSimulationSeconds": 4.578492,
+        "sha256": "67d9851891547ad778e3dd6a5e0c1a4628119cfff1abadfaa73f8c143d20ee83"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_003.png",
+        "requestedSimulationSeconds": 4.705828,
+        "sha256": "f516787d8f3c24fb79feb8ca1a492701621495f5eb7f6b8837b1bd3f428bd08e"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_004.png",
+        "requestedSimulationSeconds": 4.84258,
+        "sha256": "41053da3793070c8178b70b937bf777803e71e6d3ff53c78c0e45d5cc357048b"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_005.png",
+        "requestedSimulationSeconds": 4.970068,
+        "sha256": "5f9ca851879d8765ddc9edd97e82ee7e1d00a835fbcdf6140b8993346b27a5b9"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_006.png",
+        "requestedSimulationSeconds": 5.104594,
+        "sha256": "5ade9a713a306b615e89a41200d7ef5e6d983841ac798b486cb707b2804620f2"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_007.png",
+        "requestedSimulationSeconds": 5.23221,
+        "sha256": "e897b9a916346cc12f15305010052db944af37e0894502fb4d05d509235e6d1b"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_008.png",
+        "requestedSimulationSeconds": 5.368322,
+        "sha256": "4d26387f3eed9ad27092c370adf53c27926731e56a858287d66360771efbace5"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_009.png",
+        "requestedSimulationSeconds": 5.491607,
+        "sha256": "0681a44a2292b3f0049b58cda6c5421964e1f925598f6a60af8cadc0901b0300"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_010.png",
+        "requestedSimulationSeconds": 5.629072,
+        "sha256": "9f8359bab2e7b1df2793a934e0c6c9d91a0b5560abdd6ac4bd5c4ac360d6f70d"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_011.png",
+        "requestedSimulationSeconds": 5.762038,
+        "sha256": "5a97bfd820c6b429f17cd0416919ec611404a23dd32f8eb97c7b0ce2e62abf37"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_012.png",
+        "requestedSimulationSeconds": 5.897563,
+        "sha256": "9248f24c33cd8356d3a1e3a57190c983064822e323c35cadec2860ddb20a271a"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_013.png",
+        "requestedSimulationSeconds": 6.036096,
+        "sha256": "94e2aab2c634edc3bd72c48ef5caa87381b894e13c03134727e17bd86398a5c3"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_015.png",
+        "requestedSimulationSeconds": 6.184698,
+        "sha256": "396b27e5a628cf1cff5d6943d1d465f612703c7f6efe0570b13df6ffb24d6a19"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_016.png",
+        "requestedSimulationSeconds": 6.321228,
+        "sha256": "808963be0e0839039abee8c4866bcf14430255a12b15d3466558770124112ed0"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_017.png",
+        "requestedSimulationSeconds": 6.454196,
+        "sha256": "dc50e1d3a4b8542b50489c1a827844b7035b770bd74b311b3b6e0d9bdc754fc7"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_018.png",
+        "requestedSimulationSeconds": 6.583969,
+        "sha256": "f9c1d5dd418df828fae1196bc6fbd74d668099a0ddbc59f564602cad4faae9bf"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_019.png",
+        "requestedSimulationSeconds": 6.719569,
+        "sha256": "08a916df618d4ca63443437caa8d34ed7e5c8274deeeedeb3249c7a5d58a3ef7"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_020.png",
+        "requestedSimulationSeconds": 6.853631,
+        "sha256": "27763895e24d7fe4687a6ac9f0cad314e1e5c120298f9e8683426669e1e0d4f2"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_021.png",
+        "requestedSimulationSeconds": 6.981506,
+        "sha256": "d92a932d29b4892f537e53405e2f0e0e1b326a5213c77d47db8c28f81fa1fa47"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_022.png",
+        "requestedSimulationSeconds": 7.116796,
+        "sha256": "153ee8c77eb3fb47f9e5eea6a75ab2fa09de2a0612ff8398154e3008ca1f30e0"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_023.png",
+        "requestedSimulationSeconds": 7.24948,
+        "sha256": "4a7af65bab9b13937b4f28b9ca380a99435750ecdade6a778b1d5f5d276e33c5"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_024.png",
+        "requestedSimulationSeconds": 7.381716,
+        "sha256": "86b71f50fbf9e2d6f03c14330f24c3067dd3f25ada32690940d4e6030bccc5f9"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_025.png",
+        "requestedSimulationSeconds": 7.512361,
+        "sha256": "83989bbecca32fb3090554a18af9d7ec2ffe31ca6e72f5b2ea66caef9acfa49a"
+      },
+      {
+        "path": "Preview/MeadowWind/WIND_026.png",
+        "requestedSimulationSeconds": 7.641372,
+        "sha256": "f7bd93de817b8e2c90b57606fe3ca3f2e55fff21f967732d64e56e5ea2bf8226"
+      }
+    ],
+    "limitations": "Native requests, later-frame exposure; intervals retained; no audio. This is a presentation sequence, not a performance benchmark."
+  },
+  "windCaptureStartedAt": "2026-10-24T14:36:20.9530052Z",
+  "nativeStaticCaptureLog": ".local/Astral-MeadowCapture-66e28ae7784741d48a2c1983e1c70341.log",
+  "sourceScene": {
+    "path": "QA/meadow-source-scene.json",
+    "sha256": "948cff9371ec8b1f9a481866c66fd15a4671556e593a260f9a66cf1b3ba64409",
+    "projectionPacket": "QA/meadow-four-views.json",
+    "projectionResult": {
+      "ok": true,
+      "errors": [],
+      "sourceCount": 48,
+      "checkedViews": [
+        "eye",
+        "vortex",
+        "corridor",
+        "thrust"
+      ],
+      "claimCeiling": "CONSISTENT_WITH_DECLARED_SIMULATED_SOURCE_ONLY",
+      "perturbedObservationRejected": true
+    },
+    "claimCeiling": "48 CPU-generated geometry points, four declared mathematical projections; no GPU position readback or native camera-pixel proof"
+  },
+  "quietFrameSample": {
+    "log": ".local/Astral-MeadowBenchmark-c75916d681de45eebdaf7fdfaf3064ad.log",
+    "warmupSimulationSeconds": 3,
+    "measuredSimulationSeconds": 9,
+    "intervals": 428,
+    "medianMs": 16.899,
+    "p95Ms": 42.512,
+    "screenshots": 0,
+    "cameraChangesAfterSetup": 0,
+    "resolution": [
+      2560,
+      1440
+    ],
+    "qualityProfile": 1,
+    "fpsCap": 60,
+    "gpu": "NVIDIA RTX 4070 SUPER 12282 MiB, driver 610.88",
+    "cpu": "AMD Ryzen 7 9700X",
+    "ramGiB": 64,
+    "limit": "One fixed local development scene, not travel across all realms or guaranteed frame rate"
+  },
+  "rootContact": {
+    "samples": 16,
+    "maxGapCm": 1.238125,
+    "toleranceCm": 5,
+    "synthetic50cmLiftRejected": true,
+    "limit": "One sampled clump in quiet run; not every world blade"
+  },
+  "checks": {
+    "python": {
+      "runLog": ".local/meadow-final-python-tests.log",
+      "tests": 50,
+      "skipped": 1,
+      "result": "PASS",
+      "skip": "Existing Windows symbolic-link environment restriction"
+    },
+    "portableCpp": {
+      "assertions": 37915,
+      "failures": 0,
+      "compilers": [
+        "LLVM 23.1.2 C++17 warnings-as-errors",
+        "MSVC 19.51.36260 C++20 W4/WX"
+      ],
+      "intentionalCountermodels": 8
+    },
+    "native": [
+      "Astral stairs/book/free flight PASS",
+      "Living routines/indoor flight/closed-door collision/LOS/warning/chase/hold/release PASS",
+      "2950-degree look probe PASS, former pitch clamp rejected",
+      "HALVETH_RUNTIME_SMOKE_PASS"
+    ],
+    "nativeRawLogRefs": [
+      ".local/Astral-Probe-057af25473c344678eb8e628b36b6ce3.log",
+      ".local/Astral-LivingProbe-cce45d9cca6841e38ce10c405f5a6209.log",
+      ".local/Astral-ViewProbe-94b119ea40734ead81db967e2e5a4c27.log",
+      ".local/meadow-smoke-638c3aa310da43dfa328cc8ff728514c.log"
+    ],
+    "cacheNegativeChallenge": "Tampered cooked-payload digest rejected by actual starter; receipt restored; payload untouched"
+  },
+  "normalStart": {
+    "observedAt": "2026-10-24T14:43:26Z",
+    "route": "Desktop HALVETH Portal Garden.lnk -> Start-Astralis.cmd -> scripts/astral.ps1 -> .local/meadow-package/Windows/HALVETHRealms.exe",
+    "observed": "Native responding window; moving residents at Astralis gate; J activates levitation HUD, second J returns gravity; game left open",
+    "previousShortcut": "Pointed to older separate project lacking Meadow and LivingWorld sources",
+    "recovery": "Original shortcut copied and hash-verified in private local backup; earlier packages preserved",
+    "privateReceipt": ".local/meadow-desktop-start.json"
+  },
+  "rights": {
+    "map": "HALVETH-RIGHTS.json",
+    "oldMitBasePreserved": true,
+    "newOriginalSixFiles": "LicenseRef-HALVETH-PIRL-2.0",
+    "thirdPartyUnchanged": true,
+    "mediaUse": "Original rendered development captures; underlying PolyHaven CC0 art and Unreal Engine rendering retain their own terms; no blanket proprietary ownership over third-party assets"
+  },
+  "limitations": [
+    "Four 600x600-metre realms, not a 5x5-km world",
+    "Reused tree scan and three resident base meshes",
+    "No full ecology, soil chemistry, digging volume or autonomous language-model society",
+    "Native Windows package local; this receipt does not establish mobile gameplay",
+    "PNG writing in GIF capture causes hitches; sequence is not a performance run",
+    "Static PNG run preceded the final benchmark-only instrumentation addition; final GIF is bound to final package",
+    "Logs and development package remain local; selected hashes/results are published"
+  ],
+  "packageInputBinding": "sha256 binds the measured local build input bytes. gitBlobSha256 binds the corresponding Git index blob; historical source metadata may use different line endings. Neither field asserts unobserved build reproducibility."
+}

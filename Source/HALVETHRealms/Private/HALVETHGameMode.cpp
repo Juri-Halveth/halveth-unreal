@@ -3,6 +3,7 @@
 #include "HALVETHPlayerController.h"
 #include "HALVETHViewProbe.h"
 #include "HALVETHLivingWorld.h"
+#include "HALVETHMeadow.h"
 #include "HALVETHAdventureComponent.h"
 #include "HALVETHKnowledgeComponent.h"
 #include "HALVETHTrainingTarget.h"
@@ -86,6 +87,7 @@ void AHALVETHGameMode::BeginPlay()
     int32 RequestedQuality = SavedQualityProfile(GEngine ? GEngine->GetGameUserSettings() : nullptr);
     FParse::Value(FCommandLine::Get(), TEXT("HalvethQuality="), RequestedQuality);
     ApplyQuality(FMath::Clamp(RequestedQuality, 0, 2), false);
+    if(auto* Meadow=GetWorld()->SpawnActor<AHALVETHMeadow>())Meadow->Initialize(RealmWorld);
     if(!FParse::Param(FCommandLine::Get(),TEXT("HalvethLivingOff"))){LivingWorld=GetWorld()->SpawnActor<AHALVETHLivingWorld>();if(LivingWorld)LivingWorld->Initialize(RealmWorld,static_cast<uint32>(WorldSeed));}
     if(FParse::Param(FCommandLine::Get(),TEXT("HalvethViewProbe"))||FParse::Param(FCommandLine::Get(),TEXT("HalvethNightCapture")))GetWorld()->SpawnActor<AHALVETHViewProbe>();
     Notify(TEXT("Welcome home. B opens your living library. E gathers, speaks or enters a portal. L sends LOVE."));

@@ -96,7 +96,7 @@ void AHALVETHRealmWorld::BuildLandscape(uint32 Seed) {
             if(Key==TEXT("fern_02") && RNG.FRand()>
                 FMath::Clamp((double(Soil.Y)-.23)*1.55*(1.-.8*Soil.X),.0,1.)) continue;
             auto* C=Groups[RNG.RandRange(0,Groups.Num()-1)];
-            float Scale=Key==TEXT("tree_small_02")?RNG.FRandRange(2.4f,4.8f):Key==TEXT("fern_02")?RNG.FRandRange(1.0f,2.5f):RNG.FRandRange(1.0f,4.8f);
+            float Scale=Key==TEXT("tree_small_02")?RNG.FRandRange(2.4f,4.8f):Key==TEXT("fern_02")?RNG.FRandRange(.65f,1.35f):RNG.FRandRange(1.0f,4.8f);
             FBox Bounds=C->GetStaticMesh()->GetBoundingBox();
             double Footprint=Bounds.GetExtent().Size2D()*Scale;
             if(FVector2D(X,Y).Size()<2500+Footprint) continue;
@@ -135,11 +135,20 @@ void AHALVETHRealmWorld::BuildLandscape(uint32 Seed) {
         }
     };
     Scatter(TEXT("tree_small_02"),CurrentRealm==1?1700:1050,false);
-    Scatter(TEXT("fern_02"),15000,false);
+    // Ferns are an understory layer; they no longer substitute for an entire
+    // meadow with oversized repeated fronds. Fine ground cover has its own budget.
+    Scatter(TEXT("fern_02"),4200,false);
     Scatter(TEXT("rock_moss_set_01"),550,true);
     UE_LOG(LogTemp,Display,TEXT("GARDEN_LANDSCAPE_READY realm=%d extent_m=600 trees=%d ferns=%d rocks=%d"),CurrentRealm,TreeCount,FernCount,RockCount);
     UE_LOG(LogTemp,Display,TEXT("GARDEN_FOREST_PHYSICS realm=%d visual_trees=%d colliding_trunks=%d"),CurrentRealm,TreeCount,TreeTrunks?TreeTrunks->GetInstanceCount():0);
     UE_LOG(LogTemp,Display,TEXT("GARDEN_SUBSTRATE_CONTACT realm=%d trees=%d/%d ferns=%d/%d rocks=%d/%d terrain=triangle_trace biome=soil_color_moisture"),CurrentRealm,GroundedTreeCount,TreeCount,GroundedFernCount,FernCount,GroundedRockCount,RockCount);
+}
+
+bool AHALVETHRealmWorld::TraceMeadowGround(double X,double Y,FVector& Position,FVector& Normal) const {
+    if(!TerrainComponent)return false;
+    FHitResult Hit;FCollisionQueryParams Query(SCENE_QUERY_STAT(MeadowRoot),true);
+    if(!TerrainComponent->LineTraceComponent(Hit,FVector(X,Y,12000),FVector(X,Y,-12000),Query))return false;
+    Position=Hit.ImpactPoint;Normal=Hit.ImpactNormal;return true;
 }
 
 bool AHALVETHRealmWorld::VerifyLandscape() {
