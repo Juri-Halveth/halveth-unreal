@@ -196,7 +196,12 @@ void AHALVETHCharacter::Tick(float DeltaSeconds)
         if(!At.Equals(Bounded,.01))SetActorLocation(Bounded,true);
     }
     if(IsReading()&&bAstralFlight)GetCharacterMovement()->StopMovementImmediately();
-    const float TargetFov=bAstralFlight?85+float(FMath::Clamp(GetVelocity().Size()/1700.,0.,1.))*7:85;
+    const float TargetFov=AppearanceInspectionFov>0?AppearanceInspectionFov:(bAstralFlight?85+float(FMath::Clamp(GetVelocity().Size()/1700.,0.,1.))*7:85);
     Camera->FieldOfView=FMath::FInterpTo(Camera->FieldOfView,TargetFov,DeltaSeconds,4);
     if (GetActorLocation().Z < -12000) ResetToSpawn();
+}
+
+void AHALVETHCharacter::SetAppearanceInspectionFov(float Degrees){
+    AppearanceInspectionFov=FMath::IsFinite(Degrees)&&Degrees>=20&&Degrees<=100?Degrees:0;
+    Camera->SetFieldOfView(AppearanceInspectionFov>0?AppearanceInspectionFov:85);
 }

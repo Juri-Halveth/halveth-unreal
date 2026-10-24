@@ -1,4 +1,5 @@
 #include "HALVETHRealmWorld.h"
+#include "HumanAppearanceRuntime.h"
 #include "HALVETHAstralSanctum.h"
 #include "HALVETHTrainingTarget.h"
 #include "HALVETHCharacter.h"
@@ -7,6 +8,7 @@
 #include "HALVETHGuideCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/WorldSettings.h"
+#include "GameFramework/PlayerController.h"
 #include "EarthDynamicsMath.h"
 #include "CollisionShape.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -208,7 +210,8 @@ void AHALVETHRealmWorld::Label(FVector Position, const FString& Text, FLinearCol
     Component->SetRelativeRotation(FRotator(0, -90, 0));
     Component->SetText(FText::FromString(Text));
     Component->SetHorizontalAlignment(EHTA_Center);
-    Component->SetWorldSize(Size);
+    Component->SetWorldSize(FMath::Min(Size,8.f));
+    Component->SetVisibility(false);
     Component->SetTextRenderColor(Color.ToFColor(true));
     Component->RegisterComponent();
     Generated.Add(Component);
@@ -232,7 +235,8 @@ void AHALVETHRealmWorld::Portal(FVector Position, int32 Destination, FLinearColo
     Link.Veil = Shape(SphereMesh, Position + FVector(0, 8, 215), FVector(2.8f, 0.10f, 3.7f), Color * 0.3f, 2, false);
     Link.Light = Light(Position + FVector(0, -110, 240), Color, 1900, 850);
     Portals.Add(Link);
-    Label(Position + FVector(0, -60, 485), RealmName(Destination), Color, 22);
+    const TCHAR* Destinations[]={TEXT("Zurueck [E]"),TEXT("Zum Garten [E]"),TEXT("Zur Kueste [E]"),TEXT("Zum Archiv [E]")};
+    Label(Position + FVector(0,-65,185),Destinations[Destination],FLinearColor(.9f,.9f,.85f),8);
 }
 
 void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
@@ -325,9 +329,7 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
 
 void AHALVETHRealmWorld::Guide(FVector Position, int32 Identity)
 {
-    const FLinearColor Color = RealmColor(Identity);
     const FName GuideTags[] = {TEXT("HALVETH_NPC_SCARLET"), TEXT("HALVETH_NPC_LUCINET"), TEXT("HALVETH_NPC_RACHEL")};
-    const FString Names[] = {TEXT("SCARLET"), TEXT("LUCINET"), TEXT("RACHEL")};
     const FString CharacterName=Identity==1?TEXT("Scarlet"):Identity==2?TEXT("Lucinet"):TEXT("Rachel");
     const FString Path=TEXT("/Game/Characters/")+CharacterName+TEXT(".")+CharacterName;
     BuildSoil(Position);
@@ -337,6 +339,7 @@ void AHALVETHRealmWorld::Guide(FVector Position, int32 Identity)
     GuideActor->GetCharacterMovement()->Mass=Identity==1?68:Identity==2?82:61;
     auto* Body=GuideActor->GetMesh();
     Body->SetSkeletalMeshAsset(LoadObject<USkeletalMesh>(nullptr,*Path));
+    HalvethAppearanceRuntime::Apply(Body,Identity*7919u);
     Body->SetAnimationMode(EAnimationMode::AnimationBlueprint);
     Body->SetAnimInstanceClass(UHALVETHGuideAnimInstance::StaticClass());
     Body->VisibilityBasedAnimTickOption=EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
@@ -358,11 +361,7 @@ void AHALVETHRealmWorld::Guide(FVector Position, int32 Identity)
     GuideProfiles.Add(BodyLineages[Identity].Profile);GuideBodyStates.Add(BodyLineages[Identity].State);
     GuideActor->GetCharacterMovement()->MaxWalkSpeed=GuideProfiles.Last().paceCmS;
     GuideActor->GetCharacterMovement()->Mass=GuideProfiles.Last().massKg;
-    UE_LOG(LogTemp,Display,TEXT("GARDEN_GUIDE_READY identity=%d skeletal=%d idle=%d own_clothing=true cc0_human=true morphs=%d"),Identity,Body->GetSkeletalMeshAsset()!=nullptr,Idle!=nullptr,Body->GetSkeletalMeshAsset()?Body->GetSkeletalMeshAsset()->GetMorphTargets().Num():0);
-    auto* Glow=Light(Position + FVector(0, -65, 160), Color, 180, 290);
-    Glow->AttachToComponent(Body,FAttachmentTransformRules::KeepWorldTransform);
-    Label(Position + FVector(0, 0, 213), Names[Identity - 1] + TEXT("  [E]"), FLinearColor(0.96f, 0.84f, 0.60f), 12);
-    if(auto* Name=Cast<USceneComponent>(Generated.Last()))Name->AttachToComponent(Body,FAttachmentTransformRules::KeepWorldTransform);
+    UE_LOG(LogTemp,Display,TEXT("GARDEN_GUIDE_READY identity=%d skeletal=%d idle=%d wardrobe=removed full_adult_body=true cc0_human=true morphs=%d"),Identity,Body->GetSkeletalMeshAsset()!=nullptr,Idle!=nullptr,Body->GetSkeletalMeshAsset()?Body->GetSkeletalMeshAsset()->GetMorphTargets().Num():0);
 }
 
 FVector AHALVETHRealmWorld::GetGuidePosition(int32 Identity) const {
@@ -444,7 +443,7 @@ bool AHALVETHRealmWorld::VerifyCharacters() const
         const bool Bound=Mesh&&Mesh->GetSkeleton()&&Idle&&Idle->GetSkeleton()==Mesh->GetSkeleton()
             &&Mesh->GetRefSkeleton().GetNum()>=163&&Idle->GetPlayLength()>=11.9
             &&Mesh->FindMorphTarget(TEXT("Blink"))&&Mesh->FindMorphTarget(TEXT("Talk"))
-            &&Mesh->FindMorphTarget(TEXT("ClothLeft"))&&Mesh->FindMorphTarget(TEXT("HairRight"))&&Mesh->FindMorphTarget(TEXT("Breath"))
+            &&Mesh->FindMorphTarget(TEXT("IdentityJaw"))&&Mesh->FindMorphTarget(TEXT("IdentityNose"))&&Mesh->FindMorphTarget(TEXT("Breath"))
             &&Body->GetBoneIndex(TEXT("spine02"))!=INDEX_NONE
             &&Body->GetBoneIndex(TEXT("wrist_R"))!=INDEX_NONE&&Body->GetBoneIndex(TEXT("upperleg01_L"))!=INDEX_NONE
             &&GuideActors.IsValidIndex(I)&&GuideActors[I]&&GuideActors[I]->GetCharacterMovement()->GravityScale==1;
@@ -480,7 +479,7 @@ void AHALVETHRealmWorld::Readable(FVector Position, int32 Book)
     for (int32 Line = 0; Line < 4; ++Line)
         Shape(CubeMesh, Position + FVector(0, -14 + Line * 9, 112), FVector(0.43f, 0.009f, 0.008f), Cover * 0.18f, 0, false);
     Light(Position + FVector(0, 0, 175), Cover, 150, 200);
-    Label(Position + FVector(0, 0, 171), TEXT("E  /  READ"), FLinearColor(0.96f, 0.84f, 0.60f), 15);
+    Label(Position + FVector(0,0,133),TEXT("Lesen [E]"),FLinearColor(.96f,.84f,.60f),8);
 }
 
 int32 AHALVETHRealmWorld::FindReadable(const FVector& Position) const
@@ -530,9 +529,16 @@ void AHALVETHRealmWorld::BeginLovePulse()
 void AHALVETHRealmWorld::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
-    TickSoil(DeltaSeconds);TickEarthSky(DeltaSeconds);
+    TickSoil(DeltaSeconds);if(!AppearanceStudio)TickEarthSky(DeltaSeconds);
     Elapsed += DeltaSeconds;
     const auto* Player=Cast<AHALVETHCharacter>(UGameplayStatics::GetPlayerPawn(this,0));
+    FVector ViewPosition=Player?Player->GetPawnViewLocation():FVector::ZeroVector;FRotator ViewDirection;
+    if(auto* Controller=GetWorld()->GetFirstPlayerController())Controller->GetPlayerViewPoint(ViewPosition,ViewDirection);
+    for(UActorComponent* Component:Generated)if(auto* Text=Cast<UTextRenderComponent>(Component)){
+        const FVector To=Text->GetComponentLocation()-ViewPosition;
+        const bool Show=!AppearanceStudio&&Player&&To.SizeSquared()<FMath::Square(350.)&&FVector::DotProduct(To.GetSafeNormal(),ViewDirection.Vector())>.94;
+        Text->SetVisibility(Show);if(Show)Text->SetWorldRotation((-To).Rotation());
+    }
     for(int32 I=0;I<GuideBodies.Num();I++) {
         auto* Body=GuideBodies[I].Get(); if(!Body)continue;
         auto* Motion=Cast<UHALVETHGuideAnimInstance>(Body->GetAnimInstance());if(!Motion)continue;
@@ -561,7 +567,7 @@ void AHALVETHRealmWorld::Tick(float DeltaSeconds)
             &&Player->GetAdventure()->IsSpeakingTo(Body->ComponentTags[0]);
         // Ordinary proximity permits movement. A conversation pauses it;
         // development still portraits explicitly hold their nearby subjects.
-        const bool PortraitHold=Near&&FParse::Param(FCommandLine::Get(),TEXT("HalvethVisual"));
+        const bool PortraitHold=Near&&(FParse::Param(FCommandLine::Get(),TEXT("HalvethVisual"))||FParse::Param(FCommandLine::Get(),TEXT("HalvethAppearanceCapture")));
         if(!Speaking&&!PortraitHold) {
             if(Phys.muscleReserve<.22&&Elapsed>=GuideRestUntil[I]){
                 GuideRestUntil[I]=Elapsed+12;GuideDecisionAt[I]=GuideRestUntil[I];
@@ -630,14 +636,15 @@ void AHALVETHRealmWorld::Tick(float DeltaSeconds)
             double Angle=FMath::Atan2(FVector::DotProduct(Local,Motion->Right),FVector::DotProduct(Local,Motion->Forward));
             if(FMath::Abs(Angle)>.55)Facing.Yaw=Difference.Rotation().Yaw;
         }
-        GuideActor->SetActorRotation(FMath::RInterpTo(GuideActor->GetActorRotation(),Facing,DeltaSeconds,2.3));
+        if(!PortraitHold)GuideActor->SetActorRotation(FMath::RInterpTo(GuideActor->GetActorRotation(),Facing,DeltaSeconds,2.3));
         // Translation drives strides. Turning towards a speaker must not leave
         // a planted walking foot behind while the capsule rotates in place.
         Motion->DesiredSpeed=Movement->IsMovingOnGround()?Velocity.Size2D():0;
         Motion->Speaking=Speaking;
-        FVector EyeTarget=Player?Player->GetActorLocation()+FVector(0,0,55)-Body->GetComponentLocation():FVector(0,0,0);
-        EyeTarget=Body->GetComponentTransform().InverseTransformVectorNoScale(EyeTarget);
-        EyeTarget.Z-=165;
+        FVector View=Player?Player->GetPawnViewLocation():FVector::ZeroVector;FRotator ViewRotation;
+        if(auto* Controller=GetWorld()->GetFirstPlayerController())Controller->GetPlayerViewPoint(View,ViewRotation);
+        const FVector Eyes=(Body->GetBoneLocation(TEXT("eye_L"))+Body->GetBoneLocation(TEXT("eye_R")))*.5;
+        const FVector EyeTarget=Body->GetComponentTransform().InverseTransformVectorNoScale(View-Eyes);
         Motion->DesiredLookYaw=Near?FMath::Clamp(FMath::Atan2(FVector::DotProduct(EyeTarget,Motion->Right),FVector::DotProduct(EyeTarget,Motion->Forward)),-.7,.7):.18*FMath::Sin(Elapsed*.41+I);
         Motion->DesiredLookPitch=Near?FMath::Clamp(FMath::Atan2(EyeTarget.Z,EyeTarget.Size2D()),-.22,.22):.03*FMath::Sin(Elapsed*.61+I);
         Body->SetMorphTarget(TEXT("Talk"),Speaking?.5f*FMath::Max(0.f,FMath::Sin(Elapsed*5.2f+I)):0.f);
@@ -657,7 +664,10 @@ void AHALVETHRealmWorld::Tick(float DeltaSeconds)
         Fireflies[Index]->SetRelativeScale3D(FVector(0.045f + Strength * 0.10f));
     }
     for (const FHALVETHPortal& Portal : Portals)
-        if (Portal.Light) Portal.Light->SetIntensity(1750 + FMath::Sin(Elapsed * 1.6f) * 220 + Strength * 1600);
+        if (Portal.Light){
+            const float Daylight=float(FMath::SmoothStep(-.05,.25,-Sun->GetForwardVector().Z));
+            Portal.Light->SetIntensity(FMath::Lerp(1750.f,120.f,Daylight)+FMath::Sin(Elapsed*1.6f)*FMath::Lerp(220.f,25.f,Daylight)+Strength*1600);
+        }
     if (LoveOrb)
     {
         LoveOrb->SetVisibility(LoveRemaining > 0);

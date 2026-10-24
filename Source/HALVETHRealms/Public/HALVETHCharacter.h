@@ -27,6 +27,7 @@ public:
     void SetReaderPanel(int32 Panel) { ReaderPanel = FMath::Clamp(Panel, 0, 3); }
     UHALVETHAdventureComponent* GetAdventure() const { return Adventure; }
     UHALVETHKnowledgeComponent* GetKnowledge() const { return Knowledge; }
+    void SetAppearanceInspectionFov(float Degrees);
 private:
     UPROPERTY() TObjectPtr<UCameraComponent> Camera;
     UPROPERTY() TObjectPtr<UHALVETHAdventureComponent> Adventure;
@@ -36,6 +37,7 @@ private:
     int32 ReaderPanel = 0;
     bool bAstralFlight=false,bFlightAscend=false,bFlightDescend=false;
     float CivicHoldRemaining=0;
+    float AppearanceInspectionFov=0;
     bool bHoldHover=false;
     void FlightToggle();
     void StopJumpOrAscend();

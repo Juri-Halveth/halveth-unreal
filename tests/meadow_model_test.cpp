@@ -1,275 +1,318 @@
 // Copyright (c) 2026 Juri Janovski.
 // SPDX-License-Identifier: LicenseRef-HALVETH-PIRL-2.0
 // Exact terms and earlier-grant boundaries: LICENSES.md.
-
-// Standalone C++17; no engine, assets, test framework or network required.
-// Example: clang++ -std=c++17 -O2 -Wall -Wextra -Werror -pedantic
-//          tests/meadow_model_test.cpp -o <temporary-executable>
+// Portable C++17 geometry, habitat and wind regression tests; no engine/assets.
 #include "../Source/HALVETHRealms/Public/MeadowModel.h"
 
 #include <array>
 #include <iostream>
 #include <limits>
+#include <vector>
 
 namespace
 {
 using namespace HalvethMeadow;
 using PointFunction = Vec (*)(const Blade&, double, double);
-using WindFunction = Vec (*)(Vec, double, double, double);
+using WindFunction = Vec (*)(Vec, double, double, double, double);
+using HabitatFunction = HabitatStyle (*)(double, double, double, double);
+int checks = 0, failures = 0;
 
-int checks = 0;
-int failures = 0;
-
-void Check(bool passed, const char* description)
+void Check(bool passed, const char* message)
 {
     ++checks;
-    if (!passed && ++failures <= 12)
-        std::cerr << "FAIL: " << description << '\n';
+    if (!passed && ++failures <= 16)
+        std::cerr << "FAIL: " << message << '\n';
 }
-
-Vec Difference(Vec a, Vec b) { return {a.x - b.x, a.y - b.y, a.z - b.z}; }
-double Length(Vec a) { return std::sqrt(a.x * a.x + a.y * a.y + a.z * a.z); }
+Vec Sub(Vec a, Vec b) { return {a.x-b.x, a.y-b.y, a.z-b.z}; }
+double Length(Vec a) { return std::sqrt(a.x*a.x+a.y*a.y+a.z*a.z); }
 bool Finite(Vec a) { return std::isfinite(a.x) && std::isfinite(a.y) && std::isfinite(a.z); }
-bool Same(Vec a, Vec b) { return a.x == b.x && a.y == b.y && a.z == b.z; }
-bool Near(double a, double b) { return std::abs(a - b) <= 1e-10; }
-bool Near(Vec a, Vec b) { return Length(Difference(a, b)) <= 1e-10; }
-
+bool Same(Vec a, Vec b) { return a.x==b.x && a.y==b.y && a.z==b.z; }
+bool Near(Vec a, Vec b) { return Length(Sub(a,b)) < 1e-9; }
 bool Same(const Blade& a, const Blade& b)
 {
-    return Same(a.root, b.root) && a.height == b.height && a.width == b.width
-        && a.bend == b.bend && a.angle == b.angle && a.phase == b.phase;
+    return Same(a.root,b.root) && a.height==b.height && a.width==b.width
+        && a.bend==b.bend && a.angle==b.angle && a.phase==b.phase
+        && a.curl==b.curl && a.twist==b.twist && a.lateral==b.lateral
+        && a.age==b.age && a.form==b.form;
 }
-
-bool ParametersValid(const Blade& blade)
+bool ParametersValid(const Blade& b)
 {
-    return Finite(blade.root) && blade.root.z == 0.0
-        && std::hypot(blade.root.x, blade.root.y) <= 45.0 + 1e-10
-        && blade.height >= 18.0 && blade.height <= 65.0
-        && blade.width >= 0.45 && blade.width <= 1.35
-        && blade.bend >= 4.0 && blade.bend <= 22.0
-        && blade.angle >= 0.0 && blade.angle < 2.0 * Pi
-        && blade.phase >= 0.0 && blade.phase < 2.0 * Pi;
+    return Finite(b.root) && b.root.z==0.0
+        && std::hypot(b.root.x,b.root.y)<=ClumpRadiusCm+1e-9
+        && b.height>=4.0 && b.height<=24.0
+        && (b.form==Form::GroundLeaf ? b.width>=0.60 && b.width<=1.20 : b.width>=0.18 && b.width<=0.55)
+        && b.bend>=0.48*b.height && b.bend<=1.14*b.height
+        && b.angle>=0.0 && b.angle<2.0*Pi && b.phase>=0.0 && b.phase<2.0*Pi
+        && b.curl>=0.12 && b.curl<=0.78 && std::abs(b.twist)<=0.8
+        && std::abs(b.lateral)<=0.12 && b.age>=0.0 && b.age<=1.0;
 }
-
 double TriangleAreaTwice(Vec a, Vec b, Vec c)
 {
-    const Vec u = Difference(b, a);
-    const Vec v = Difference(c, a);
-    return Length({u.y * v.z - u.z * v.y, u.z * v.x - u.x * v.z,
-                   u.x * v.y - u.y * v.x});
+    const Vec u=Sub(b,a),v=Sub(c,a);
+    return Length({u.y*v.z-u.z*v.y,u.z*v.x-u.x*v.z,u.x*v.y-u.y*v.x});
 }
-
-bool SurfaceValid(const Blade& blade, PointFunction point)
+bool SurfaceValid(const Blade& b, PointFunction point)
 {
-    const Vec tip = point(blade, 1.0, 0.0);
-    if (!Near(point(blade, 0.0, 0.0), blade.root)
-        || !Near(tip.z - blade.root.z, blade.height)
-        || !Near(std::hypot(tip.x - blade.root.x, tip.y - blade.root.y), blade.bend)
-        || !Same(tip, point(blade, 1.0, -1.0))
-        || !Same(tip, point(blade, 1.0, 1.0)))
+    const Vec tip=point(b,1.0,0.0);
+    if (!Near(point(b,0.0,0.0),b.root)
+        || !Same(tip,point(b,1.0,-1.0)) || !Same(tip,point(b,1.0,1.0))
+        || tip.z<=b.root.z || tip.z>b.root.z+b.height+1e-9
+        || std::hypot(tip.x-b.root.x,tip.y-b.root.y)<0.47*b.height)
         return false;
-
-    double previousWidth = blade.width + 1.0;
-    for (int row = 0; row <= 12; ++row)
+    const int segments=Segments(b),vertexCount=VertexCount(b);
+    std::array<Vec,2*BladeSegments+1> vertices{};
+    double crown=0;
+    for (int row=0;row<=segments;++row)
     {
-        const double t = static_cast<double>(row) / 12.0;
-        const Vec left = point(blade, t, -1.0);
-        const Vec centre = point(blade, t, 0.0);
-        const Vec right = point(blade, t, 1.0);
-        const double width = Length(Difference(left, right));
+        const double t=static_cast<double>(row)/segments;
+        const Vec left=point(b,t,-1.0),centre=point(b,t,0.0),right=point(b,t,1.0);
         if (!Finite(left) || !Finite(centre) || !Finite(right)
-            || !Near(centre.z - blade.root.z, blade.height * t)
-            || !Near(left.z, centre.z) || !Near(right.z, centre.z)
-            || !(width < previousWidth)
-            || (row == 0 && !Near(width, blade.width)))
+            || centre.z<b.root.z-1e-9 || centre.z>b.root.z+b.height+1e-9
+            || Length(Sub(left,right))>b.width+1e-9)
             return false;
-        previousWidth = width;
-        if (row < 12)
+        const Vec edgeMid={(left.x+right.x)*0.5,(left.y+right.y)*0.5,(left.z+right.z)*0.5};
+        if (!Near(centre,edgeMid)) return false; // Reject the old centre crease.
+        crown=std::max(crown,centre.z-b.root.z);
+        if (row<segments)
         {
-            const double nextT = static_cast<double>(row + 1) / 12.0;
-            const Vec nextLeft = point(blade, nextT, -1.0);
-            const Vec nextRight = point(blade, nextT, 1.0);
-            // A strip has two triangles per row and ONE final tip triangle.
-            if (TriangleAreaTwice(left, right, nextLeft) < 1e-7
-                || (row < 11 && TriangleAreaTwice(right, nextRight, nextLeft) < 1e-7)
-                || TriangleAreaTwice(left, centre, nextLeft) < 1e-7
-                || TriangleAreaTwice(centre, right, nextRight) < 1e-7)
+            vertices[2*row]=left;vertices[2*row+1]=right;
+            const double next=static_cast<double>(row+1)/segments;
+            const Vec nextCentre=point(b,next,0.0);
+            const Vec lineMid={(centre.x+nextCentre.x)*0.5,(centre.y+nextCentre.y)*0.5,(centre.z+nextCentre.z)*0.5};
+            if (Length(Sub(point(b,0.5*(t+next),0.0),lineMid))>0.06*b.height) return false;
+        }
+        else vertices[2*segments]=tip;
+    }
+    bool meshValid=true;
+    int triangles=0;
+    std::array<int,2*BladeSegments+1> uses{};
+    ForEachTriangle(b,[&](int a,int c,int d){
+        ++triangles;
+        if (a<0 || c<0 || d<0 || a>=vertexCount || c>=vertexCount || d>=vertexCount)
+        {
+            meshValid=false;return;
+        }
+        ++uses[a];++uses[c];++uses[d];
+        if (TriangleAreaTwice(vertices[a],vertices[c],vertices[d])<1e-7) meshValid=false;
+    });
+    if (!meshValid || triangles!=TriangleCount(b)) return false;
+    for (int i=0;i<vertexCount;++i) if (uses[i]==0) return false;
+    const Vec mid=point(b,0.5,0.0);
+    const Vec chord={(b.root.x+tip.x)*0.5,(b.root.y+tip.y)*0.5,(b.root.z+tip.z)*0.5};
+    return crown>=0.95*b.height && Length(Sub(mid,chord))>0.06*b.height;
+}
+bool RootsAnchored(const Blade& b, WindFunction wind)
+{
+    for (int sample=0;sample<128;++sample)
+        for (double side : {-1.0,0.0,1.0})
+            if (!Same(wind(BladePoint(b,0.0,side),0.0,sample*1.137,b.phase,b.height),Vec{0.0,0.0,0.0}))
+                return false;
+    // Quadratic envelope pins the root slope as well as the exact endpoint.
+    const Vec close=wind(BladePoint(b,0.0001,0.0),0.0001,4.2,b.phase,b.height);
+    return Length(close)<1e-7;
+}
+bool WindBounded(const Blade& b, WindFunction wind)
+{
+    const Vec tip=BladePoint(b,1.0,0.0);
+    for (int sample=0;sample<64;++sample)
+        for (double t : {0.0,0.001,0.25,0.5,0.9,1.0})
+        {
+            const Vec offset=wind(tip,t,(sample-32.0)*7.123,b.phase,b.height);
+            if (!Finite(offset) || Length(offset)>MaxWindDisplacementCm
+                || Length(offset)>0.0915*b.height*t*t+1e-9)
                 return false;
         }
-    }
-    const Vec linearMid = {(blade.root.x + tip.x) * 0.5,
-                           (blade.root.y + tip.y) * 0.5,
-                           (blade.root.z + tip.z) * 0.5};
-    const Vec centreMid = point(blade, 0.5, 0.0);
-    const Vec leftMid = point(blade, 0.5, -1.0);
-    const Vec rightMid = point(blade, 0.5, 1.0);
-    const Vec edgeMid = {(leftMid.x + rightMid.x) * 0.5,
-                         (leftMid.y + rightMid.y) * 0.5,
-                         (leftMid.z + rightMid.z) * 0.5};
-    return Length(Difference(centreMid, linearMid)) > 0.5
-        && Length(Difference(centreMid, edgeMid)) > 0.001;
-}
-
-bool RootsAnchored(const Blade& blade, WindFunction wind)
-{
-    for (int sample = 0; sample < 1000; ++sample)
-    {
-        const double time = (static_cast<double>(sample) - 500.0) * 0.137;
-        for (double side : {-1.0, 0.0, 1.0})
-            if (!Same(wind(BladePoint(blade, 0.0, side), 0.0, time, blade.phase),
-                      Vec{0.0, 0.0, 0.0}))
-                return false;
-    }
     return true;
 }
-
-bool WindBounded(const Blade& blade, WindFunction wind)
+bool ContinuousAt(WindFunction wind, Vec p, double phase, double height, double time, double dt)
 {
-    const Vec tip = BladePoint(blade, 1.0, 0.0);
-    for (int sample = 0; sample < 64; ++sample)
+    const Vec a=wind(p,1.0,time,phase,height),b=wind(p,1.0,time+dt,phase,height);
+    return Finite(a) && Finite(b) && Length(Sub(a,b))<=0.12*height*dt+1e-9;
+}
+template<class Population> bool PopulationValid(const Population& blades)
+{
+    const std::size_t n=blades.size();
+    std::array<int,4> forms{};
+    std::size_t shortCount=0,downturned=0;
+    for (const auto& b : blades)
     {
-        const double time = (static_cast<double>(sample) - 32.0) * 7.123;
-        for (double t : {0.0, 0.001, 0.25, 0.5, 0.9, 1.0})
-        {
-            const Vec offset = wind(tip, t, time, blade.phase);
-            if (!Finite(offset) || Length(offset) > MaxWindDisplacementCm
-                || Length(offset) > 8.76 * t * t + 1e-10)
-                return false;
-        }
+        if (!ParametersValid(b)) return false;
+        if (b.height<=16.0) ++shortCount;
+        const double dz=BladePoint(b,1.0,0.0).z-BladePoint(b,0.99,0.0).z;
+        if (dz<0.0) ++downturned;
+        ++forms[static_cast<std::size_t>(b.form)];
     }
-    return true;
+    return shortCount*100>=n*85 && shortCount*100<=n*96
+        && forms[0]*100>=static_cast<int>(n)*12 && forms[0]*100<=static_cast<int>(n)*15
+        && downturned*100>=n*45
+        && std::all_of(forms.begin(),forms.end(),[](int count){return count>0;});
 }
-
-bool ContinuousAt(WindFunction wind, Vec position, double phase, double time, double dt)
+template<std::size_t N> bool MeshBudgetValid(const std::array<Blade,N>& blades)
 {
-    const Vec a = wind(position, 1.0, time, phase);
-    const Vec b = wind(position, 1.0, time + dt, phase);
-    return Finite(a) && Finite(b) && Length(Difference(a, b)) <= 16.0 * dt + 1e-10;
+    std::size_t vertices=0,triangles=0;
+    for (const auto& b : blades) { vertices+=VertexCount(b);triangles+=TriangleCount(b); }
+    // Compare one candidate clump with the first native pass, including its
+    // unused duplicate terminal vertices. Triangle ceiling is the old 2816.
+    return N==256 && vertices<=2880 && triangles<=2816;
 }
-
-template <std::size_t N>
-bool DistinctPhases(const std::array<Blade, N>& blades)
+template<std::size_t N> bool RootCoverage(const std::array<Blade,N>& blades)
 {
-    std::array<double, N> phases{};
-    for (std::size_t i = 0; i < N; ++i)
-        phases[i] = blades[i].phase;
-    std::sort(phases.begin(), phases.end());
-    return std::adjacent_find(phases.begin(), phases.end()) == phases.end();
+    std::array<std::size_t,8> rings{};
+    std::array<std::size_t,4> quadrants{};
+    for (const auto& b : blades)
+    {
+        const double r2=(b.root.x*b.root.x+b.root.y*b.root.y)/(ClumpRadiusCm*ClumpRadiusCm);
+        ++rings[std::min<std::size_t>(7,static_cast<std::size_t>(r2*8))];
+        ++quadrants[(b.root.x>=0.0?1U:0U)+(b.root.y>=0.0?2U:0U)];
+    }
+    return std::all_of(rings.begin(),rings.end(),[](std::size_t n){return n>=N/10 && n<=N/6;})
+        && std::all_of(quadrants.begin(),quadrants.end(),[](std::size_t n){return n>=N/5;});
 }
-
-// Safe synthetic defects ensure the important oracles can actually reject bad
-// geometry/wind. They are test-only and never enter the production helper.
-Vec StraightBlade(const Blade& blade, double t, double side)
+bool HabitatValid(HabitatFunction habitat)
 {
-    Blade straight = blade;
-    straight.bend = 0.0;
-    Vec p = BladePoint(straight, t, side);
-    p.x += std::cos(blade.angle) * blade.bend * t;
-    p.y += std::sin(blade.angle) * blade.bend * t;
+    const auto lush=habitat(0.9,0.7,0.1,0.5);
+    if (lush.density<0.85 || habitat(0.1,0.0,0.0,0.5).density!=0.0
+        || habitat(0.9,0.7,0.9,0.5).density!=0.0)
+        return false;
+    double previous=0;
+    for (int i=0;i<=1000;++i)
+    {
+        const auto h=habitat(i/1000.0,0.6,0.1,0.5);
+        if (!std::isfinite(h.density) || h.density<previous-1e-9 || h.density>1.0
+            || h.density-previous>0.005 || h.heightScale<0.90 || h.heightScale>1.02
+            || h.widthScale<1.02 || h.widthScale>1.12 || h.vigour<0.0 || h.vigour>1.0)
+            return false;
+        previous=h.density;
+    }
+    return habitat(0.8,0.05,0.1,0.5).density<0.35*lush.density;
+}
+// Old tall straws and safe synthetic defects must be rejected by the same
+// oracles that accept the candidate. No defective path is in production.
+Vec StraightBlade(const Blade& b,double t,double side)
+{
+    const Vec tip=BladePoint(b,1.0,0.0);
+    return {b.root.x+(tip.x-b.root.x)*t-std::sin(b.angle)*b.width*(1-t)*side*0.5,
+            b.root.y+(tip.y-b.root.y)*t+std::cos(b.angle)*b.width*(1-t)*side*0.5,
+            b.root.z+(tip.z-b.root.z)*t};
+}
+Vec UntaperedBlade(const Blade& b,double t,double side)
+{
+    Vec p=BladePoint(b,t,0.0);
+    p.x-=std::sin(b.angle)*b.width*side*0.5;
+    p.y+=std::cos(b.angle)*b.width*side*0.5;
     return p;
 }
-
-Vec UntaperedBlade(const Blade& blade, double t, double side)
+Vec CollapsedBlade(const Blade& b,double t,double) { return BladePoint(b,t,0.0); }
+Vec CreasedBlade(const Blade& b,double t,double side)
 {
-    Vec p = BladePoint(blade, t, 0.0);
-    p.x -= std::sin(blade.angle) * 0.5 * blade.width * side;
-    p.y += std::cos(blade.angle) * 0.5 * blade.width * side;
-    return p;
+    Vec p=BladePoint(b,t,side);p.z-=0.12*b.width*t*(1-t)*side*side;return p;
 }
-
-Vec CollapsedBlade(const Blade& blade, double t, double) { return BladePoint(blade, t, 0.0); }
-Vec DriftingRoot(Vec p, double t, double time, double phase)
+Vec DriftingRoot(Vec p,double t,double time,double phase,double height)
 {
-    Vec offset = Wind(p, t, time, phase);
-    offset.x += 0.25;
-    return offset;
+    Vec offset=Wind(p,t,time,phase,height);offset.x+=0.25;return offset;
 }
-Vec ExcessiveWind(Vec, double t, double, double) { return {11.0 * t, 0.0, 0.0}; }
-Vec SteppedWind(Vec, double t, double time, double)
+Vec ExcessiveWind(Vec,double t,double,double,double) { return {8.0*t*t,0.0,0.0}; }
+Vec SteppedWind(Vec,double t,double time,double,double) { return {(time<0.5?-1.0:1.0)*t*t,0.0,0.0}; }
+HabitatStyle HardCutoff(double cover,double moisture,double rock,double patch)
 {
-    return {(time < 0.5 ? -8.0 : 8.0) * t * t, 0.0, 0.0};
+    auto h=Habitat(cover,moisture,rock,patch);h.density=cover<0.43?0.0:0.95;return h;
 }
-} // namespace
+HabitatStyle Everywhere(double,double,double,double) { return {1.0,1.0,1.0,1.0}; }
+}
 
 int main()
 {
-    constexpr std::size_t variantCount = 16;
-    constexpr std::size_t bladesPerVariant = 64;
-    std::array<Blade, variantCount * bladesPerVariant> blades{};
-    double minHeight = 65.0, maxHeight = 18.0;
-    double minWidth = 1.35, maxWidth = 0.45;
-    double minBend = 22.0, maxBend = 4.0;
-    double minRadius = 45.0, maxRadius = 0.0;
-    std::array<bool, 4> quadrants{};
-    for (std::size_t v = 0; v < variantCount; ++v)
+    constexpr std::size_t variants=16;
+    std::array<Blade,variants*BladesPerClump> blades{};
+    std::array<Blade,BladesPerClump> clump{};
+    std::array<double,variants*BladesPerClump> phases{};
+    for (std::size_t v=0;v<variants;++v)
     {
-        for (std::size_t i = 0; i < bladesPerVariant; ++i)
+        for (std::uint32_t i=0;i<BladesPerClump;++i)
         {
-            const Blade b = MakeBlade(static_cast<std::uint32_t>(v), static_cast<std::uint32_t>(i));
-            blades[v * bladesPerVariant + i] = b;
-            Check(ParametersValid(b), "disk, dimensions, angles and root Z bounds");
-            Check(SurfaceValid(b, BladePoint), "curved tapered surface, full height and nonzero triangles");
-            Check(RootsAnchored(b, Wind), "both base edges and centre pinned across 1000 times");
-            Check(WindBounded(b, Wind), "finite wind, quadratic root envelope and bounded tip");
-            const Vec tip = BladePoint(b, 1.0, 0.0);
-            for (int frame = 0; frame < 16; ++frame)
-                for (double dt : {1.0 / 60.0, 1.0 / 240.0})
-                    Check(ContinuousAt(Wind, tip, b.phase, -1000.0 + frame * 137.23, dt),
-                          "frame continuity at 60/240 Hz, including negative times");
-            minHeight = std::min(minHeight, b.height); maxHeight = std::max(maxHeight, b.height);
-            minWidth = std::min(minWidth, b.width); maxWidth = std::max(maxWidth, b.width);
-            minBend = std::min(minBend, b.bend); maxBend = std::max(maxBend, b.bend);
-            const double radius = std::hypot(b.root.x, b.root.y);
-            minRadius = std::min(minRadius, radius); maxRadius = std::max(maxRadius, radius);
-            quadrants[(b.root.x >= 0.0 ? 1U : 0U) + (b.root.y >= 0.0 ? 2U : 0U)] = true;
+            const Blade b=MakeBlade(static_cast<std::uint32_t>(v),i);
+            const std::size_t n=v*BladesPerClump+i;
+            blades[n]=b;clump[i]=b;phases[n]=b.phase;
+            Check(ParametersValid(b),"bounded low dimensions, leaning forms and root radius");
+            Check(SurfaceValid(b,BladePoint),"smooth narrow ribbons, no centre crease, shared topology without unused/degenerate vertices");
+            Check(RootsAnchored(b,Wind),"root edges and slope remain pinned");
+            Check(WindBounded(b,Wind),"tip sway stays below 9.15 percent of blade height and 2.2cm");
+            const Vec tip=BladePoint(b,1.0,0.0);
+            for (int frame=0;frame<8;++frame)
+                for (double dt : {1.0/60.0,1.0/240.0})
+                    Check(ContinuousAt(Wind,tip,b.phase,b.height,-1000.0+frame*137.23,dt),"continuous wind across 60/240Hz steps");
+            for (double t : {0.0,0.25,0.5,1.0})
+            {
+                const Vec c=Albedo(b,t);
+                Check(Finite(c) && c.x>0 && c.y>0 && c.z>0
+                      && c.x<0.09 && c.y<0.08 && c.z<0.04
+                      && c.y/c.x<2.0,"muted finite linear albedo, no fluorescent tip gradient");
+            }
         }
+        Check(RootCoverage(clump),"every clump fills equal-area rings and all directions without root clustering");
+        Check(PopulationValid(clump),"each mesh variant contains mostly short leaves and several growth forms");
+        Check(MeshBudgetValid(clump),"256 roots remain within 2880 positions and 2816 triangles per clump");
     }
-
-    // Replay in reverse order: unrelated calls must not advance a global RNG.
-    for (std::size_t n = blades.size(); n-- > 0;)
-        Check(Same(blades[n], MakeBlade(static_cast<std::uint32_t>(n / bladesPerVariant),
-                                        static_cast<std::uint32_t>(n % bladesPerVariant))),
-              "exact deterministic replay independent of call order");
-    for (std::uint32_t value : {0U, 1U, 0x80000000U, std::numeric_limits<std::uint32_t>::max()})
+    Check(PopulationValid(blades),"85-96 percent short floor leaves plus minority taller tufts and many hooked tips");
+    Check(BladesPerClump>192,"more roots than the first native pass");
+    for (std::size_t n=blades.size();n-->0;)
+        Check(Same(blades[n],MakeBlade(static_cast<std::uint32_t>(n/BladesPerClump),static_cast<std::uint32_t>(n%BladesPerClump))),
+              "reverse-order deterministic replay without global random state");
+    for (std::uint32_t value : {0U,1U,0x80000000U,std::numeric_limits<std::uint32_t>::max()})
     {
-        const Blade b = MakeBlade(value, value);
-        Check(ParametersValid(b) && Same(b, MakeBlade(value, value)), "full uint32 seed domain");
-        Check(!Same(b, MakeBlade(value ^ 0x80000000U, value)), "variant high bits affect output");
-        Check(!Same(b, MakeBlade(value, value ^ 0x80000000U)), "index high bits affect output");
+        const Blade b=MakeBlade(value,value);
+        Check(ParametersValid(b) && Same(b,MakeBlade(value,value)),"full uint32 seed range remains finite and repeatable");
+        Check(!Same(b,MakeBlade(value^0x80000000U,value)) && !Same(b,MakeBlade(value,value^0x80000000U)),"all seed bits participate");
     }
-    Check(DistinctPhases(blades), "no shared phase in the declared 16 x 64 population");
-    Check(maxHeight - minHeight > 44.0 && maxWidth - minWidth > 0.85 && maxBend - minBend > 17.0,
-          "fixed variants span substantial dimension ranges");
-    Check(minRadius < 5.0 && maxRadius > 44.0
-          && std::all_of(quadrants.begin(), quadrants.end(), [](bool seen) { return seen; }),
-          "disk distribution reaches centre, rim and all quadrants");
-
-    const Blade b = blades[0];
-    const Vec tip = BladePoint(b, 1.0, 0.0);
-    const Vec distant = {tip.x + 137.0, tip.y - 71.0, tip.z};
-    Check(Length(Difference(Wind(tip, 1.0, 2.25, b.phase), Wind(distant, 1.0, 2.25, b.phase))) > 0.1,
-          "wind phase responds to world position");
-    Check(Length(Difference(Wind(tip, 1.0, 2.25, b.phase), Wind(tip, 1.0, 2.25, b.phase + 1.0))) > 0.1,
-          "wind phase responds to per-blade phase");
-    Check(Same(Wind(tip, -1.0, 3.0, b.phase), Vec{0.0, 0.0, 0.0})
-          && Same(Wind(tip, 2.0, 3.0, b.phase), Wind(tip, 1.0, 3.0, b.phase)), "wind t saturation");
-    Check(Same(BladePoint(b, -1.0, -2.0), BladePoint(b, 0.0, -1.0))
-          && Same(BladePoint(b, 2.0, 2.0), BladePoint(b, 1.0, 1.0)), "geometry parameter saturation");
-    Check(!SurfaceValid(b, StraightBlade), "negative challenge rejects straight blade");
-    Check(!SurfaceValid(b, UntaperedBlade), "negative challenge rejects missing taper/tip");
-    Check(!SurfaceValid(b, CollapsedBlade), "negative challenge rejects degenerate triangles");
-    Blade shortened = b;
-    shortened.height = 17.0;
-    Check(!ParametersValid(shortened), "negative challenge rejects out-of-contract height");
-    Check(!RootsAnchored(b, DriftingRoot), "negative challenge rejects moving roots");
-    Check(!WindBounded(b, ExcessiveWind), "negative challenge rejects excessive wind");
-    Check(!ContinuousAt(SteppedWind, tip, b.phase, 0.5 - 1.0 / 240.0, 1.0 / 120.0),
-          "negative challenge rejects frame discontinuity");
-    auto sharedPhase = blades;
-    sharedPhase[1].phase = sharedPhase[0].phase;
-    Check(!DistinctPhases(sharedPhase), "negative challenge rejects phase reuse");
-
-    std::cout << "HalvethMeadow: " << checks << " checks, " << failures
-              << " failures; 1024 blades, 1000 root times each, 12 geometry segments, 60/240 Hz.\n";
-    return failures == 0 ? 0 : 1;
+    std::sort(phases.begin(),phases.end());
+    Check(std::adjacent_find(phases.begin(),phases.end())==phases.end(),"no duplicate phase in declared population");
+    const Blade b=blades[0];const Vec tip=BladePoint(b,1.0,0.0);
+    Check(Near(Wind(tip,1.0,3.2,b.phase,20.0),
+               {Wind(tip,1.0,3.2,b.phase,4.0).x*5,Wind(tip,1.0,3.2,b.phase,4.0).y*5,Wind(tip,1.0,3.2,b.phase,4.0).z*5}),
+          "short blades have proportionally smaller sway, not old fixed 8cm motion");
+    Check(Same(Wind(tip,1.0,3.2,b.phase,0.0),Vec{0,0,0}),"zero-height wind stays still");
+    Check(Same(Wind(tip,-1.0,3.0,b.phase,b.height),Vec{0,0,0})
+          && Same(Wind(tip,2.0,3.0,b.phase,b.height),Wind(tip,1.0,3.0,b.phase,b.height)),"wind parameter saturation");
+    Check(Same(BladePoint(b,-1.0,-2.0),BladePoint(b,0.0,-1.0))
+          && Same(BladePoint(b,2.0,2.0),BladePoint(b,1.0,1.0)),"geometry parameter saturation");
+    Check(HabitatValid(Habitat),"continuous cover transition, moisture response and bare rock exclusions");
+    Check(!HabitatValid(HardCutoff),"negative challenge rejects old abrupt grass boundary");
+    Check(!HabitatValid(Everywhere),"negative challenge rejects grass on bare dry or rocky ground");
+    Check(!SurfaceValid(b,StraightBlade),"negative challenge rejects straight flat straws");
+    Check(!SurfaceValid(b,UntaperedBlade),"negative challenge rejects missing taper/tip");
+    Check(!SurfaceValid(b,CollapsedBlade),"negative challenge rejects collapsed sheet");
+    Check(!SurfaceValid(b,CreasedBlade),"negative challenge rejects the old hard longitudinal fold");
+    Check(!RootsAnchored(b,DriftingRoot),"negative challenge rejects root drift");
+    Check(!WindBounded(b,ExcessiveWind),"negative challenge rejects old radiation-sized sway");
+    Check(!ContinuousAt(SteppedWind,tip,b.phase,b.height,0.5-1.0/240.0,1.0/120.0),"negative challenge rejects wind jumps");
+    // Keep the large negative populations off Windows' default 1MiB stack.
+    std::vector<Blade> changed(blades.begin(),blades.end());
+    for (std::size_t i=0;i<changed.size();++i) changed[i].height=18.0+47.0*static_cast<double>(i%100)/99.0;
+    Check(!PopulationValid(changed),"negative challenge rejects original 18-65cm height population");
+    changed.assign(blades.begin(),blades.end());
+    for (auto& blade : changed) { blade.bend=0;blade.curl=0; }
+    Check(!PopulationValid(changed),"negative challenge rejects all-upright needles");
+    changed.assign(blades.begin(),blades.end());
+    for (auto& blade : changed) blade.width=1.5;
+    Check(!PopulationValid(changed),"negative challenge rejects the first-pass broad grass population");
+    auto broad=clump;
+    for (auto& blade : broad) { blade.form=Form::GroundLeaf;blade.width=0.9; }
+    Check(!PopulationValid(broad),"negative challenge rejects too many broad floor leaves");
+    Check(!MeshBudgetValid(broad),"negative challenge rejects six segments on every blade exceeding the position budget");
+    for (auto& blade : clump) { blade.root.x*=0.1;blade.root.y*=0.1; }
+    Check(!RootCoverage(clump),"negative challenge rejects concentrated roots with empty disk rim");
+    std::size_t shortCount=0,hookCount=0;double sum=0,max=0;
+    for (const auto& blade : blades)
+    {
+        if (blade.height<=16) ++shortCount;
+        if (blade.curl>1.0/3.0) ++hookCount;
+        sum+=blade.height;max=std::max(max,blade.height);
+    }
+    int positions=0,triangles=0;
+    for (const auto& blade : clump) { positions+=VertexCount(blade);triangles+=TriangleCount(blade); }
+    std::cout<<"HalvethMeadow: "<<checks<<" checks, "<<failures<<" failures; "<<blades.size()
+             <<" blades, short="<<shortCount<<", downturned="<<hookCount
+             <<", mean_height_cm="<<sum/blades.size()<<", max_height_cm="<<max
+             <<", positions_per_clump="<<positions<<", blade_triangles_per_clump="<<triangles<<".\n";
+    return failures==0?0:1;
 }

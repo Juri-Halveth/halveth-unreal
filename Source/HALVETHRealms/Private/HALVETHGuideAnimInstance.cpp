@@ -167,6 +167,12 @@ void UHALVETHGuideAnimInstance::NativeInitializeAnimation(){
 void UHALVETHGuideAnimInstance::NativeUpdateAnimation(float Dt){
     Super::NativeUpdateAnimation(Dt);if(!FMath::IsFinite(Dt)||Dt<=0)return;
     auto* Body=GetSkelMeshComponent();if(!Body)return;
+    if(FreezeAppearancePose){
+        Time=0;GaitPhase=0;WalkWeight=0;LookYaw=0;LookPitch=0;Gesture=0;WeightShift=0;
+        for(int32 Side=0;Side<2;Side++){HandForward[Side]=3;FootTargets[Side]=RefFeet[Side];GroundNormals[Side]=FVector::UpVector;}
+        Body->SetMorphTarget(TEXT("Blink"),0);Body->SetMorphTarget(TEXT("Talk"),0);
+        Body->SetMorphTarget(TEXT("Breath"),.25f);Body->SetMorphTarget(TEXT("Smile"),0);return;
+    }
     auto* Pawn=Cast<ACharacter>(Body->GetOwner());
     auto* Movement=Pawn?Pawn->GetCharacterMovement():nullptr;
     // Both residents and guides are ACharacters. Read actual grounded speed
@@ -198,9 +204,9 @@ void UHALVETHGuideAnimInstance::NativeUpdateAnimation(float Dt){
         if(GetWorld()->LineTraceSingleByChannel(Hit,Contact+FVector(0,0,80),Contact-FVector(0,0,120),ECC_Visibility,Query)){
             double Ground=Body->GetComponentTransform().InverseTransformPosition(Hit.ImpactPoint).Z;
             GroundCorrections[S]=FMath::FInterpTo(GroundCorrections[S],Ground,Dt,15);
-            // Measured source sole is 3.204499 cm below the hm08 body origin.
-            // Ground support binds the actual footwear sole, rather than origin.
-            Contact.Z=Hit.ImpactPoint.Z+RefFeet[S].Z+3.204499+Step.lift*WalkWeight;
+            // The new full, barefoot source binds its sole to local Z=0.
+            // Do not retain the removed boot's 3.204499 cm negative sole offset.
+            Contact.Z=Hit.ImpactPoint.Z+RefFeet[S].Z+Step.lift*WalkWeight;
             GroundNormals[S]=Body->GetComponentTransform().InverseTransformVectorNoScale(Hit.ImpactNormal).GetSafeNormal();
             if(WantPlant&&!Planted[S])PlantWorld[S]=Contact;
             if(WantPlant&&Planted[S]){PlantDriftMax=FMath::Max(PlantDriftMax,FVector::Dist2D(Contact,PlantWorld[S]));PlantSamples++;}
@@ -211,12 +217,12 @@ void UHALVETHGuideAnimInstance::NativeUpdateAnimation(float Dt){
         }
         Planted[S]=WantPlant;
     }
-    double Flutter=.45*FMath::Sin(Time*1.8+Identity)+.22*FMath::Sin(Time*3.13)+.35*WalkWeight;
-    ClothSpring.update(Flutter,Dt,7);
-    Body->SetMorphTarget(TEXT("ClothLeft"),FMath::Max(0.,ClothSpring.position));
-    Body->SetMorphTarget(TEXT("ClothRight"),FMath::Max(0.,-ClothSpring.position));
-    Body->SetMorphTarget(TEXT("HairLeft"),FMath::Max(0.,FMath::Sin(Time*1.39+Identity))*.55);
-    Body->SetMorphTarget(TEXT("HairRight"),FMath::Max(0.,-FMath::Sin(Time*1.39+Identity))*.55);
+    // Self-timed, phase-offset blinks also reach ordinary residents, whose
+    // faces previously stayed fixed unless the guide dialogue controller ran.
+    const double BlinkTime=FMath::Fmod(Time+Identity*.731,3.1+Identity*.173);
+    const double Blink=FMath::Max(0.,1.-FMath::Abs(BlinkTime-.12)/.12);
+    Body->SetMorphTarget(TEXT("Blink"),Blink*Blink*(3.-2.*Blink));
+    Body->SetMorphTarget(TEXT("Talk"),Gesture*(.18+.22*FMath::Sin(Time*8.4+Identity)));
     Body->SetMorphTarget(TEXT("Breath"),(.4+BodyLoad)*(.5+.5*FMath::Sin(BodyBreathPhase))+.015*(.5+.5*FMath::Sin(BodyHeartPhase)));
     Body->SetMorphTarget(TEXT("Smile"),.35*Gesture);
 }

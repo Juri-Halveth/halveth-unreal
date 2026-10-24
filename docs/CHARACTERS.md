@@ -1,5 +1,12 @@
 # Character construction and response
 
+The active 2026-10-24 builder is `hm08-adult-smooth-surface-v2`:
+[current visible body and meadow candidate](VISIBLE-BODIES-AND-MEADOW.md).
+It exports eight adult full-body sources, without the old clothing, footwear,
+scalp cards or covered-skin deletion masks. The paragraphs below preserve the
+earlier dressed-body construction as history, rather than describe the active
+source set. Its native QA receipts remain historical.
+
 The current runtime adds independent head/eye/hand/finger response, world-space
 stance targets, two-bone limb placement, eight morph targets and actual
 `ACharacter` walking/falling. See [motion and ground response](MOTION-EARTH-SKY.md)

@@ -48,9 +48,11 @@ private:
     void RunVisualStep();
     bool bMotionCapture=false;
     double MotionElapsed=0,MotionNextFrame=0;
+    double MotionFirstSample=-1,MotionLastSample=0;
     int32 MotionFrame=0,MotionStage=-1;
     FString MotionTiming;
     void RunMotionCapture(float DeltaSeconds);
+    void RunAppearanceCapture(float DeltaSeconds);
     double MotionDropStartZ=0,MotionDropMinVz=0,MotionDropLandingError=0;
     bool MotionDropFalling=false,MotionDropLanded=false;
 };

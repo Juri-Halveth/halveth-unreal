@@ -20,11 +20,13 @@
 
 // Explicit native capture only; ordinary play keeps its input and camera.
 void AHALVETHGameMode::RunMotionCapture(float Dt){
+    if(FParse::Param(FCommandLine::Get(),TEXT("HalvethAppearanceCapture"))){RunAppearanceCapture(Dt);return;}
     auto* P=Cast<AHALVETHCharacter>(UGameplayStatics::GetPlayerPawn(this,0));
     auto* PC=GetWorld()->GetFirstPlayerController();if(!P||!PC||!RealmWorld)return;
     MotionElapsed+=Dt;if(MotionElapsed<5)return;
     const bool Sparse=FParse::Param(FCommandLine::Get(),TEXT("HalvethSparseCapture"));
     const bool TissueCapture=FParse::Param(FCommandLine::Get(),TEXT("HalvethTissueCapture"));
+    const bool AppearanceMotion=FParse::Param(FCommandLine::Get(),TEXT("HalvethAppearanceMotion"));
     const bool NoImages=FParse::Param(FCommandLine::Get(),TEXT("HalvethNoMotionImages"));
     double T=MotionElapsed-5;int Stage=TissueCapture?(T<20?0:4):(T<5?0:T<10?1:T<15?2:T<20?3:4);
     FVector Guide=RealmWorld->GetGuidePosition(1);
@@ -51,10 +53,13 @@ void AHALVETHGameMode::RunMotionCapture(float Dt){
         const bool Passed=RealmWorld->VerifyCharacters()&&RealmWorld->VerifyGroundDynamics()&&RealmWorld->VerifySkyDynamics()&&GravityPassed&&(!Sparse||TissueCapture||RealmWorld->VerifyGuidePatrol())&&(!TissueCapture||TissuePassed);
         if(TissueCapture){UE_LOG(LogTemp,Display,TEXT("TISSUE_NATIVE_WITNESS result=%s single_camera=true gravity_drop_fixture=false disconnected_control=%d"),Passed?TEXT("PASS"):TEXT("FAIL"),FParse::Param(FCommandLine::Get(),TEXT("HalvethRigidTissueControl")));}
         else {UE_LOG(LogTemp,Display,TEXT("GARDEN_GRAVITY_DROP_AUDIT passed=%d lift_cm=150 falling_observed=%d landed=%d min_vertical_velocity_cm_s=%.5f landing_height_difference_cm=%.5f"),GravityPassed,MotionDropFalling,MotionDropLanded,MotionDropMinVz,MotionDropLandingError);}
-        const FString TimingFile=TissueCapture?TEXT("tissue-motion-frames.tsv"):(Sparse?TEXT("world-scale-motion-frames.tsv"):TEXT("motion-frames.tsv"));
+        const FString TimingFile=AppearanceMotion?TEXT("appearance-motion-frames.tsv"):TissueCapture?TEXT("tissue-motion-frames.tsv"):(Sparse?TEXT("world-scale-motion-frames.tsv"):TEXT("motion-frames.tsv"));
         FFileHelper::SaveStringToFile(MotionTiming,*(FPaths::ProjectDir()/TEXT("QA")/TimingFile));
-        FString Receipt=FString::Printf(TEXT("{\"nativeMotionPassed\":%s,\"requestedFrames\":%d,\"simulationSeconds\":%.5f,\"nominalSamplingHz\":%d,\"timingFile\":\"%s\",\"scope\":\"Native walking, proximity stop, dialogue and gaze sequence\"}"),Passed?TEXT("true"):TEXT("false"),MotionFrame,T,Sparse?2:24,*TimingFile);
-        FFileHelper::SaveStringToFile(Receipt,*(FPaths::ProjectDir()/TEXT("QA")/(TissueCapture?TEXT("native-tissue-motion.json"):(Sparse?TEXT("native-world-scale-motion.json"):TEXT("native-motion-capture.json")))));
+        const TCHAR* Scope=TissueCapture?TEXT("Single stationary camera after initial placement; native walking and surface field; no dialogue or gravity-drop fixture")
+            :TEXT("Native motion fixture with camera cuts, proximity stop, dialogue, gaze and explicit gravity drop");
+        const double ObservedHz=MotionFrame>1&&MotionLastSample>MotionFirstSample?(MotionFrame-1)/(MotionLastSample-MotionFirstSample):0;
+        FString Receipt=FString::Printf(TEXT("{\"nativeMotionPassed\":%s,\"requestedFrames\":%d,\"simulationSeconds\":%.5f,\"nominalSamplingHz\":%d,\"observedSamplingHz\":%.9f,\"isFrameRateBenchmark\":false,\"timingFile\":\"%s\",\"scope\":\"%s\"}"),Passed?TEXT("true"):TEXT("false"),MotionFrame,T,Sparse?2:24,ObservedHz,*TimingFile,Scope);
+        FFileHelper::SaveStringToFile(Receipt,*(FPaths::ProjectDir()/TEXT("QA")/(AppearanceMotion?TEXT("native-appearance-motion.json"):TissueCapture?TEXT("native-tissue-motion.json"):(Sparse?TEXT("native-world-scale-motion.json"):TEXT("native-motion-capture.json")))));
         bMotionCapture=false;FPlatformMisc::RequestExitWithStatus(false,Passed?0:4);return;
     }
     if(auto* Actor=RealmWorld->GetGuideCharacter(1)){
@@ -67,9 +72,10 @@ void AHALVETHGameMode::RunMotionCapture(float Dt){
     FVector Target=Guide+FVector(0,0,Stage==2?150:105);
     PC->SetControlRotation((Target-(P->GetActorLocation()+FVector(0,0,66))).Rotation());
     if(T>=MotionNextFrame){
+        if(MotionFirstSample<0)MotionFirstSample=T;MotionLastSample=T;
         for(int Identity=1;Identity<=3;Identity++)if(auto* Actor=RealmWorld->GetGuideCharacter(Identity))
             if(auto* Motion=Cast<UHALVETHGuideAnimInstance>(Actor->GetMesh()->GetAnimInstance()))Motion->LogPoseAudit(TEXT("motion_frame"));
-        const FString Folder=FPaths::ProjectDir()/(TissueCapture?TEXT("Preview/Tissue"):(Sparse?TEXT("Preview/WorldScale"):TEXT("Preview/Motion")));
+        const FString Folder=FPaths::ProjectDir()/(AppearanceMotion?TEXT("Preview/AppearanceMotion"):TissueCapture?TEXT("Preview/Tissue"):(Sparse?TEXT("Preview/WorldScale"):TEXT("Preview/Motion")));
         FPlatformFileManager::Get().GetPlatformFile().CreateDirectoryTree(*Folder);
         FString Name=FString::Printf(TEXT("frame-%05d.png"),MotionFrame);
         if(!NoImages)FScreenshotRequest::RequestScreenshot(Folder/Name,false,false);

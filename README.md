@@ -9,27 +9,46 @@ Ein eigenständiger C++-Spielprototyp für Unreal Engine. Portalwelten, eine int
 [**Projekt öffnen →**](https://github.com/Juri-Halveth/halveth-unreal/releases) · [Arbeitsproben](https://juri-halveth.github.io/koennen/) · [Portfolio](https://juri-halveth.github.io/)
 
 
-## Körperkontinuität und elastischer Träger
+## Sichtbar überarbeitete Figuren und kurze Wiese
+
+**Sichtbarer Umbau vom 24.10.2026:** Der neue
+[Figuren- und Wiesenstand](docs/VISIBLE-BODIES-AND-MEADOW.md) ersetzt die drei
+wiederholten bekleideten Grundfiguren durch acht unterschiedlich aufgebaute
+erwachsene Körper. Die aktuelle Körperansicht verwendet vollständige Haut und
+bare Füße; alte Kleidung und Haarflächen sind aus dem aktiven Modell entfernt.
+Die Wiese besteht jetzt überwiegend aus kurzen, schmalen, gebogenen Halmen.
+Native Bild- und Bewegungsbelege werden an das konkrete Windows-Paket gebunden.
+Das ist ein überprüfbarer Entwicklungskandidat; die sichtbare Qualität der
+vorherigen Version wurde vom Nutzer ausdrücklich abgelehnt.
+
+![Gesichtsansicht aus dem nativen Windows-Kandidaten vom 24.10.2026](Preview/VISIBLE_ADULT_SCARLET.png)
+
+Diese Nahaufnahme ist eine deklarierte Inspektionsansicht im Weltlicht;
+die Pose wird für den Materialvergleich gehalten. Augen, Mimik und Gang
+benötigen weitere sichtbare Arbeit. Die Aufnahme ist keine menschliche
+Qualitätsabnahme.
+
+![Kurze gebogene Wiesenhalme im selben nativen Windows-Paket](Preview/VISIBLE_MEADOW.png)
 
 Der neue [Körperträger](docs/BODY-CONTINUITY.md) erhält sichtbare Bewohner,
 statt sie durch eine neue Rangliste auszutauschen. Ein kleiner räumlicher
 Gewebesolver übergibt nachgiebige Restbewegungen an die GPU-Oberfläche.
-Das ist ein nativer Entwicklungskandidat mit vorläufig wiederverwendeten
-Charakterformen; individuelle Anatomie und biologische Zellen sind noch offen.
+Dieser technische Träger ist getrennt von der sichtbaren Figurenüberarbeitung
+zu beurteilen. Seine grünen Tests bescheinigen keine überzeugende Figurengrafik.
 
-## Entspanntere Figuren und verlässlicher Bodenkontakt
+## Vorheriger Bewegungsschritt und verlässlicher Bodenkontakt
 
 Die [aktuelle Bewohnerbewegung](docs/RESIDENT-MOTION.md) ergänzt entspanntere
 Ellenbogen, eine kurze Nachbewegung der Hände und durchgängige Schrittphasen.
 Menschen dienen anderen Figuren nicht mehr als Treppen oder Boden.
 [Native Gehaufnahme ansehen](Preview/RESIDENT_MOTION.gif).
 
-## Wiese, Wind und ein tatsächlich aktueller Start
+## Frühere Wiesenaufnahmen und normaler Start
 
 ![Native Spielaufnahme: Wiesenhalme und Blüten bewegen sich vor der Archivtreppe](Preview/MEADOW_WIND.gif)
 
 Das native Windows-Spiel verbindet vier Landschaften, ein begehbares Archiv,
-freie Levitation und lokale Bewohner. Die neue Wiese besteht aus gekrümmten
+freie Levitation und lokale Bewohner. Die damalige Wiese besteht aus gekrümmten
 Geometriehalmen mit festen Wurzeln, verschiedenen Windphasen und kleinen
 Blüten. Ein begrenztes Fenster mit höchstens 3.844 Instanzen folgt den
 besuchten Weltzellen; zurückkehrende Zellen erhalten dieselbe Platzierung.
@@ -84,6 +103,10 @@ fünffache Bevölkerung ist damit noch nicht erreicht.
 ![Bewohner und kurzer Fangimpuls im nativen Funktionstest](Preview/LIVING_WARNING_HOLD.png)
 
 ---
+
+The following paragraphs describe the earlier dressed-body increments and their
+historical receipts. The active adult surface rebuild is described above and in
+[the current visual candidate](docs/VISIBLE-BODIES-AND-MEADOW.md).
 
 Four locally generated 600 × 600 metre landscapes with hills, CC0 forest scans,
 portal arches, spell practice, library, crafting and persistent construction.
@@ -167,7 +190,7 @@ stars and night fill are authored, rather than a live weather or Moon service.
 
 The selected CC0 inputs, FBX sources, textures and MIT builders are included.
 Normal game startup uses the supplied FBX files and needs no Blender installation.
-To regenerate the art, install Blender 4.5, NumPy and Pillow, then:
+To regenerate the current art, use Blender 5.2 LTS (tested), NumPy and Pillow, then:
 
 ```bash
 export GARDEN_BLENDER="/c/path/to/blender.exe"
@@ -176,7 +199,9 @@ bash CHARACTERS.sh build
 bash GARDEN.sh prepare
 ```
 
-The anatomical deformation also transfers to authored clothing and hair. FBX path
+The current generator exports full adult skin, bare feet, fitted eyebrow strands
+and shallow modeled eye caps. The older clothes, footwear and scalp-card sources
+remain preserved but are inactive. FBX path
 sanitizing replaces local author paths with relative filenames and verifies the
 parsed numeric geometry, skeleton and animation digest remains identical.
 

@@ -44,6 +44,7 @@ prepare() {
       "$CMD" "$NATIVE_PROJECT" -run=GardenPrepare -unattended -nop4 -nosound "-abslog=$(cygpath -w "$ROOT/Saved/GARDEN-prepare.log")"
     fi
     if ! "$PYTHON" "$(cygpath -w "$ROOT/scripts/garden_assets.py")" characters-current; then
+      "$PYTHON" "$(cygpath -w "$ROOT/scripts/garden_assets.py")" archive-characters
       "$CMD" "$NATIVE_PROJECT" -run=GardenCharacters -unattended -nop4 -nosound "-abslog=$(cygpath -w "$ROOT/Saved/GARDEN-characters.log")"
     fi
     "$PYTHON" "$(cygpath -w "$ROOT/scripts/garden_assets.py")" bind

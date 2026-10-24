@@ -1,0 +1,2474 @@
+{
+  "schema": "halveth.visible-appearance-candidate.v1",
+  "recordedAtUtc": "2026-10-24T20:34:19.441963+00:00",
+  "status": "NATIVE_ART_CANDIDATE_NOT_HUMAN_ACCEPTED",
+  "priorUserReview": "USER_REJECTED_VISUAL_QUALITY",
+  "currentUserReview": "PENDING",
+  "visualReview": {
+    "reviewer": "CURRENT_CODEX_AGENT",
+    "coverage": "Eight final world portraits and five of 300 final motion stills were visually inspected",
+    "motionFramesInspected": [
+      0,
+      75,
+      150,
+      225,
+      299
+    ],
+    "fullVideoPlayback": "NOT_PERFORMED",
+    "finding": "Visible source and meadow changes; eyes, expression, gait, repeated tree art and secondary resource labels remain open"
+  },
+  "scope": "Native Windows Unreal candidate: adult body/face art, shared surface field and short geometric meadow",
+  "packageBuild": {
+    "schema": "halveth.astral-local-package.v2",
+    "builtAt": "2026-10-24T20:18:07.9940034Z",
+    "sourceDigest": "2069AAEB2CCFFFA1779B74F59D4B6B151298AB6CF09B498B0DF97F7C8BB7A71A",
+    "launcherSha256": "AB3F1C19FFED772018B938DAC66ADEAB425CBAAF76A52245098B45D749D8B134",
+    "binarySha256": "D944DDCCF59DA68E70276363320DB235176710238BE0F0484C390982E68DBC79",
+    "cookedPayload": [
+      {
+        "name": "global.ucas",
+        "bytes": 3216176,
+        "sha256": "140844B9F6C7E474C1423E77A913AA97482BF36BF27D7A6CD2F66110955CF9AA"
+      },
+      {
+        "name": "global.utoc",
+        "bytes": 794,
+        "sha256": "B0B3C8FC8E6417EC7AFB9E0A92F459F6EC5EC0265ADB96F7D011490BA3C8DD4E"
+      },
+      {
+        "name": "HALVETHRealms-Windows.pak",
+        "bytes": 11234937,
+        "sha256": "D5C3912A4CBEA135D0374B9EC9F8D736E066295E51520ED1F67A5C5181055523"
+      },
+      {
+        "name": "HALVETHRealms-Windows.ucas",
+        "bytes": 363704576,
+        "sha256": "C0A47B0C7E0E4F6CA884426A6573BA3EFCA1A140B47C089375004221B9249FEF"
+      },
+      {
+        "name": "HALVETHRealms-Windows.utoc",
+        "bytes": 279830,
+        "sha256": "6FF2B4E2C87A54DCE7E5A4113324BA0A5A6754B478EE205414989856B6388BC6"
+      }
+    ],
+    "distribution": "LOCAL_DEVELOPMENT_ONLY"
+  },
+  "executable": {
+    "path": ".local/meadow-package/Windows/HALVETHRealms/Binaries/Win64/HALVETHRealms.exe",
+    "bytes": 340574208,
+    "sha256": "d944ddccf59da68e70276363320db235176710238be0f0484c390982e68dbc79"
+  },
+  "normalStart": {
+    "entry": "Start-Astralis.cmd",
+    "desktopShortcut": "HALVETH Portal Garden",
+    "cacheProbe": {
+      "path": ".local/appearance-cached-start-probe.log",
+      "bytes": 17123,
+      "sha256": "ae7eac134b9f7eff869a41ed333d7ea6984d7bef1ec69134b955f98a99430d3e"
+    },
+    "scope": "Actual launcher cache reused with deliberately absent engine path; native traversal probe passed"
+  },
+  "catalogue": {
+    "path": "ArtSource/Characters/characters.json",
+    "bytes": 82785,
+    "sha256": "614dde1dd053b171ebf25d7b4a283f894498feeb567e27bf6fce210976afa169"
+  },
+  "portraits": [
+    {
+      "name": "Scarlet",
+      "image": {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Appearance/portrait-Scarlet.png",
+        "bytes": 3844103,
+        "sha256": "b948a79ca95fb7dba4dd248da30e8f8aa524b6badcc50e8723603306cdee6448",
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "name": "Lucinet",
+      "image": {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Appearance/portrait-Lucinet.png",
+        "bytes": 3846332,
+        "sha256": "722005abd56812b61f6c1b4b7cfbe1fb6845f3eebe529543b1747a10b61fe316",
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "name": "Rachel",
+      "image": {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Appearance/portrait-Rachel.png",
+        "bytes": 3852445,
+        "sha256": "fc18053c57cb5a8a2d43dbb8717c2358b09b82734194de4d785daec6dc927bfd",
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "name": "Tala",
+      "image": {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Appearance/portrait-Tala.png",
+        "bytes": 3860321,
+        "sha256": "1bfe913e07043f2c9aa0228c9b436576169c6a4e9035a3947c54b4a410145db0",
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "name": "Orin",
+      "image": {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Appearance/portrait-Orin.png",
+        "bytes": 3842820,
+        "sha256": "f8264986005671bc055146adc74a7b1d12934a713ed4d169098355ac4d5e7680",
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "name": "Ivo",
+      "image": {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Appearance/portrait-Ivo.png",
+        "bytes": 3853435,
+        "sha256": "5e14eeff61812b40232550689e629782c6ae83b2b95e61f8e82f7c31fc8332df",
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "name": "Mara",
+      "image": {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Appearance/portrait-Mara.png",
+        "bytes": 3807828,
+        "sha256": "9f8bdfebd4e3ffa5f27da5669136f5e5397dd8ac3a5c8d8eea88b2643a57154e",
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    {
+      "name": "Neri",
+      "image": {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Appearance/portrait-Neri.png",
+        "bytes": 3851830,
+        "sha256": "708d81347b74be88b7cf77b3f3b1fa10d065f628fc84f6f76415e8d47a986759",
+        "width": 1920,
+        "height": 1080
+      }
+    }
+  ],
+  "worldViews": [
+    {
+      "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Appearance/world-body.png",
+      "bytes": 4367075,
+      "sha256": "36c151240c2ad51b02ea5e6b9231412990c88a31a3ccec02aaf579ef4721673c",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Appearance/meadow-ground.png",
+      "bytes": 4244388,
+      "sha256": "514384b35ea93f7598769655f2d1fa451bf0eb607d453a70409e4a9cdf1f8498",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "studio": {
+    "images": [
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceStudio/studio-no-sss.png",
+        "bytes": 1429947,
+        "sha256": "b1ba203d5162992c9c9583d4b198ffda3af826b9bf9eae3a32fa73a434436d9a",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceStudio/studio-scatter04.png",
+        "bytes": 1482503,
+        "sha256": "42ccb77203c90530e4145d8507352e35fd822cce4150fae6c61b015d18d084dc",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceStudio/studio-scatter08.png",
+        "bytes": 1552852,
+        "sha256": "f575af1a0b517b331c66d1cde9d9c3df949a0e6033806614e1fe5cab7c662cf1",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceStudio/studio-scatter20.png",
+        "bytes": 1559264,
+        "sha256": "26ff41979b2c2e40ac8c3848d98588d7b2207acdab254ee78d5cdcf3a9441dcc",
+        "width": 1920,
+        "height": 1080
+      }
+    ],
+    "poseObservations": [
+      [
+        "studio-no-sss.png",
+        "0.000000",
+        "0.000000",
+        "0.000000",
+        "0.000000",
+        "0.000000",
+        "0.250000",
+        "X=-548.386 Y=-921.382 Z=159.717",
+        "X=-548.386 Y=-915.396 Z=159.717",
+        "X=-0.488382435 Y=0.488384471 Z=-0.511354286 W=0.511351152"
+      ],
+      [
+        "studio-scatter04.png",
+        "0.000000",
+        "0.000000",
+        "0.000000",
+        "0.000000",
+        "0.000000",
+        "0.250000",
+        "X=-548.386 Y=-921.382 Z=159.717",
+        "X=-548.386 Y=-915.396 Z=159.717",
+        "X=-0.488382435 Y=0.488384471 Z=-0.511354286 W=0.511351152"
+      ],
+      [
+        "studio-scatter08.png",
+        "0.000000",
+        "0.000000",
+        "0.000000",
+        "0.000000",
+        "0.000000",
+        "0.250000",
+        "X=-548.386 Y=-921.382 Z=159.717",
+        "X=-548.386 Y=-915.396 Z=159.717",
+        "X=-0.488382435 Y=0.488384471 Z=-0.511354286 W=0.511351152"
+      ],
+      [
+        "studio-scatter20.png",
+        "0.000000",
+        "0.000000",
+        "0.000000",
+        "0.000000",
+        "0.000000",
+        "0.250000",
+        "X=-548.386 Y=-921.382 Z=159.717",
+        "X=-548.386 Y=-915.396 Z=159.717",
+        "X=-0.488382435 Y=0.488384471 Z=-0.511354286 W=0.511351152"
+      ]
+    ],
+    "held": "same model, seed, camera, actual eye/head transforms, pose time, gaze, blink, talk, breath; skin field off",
+    "lighting": "declared white light control, EV12; not ordinary gameplay lighting"
+  },
+  "movement": {
+    "frameCount": 300,
+    "firstSimulationTime": 2.61e-07,
+    "lastSimulationTime": 19.933334634,
+    "meanSampleIntervalSeconds": 0.06666667014381271,
+    "encodedFrameRate": 14.99999921764218,
+    "timing": {
+      "path": ".local/meadow-package/Windows/HALVETHRealms/QA/appearance-motion-frames.tsv",
+      "bytes": 14740,
+      "sha256": "900dd2085e0411cff2d6d1e1f6f3e795d8df4836539a9a7b0bc9e8e6df311fdb"
+    },
+    "frames": [
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00000.png",
+        "bytes": 1872330,
+        "sha256": "c5f1545026e8256bd64959d28f41a4539b69acfbf3b7f18dfa43df648499ad4c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00001.png",
+        "bytes": 1811464,
+        "sha256": "25658ed2108e94e0bcd7655ee5ef94849b273c827decfeed9d5f45b7f33931d7",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00002.png",
+        "bytes": 1779402,
+        "sha256": "5f8422b414609c032738ee7c5dbcdff417b2080475742930178a4730e5d578b8",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00003.png",
+        "bytes": 1756378,
+        "sha256": "d804f96bf0cc0ac9ad0ae34b8a14c80defd57c28a7fd2f2c29c8c61e8e8cab36",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00004.png",
+        "bytes": 1737637,
+        "sha256": "11a2cc081a8caf508a973305915abe7191355cd7e72776c85ffd9376bc7ec69d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00005.png",
+        "bytes": 1728345,
+        "sha256": "0e7bfea487e824f74a75cfa4b72b4ad6c534426876c0363ffc7c94cd07190e1d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00006.png",
+        "bytes": 1722866,
+        "sha256": "f39382311383b1973c45d7e6e16f2186c98b7cd2d2259beab7a4fb76ad5d1e60",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00007.png",
+        "bytes": 1717430,
+        "sha256": "85797f7b474a7f313db2457dfcc85d0390a4d1227ca1c6c5af5bd06f982c2ca3",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00008.png",
+        "bytes": 1718651,
+        "sha256": "e90125ec5142428883f38dfb8325377c987046c8135ee25b9f24296b082a6971",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00009.png",
+        "bytes": 1712624,
+        "sha256": "b7c7275c3f22d6d7c43e4b29fa9f74fa3b81110ce68030a5caadb6a517e1e959",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00010.png",
+        "bytes": 1715023,
+        "sha256": "90289234089b58d398a4de9235a25d25ba60c320d3ece3e28f4cf24a8aaf45a3",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00011.png",
+        "bytes": 1715012,
+        "sha256": "96c7baefeb7326bcea03b5f90366faa0bd309be9e35386340b4a56951395eab9",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00012.png",
+        "bytes": 1721699,
+        "sha256": "e4ed903da025c9966ae1c6b70d2ca16c7d666e649292af5ea105079ae0edc3c9",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00013.png",
+        "bytes": 1722595,
+        "sha256": "c69fb88ab1b12f9337c0f5527d48a82bc3840fdd5fca864c17bd8addcd20722f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00014.png",
+        "bytes": 1722003,
+        "sha256": "b6872ead77122773168984c507cd738a5c35b1c576a89372cfc525eac53e0a93",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00015.png",
+        "bytes": 1727208,
+        "sha256": "9eb81c11c9cc4ab6617eb3b11d2cbfc1c0415f9e68415c0fd609edede2996d03",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00016.png",
+        "bytes": 1751513,
+        "sha256": "e0a4d4e48ee128a8d44ae582889c690344bbf3bd9dc6f5e3e552ccee8926388f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00017.png",
+        "bytes": 1770992,
+        "sha256": "45e9e9f9d079ce15be773e88ddaa1a898bae025f4758f0387bb8f4f09ea405cd",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00018.png",
+        "bytes": 1784836,
+        "sha256": "4b35d27396140340b44fc3d9eb6ffb7794ada5eaf3e4c45e507f4e609146a702",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00019.png",
+        "bytes": 1790868,
+        "sha256": "5a9bbeb71b857648b2dbaa63c2a58a303c14f792969b7ccaec43793faa397f0d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00020.png",
+        "bytes": 1798646,
+        "sha256": "b521df411bccf8bad7766be2d59805f57237efe149673c481aae2a401ca50559",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00021.png",
+        "bytes": 1809485,
+        "sha256": "c83f406ca6642a80fbbc53c0318bbc8ce7443740c67ce15eabc6898c2952d1b8",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00022.png",
+        "bytes": 1816750,
+        "sha256": "13964f90d935ae22b91c867749920ada7ebf94b9fc9d76dd4eff2032190575d0",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00023.png",
+        "bytes": 1823308,
+        "sha256": "cb8e286283a132bc8b67b12d3650643f9600c7a35234ad63d2e6006849f9ab2a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00024.png",
+        "bytes": 1829465,
+        "sha256": "234fce0b753e19074978d9d90aac80ce05deaf9bf4058ca8c6d2ba277774b936",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00025.png",
+        "bytes": 1833384,
+        "sha256": "37909246f3226476622facda1dcba5e1b13e2ace559e08fe681a3b492d8ba7cd",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00026.png",
+        "bytes": 1838222,
+        "sha256": "4f6c27bfdb9ea97862bf55fc7518316eca72f84eccd9368d14a3fb936e324a28",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00027.png",
+        "bytes": 1840263,
+        "sha256": "fe3afb1965dceb5d7e2e2c38be5ea6f29fecae8293c70d22e51bb86fd6fa8aeb",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00028.png",
+        "bytes": 1845776,
+        "sha256": "6834d9231e95f19f5ddb994f9f2aa471196dffd9bd7ee2329088f847ea76f668",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00029.png",
+        "bytes": 1849056,
+        "sha256": "eab038c3740dd0e14662457cdc1fe8979517c5a28155b6a62e0bbd35e16cba56",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00030.png",
+        "bytes": 1803978,
+        "sha256": "b9c4ed1432de8c22da29a4e8cd9feec42b0a4cab1db190970efa0f08bbc8b5e4",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00031.png",
+        "bytes": 1765591,
+        "sha256": "56f3ab6db496f47cc3690c145c7386ccac1be7f3e42976bb5e5e020f3697f69a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00032.png",
+        "bytes": 1740166,
+        "sha256": "f47bee0a22f8aa80c3c9aba469f21eaf34a64e212b31126de890a70edc2d38fb",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00033.png",
+        "bytes": 1729401,
+        "sha256": "37da822c878bb4d6a1abae55a5b1377966ad05e07df4cf7fcb103457b19c5e26",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00034.png",
+        "bytes": 1721918,
+        "sha256": "d71d3ee994225f8b4080670fa475ce560e364e2c5c1f206e0414f593d65d9f43",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00035.png",
+        "bytes": 1725415,
+        "sha256": "d3ae999ae15acfefcc1cb2134db11c3992cd33d44c403d3372aacfaa9dc83e40",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00036.png",
+        "bytes": 1727670,
+        "sha256": "d99a5e897e2ee0c0ddbe70073a249f83891311db64143e59abd446f649fa0ea4",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00037.png",
+        "bytes": 1727550,
+        "sha256": "d9c7c92f64bebacf5fa70f3c671592afecd1558223834e6645d3feca50afb4fb",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00038.png",
+        "bytes": 1726633,
+        "sha256": "1200d1b61c331bd3c2a2e6c76373b73641340eb9042696b3bfa2ba28cc37e8b2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00039.png",
+        "bytes": 1726991,
+        "sha256": "75b02be234fc1ddc38c7fa7c9c37a7e27a22c21e87105067649b2386aa9abf2a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00040.png",
+        "bytes": 1727019,
+        "sha256": "1641c36dfb83b51e69db5b8dffc7201fce1500ade099782c0fef40d51a69176a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00041.png",
+        "bytes": 1728495,
+        "sha256": "6a2a016a9f229d0265835ccfbfbe318a8d443b65ee14af1974c58db1939e88c6",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00042.png",
+        "bytes": 1727305,
+        "sha256": "85ac30e7d940f76fbefe17e5a47bd41958b45584d6531892d2dfe35884c8ccda",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00043.png",
+        "bytes": 1725700,
+        "sha256": "83956309b8c86ae803ab638d55f5ff436122b628e49443e83c73292d8b0e3959",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00044.png",
+        "bytes": 1723714,
+        "sha256": "109c8fb0b9ca16ceed451a467f7c86a790860a92fc194e61f233b236c00ad8ab",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00045.png",
+        "bytes": 1712421,
+        "sha256": "d5634686ae9204ec5976f9ed7488f14ee18cf823cc525661de690dfa2ae2e5a1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00046.png",
+        "bytes": 1708570,
+        "sha256": "79000d19123e3fad735b3c622ecc1f1d1025c8ce6e3e6d6c77bc819819e076b8",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00047.png",
+        "bytes": 1710573,
+        "sha256": "9db0662d7f8ac90a5d55ba07d3cb5f1f12f9ab41b2eec57805f146bb1b1d4aab",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00048.png",
+        "bytes": 1706345,
+        "sha256": "6936bc2ac275416504e70c13f6ad5bad41ce2e524730a2718798bb27d1c5bbd8",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00049.png",
+        "bytes": 1719421,
+        "sha256": "496befd88a1822181f2acc42e4ae3f7935bef9aab5e3d97d89772f6910a63651",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00050.png",
+        "bytes": 1720768,
+        "sha256": "be7bb84d700f24b61045a5960a5f23abffbe3d71ff41562905ed8fdef7c08fac",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00051.png",
+        "bytes": 1720564,
+        "sha256": "1356b9ab7df55a578d30a4768539c940e67ec1e248428901ee41af9376a15581",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00052.png",
+        "bytes": 1725482,
+        "sha256": "9ac1b196a837aefe70cc18b822274a17395d11860fc574fc2c3930a8a5030619",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00053.png",
+        "bytes": 1734074,
+        "sha256": "f975857bfd3e8f822a2c466002f043a5d07477baf33d3c41cdde0d8035c463e4",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00054.png",
+        "bytes": 1737194,
+        "sha256": "9b6a6434e71832e116512d75da6f2bdfc67c61f1cff910ee6248e9ceccb2489e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00055.png",
+        "bytes": 1736756,
+        "sha256": "fc27193f699d421956bbaa3435e263b223e44cd469073348121de1392524296a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00056.png",
+        "bytes": 1734333,
+        "sha256": "a0b7a87b5af0b50b105aa6ed4af8aed9145f4b6265c1ab83579eb475db091eb9",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00057.png",
+        "bytes": 1733195,
+        "sha256": "ab242070588863c566deb09d28c08147864e2459d4a239df120bfe5eb2fbd60c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00058.png",
+        "bytes": 1731484,
+        "sha256": "80ee962735457c48007861bbd352cafd7e7059ae2afe317bc5172f311730b353",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00059.png",
+        "bytes": 1729235,
+        "sha256": "0986636c6135aad7f7ca105bf3987e92cf62391c011dff5401cd4ff20b2c5331",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00060.png",
+        "bytes": 1728079,
+        "sha256": "e2284a765e57903bfe28967ce7f93267add6906fcc0d0aa063ca337b0966ec8c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00061.png",
+        "bytes": 1727485,
+        "sha256": "9994b85ee50c9aa122db3233cfcd1abc39b9bc736a09d569d445f50e176520ec",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00062.png",
+        "bytes": 1725111,
+        "sha256": "8a0b8939768fb1800c3f926cd4bfaac8329756533ac3bc1b149d811b5c64580a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00063.png",
+        "bytes": 1723653,
+        "sha256": "690b55a6e78eb1585c936ac14e0b2020bb60a68877bd233f97ae0a8d79bbc49e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00064.png",
+        "bytes": 1722518,
+        "sha256": "365556c4a23bf4a6a30dd978f63c9dbc95064445ca4ab68f22638e6af6ce0a54",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00065.png",
+        "bytes": 1720868,
+        "sha256": "172f7ab570c85e6b976b394c9ec6c6a8be8f6feec198171eeee881af258281d0",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00066.png",
+        "bytes": 1729861,
+        "sha256": "3c7bae5a101ac13b71dad51a6247a25de89b807aad30134c4a5ec722e0d0ba48",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00067.png",
+        "bytes": 1734847,
+        "sha256": "f28ca58a8b862b4336008e13c9ef002d0c9fad2521d8370d2f976a8d5f0678d9",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00068.png",
+        "bytes": 1741054,
+        "sha256": "57fada592fa4ce097c3a5e07b188ff409fc8e7aa3763b1269ffe05b59e8b0c3a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00069.png",
+        "bytes": 1742210,
+        "sha256": "a6537df9a767f695194b0267aada67dd2fc55dee3f6d94f212b0cc81aa77d35e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00070.png",
+        "bytes": 1742750,
+        "sha256": "6013859c460a74633453216030e8f9e2f3d044b8c46b98a691c71c76ffcbed94",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00071.png",
+        "bytes": 1744691,
+        "sha256": "a95dd054a3b01fa5ab3bea9e0eebd2c6452e947a3079cce8aeab7247bdbe6ad2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00072.png",
+        "bytes": 1745004,
+        "sha256": "4f1991b1e3fe99a568e10d597f8c3d2ccd011eba3036d81c40041380d736366f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00073.png",
+        "bytes": 1744381,
+        "sha256": "a207f591a11e22ea6c90d008dd22b0774224f36aeb332a051b071478b724d306",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00074.png",
+        "bytes": 1744911,
+        "sha256": "f3d9a02685ee5b76219e8eb90851fef5b9d39dcc3b57f7c2a5d00611801fd9df",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00075.png",
+        "bytes": 1747079,
+        "sha256": "fd7220a91fd13cd3895d7995a859bdcfac820b132983f5f6f1074c95114b34a6",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00076.png",
+        "bytes": 1746869,
+        "sha256": "f0b1aa711347e963681f9497a83095ff524194afb6e47bfeead5a50a975d9afb",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00077.png",
+        "bytes": 1740939,
+        "sha256": "ff70872d151ff662413d07a7b9a70fc5dba1f8ae622a1113f9aa8718078bf589",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00078.png",
+        "bytes": 1744297,
+        "sha256": "58424f069e4c57039e54e439109c5a679629471cf382f4039e785146f4cd9a3f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00079.png",
+        "bytes": 1747895,
+        "sha256": "d7ce58fd3029a57d9a98b957a4094be0d43549b74879b85228fc0965716b639a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00080.png",
+        "bytes": 1757576,
+        "sha256": "243b4c9cad863ca0fc3d78de3eb4bfe9edd1b3bbb8dbfce0a24e1c25d9c89412",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00081.png",
+        "bytes": 1761838,
+        "sha256": "e7223d2ecae59c7d5346d5ff449bead60135eb8bd5a7721320f74ff52e56693c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00082.png",
+        "bytes": 1770257,
+        "sha256": "221047dcd36a5fe95484b1ce5de84085c9164ff69f81332d37baa9da38730cbe",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00083.png",
+        "bytes": 1774894,
+        "sha256": "464f59481cae4b7a48320ded631224e54f4609a1d98d5b90ce2c36230ece5629",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00084.png",
+        "bytes": 1781964,
+        "sha256": "ae0096395b511637f1f38b7844b3284009a67cbe2a61e1c3d31f5cabe7614c6d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00085.png",
+        "bytes": 1784210,
+        "sha256": "6ac3e9cc5eb8bc7f23e0383b2dc352ea87c5272192594e757fec89856e29f558",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00086.png",
+        "bytes": 1790911,
+        "sha256": "8c83c6bf0955b0624c50082ffeb8a8b883a943758825c4e42fdf068ed1a6869f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00087.png",
+        "bytes": 1796241,
+        "sha256": "393f0463480dc0d6414b60c7eaad2276ea700bd5a02e7818927474dab9db7ab1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00088.png",
+        "bytes": 1805215,
+        "sha256": "4d983635d188d54369a2079a70e5712688758a736d1a172e2fdf46261ea84725",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00089.png",
+        "bytes": 1810763,
+        "sha256": "d7d4703c4cad0703c977a48240fd32e171c7fc6d561fbf3b5c5089891dad01bc",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00090.png",
+        "bytes": 1810989,
+        "sha256": "9c99a963fc2525ba3a9874558c1ce3662a6e62b1c4514daba2e946b700eccb51",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00091.png",
+        "bytes": 1811298,
+        "sha256": "749def9fa02efc22eff192e3b3906f306d16b879f604771ba146189ca184e565",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00092.png",
+        "bytes": 1812274,
+        "sha256": "e3796030b1d477a5dfa612ecc1ad130dbc6c81dd2ff07f656b31733db7fc2ba8",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00093.png",
+        "bytes": 1808748,
+        "sha256": "ab49ce6f78a1af6cd6fe782c694b04d1c86de3e7fa36701ecec62baab88e64e0",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00094.png",
+        "bytes": 1809573,
+        "sha256": "fd61806a3f6ab0d80e04c150aeb018649295113bd605cd6677c193f5f8cf4f8f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00095.png",
+        "bytes": 1809550,
+        "sha256": "8148fc27e189c147a047374064fc858a188f5651be8a8a6fc7d550763bb40061",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00096.png",
+        "bytes": 1807252,
+        "sha256": "f92c5a8b404c50fc7418f6bd629eb592ea53588e0cdfa46e1207506da3ff1944",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00097.png",
+        "bytes": 1813553,
+        "sha256": "71b8ee605878c17246aa5c716e9ee78a59e7f8932b8106f67a74ff0da3cc8b20",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00098.png",
+        "bytes": 1817290,
+        "sha256": "117818a470edf193496d6b574d92a655546227d3d3e7b403d5737945a6a6c6a8",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00099.png",
+        "bytes": 1813393,
+        "sha256": "33def470275d1871963952ae8b39025f15be3b0cac08acb256a179e1c7132133",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00100.png",
+        "bytes": 1812771,
+        "sha256": "38dbe5c99db15a42d0992195a49d87929b4007c8d4aae91085075a355d66ef9e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00101.png",
+        "bytes": 1819765,
+        "sha256": "9cf3fd99f4b61043b3beb418c1c8229bc3c9642595287c425910ea0a781edbf8",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00102.png",
+        "bytes": 1821959,
+        "sha256": "2bb15efe6cc51793375aec79f529736b62ad695fdd2a47ebe7b21da4986ff09b",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00103.png",
+        "bytes": 1815244,
+        "sha256": "7366352fb7cd78cd743211908aa81de71146ca645467440c060be67d1553a506",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00104.png",
+        "bytes": 1852568,
+        "sha256": "f9ae180b06278aed0d81d0c2d1327127264002af1e7552b7114e5354bb9bb343",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00105.png",
+        "bytes": 1870070,
+        "sha256": "7f75a8e2430cbfc8486c5b9955242f2ab45656cd1f0f3051d2ae39ec0c91ab54",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00106.png",
+        "bytes": 1881091,
+        "sha256": "4327902f8521744d5898c363362596eb7557949d0c7fb30ef92fb895395da0b7",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00107.png",
+        "bytes": 1890098,
+        "sha256": "e71f9815dbac7b250f4b9fde8da671ef9710fd5e54366f6e3aea8b154f07e522",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00108.png",
+        "bytes": 1899383,
+        "sha256": "245d42fe2187933ab0086ca8cbada64e2f1674ee8552f06416fc0f221650acbe",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00109.png",
+        "bytes": 1909852,
+        "sha256": "0d17171a41ac5e6c96ca2cc9e4983d764257ded7109ae41cc88008ac88c4ed27",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00110.png",
+        "bytes": 1918116,
+        "sha256": "2aeded0ff264ed2cc35df26ae68e6d540b9f6f12b57bf7a8978637086398118e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00111.png",
+        "bytes": 1924030,
+        "sha256": "9fde84c55a51b28426288c051a921483250b6965abf922f8e7a1eee5782e808a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00112.png",
+        "bytes": 1931508,
+        "sha256": "2da2ef2783a994a9a44c1f5b8be43867f1ede5341ebb1ad70706c610ad929c4a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00113.png",
+        "bytes": 1937449,
+        "sha256": "7059b036217f7b98f910d4b46a217b2963a4cbc01a481f3cd960b5b21e19e816",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00114.png",
+        "bytes": 1943309,
+        "sha256": "3d26cceb027bdcdff6c2faea7ba883ebbd1f5eb3345d1e53640002867150e617",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00115.png",
+        "bytes": 1947189,
+        "sha256": "c53a123ea4d486c04534c7238bce7a6b98cf0986c3702df887f5a7045989c070",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00116.png",
+        "bytes": 1952953,
+        "sha256": "54075feeb2944a1ba1d68878fd56d1281c99fb459f4ece9fd119dac3d0e695c1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00117.png",
+        "bytes": 1959092,
+        "sha256": "03fef1372d60fb7a322ff007a0fe42aa95b18eb23482835c1b2f27599cc9585e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00118.png",
+        "bytes": 1961645,
+        "sha256": "8a3619c798065ed85c309fd8715171e0d5e4003f77985d9c7d3a173c8bbeb891",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00119.png",
+        "bytes": 1965686,
+        "sha256": "990d1e3b1a03803d61a7183e0079d4b5f4b64cc60de7cee7272b9a4d8c56abd2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00120.png",
+        "bytes": 1967642,
+        "sha256": "c180b2505123ba5421c3bec87d2fac7edbc54b28cda80c244ea7ad61d820c565",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00121.png",
+        "bytes": 1969944,
+        "sha256": "7992df1bad8715d2a4c3b11033706d6aa62e6506db69ada2b95bcbbc7913f420",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00122.png",
+        "bytes": 1972388,
+        "sha256": "844fe74b01964e97e080f5d099d989a0a8ce92880ffde6a338101085a5a1ed30",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00123.png",
+        "bytes": 1975061,
+        "sha256": "849e302315daccbf08166f23dcc8173b738e83f7d16793aa14b083bb644b4d23",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00124.png",
+        "bytes": 1976620,
+        "sha256": "7c0c35434b1c5707b4f3846497be57b55fb7c07c235f59ab5dbce282c1ba76a4",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00125.png",
+        "bytes": 1980579,
+        "sha256": "1200a390eaf986ef005bbfaf1464b007cfa469ce9305c5c2d39ac2a675c4bb96",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00126.png",
+        "bytes": 1982913,
+        "sha256": "ce9bcfdf3b90fe464cddabc3de4a84efa098dd56507255205ff04782738a05f9",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00127.png",
+        "bytes": 1987339,
+        "sha256": "f7c9451ae81c50da2f05c327490d0b20e56df3fc7c9fba75dafd3d86486a1d54",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00128.png",
+        "bytes": 1989626,
+        "sha256": "b0f10bd04e79813d716a932e3ae7fe319caf87ab2b7749321bd1c88eba5cafa0",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00129.png",
+        "bytes": 1990431,
+        "sha256": "00fd82f42f412e2fb204f5ef6f922219634a8837c175477b79ad1f92059ea1ff",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00130.png",
+        "bytes": 1990377,
+        "sha256": "1e90b48040f5a1a597d21f3c7db09c221467a3d5379ade9717d3e7f9342796d9",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00131.png",
+        "bytes": 1992092,
+        "sha256": "be723263fb67cae0f4b8348712d8ee4b085b2e8ed8b5151e4befd48bf18e773e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00132.png",
+        "bytes": 1993975,
+        "sha256": "705332372f67172823380b7bd0bd1e1ba051782b16ddb6abdf5495ca0229591c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00133.png",
+        "bytes": 1996119,
+        "sha256": "deee71fbe7016317a85a466ae6052d6d1f7c6195ce6aa81eaf9f02d80e6bb4ef",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00134.png",
+        "bytes": 1998413,
+        "sha256": "e6696ea3713ca6208997f829fbaaf08488e3fbd5af06f706b92e1542d7833211",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00135.png",
+        "bytes": 1998837,
+        "sha256": "142987a4c45c87312ff795476dd6f99a4a030d27626290d5803d28105ec5fc3c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00136.png",
+        "bytes": 2001287,
+        "sha256": "2e99af92c108fed6178a1cc2f5a2001751a1b2f74dc729b58673e706f96abddd",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00137.png",
+        "bytes": 2000416,
+        "sha256": "6a240e312b4c959ce0984317a4061ad3a6b860742c74ffc2675c6ce67063aae6",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00138.png",
+        "bytes": 2002528,
+        "sha256": "f65e0d0136a8c4fbefb93a9c6e7715ba47b513b2cc79d525e542744262169cbc",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00139.png",
+        "bytes": 2003794,
+        "sha256": "26b299c500c4de72e3d85d95b0a659fcadfebf950d6d7da24875e07f2963545c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00140.png",
+        "bytes": 2004319,
+        "sha256": "45f6e85d50c1581235a007dd5146f0a68b077dd7121d2bcf5247ddf288e07039",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00141.png",
+        "bytes": 2004378,
+        "sha256": "87a8ee508805bac5c3783f8d2c6ff66866300a83b8efc2b410afbd85332b3ee0",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00142.png",
+        "bytes": 2006092,
+        "sha256": "f8158a84393f17b167d3bd78ac1bd4959184a4c231da501d4cc75f3f634e2dfb",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00143.png",
+        "bytes": 2005388,
+        "sha256": "be431195d61eb2a777c3aac215ef48fd0a19bf08493b4835b3c954349ce89e35",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00144.png",
+        "bytes": 1898393,
+        "sha256": "1a6b74f7f29f355cd8aba09486029f321cf07db8b89013c00a32a8aa5dbc24b1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00145.png",
+        "bytes": 1850688,
+        "sha256": "2cf788fd0323a384574c6b749896dd9e41207f1620ac42708e3b788c0a7a42e3",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00146.png",
+        "bytes": 1829063,
+        "sha256": "93106d5723772860984655c0d0b87117db2c552a02106f961a994b22eae5dca4",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00147.png",
+        "bytes": 1816716,
+        "sha256": "570ae59d4af0cb89b5224aa3691ce7e64c9c83b5661352ae81c0ab1ca350d39f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00148.png",
+        "bytes": 1812431,
+        "sha256": "fae03044503275baba3a404b304f26d40b61c121a96465d6c47482ebcce26377",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00149.png",
+        "bytes": 1813358,
+        "sha256": "d49e745d555b7f3041be6e99f405ff08bed7d43bfcaf84678997182f476c46be",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00150.png",
+        "bytes": 1816697,
+        "sha256": "3d83ca20d2f16c92831cac049bd426e23d41ce464b4f58aa783d18dde1b11d9e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00151.png",
+        "bytes": 1813638,
+        "sha256": "e5a3ded58d2f5a58bd5fac6c8820b11948de4bdacc3d884dabb8ef6af36f65ea",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00152.png",
+        "bytes": 1805132,
+        "sha256": "879a336c091be3dfa826c3aae187c578a285873164e72ac07e3f7f8e4a2595dc",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00153.png",
+        "bytes": 1802393,
+        "sha256": "c462bf737811b40208931b7ab5bc56c6f4902812e028b07b010bb26ed4c44099",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00154.png",
+        "bytes": 1797526,
+        "sha256": "4a8c77ae362c9ad4db330061105ad4b7654280e70305150317169d2d79bea936",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00155.png",
+        "bytes": 1793849,
+        "sha256": "6cad3e9cd0fe89f5fd712b8740540dd047f0008c19135c4ab0ced7b1cc81f6a4",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00156.png",
+        "bytes": 1789095,
+        "sha256": "64c257803c72ff8e0a7a510877ad8afa206b609705091473596d0126f6dc35d4",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00157.png",
+        "bytes": 1782928,
+        "sha256": "e4e59d1b6c67150f103a9e001cc177702cf15eb691727e450d3ab2d3ee144783",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00158.png",
+        "bytes": 1776418,
+        "sha256": "2d57693e534233ddaadb26d95f18bfb2f22d3ee559763ba1a005fe70d30c3d1c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00159.png",
+        "bytes": 1764400,
+        "sha256": "51fb53f3d2689921ac5644285d2bb5baad20dad8f9a3464b44447b297f4206e5",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00160.png",
+        "bytes": 1759166,
+        "sha256": "6853a79707306167b8f3806e4d4386e2ce035e45d51a0001b52d5b29b58516ea",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00161.png",
+        "bytes": 1754775,
+        "sha256": "c9302dd5e4c8c148cc3c99094a1892cf21d614b1bf26b61a9ad86dfd15ace36d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00162.png",
+        "bytes": 1753140,
+        "sha256": "fe1792dcf14fbaccbc91de9575e38c69301e17186cae56073f2fd83387681ad1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00163.png",
+        "bytes": 1754586,
+        "sha256": "12170b57d7ed4ef54dc767edf5878607730e584a3ca637bfee5457d6c0169ee7",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00164.png",
+        "bytes": 1749711,
+        "sha256": "1b002776adfb132037eb85af4d88d54c6fd0cf2ca65e2440113dac271f4e12a2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00165.png",
+        "bytes": 1740649,
+        "sha256": "54dd0550aa0f82f375bb1d0959fec78905222dbc6306c875a79504d1cad7790f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00166.png",
+        "bytes": 1741512,
+        "sha256": "baa705ad6ffcf09d7e859bf8ae042256889517bd7cd5e761b62d32448933da94",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00167.png",
+        "bytes": 1738628,
+        "sha256": "6a468f2056e1823c18c5ee3c9e19c73fbabcbe147101e0605eef5c84d2f24fb0",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00168.png",
+        "bytes": 1737946,
+        "sha256": "52168199a07f18f6f167904b4fca87c3b0777f1a4670eaabbaac721ec52865c2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00169.png",
+        "bytes": 1738184,
+        "sha256": "db381e10ca96e1ff9ea108fef0fb2831bb83616f983a0a2525537dff2c65898e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00170.png",
+        "bytes": 1739724,
+        "sha256": "0a945c22ba3ac6bba1da49be8c6cb56d1331604632a41f7477695254df12c834",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00171.png",
+        "bytes": 1742378,
+        "sha256": "720301a8f15de16f38c1c746109bb912ef29962eaf60dee901c68d21d6b612cf",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00172.png",
+        "bytes": 1739645,
+        "sha256": "b822def2e3a3ec18f4a8f881994ea7a14f5e720da57639bacbec3d5f6aec6e79",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00173.png",
+        "bytes": 1735634,
+        "sha256": "ce635fcaa1a66c7f9b197a8837f0fd555f3375d81a78bf87ff32f7c0f1168d7e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00174.png",
+        "bytes": 1729781,
+        "sha256": "bd6153e394e77f2c71d3f8db8093c88b6cde8372a64ef870ae8dbb54a9585a00",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00175.png",
+        "bytes": 1725198,
+        "sha256": "ee90aa58231189bac8095362cba938449636278b6d84524b4c385eaed966e0b1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00176.png",
+        "bytes": 1721448,
+        "sha256": "6f73d448fff6cbdf69c18443496a13e6b4f1e2c0ac7e6fac2d9e7e99ce6eccd2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00177.png",
+        "bytes": 1719520,
+        "sha256": "08438dac27bf425378e47e8234061bd1fcd81264dbac75a83f964aab902a0da2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00178.png",
+        "bytes": 1723140,
+        "sha256": "d14e11c3136f1bf35db3d66afb0fbbfbe58993dfdc9c38fad50a797c502c1f66",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00179.png",
+        "bytes": 1724638,
+        "sha256": "7951ca6de4fa81056d433b927ecb61de8ce06facfcaf13944308e78882b259ad",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00180.png",
+        "bytes": 1725494,
+        "sha256": "a718255e7e378321d3bfc8da31a22d4433970b25eec348c5a51ea6d485133281",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00181.png",
+        "bytes": 1717589,
+        "sha256": "9a5b38d1f697cb4876fd2fa8df1531aba846f11d8f67206d5fafda1f0cde6a96",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00182.png",
+        "bytes": 1714913,
+        "sha256": "8dae0d6c6b238083103f6aa4b951f218fe8ae5b275861cd2713ab975409975ff",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00183.png",
+        "bytes": 1715272,
+        "sha256": "02d3ddda7d2cada510619746eebc764f5aa06550affea0a9913d4959d7bd5195",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00184.png",
+        "bytes": 1721250,
+        "sha256": "48ef28a62535ca71e9f41168a0ba6192147d6353f097cc65be3b9dae92e425a1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00185.png",
+        "bytes": 1728126,
+        "sha256": "f82b7fad7e3da8a9d6e2cb46cf5ba1abb76e3ed51715ac9b0108d911e6962a84",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00186.png",
+        "bytes": 1734098,
+        "sha256": "c278882775d65688a8b2632f3033d9b4e41121c0530bda4a32fde5054af2a947",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00187.png",
+        "bytes": 1737843,
+        "sha256": "52a35bacc9ccd0fc1e1834b5135878507e2c785209dc576387eeb8c798f82663",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00188.png",
+        "bytes": 1735354,
+        "sha256": "2cc1cf4aabe5b3667c39a9c2b7955c1e1e62d93e44d8a80e620f4aeab4ae3328",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00189.png",
+        "bytes": 1729406,
+        "sha256": "668dc7bda77f44df4e36bea6de98ffac7b93f409c85ca6c3853c22bc529d04ed",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00190.png",
+        "bytes": 1725915,
+        "sha256": "af2ca59b3b320199d44eab172906025d760ef5c73592059029193d8bdc095248",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00191.png",
+        "bytes": 1724049,
+        "sha256": "ce5aa16131102b9977feb7c66c99855326cc8ffc510862d923183e6fc9e743f7",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00192.png",
+        "bytes": 1723297,
+        "sha256": "caf1affd5cf6a068ab7c8f29afafff50d403c3917ca13765a5ac97745437fd1f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00193.png",
+        "bytes": 1721498,
+        "sha256": "dbd4d9028efaec287dc40dc20b705dfc4d8e4e931f1a8714f2ad6ae345f7f94e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00194.png",
+        "bytes": 1716340,
+        "sha256": "91c25630945a5ceb25b53947d3c0864218f84962beb0b8226408d86497ca6839",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00195.png",
+        "bytes": 1719363,
+        "sha256": "1e8305c106c5800ca846fe3fea10493d66f987dd46fc0b20d3c316164b3905d4",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00196.png",
+        "bytes": 1722935,
+        "sha256": "0b4fb2f49373f11c02b185da083dedf2ecaa02f0e3770696f7fd6c7fdab60fdd",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00197.png",
+        "bytes": 1725163,
+        "sha256": "16185770d0e97fa7c650863dd1f1d4e45378217ec057cfacb767cc83f86929b8",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00198.png",
+        "bytes": 1728114,
+        "sha256": "f21e206cf0f48a841258fd19f177ab31c96875af7e38a58f33f9b17bcac1cfc1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00199.png",
+        "bytes": 1731401,
+        "sha256": "73d86e215b917e802e6bf3014ea640a66113a3a69c9996ad59f35672160ca882",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00200.png",
+        "bytes": 1728996,
+        "sha256": "f0643552ba51e9f56f8b9ed6b5f577cf103cf1e65b78dacd4f951d1cf06e7154",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00201.png",
+        "bytes": 1729131,
+        "sha256": "939c0a5e614a70a165a4114ab9a01a1b562029fa364b7b2a8794f2c8894d5b28",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00202.png",
+        "bytes": 1725700,
+        "sha256": "8ed9bb40dea951607ce37e9d5ac9c85f470f1aebb7693f8024b2f7ea1047946b",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00203.png",
+        "bytes": 1723465,
+        "sha256": "caa8611bf29594fbc9c1e0b734a8b291dca7afa59d8ebb9db7e1af35d67a3a7a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00204.png",
+        "bytes": 1723349,
+        "sha256": "694cd2ca4c4ec7e58061488ad421c83fd8aeeae0aea704785c49239b0484eb05",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00205.png",
+        "bytes": 1720538,
+        "sha256": "2daae6c7bcb8b20dd47a1d39277ee8747e9e9f0af717a80fa605974bf1125c5c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00206.png",
+        "bytes": 1720611,
+        "sha256": "74d1939bd5d587614fb4425c80497e8952aef083a585bf13b6eddb0ba03870c1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00207.png",
+        "bytes": 1720231,
+        "sha256": "6c9582683ce5782a533d0b179ff156d3e9b24e22f795160dc5c53a93603f809e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00208.png",
+        "bytes": 1720733,
+        "sha256": "9c1aa98b20ab046656c1ca69bc727247846fcc8da6c0e2ff16f5a092cdae89d0",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00209.png",
+        "bytes": 1719251,
+        "sha256": "b660f504d9568b403416276ea2ab829698eca61331bc291da3c5a5d0e0e59954",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00210.png",
+        "bytes": 1719622,
+        "sha256": "dec844149b1a0357c8c1ae4c884cc57e6ccdf3368727fe6c2b23d36de8cc7b3e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00211.png",
+        "bytes": 1720854,
+        "sha256": "8901ac61919f757bbf9d8f3aa9a8c43eee74a026b8a88f55b3e6ed46340e73e5",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00212.png",
+        "bytes": 1723596,
+        "sha256": "656ca92ba84f42c2c35437bc733031f82b1353c7555e40c61b7883f4b8969f8a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00213.png",
+        "bytes": 1725053,
+        "sha256": "2ad6747044c711620ab1608883f89cc62230b64173acf52d79c419e2d9c92ffb",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00214.png",
+        "bytes": 1727885,
+        "sha256": "741b474cfbc945c24c8a3f9a76593ba2061809f3c823e8cbe65c50882dc29586",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00215.png",
+        "bytes": 1730464,
+        "sha256": "3f518b0fe65495bf41d2be3ad2bc6dd1f6556f0b28ec226e1a0c84c823da2e3d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00216.png",
+        "bytes": 1730363,
+        "sha256": "19b4c902418d7292fd9e64a87fe6fadcee624e19e5596cf50fb507015d0470b2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00217.png",
+        "bytes": 1730561,
+        "sha256": "5ef62ab4d1a1e2d0c30e9905feba31a105a8103a1cdd26a3cf6da9fb15e4b8dd",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00218.png",
+        "bytes": 1733254,
+        "sha256": "7dab27c90e1ef64cf465f161ff458b874401bde3623134d70c018d293b51e895",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00219.png",
+        "bytes": 1733264,
+        "sha256": "0087cf566dbc0a273d3348fa37d5a16eab6534a73bb7c88eed09bab168cc5990",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00220.png",
+        "bytes": 1730608,
+        "sha256": "b5344b587a5c0cf4dbc579beae92fa6b3c720102535506b4a5587ca0cf8052e9",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00221.png",
+        "bytes": 1727625,
+        "sha256": "2ee09b4ac170a51de4f2a68eed7b8fcf1337719d47216d0a9c921ca57f4929bd",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00222.png",
+        "bytes": 1722977,
+        "sha256": "a278242a1c88c36c1c8887301f0f74b491119946cf0dfb744ea1f3510080baad",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00223.png",
+        "bytes": 1719084,
+        "sha256": "693d8f863ef60223951e0c7bbe53b2cc1fce472da4e413f511f0b5a69015d5df",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00224.png",
+        "bytes": 1715285,
+        "sha256": "0757143af17174bd762bc8cd469d64274d68dc4734fa7e1f3614db1e83b515a7",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00225.png",
+        "bytes": 1708101,
+        "sha256": "bd3ae8d598a4a7dc6d82c0f3b8a9e87a0959ffad29affa3342a76edf8692704f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00226.png",
+        "bytes": 1706832,
+        "sha256": "6a85038aee3217e275f6e97150fc32b00b5b80139773fdf0ea2b7e75e3c8e739",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00227.png",
+        "bytes": 1705705,
+        "sha256": "40157c9305f34a05dd59050d5ef555fafee193685843a4003ef6d4e141bdf397",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00228.png",
+        "bytes": 1703690,
+        "sha256": "db6b09520c446c0bfb2176d5e9601c53eecdeab95505a4ee531f439d4bff2fec",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00229.png",
+        "bytes": 1701104,
+        "sha256": "322b7a7a1a61f39672ec0866776062900b16e2ffb07777f4d1bf6f7a19b12dc5",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00230.png",
+        "bytes": 1699989,
+        "sha256": "b8071ee70a60c3c31565199a030c7adc9ee1eaf4449a793761d0af051e4f58ac",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00231.png",
+        "bytes": 1699854,
+        "sha256": "78cad30bd11055d18e0e48f0eebf709cb80adf6eef81e0dd524c235e6ab9d3bd",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00232.png",
+        "bytes": 1703169,
+        "sha256": "9effcaeeb4193f379c809d6cdc7446fe29b2997fa8e833e1238daaf80aae2045",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00233.png",
+        "bytes": 1704109,
+        "sha256": "ff2e497449f6748256357f4c93ba40c83cb8ae870c96c8669ee260db8d8ba365",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00234.png",
+        "bytes": 1704506,
+        "sha256": "c2e61a09124917691fc2155afff13433b37e0f0d869b1dded81877f6c96726b4",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00235.png",
+        "bytes": 1706642,
+        "sha256": "8d4f6dd0af0e2c5133bd23a89b0a2747f683011b9dae913eb7e3c96ad9c510a8",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00236.png",
+        "bytes": 1707581,
+        "sha256": "8876e71cb44fe25d3c0c825153ee00dd8a6b730cb70603deb9a75ca0499c0e2c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00237.png",
+        "bytes": 1709671,
+        "sha256": "7b9c495a3ae3663918adfef36fe54802530629bd3170608aa3d68962d7c644dc",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00238.png",
+        "bytes": 1710185,
+        "sha256": "dce78501727bf889a5cec1287176da819c4c57547762af1af499fa35c621a206",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00239.png",
+        "bytes": 1712851,
+        "sha256": "7c6549f65da4c8562bd42443b6c3afa688f41710842e9e1082d3dbd80b028040",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00240.png",
+        "bytes": 1712171,
+        "sha256": "30659de48c0560947a30e93dfc9ec07f3932b238bf9174b86196f9c946e8b422",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00241.png",
+        "bytes": 1712699,
+        "sha256": "971d14a4438b66896414b21e5318744d45df01b082fad0ca891246eb68ab8a95",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00242.png",
+        "bytes": 1713421,
+        "sha256": "9daf01a17ceed876af34d43a8c33fdbdb5d42d66fb4a0f3f51292af5195b4b40",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00243.png",
+        "bytes": 1715850,
+        "sha256": "f5242f070549b0161dd54f0836c0f082024e00a33709205d399229f9a9a84c1c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00244.png",
+        "bytes": 1717068,
+        "sha256": "d500e67f71bc1277d1d1f4e784217a71ea3904d2761ca31de0ca371210f4c608",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00245.png",
+        "bytes": 1717483,
+        "sha256": "06f6c9554e2336304431c8db3c0f0a2e36f1609f353b7e1a496c5fde4970e897",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00246.png",
+        "bytes": 1719230,
+        "sha256": "21cf869df1f563a4dce03520b86b26e0669a9536f6c3235bbcf77678f06e4335",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00247.png",
+        "bytes": 1719569,
+        "sha256": "5e091de10bceb3aa999edc6574e1a846a4c5301df473dcb17e1d7997203ec7cd",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00248.png",
+        "bytes": 1722397,
+        "sha256": "fa393c530a80a83235828ce45340d662c8578a2aeb54f0d433468efec99a656e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00249.png",
+        "bytes": 1726336,
+        "sha256": "f5df69892b27a1ebdf64221d67bb9c2c27a130fc2e50c36543206bbfd2f1da0d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00250.png",
+        "bytes": 1729001,
+        "sha256": "2f68c7567173bcfdfcc57e94e6a14bd812ac0b6d250d5136cd2201a7a51624d6",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00251.png",
+        "bytes": 1730545,
+        "sha256": "bc1afd13ddf386a1d2a931b795b7febb2583961b2c1b0a84b759712d5aca8fc5",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00252.png",
+        "bytes": 1735386,
+        "sha256": "da18cf19e22516f712f63c068c7d700daaa597364a1991cbe8303f55dcf674a7",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00253.png",
+        "bytes": 1733713,
+        "sha256": "aa751f89de78c13a12d90b890c72a9884111d14f9ad610a9db64b2745d61721b",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00254.png",
+        "bytes": 1737377,
+        "sha256": "580e5b0f156f1718cf828de1cc6756d11e2e7eb3776b378df33342c3a0c935fa",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00255.png",
+        "bytes": 1739117,
+        "sha256": "d17eb9d3f235a083a6c434d5198dc5ef9aaefa60333b9521d5de07998f4e1bee",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00256.png",
+        "bytes": 1738717,
+        "sha256": "ac14b01afb482a8a30d1b6cf84fd675e28aec5597194280c659b33edc16679c1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00257.png",
+        "bytes": 1740418,
+        "sha256": "8bf58cad3015ba6667729238e8b69e5c1b034210b68ede246bf89b9c97fd9b48",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00258.png",
+        "bytes": 1741508,
+        "sha256": "49aac9bb97d034cc4278651bf44a9809c28b0387cc91f59d2ad0d5b6ebffb0ee",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00259.png",
+        "bytes": 1740098,
+        "sha256": "9038d590dadc0a45f69aa07ac33108c0d22451164475036e45e53c8cd28e3198",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00260.png",
+        "bytes": 1742144,
+        "sha256": "fa25c8d29c5ac4b8ef6afa50132e6b6221c5090282184c25f7531df50bb2f750",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00261.png",
+        "bytes": 1744638,
+        "sha256": "8fb25eef97f0ad2d1b247a8e0f899fb9c96435e2d2164014bf301bddd2e0f511",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00262.png",
+        "bytes": 1742298,
+        "sha256": "ae69c9eda36c2bfd7c3bca9102c1b0b823ece0a02c9a0b305a6f2e67faa8ccd3",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00263.png",
+        "bytes": 1743808,
+        "sha256": "887a547a27a48423c8becd37a512193dfd63e2b99b9b10519f71d961b76a4913",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00264.png",
+        "bytes": 1741927,
+        "sha256": "bc9339375936ddf625cffdea72c32fba17a8528b7096c570a7c98aa3b19e7a0f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00265.png",
+        "bytes": 1741757,
+        "sha256": "3b6c6a413fa65afaa2091b89de84e73f80851b340855b26db4b8ddc12639c744",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00266.png",
+        "bytes": 1742902,
+        "sha256": "56ec281e76eba07ca0c79e3afb1e2e0b0fbfcdaf5f150c43127f7aeecbe77dde",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00267.png",
+        "bytes": 1742356,
+        "sha256": "6635b527b54d6a6ce82d7c1c0e286ad081524166855aea2892a14b9b39a80fc1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00268.png",
+        "bytes": 1740445,
+        "sha256": "e0873eb94ea7b86aac9f3be24d970b03043507ffa51073982c5770ae34c5b734",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00269.png",
+        "bytes": 1741209,
+        "sha256": "0d4b0ea8de166a183b3806045d528b4f14fdf3ba411416e45858029a4ccf63d6",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00270.png",
+        "bytes": 1736811,
+        "sha256": "bbf3c7a6e3ccc326c9ac84fffbfb038331bfca6c60538e097ced3ab6aeb3d4c1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00271.png",
+        "bytes": 1736418,
+        "sha256": "034e8cd81c72fb91a41657c6573567789740b8de52cf7872cdf727aef1b00879",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00272.png",
+        "bytes": 1735632,
+        "sha256": "382d24af2b0013822f4324dfae3303e7fc9ead46697580abfe5e0d839088eef7",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00273.png",
+        "bytes": 1733341,
+        "sha256": "4c2bf2071bb7a9909f5958b445501a737b14065f42c36957569936a767c343d1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00274.png",
+        "bytes": 1732964,
+        "sha256": "4b4f29cca40abb4b3816b6d7784fe803d2fe69cca319ee6be4ef8a62a4566461",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00275.png",
+        "bytes": 1733538,
+        "sha256": "bf097c99b72e0a1062bd052c2c5db286069328f51d09260e0a7b8a4abcd1a8f5",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00276.png",
+        "bytes": 1732166,
+        "sha256": "44c25bf4b6a5b43002a60f33ed07a07b62244cb02adb11ab55d20b3ccfe9068a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00277.png",
+        "bytes": 1732756,
+        "sha256": "0fea6f87088e18e3b379b26fb69aa692479c472ab98f30fa2d1cbb8dfdcf04bc",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00278.png",
+        "bytes": 1732748,
+        "sha256": "82557f7e815b70a58333559f84df3318475a6631382cc34f399ba6a7b083a608",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00279.png",
+        "bytes": 1729689,
+        "sha256": "be4acf2332b5523507cb2b03e007b1a2c3a29064651326926821c8dd45febb18",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00280.png",
+        "bytes": 1726922,
+        "sha256": "e246222a15970c1774174abf6ef547d4265f78db1675c952f3048801b4f7f41e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00281.png",
+        "bytes": 1720212,
+        "sha256": "91509bc42944d0c61c4bc1ca2c0749a59953b85d71c4833f03b817fc1e0d5329",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00282.png",
+        "bytes": 1722008,
+        "sha256": "a6bf1254eb81d35fb2707ca8b4cb43355c93ec65815cb74e0915ce760a028ff2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00283.png",
+        "bytes": 1721114,
+        "sha256": "834ae536ee29e0ee0e82cd11684310fc9f7f92fb3e9c69cc6693c1f52a1c15ac",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00284.png",
+        "bytes": 1723442,
+        "sha256": "2acea6ab71aada02b61dab129044546203ecbdf955c1f16176a6af91b82914dc",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00285.png",
+        "bytes": 1721781,
+        "sha256": "2b76c759f5929d64ef3c12bf8a0e971c99aa7767c7d4c8f009630708a1eb854b",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00286.png",
+        "bytes": 1721595,
+        "sha256": "e841230e120d94bb6f61e0beec0260baeaf5966ea55bad5a0b1f2b060f62c470",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00287.png",
+        "bytes": 1717927,
+        "sha256": "a27d4f6a216104cbdfabfd8e9c82dedf5b6a5544357161c5b14746c529768f5e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00288.png",
+        "bytes": 1710639,
+        "sha256": "95ee57f3a5f9c2217439a22d3ad13dfc00b447e7b660d46819666fb3bea86c9b",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00289.png",
+        "bytes": 1713722,
+        "sha256": "aa9a54be172323616aaf3899d705eda8cc643afa0dd2a3056444f7f5121b854f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00290.png",
+        "bytes": 1713648,
+        "sha256": "03f30f79499b9ae5cdf908434d3665333327ed86f1e931dbd81a5e34bebecbc8",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00291.png",
+        "bytes": 1711614,
+        "sha256": "f8e8c7e49527f2bfa0fd6e6866c7cce865d4b7bdeec6a2ce5594feb881c2c637",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00292.png",
+        "bytes": 1713749,
+        "sha256": "73ed72c9a512d4f5db0e83f2314c7492b065e7976f5f344d4a006e9fa61152d4",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00293.png",
+        "bytes": 1712342,
+        "sha256": "1f921d8b80c8f4d60ca99838c1d630ee89ab6ca90ca8788d9ddc2959c433b413",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00294.png",
+        "bytes": 1708553,
+        "sha256": "358a1d3419c86ef280ef2de1415dd0a7ebfba36cd22debb5e05acd5789287959",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00295.png",
+        "bytes": 1708674,
+        "sha256": "73bcfcb859c7f5c9c9c1c17bccfd2ebbc56fc83c65ccf982c201965b40650dc8",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00296.png",
+        "bytes": 1705333,
+        "sha256": "5d046fc28f5385bc62ab0e00b89a0ea3bbdff38e8421edb93227619ab8bfe589",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00297.png",
+        "bytes": 1704728,
+        "sha256": "98a60e4c6b3358915a9c574fad15e15b9087a29bd9b1a375f406464f645dd81a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00298.png",
+        "bytes": 1702984,
+        "sha256": "c7ff48bfb5a98ce9f1267fe4a712ec6038dfb14b32fd9676a9eeadc352b44cc2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/AppearanceMotion/frame-00299.png",
+        "bytes": 1701889,
+        "sha256": "60d0d5f296b685da9dd0980b3277cb2ae40bedb042d2563222265c94df620d5f",
+        "width": 1280,
+        "height": 720
+      }
+    ],
+    "materialBindings": [
+      [
+        "HALVETHCitizen_2147482046",
+        "5"
+      ],
+      [
+        "HALVETHCitizen_2147482030",
+        "5"
+      ],
+      [
+        "HALVETHCitizen_2147482026",
+        "5"
+      ],
+      [
+        "HALVETHCitizen_2147482016",
+        "5"
+      ],
+      [
+        "HALVETHCitizen_2147482008",
+        "5"
+      ],
+      [
+        "HALVETHCitizen_2147481999",
+        "5"
+      ],
+      [
+        "HALVETHCitizen_2147482003",
+        "5"
+      ],
+      [
+        "HALVETHCitizen_2147481995",
+        "5"
+      ],
+      [
+        "HALVETHCitizen_2147482034",
+        "5"
+      ],
+      [
+        "HALVETHGuideCharacter_2147482228",
+        "5"
+      ],
+      [
+        "HALVETHCitizen_2147482050",
+        "5"
+      ],
+      [
+        "HALVETHCitizen_2147482042",
+        "5"
+      ],
+      [
+        "HALVETHCitizen_2147482020",
+        "5"
+      ],
+      [
+        "HALVETHCitizen_2147482038",
+        "5"
+      ],
+      [
+        "HALVETHGuideCharacter_2147482217",
+        "5"
+      ]
+    ],
+    "video": {
+      "path": ".local/VISIBLE_BODIES_20s.mp4",
+      "bytes": 15479692,
+      "sha256": "a4f987b9c1a827325449e8805f5edf61489397c9630f8fff30991288c8acea41",
+      "codec": "h264",
+      "width": 1280,
+      "height": 720,
+      "frames": 300,
+      "durationSeconds": 20.0,
+      "encodedFps": 15,
+      "audio": "NONE"
+    },
+    "requestedSamplingHz": 24,
+    "observedSamplingHz": 14.999999218,
+    "isFrameRateBenchmark": false,
+    "scope": "Fixed camera position after initial placement, with tracking orientation; native walking/shared five-material field; no dialogue/drop fixture"
+  },
+  "logs": [
+    {
+      "path": ".local/appearance-final-gallery.log",
+      "bytes": 158931,
+      "sha256": "8d5925e051fb07eded7936d6c77fb4ea8d4cb32d6f427237d35ed2f6c5f20136"
+    },
+    {
+      "path": ".local/appearance-final-studio.log",
+      "bytes": 146935,
+      "sha256": "8665e8b550c16d60d23092975c2a1ca06b27fe2de99e8d12417eb5e1b8f9b2ab"
+    },
+    {
+      "path": ".local/appearance-final-motion.log",
+      "bytes": 938227,
+      "sha256": "173c103c3ad967ab7b6736455749f1727d2e7c09f29924efcb6e7b8d97237c13"
+    }
+  ],
+  "limits": [
+    "No photorealism or human visual acceptance certification",
+    "Portraits are material/pose fixtures with the live skin field disabled; movement uses the actual five-material field",
+    "GPU witness checks the shared field, not every final skinned pixel",
+    "Eight authored adult source bodies with seeded variation; no cell/organ biology",
+    "Fixed simulation timing and offline rendering are not a normal-play FPS benchmark"
+  ]
+}

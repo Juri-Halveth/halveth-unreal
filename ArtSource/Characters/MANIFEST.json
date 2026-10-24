@@ -4,8 +4,8 @@
   "files": [
     {
       "path": "characters.json",
-      "bytes": 2394,
-      "sha256": "6f0f4ab09609808a4d60d1cd7351e33d12d2edf54e189dccc9d4a383f41490b4"
+      "bytes": 82785,
+      "sha256": "614dde1dd053b171ebf25d7b4a283f894498feeb567e27bf6fce210976afa169"
     },
     {
       "path": "cloth_normal.png",
@@ -19,13 +19,18 @@
     },
     {
       "path": "fbx-path-roundtrip.json",
-      "bytes": 2333,
-      "sha256": "b227caacd5c9be35dab30e7c1e0cf1ab085aa7c14513cbf397e17a601009b517"
+      "bytes": 3582,
+      "sha256": "effebcd32ec664a26595d1bf98a916b121f368e1365de3e0bb5783be0f91d21c"
     },
     {
       "path": "footwear_diffuse.png",
       "bytes": 309009,
       "sha256": "fe8216fbd0c34ecd3ac0e1a01970a4ccf844417be5fd1d72c527c9209256db93"
+    },
+    {
+      "path": "Ivo.fbx",
+      "bytes": 12782076,
+      "sha256": "7974cffef5abebb20b4f68bd63916a65a75d469aa186e5262aaffdc8ceb943d6"
     },
     {
       "path": "LICENSE.txt",
@@ -34,8 +39,8 @@
     },
     {
       "path": "Lucinet.fbx",
-      "bytes": 6507580,
-      "sha256": "78330b7f420b5d2ffa0af383f9edea716b991bc1967d77916e3134aa16f8fb01"
+      "bytes": 12792892,
+      "sha256": "58b46f09290c027be12bf4982a55c8e8bc31dad09b162be595fe683ec2b4b042"
     },
     {
       "path": "Lucinet_hair.png",
@@ -53,9 +58,24 @@
       "sha256": "ff029fc5a3350ebc72813cdf050afcffd23064c7701d99e664572713cfa98a5f"
     },
     {
+      "path": "Mara.fbx",
+      "bytes": 12830188,
+      "sha256": "3ade63c9374e885ae094b5e5873ef3756b084482f0532ab84d8a13b8095b58ec"
+    },
+    {
+      "path": "Neri.fbx",
+      "bytes": 12801100,
+      "sha256": "e2d1887106c68a7c7a2336c3d1b1e60c3260b528b121fe8f64ad47b0fab7a43a"
+    },
+    {
+      "path": "Orin.fbx",
+      "bytes": 12787772,
+      "sha256": "98f5ea9c68a0fd578a4b96290a7ac09b0718918d3e1ca10d0235cc631946da6d"
+    },
+    {
       "path": "Rachel.fbx",
-      "bytes": 6123148,
-      "sha256": "a58c7c44109d0e416ce6be45405178e6d1704edbec4e45a311c05d1a1cd35007"
+      "bytes": 12789244,
+      "sha256": "4f27cef7498f21543f0ca3162e2e76b9faa5ca11dcb460ff109e81e4b5065452"
     },
     {
       "path": "Rachel_hair.png",
@@ -74,8 +94,8 @@
     },
     {
       "path": "Scarlet.fbx",
-      "bytes": 6626716,
-      "sha256": "56cb6fa9d8b710fd1646b4c04ccf3e76dc32a9a4628f5ad4dcf475793c71c2e1"
+      "bytes": 12814284,
+      "sha256": "e927a131e211ec7303afc2296bc4f9299f0d1cde7ddda6da9c789f613dd13a04"
     },
     {
       "path": "Scarlet_hair.png",
@@ -278,6 +298,11 @@
       "sha256": "d2493ca5f69aabeb8557d77a56c49cfcf2062ff90c0cad03073d87990d11448b"
     },
     {
+      "path": "Sources/targets/chin/chin-width-decr.target",
+      "bytes": 2853,
+      "sha256": "ac081bd1652c203fc8973f20988a868a423a49f1fe6449cb974727fd46c26af1"
+    },
+    {
       "path": "Sources/targets/chin/chin-width-incr.target",
       "bytes": 3706,
       "sha256": "deef506bfe1883d9d4c38667332c9970785226566efbae4724fd3d60c02efcf4"
@@ -286,6 +311,96 @@
       "path": "Sources/targets/head/head-age-incr.target",
       "bytes": 59255,
       "sha256": "ff677345bd81e3f439bdf75496bbee620ca3c3f029955a546837afd283abf73a"
+    },
+    {
+      "path": "Sources/targets/head/head-diamond.target",
+      "bytes": 11876,
+      "sha256": "7072c718c8476ca38d6758fb7531fd945612d51acdca6555da8a8f770284c41d"
+    },
+    {
+      "path": "Sources/targets/head/head-fat-incr.target",
+      "bytes": 14473,
+      "sha256": "075d18cdfea9e781ae0152132bfea97ea9b901ffdece8d5e6866cb1744f10056"
+    },
+    {
+      "path": "Sources/targets/head/head-oval.target",
+      "bytes": 36452,
+      "sha256": "a17cd3a600588a344babe520fbd4d4edcb096db3328051fe692dfb997a1a678d"
+    },
+    {
+      "path": "Sources/targets/head/head-rectangular.target",
+      "bytes": 10633,
+      "sha256": "bbfcbd4d6334df18515e73abb707b8a948adb74e0aba88a728c8e146dd5f4e4b"
+    },
+    {
+      "path": "Sources/targets/head/head-round.target",
+      "bytes": 32961,
+      "sha256": "bd96b745b19432ac838f15438aa87e9002f597e59353861721e12e6da0f2c625"
+    },
+    {
+      "path": "Sources/targets/head/head-square.target",
+      "bytes": 12618,
+      "sha256": "001d0d135d964daf4ad99ba46a0f77c5bc2378f04e53c2b5a20242ab19cbf265"
+    },
+    {
+      "path": "Sources/targets/head/head-triangular.target",
+      "bytes": 12676,
+      "sha256": "09f898db574e636a35b6d39f455e04bfa0bc0248c89d32ad3c959cdb65b8fd1f"
+    },
+    {
+      "path": "Sources/targets/macrodetails/african-female-old.target",
+      "bytes": 408823,
+      "sha256": "c165e7caf01aaf45511ebc78a441c8c73ead13231af1a8c6666941345f088b61"
+    },
+    {
+      "path": "Sources/targets/macrodetails/african-female-young.target",
+      "bytes": 411735,
+      "sha256": "92d61eeb3c164b421fd5a7c3537ee45e7e1a51de4d49bf312e19c3df2be1d8fc"
+    },
+    {
+      "path": "Sources/targets/macrodetails/african-male-old.target",
+      "bytes": 411367,
+      "sha256": "59ec94956b3525dbb30238d1239b2bce52adc3bfae091f12cd85d2570aa1933c"
+    },
+    {
+      "path": "Sources/targets/macrodetails/african-male-young.target",
+      "bytes": 406170,
+      "sha256": "894abc1fbb3d28543a51fef16f89d5d4bdf9aa2e1534413339811a3d47818b7d"
+    },
+    {
+      "path": "Sources/targets/macrodetails/asian-female-old.target",
+      "bytes": 426301,
+      "sha256": "1a90cb281df640df55fbce3acd6588f27b28affeb96a7f693f6f038aefc204d8"
+    },
+    {
+      "path": "Sources/targets/macrodetails/asian-female-young.target",
+      "bytes": 435553,
+      "sha256": "095fe79694fa19e1fe98d93009ec116199bd524e081c640351a10eccf2cca1eb"
+    },
+    {
+      "path": "Sources/targets/macrodetails/asian-male-old.target",
+      "bytes": 427966,
+      "sha256": "36dc5a3a135ded33885e814806b0e3668ca5bf44bddcebdee48ae75ae68bc3d3"
+    },
+    {
+      "path": "Sources/targets/macrodetails/asian-male-young.target",
+      "bytes": 421040,
+      "sha256": "ed2e8c191cb6b87b4a2d97c80486acb2604fa549316c7aa2a738a5d5a14334dc"
+    },
+    {
+      "path": "Sources/targets/macrodetails/caucasian-female-old.target",
+      "bytes": 408930,
+      "sha256": "6560982486c4b1a7a0b1d82b0ad3f09770c16b4f87c8f949537dc9cfc941a0b0"
+    },
+    {
+      "path": "Sources/targets/macrodetails/caucasian-female-young.target",
+      "bytes": 420559,
+      "sha256": "118379f6e8ba9266247fdb8788a20e1df40a239f97ced0b9905bcbcc74f6e820"
+    },
+    {
+      "path": "Sources/targets/macrodetails/caucasian-male-old.target",
+      "bytes": 400125,
+      "sha256": "b0d2b1d58cba0358af59833740e70229265f7da1c20a11240f4123b7192cfd6d"
     },
     {
       "path": "Sources/targets/macrodetails/caucasian-male-young.target",
@@ -298,9 +413,39 @@
       "sha256": "4ba5396ddabda448ece15650a566fbebfbb10239256ccb201e8f883429e12249"
     },
     {
+      "path": "Sources/targets/mouth/mouth-lowerlip-volume-incr.target",
+      "bytes": 3585,
+      "sha256": "dbdaf045b00c67bf8672d53bc8cf94eb3e3dea316de6fe18a278f7080564c65d"
+    },
+    {
+      "path": "Sources/targets/mouth/mouth-scale-horiz-decr.target",
+      "bytes": 12644,
+      "sha256": "07a9ef160755467a470bd0a1df035143d83ebddbc12e4612e69e93a64644405c"
+    },
+    {
+      "path": "Sources/targets/mouth/mouth-scale-horiz-incr.target",
+      "bytes": 15657,
+      "sha256": "ccfc39cca249883ebc46af6f2c96c4130df13a67ebce30a2550af17a48637770"
+    },
+    {
+      "path": "Sources/targets/mouth/mouth-upperlip-volume-incr.target",
+      "bytes": 3600,
+      "sha256": "b124cbd9b9be318264f61a143da603b42e0357ed92b4b6afd1b31a83daaf8568"
+    },
+    {
+      "path": "Sources/targets/nose/nose-curve-concave.target",
+      "bytes": 1906,
+      "sha256": "30dd70cfdf1ce1c77eabff12b49d238b05a3b36f95f2ba6f64d4b5b059292e58"
+    },
+    {
       "path": "Sources/targets/nose/nose-curve-convex.target",
       "bytes": 1459,
       "sha256": "3426e9a53c65962bc75b25aae04759a03e818d708bc5445ffc4dfb812497a7ca"
+    },
+    {
+      "path": "Sources/targets/nose/nose-hump-incr.target",
+      "bytes": 6836,
+      "sha256": "87f167e76cc908e8f28fed8623cf55e737f59499e8338cfe78f5d635382a5191"
     },
     {
       "path": "Sources/targets/nose/nose-point-up.target",
@@ -313,9 +458,14 @@
       "sha256": "6bb03c3065e048d6e9abbcfa58961bfbe1753a307be0d3de477cac6aeaf5f750"
     },
     {
+      "path": "Sources/targets/nose/nose-width2-incr.target",
+      "bytes": 2000,
+      "sha256": "13a9ab9ab6429a5875b47fe90cb33a4d754258af63819ee8913a93d61f312d76"
+    },
+    {
       "path": "Sources/targets/sources.json",
-      "bytes": 9707,
-      "sha256": "fbaab3ae96b2b7bdfa664c3b7039de30d12492b1d83fcd7989a3ca7def0791a1"
+      "bytes": 18547,
+      "sha256": "26c7db0159f3e5c824282d52374b8b3cbb9953439ec4e67b0fde5e104cea8a3b"
     },
     {
       "path": "Sources/Wardrobe/Lucinet/male_casualsuit01.mhclo",
@@ -409,8 +559,13 @@
     },
     {
       "path": "SOURCES.json",
-      "bytes": 2601,
-      "sha256": "057c04941142451da0ac5fe695ea7eef2226057836b4238d1132bfc84343147e"
+      "bytes": 2926,
+      "sha256": "5836e0c8fb56113048f9c8ef08bc46af928685037de163c806a426fe2947662c"
+    },
+    {
+      "path": "Tala.fbx",
+      "bytes": 12810892,
+      "sha256": "ae336b9eb0572d5680ccd84edd782fecdd797c1de565209342d7466668d61592"
     },
     {
       "path": "wardrobe-sources.json",
