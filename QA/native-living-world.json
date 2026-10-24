@@ -1,0 +1,301 @@
+{
+  "schema": "halveth.native-living-world.v1",
+  "recordedAt": "2026-10-24T00:02:06.803358+00:00",
+  "baseCommit": "5f53f17407a973149df2b29afd86096ab7d93c2f",
+  "sourceFiles": [
+    {
+      "path": ".github/workflows/source.yml",
+      "sha256": "e554774fbb0b2330b598c4e2f406802e0aeb7e28466d34dfad389a57ffd8d8c5"
+    },
+    {
+      "path": "HALVETHRealms.uproject",
+      "sha256": "ecd613130c0abf27e6f4da31059d9e4d93e5dac9fead0b3dbdecab42a5e55afe"
+    },
+    {
+      "path": "README.md",
+      "sha256": "6ae9ac697a4349688efeebee98c45439a665aff3d65b12235a35e658682fb470"
+    },
+    {
+      "path": "Source/HALVETHRealms/HALVETHRealms.Build.cs",
+      "sha256": "1fa6dfb6f71b68c10b921c52e9ba66482b8a04fe9d87038626ca46f28ccb5c73"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHCharacter.cpp",
+      "sha256": "96e998bccf35297ab22dfd13c803b04ecab2d94deb42f239a38383fe93fdd445"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHCitizen.cpp",
+      "sha256": "d279add5651962cfe07912e6d6b3b77ea3916251a8b65fddeb2e2413b0ae5831"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHGameMode.cpp",
+      "sha256": "e95a41eb63a645a4255687090e679fd634e642552ad54cfe147e84c67911c164"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHGuideAnimInstance.cpp",
+      "sha256": "518d601a93e23b576f4f5e687fe91d251abaa908ef9ff30ec115ccf168b6e262"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHHUD.cpp",
+      "sha256": "49adf6fa92360a2b2175e47c2b4b88d2a0b2b8598e3486867ce9c1c62c5d061e"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHKnowledgeComponent.cpp",
+      "sha256": "e3a8b4374552a5b75af5c830f37ce0156d6e6618742af8e4a6eacae64722a6ff"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/HALVETHLivingWorld.cpp",
+      "sha256": "d5c4021ad80e194b72bf214f1332f2770dd7eb4eb6e0bf608cfde0d39b280867"
+    },
+    {
+      "path": "Source/HALVETHRealms/Private/LivingWorldProbe.cpp",
+      "sha256": "240fb2c7c0249ead0273fe60b97f1755a63a58480c21cbc68cfd4f880f6b371b"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHCharacter.h",
+      "sha256": "b8b3156c5505fa2efdae7c12ae1c9abf8834e68a2ac3de1f27b47fe5293f8b48"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHCitizen.h",
+      "sha256": "36fb60ea091e7ff2beed560c4063b9b9e5bc1bdb113c4e0f96dcdf881a9419f6"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHGameMode.h",
+      "sha256": "1566fe31541a3c90c92c241c00b6a38b4a6cb75c121421625645bbb3e731f719"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/HALVETHLivingWorld.h",
+      "sha256": "dfd5a9f96060fafdb74801aa3a50d794c10563598213d0b6b5cfca5a029683ee"
+    },
+    {
+      "path": "Source/HALVETHRealms/Public/LivingWorldModel.h",
+      "sha256": "5936816fca3d931f97aaa082ffb68ac573d43fc598a36519d6c6389c0653303f"
+    },
+    {
+      "path": "docs/ASTRAL-TOOLKIT.md",
+      "sha256": "6fceba82c6d165d3f6d9b2bf15d471b4bbd312dbda86018f5bec2c0478818acf"
+    },
+    {
+      "path": "docs/LIVING-WORLD.md",
+      "sha256": "dd671830d426b08b3a6b33c13f0922f7521994073f3783c92836bf37d2301cf0"
+    },
+    {
+      "path": "scripts/astral.ps1",
+      "sha256": "cbfe10130172eb90896312a07856472a80f899a8cf29cf6349e77c774d6bae76"
+    },
+    {
+      "path": "tests/living_world_test.cpp",
+      "sha256": "9f1aafbc6a9f7cc06c16f8f1a2a8c56ba159bdcd0a42c448a76ed9240e25bf26"
+    }
+  ],
+  "build": {
+    "schema": "halveth.astral-local-package.v1",
+    "builtAt": "2026-10-23T23:55:55.7122705Z",
+    "sourceDigest": "3739F3A01A399B1A0652CD4A1570CFF5A887B034868FE1BED1DEF2C9431742D2",
+    "launcherSha256": "AB3F1C19FFED772018B938DAC66ADEAB425CBAAF76A52245098B45D749D8B134",
+    "binarySha256": "25A2332C6AB3FE0DE6F0DE3AB966295E78B63A67850312AC385B9E055ADE54B3",
+    "distribution": "LOCAL_DEVELOPMENT_ONLY"
+  },
+  "cookedContainers": [
+    {
+      "name": "global.ucas",
+      "sha256": "981634201f9c353ed229f67f8d6c77f9513a973044bc6ac72be6ee6ec60fd464",
+      "bytes": 3215792
+    },
+    {
+      "name": "global.utoc",
+      "sha256": "5e4f0e02cd89af3a0283085280ff33141491c787e6c7c7053a9434fc54404379",
+      "bytes": 794
+    },
+    {
+      "name": "HALVETHRealms-Windows.pak",
+      "sha256": "0b4aa02e0641d20bda31856d1eec551dbaf99543648b9a2556f963bc84c2c60f",
+      "bytes": 11232889
+    },
+    {
+      "name": "HALVETHRealms-Windows.ucas",
+      "sha256": "5d29ae36963da370ff23d240f9081b093a01e1c3f0273c4877c9c69ca1dc81bb",
+      "bytes": 352670160
+    },
+    {
+      "name": "HALVETHRealms-Windows.utoc",
+      "sha256": "9e07ddf1b8d851160100b7ce4d102ba9ee3f74c8f6aca387350b855388ae97dd",
+      "bytes": 273758
+    }
+  ],
+  "hardware": {
+    "cpu": "AMD Ryzen 7 9700X",
+    "ramGiB": 64,
+    "gpu": "NVIDIA GeForce RTX 4070 SUPER",
+    "vramMiB": 12282
+  },
+  "scope": {
+    "worlds": 4,
+    "extentMetresEach": [
+      600,
+      600
+    ],
+    "residentRecords": 4096,
+    "maximumAdditionalPhysicalResidents": 18,
+    "existingSeparateGuides": 3,
+    "remoteCohortPerSecond": 512,
+    "physicalDecisionHz": 5,
+    "animationBudgetTargetMs": 3,
+    "behaviour": "AUTHORED_LOCAL_ROUTINES_AND_FOUR_DIALOGUE_FAMILIES",
+    "newPopulationPersistence": "SESSION_ONLY",
+    "flight": "FREE_FROM_START_WITH_SOLID_COLLISION_AND_FINITE_WORLD_BOUNDS"
+  },
+  "nativeEvidence": [
+    {
+      "kind": "living-capture-final.log",
+      "sha256": "33d4864a4c0f522de06ddb629d61417ad06b7b49f7a9dd581c1e1206f8d22b3e",
+      "observations": [
+        "[2026.10.23-23.58.05:337][  0]LogTemp: Display: LIVING_WORLD_READY records=4096 realms=4 physical_budget=18 animation_budget_ms=3 behaviour=authored_local no_network=true",
+        "[2026.10.23-23.58.10:372][294]LogTemp: Display: LIVING_CAPTURE_SHOT name=LIVING_DISTRICT time=5.015 bodies=18 notice=0",
+        "[2026.10.23-23.58.11:631][343]LogTemp: Display: LIVING_INDOOR_FLIGHT passed=1 dx_cm=571.556 dz_cm=0.000 rings_attuned=0",
+        "[2026.10.23-23.58.11:631][343]LogTemp: Display: LIVING_CAPTURE_SHOT name=LIVING_INDOOR_FLIGHT time=6.218 bodies=18 notice=0",
+        "[2026.10.23-23.58.13:353][421]LogTemp: Display: LIVING_FLIGHT_COLLISION passed=1 local_y=844.118 expected_max_y=870",
+        "[2026.10.23-23.58.13:354][421]LogTemp: Display: LIVING_PERCEPTION clear=1 wall_blocks=1",
+        "[2026.10.23-23.58.13:483][428]LogTemp: Display: LIVING_NOTICE event=1 state=1 guard=0 warnings=1 holds=0 time=8.039 player_hold=0 health=100.000 damage_applied=0 fine_applied=0",
+        "[2026.10.23-23.58.13:483][428]LogTemp: Display: LIVING_CAPTURE_SHOT name=LIVING_WARNING time=8.039 bodies=17 notice=1",
+        "[2026.10.23-23.58.19:516][765]LogTemp: Display: LIVING_NOTICE event=2 state=2 guard=0 warnings=1 holds=0 time=14.049 player_hold=0 health=100.000 damage_applied=0 fine_applied=0",
+        "[2026.10.23-23.58.21:316][873]LogTemp: Display: LIVING_NOTICE event=3 state=3 guard=0 warnings=1 holds=1 time=15.850 player_hold=1 health=100.000 damage_applied=0 fine_applied=0",
+        "[2026.10.23-23.58.21:317][873]LogTemp: Display: LIVING_CHASE physical_travel_cm=427.378 since=pursuit_transition guard_id=0",
+        "[2026.10.23-23.58.21:317][873]LogTemp: Display: LIVING_CAPTURE_SHOT name=LIVING_WARNING_HOLD time=15.850 bodies=16 notice=3",
+        "[2026.10.23-23.58.23:685][994]LogTemp: Display: LIVING_NOTICE event=4 state=4 guard=0 warnings=1 holds=1 time=18.217 player_hold=0 health=100.000 damage_applied=0 fine_applied=0",
+        "[2026.10.23-23.58.23:907][  8]LogTemp: Display: LIVING_CAPTURE_SHOT name=LIVING_RELEASED time=18.450 bodies=16 notice=4",
+        "[2026.10.23-23.58.24:921][ 48]LogTemp: Display: LIVING_FRAME_SAMPLE frames=934 median_ms=16.679 p95_ms=27.787 body_brain_ms=0.887 remote_cohort_ms=1.677",
+        "[2026.10.23-23.58.24:921][ 48]LogTemp: Display: LIVING_NATIVE_PROBE result=PASS reason=free_flight_population_occlusion_warning_hold_release records=4096 physical=16 moved=8 free_flight=1 indoor_flight=1 wall_occlusion=1 warnings=1 holds=1 released=1"
+      ]
+    },
+    {
+      "kind": "living-astral-regression-final.log",
+      "sha256": "86c42f527b74d2cee72e5867f55bc8231ac35bfa854eb23f8dd6fd6f49d67b0d",
+      "observations": [
+        "[2026.10.23-23.56.04:426][300]LogTemp: Display: ASTRAL_TRAVERSAL passed=1 local_y=308.536 local_z=262.380 walking=1 max_step=45.000 floor_dist=2.150 floor_normal=X=0.000 Y=0.000 Z=1.000",
+        "[2026.10.23-23.56.04:426][300]LogTemp: Display: ASTRAL_BOOK_PROBE opened=1 closed=1",
+        "[2026.10.23-23.56.06:426][420]LogTemp: Display: ASTRAL_FLIGHT_PROBE passed=1 forward_cm=1689.888 rise_cm=1013.933 path_samples=24 gravity_restored=1",
+        "[2026.10.23-23.56.06:426][420]LogTemp: Display: ASTRAL_NATIVE_PROBE result=PASS"
+      ]
+    },
+    {
+      "kind": "living-view-final.log",
+      "sha256": "f23588d06a7315ada37b3e2999b9c6154d821fd75f50e299db8febc6693b31a6",
+      "observations": [
+        "[2026.10.23-23.58.38:932][661]LogTemp: Display: HALVETH_VIEW_WITNESS pitch_arc_deg=2950.000 yaw_arc_deg=2950.000 zenith=8 nadir=9 max_step_deg=10.000 body_up_min=1.000000 rebase_error_deg=0.000002 legacy_clamp_rejected=1 source=controller_input_and_camera_component",
+        "[2026.10.23-23.58.38:932][661]LogTemp: Display: HALVETH_VIEW_PROBE result=PASS detail=full_rotation_poles_rebase_and_sky"
+      ]
+    },
+    {
+      "kind": "living-smoke-final.log",
+      "sha256": "91131fda672f711a0e940f77026506f27b410b5bc466fd3c3f2fbe9d06493974",
+      "observations": [
+        "[2026.10.23-23.58.56:672][877]LogTemp: Display: GARDEN_PATROL_AUDIT identity=1 passed=1 observed_max_distance_cm=438.69957 required_distance_cm=150",
+        "[2026.10.23-23.58.56:672][877]LogTemp: Display: GARDEN_PATROL_AUDIT identity=2 passed=1 observed_max_distance_cm=392.71377 required_distance_cm=150",
+        "[2026.10.23-23.58.56:672][877]LogTemp: Display: GARDEN_PATROL_AUDIT identity=3 passed=1 observed_max_distance_cm=463.96462 required_distance_cm=150",
+        "[2026.10.23-23.59.18:306][157]LogTemp: Display: HALVETH_RUNTIME_SMOKE_PASS portals_love_collision_recovery_quality_inventory_shield_npc_dodge_projectiles_crystal_library_recall_crafting_enchantments_scribble_council_construction_realm_persistence_save_restore"
+      ]
+    },
+    {
+      "kind": "living-model-final.log",
+      "sha256": "36c881f4013501743e4429a0009d28f5e32aa70d25a085425223c4634880bf37",
+      "observations": [
+        "LIVING_MODEL_PASS residents=25000 routines_changed=24992 update_ms=6.0712 wall_control=REJECTED grace=6 hold=2.2 cooldown=25"
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "Preview/LIVING_DISTRICT.png",
+      "sha256": "3a2a88344fd46e9ce443dca32b42621a71fc524e34f2047bed434ea24dad3bb4",
+      "resolution": [
+        2560,
+        1440
+      ],
+      "review": "NATIVE_RENDER_VISUALLY_REVIEWED"
+    },
+    {
+      "path": "Preview/LIVING_INDOOR_FLIGHT.png",
+      "sha256": "d49f5f14b34f534fd7b8c7f6ee1c18f278963f4e1066699da7fd21acf5ef2e78",
+      "resolution": [
+        2560,
+        1440
+      ],
+      "review": "NATIVE_RENDER_VISUALLY_REVIEWED"
+    },
+    {
+      "path": "Preview/LIVING_RELEASED.png",
+      "sha256": "c50725a3b44dd81e151a665855f649a438236d630b51693e5196a4b30cdf3682",
+      "resolution": [
+        2560,
+        1440
+      ],
+      "review": "NATIVE_RENDER_VISUALLY_REVIEWED"
+    },
+    {
+      "path": "Preview/LIVING_WARNING.png",
+      "sha256": "3d165093897219381df5d8d42e6dfde58cc1b248a8aeeacc09d0722560f101a0",
+      "resolution": [
+        2560,
+        1440
+      ],
+      "review": "NATIVE_RENDER_VISUALLY_REVIEWED"
+    },
+    {
+      "path": "Preview/LIVING_WARNING_HOLD.png",
+      "sha256": "31e252db53c656d30efec48f6b8d5493c168f56ec44db32bd94620f51a452e6d",
+      "resolution": [
+        2560,
+        1440
+      ],
+      "review": "NATIVE_RENDER_VISUALLY_REVIEWED"
+    }
+  ],
+  "frameIntervals": {
+    "samples": 934,
+    "medianMs": 16.679,
+    "p95Ms": 27.787,
+    "resolution": [
+      2560,
+      1440
+    ],
+    "internalResolutionPercent": 85,
+    "frameLimit": 60,
+    "skyUnix": 1791115200,
+    "coverage": "One scripted offscreen capture, including screenshot stalls and scene changes. Brief source checks occurred during the run. Not a sustained city benchmark or an isolated GPU benchmark."
+  },
+  "normalStart": {
+    "observedAt": "2026-10-24T00:02:05.2030359Z",
+    "entrypoint": "Start-Astralis.cmd",
+    "starterExitCode": 0,
+    "executable": ".local/living-world-package/Windows/HALVETHRealms/Binaries/Win64/HALVETHRealms.exe",
+    "windowTitle": "HALVETHRealms (64-bit Development PCD3D_SM6) ",
+    "responding": true,
+    "normalArgumentsObserved": true,
+    "scope": "Normal starter and responsive native window; not a full manual gameplay session"
+  },
+  "recovery": {
+    "priorPackage": ".local/astral-sky-package/Windows/HALVETHRealms.exe",
+    "sourceBaseRetained": true,
+    "priorPackagesOverwritten": false
+  },
+  "resolvedDevelopmentFindings": [
+    "Unsigned resident ID promoted the negative guard priority: use a floating-point rank and require physical guards in the native probe.",
+    "Complex-only support and sight queries skipped convex architecture: query actual simple world collision; test a wall and closed door.",
+    "Single-frame safe observations cancelled warnings: require one second of stable safe behaviour; reject a short interruption in the portable model.",
+    "Chase distance previously included patrol position: bind the measured start to the actual pursuit transition and require 200 cm afterward.",
+    "Screenshot requests were followed by an immediate camera change: retain each camera fixture before transitioning.",
+    "Crowded stair arrival and stale bodies during realm rebuild: reserve new materialization at the stair, yield to nearby walking players and destroy old bodies before rebuilding."
+  ],
+  "limitations": [
+    "No five-times-Morrowind population comparison or full open-world completion is claimed.",
+    "The 25000-resident portable test measures state logic including assertions and set insertion, not rendered people or optimized simulation throughput.",
+    "Only three shared base character models are used. Unique faces, clothing, full jobs, social memory and free language generation remain open.",
+    "Background records do not have full collision physics. Local steering is not a complete navigation network; body materialization can be visible.",
+    "No new photorealistic landscape, larger terrain, anatomical player hands or visible broom is provided by this increment.",
+    "Native integration uses repeatable position and movement fixtures. Normal-start evidence verifies a responsive window, not a full manual acceptance session.",
+    "The temporary blue beam represents a successful ray-tested hold; it is not an independently simulated projectile.",
+    "Nineteen Python checks completed with one Windows symlink-capability skip."
+  ],
+  "result": "LOCAL_NATIVE_INCREMENT_VERIFIED_WITH_DECLARED_LIMITS"
+}

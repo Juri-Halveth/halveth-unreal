@@ -4,6 +4,7 @@
 #include "HALVETHKnowledgeComponent.h"
 #include "HALVETHGameMode.h"
 #include "HALVETHRealmWorld.h"
+#include "HALVETHLivingWorld.h"
 #include "Engine/Canvas.h"
 #include "Engine/Engine.h"
 #include "Kismet/GameplayStatics.h"
@@ -79,6 +80,7 @@ void AHALVETHHUD::DrawHUD()
     DrawRect(FLinearColor(0.015f,0.02f,0.025f,.55f),24,22,350*Scale,64*Scale);
     DrawText(TEXT("PORTAL GARDEN"),Gold,38,31,Font,.82f*Scale);
     DrawText(AHALVETHRealmWorld::RealmName(Realm->GetCurrentRealm()),White,38,53*Scale,Font,.9f*Scale);
+    if(Mode->GetLivingWorld())DrawText(Mode->GetLivingWorld()->GetStatus(),Gold,38,118*Scale,Font,.65f*Scale);
     DrawRect(FLinearColor(1,.88f,.65f,.7f),Width/2-1,Height/2-1,2,2);
     if (Pawn->IsHelpVisible())
     {

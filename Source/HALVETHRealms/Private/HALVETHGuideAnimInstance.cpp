@@ -176,7 +176,7 @@ void UHALVETHGuideAnimInstance::NativeUpdateAnimation(float Dt){
         FVector Contact=Body->GetComponentTransform().TransformPosition(Local);
         const bool WantPlant=Step.stance&&WalkWeight>.08f;
         if(WantPlant&&Planted[S]){Contact.X=PlantWorld[S].X;Contact.Y=PlantWorld[S].Y;}
-        FHitResult Hit;FCollisionQueryParams Query(SCENE_QUERY_STAT(GuideFeet),true);Query.AddIgnoredActor(Body->GetOwner());
+        FHitResult Hit;FCollisionQueryParams Query(SCENE_QUERY_STAT(GuideFeet),false);Query.AddIgnoredActor(Body->GetOwner());
         Query.AddIgnoredActor(UGameplayStatics::GetPlayerPawn(GetWorld(),0));
         if(GetWorld()->LineTraceSingleByChannel(Hit,Contact+FVector(0,0,80),Contact-FVector(0,0,120),ECC_Visibility,Query)){
             double Ground=Body->GetComponentTransform().InverseTransformPosition(Hit.ImpactPoint).Z;

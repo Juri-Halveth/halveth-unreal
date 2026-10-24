@@ -4,6 +4,7 @@
 #include "HALVETHKnowledgeComponent.h"
 #include "HALVETHRealmWorld.h"
 #include "HALVETHAstralSanctum.h"
+#include "HALVETHLivingWorld.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
@@ -75,11 +76,11 @@ void AHALVETHCharacter::SetupPlayerInputComponent(UInputComponent* Input)
 }
 
 bool AHALVETHCharacter::IsReading() const { return Knowledge && Knowledge->IsReading(); }
-void AHALVETHCharacter::Forward(float Value) { if (!IsReading()) AddMovementInput(bAstralFlight?Camera->GetForwardVector():GetActorForwardVector(), Value); }
-void AHALVETHCharacter::Right(float Value) { if (!IsReading()) AddMovementInput(GetActorRightVector(), Value); }
+void AHALVETHCharacter::Forward(float Value) { if (!IsReading()&&!IsCivicHeld()) AddMovementInput(bAstralFlight?Camera->GetForwardVector():GetActorForwardVector(), Value); }
+void AHALVETHCharacter::Right(float Value) { if (!IsReading()&&!IsCivicHeld()) AddMovementInput(GetActorRightVector(), Value); }
 void AHALVETHCharacter::Turn(float Value) { if (!IsReading()) AddControllerYawInput(Value); }
 void AHALVETHCharacter::Look(float Value) { if (!IsReading()) AddControllerPitchInput(Value); }
-void AHALVETHCharacter::StartJump() { if (!IsReading()) {if(bAstralFlight)bFlightAscend=true;else Jump();} }
+void AHALVETHCharacter::StartJump() { if (!IsReading()&&!IsCivicHeld()) {if(bAstralFlight)bFlightAscend=true;else Jump();} }
 void AHALVETHCharacter::StopJumpOrAscend(){bFlightAscend=false;StopJumping();}
 void AHALVETHCharacter::StopDescend(){bFlightDescend=false;}
 void AHALVETHCharacter::SprintOn() { if (!IsReading()){GetCharacterMovement()->MaxWalkSpeed = 790;GetCharacterMovement()->MaxFlySpeed=1700;} }
@@ -97,6 +98,7 @@ void AHALVETHCharacter::Interact()
                 const int32 Book = Mode->GetRealmWorld()->FindReadable(GetActorLocation());
                 if (Book != INDEX_NONE) { Knowledge->OpenBook(Book); GetCharacterMovement()->StopMovementImmediately(); SprintOff(); return; }
             }
+    if(auto* Mode=Cast<AHALVETHGameMode>(UGameplayStatics::GetGameMode(this)))if(Mode->GetLivingWorld()&&Mode->GetLivingWorld()->Interact(this))return;
     if (Adventure && Adventure->InteractWithNearbyCharacter()) return;
     if (auto* Mode = Cast<AHALVETHGameMode>(UGameplayStatics::GetGameMode(this))) Mode->Interact(this);
 }
@@ -118,19 +120,23 @@ void AHALVETHCharacter::CastSpell()
 void AHALVETHCharacter::NextSpell() { if (Adventure && !IsReading()) Adventure->CycleAbility(); }
 void AHALVETHCharacter::NextItem() { if (Adventure && !IsReading()) Adventure->CycleItem(); }
 void AHALVETHCharacter::UseItem() { if (Adventure && !IsReading()) { Adventure->UseItem(); if (Knowledge) Knowledge->SaveProgress(); } }
-void AHALVETHCharacter::Dodge() { if (Adventure && !IsReading()){if(bAstralFlight)bFlightDescend=true;else Adventure->Dodge();} }
+void AHALVETHCharacter::Dodge() { if (Adventure && !IsReading()&&!IsCivicHeld()){if(bAstralFlight)bFlightDescend=true;else Adventure->Dodge();} }
 void AHALVETHCharacter::FlightToggle(){if(!IsReading())ToggleAstralFlight();}
 bool AHALVETHCharacter::ToggleAstralFlight(){
     auto* Mode=Cast<AHALVETHGameMode>(UGameplayStatics::GetGameMode(this));
-    if(!bAstralFlight){
-        auto* Sanctum=Mode&&Mode->GetRealmWorld()?Mode->GetRealmWorld()->GetAstralSanctum():nullptr;
-        if(!Sanctum||!Sanctum->IsAttuned()){if(Mode)Mode->Notify(TEXT("Richte zuerst die drei Ringe der Sternenpforte aus."));return false;}
-    }
+    if(IsCivicHeld())return false;
     bAstralFlight=!bAstralFlight;bFlightAscend=bFlightDescend=false;
     auto* Move=GetCharacterMovement();Move->MaxFlySpeed=1150;Move->BrakingDecelerationFlying=650;
     Move->SetMovementMode(bAstralFlight?MOVE_Flying:MOVE_Falling);
     if(Mode)Mode->Notify(bAstralFlight?TEXT("Levitation: WASD + Blickrichtung · Leertaste auf · Strg ab · J beendet"):TEXT("Levitation beendet. Die Schwerkraft trägt dich zurück."));
     UE_LOG(LogTemp,Display,TEXT("ASTRAL_FLIGHT active=%d"),bAstralFlight);return true;
+}
+void AHALVETHCharacter::ApplyCivicHold(float Seconds){
+    if(!FMath::IsFinite(Seconds)||Seconds<=0)return;
+    CivicHoldRemaining=FMath::Clamp(Seconds,0.f,2.2f);bFlightAscend=bFlightDescend=false;
+    auto* Move=GetCharacterMovement();bHoldHover=Move->IsFalling()&&!bAstralFlight;
+    if(bHoldHover)Move->SetMovementMode(MOVE_Flying);
+    Move->StopMovementImmediately();ConsumeMovementInputVector();
 }
 void AHALVETHCharacter::ReturnHome()
 {
@@ -163,6 +169,7 @@ void AHALVETHCharacter::Quit() { if (IsReading()) { ToggleLibrary(); return; } i
 
 void AHALVETHCharacter::ResetToSpawn()
 {
+    CivicHoldRemaining=0;bHoldHover=false;
     bAstralFlight=bFlightAscend=bFlightDescend=false;
     GetCharacterMovement()->StopMovementImmediately();
     GetCharacterMovement()->SetMovementMode(MOVE_Walking);
@@ -174,7 +181,12 @@ void AHALVETHCharacter::ResetToSpawn()
 void AHALVETHCharacter::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
-    if(bAstralFlight&&!IsReading()){
+    if(IsCivicHeld()){
+        CivicHoldRemaining=FMath::Max(0.f,CivicHoldRemaining-DeltaSeconds);
+        GetCharacterMovement()->StopMovementImmediately();ConsumeMovementInputVector();
+        if(!IsCivicHeld()&&bHoldHover){bHoldHover=false;GetCharacterMovement()->SetMovementMode(MOVE_Falling);}
+    }
+    if(bAstralFlight&&!IsReading()&&!IsCivicHeld()){
         auto* Move=GetCharacterMovement();const double SpeedMps=Move->Velocity.Size()/100.;
         // Declared magical flight model: finite speed, quadratic drag, capsule
         // collision and bounded world extent. It is not a fluid simulation.
