@@ -1,4 +1,13 @@
+<!-- HUB_LANGUAGES_V1 -->
+[Original / Deutsch](README.md) · [English](README.en.md) · [Русский](README.ru.md)
+<!-- /HUB_LANGUAGES_V1 -->
+
 # HALVETH Portal Garden — begehbare Welt, freie Levitation und Wissen
+
+Ein eigenständiger C++-Spielprototyp für Unreal Engine. Portalwelten, eine interaktive Bibliothek und Bau- und Rezeptsysteme verbinden Gestaltung mit nativer Spielentwicklung.
+
+[**Projekt öffnen →**](https://github.com/Juri-Halveth/halveth-unreal/releases) · [Arbeitsproben](https://juri-halveth.github.io/koennen/) · [Portfolio](https://juri-halveth.github.io/)
+
 
 ## Wiese, Wind und ein tatsächlich aktueller Start
 
