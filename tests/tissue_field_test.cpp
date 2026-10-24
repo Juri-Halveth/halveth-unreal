@@ -16,7 +16,9 @@ int main(){
     Field f;for(int i=0;i<HalvethTissueField::Regions;i++){f[i].centre={500.+i*30,0,0};f[i].basis={V{1,0,0},V{0,1,0},V{0,0,1}};for(auto& d:f[i].displacement)d={1,-2,.4};}
     const auto constant=HalvethTissueField::Sample(f,{0,0,0});Check((constant-V{1,-2,.4}).length()<1e-12,"partition must reproduce constant displacement");
     f[0].centre={0,1,0};f[1].centre={-2,0,0};f[2].centre={2,0,0};
-    for(auto& d:f[0].displacement)d={0,0,0};for(auto& d:f[1].displacement)d={0,2,0};for(auto& d:f[2].displacement)d={0,-2,0};
+    for(auto& d:f[0].displacement){d={0,0,0};}
+    for(auto& d:f[1].displacement){d={0,2,0};}
+    for(auto& d:f[2].displacement){d={0,-2,0};}
     const V left{-1e-8,0,0},right{1e-8,0,0};
     const double oldJump=(OldNearestTwo(f,left)-OldNearestTwo(f,right)).length();Check(oldJump>1,"legacy nearest-two discontinuity must be rejected");
     const double newJump=(HalvethTissueField::Sample(f,left)-HalvethTissueField::Sample(f,right)).length();Check(newJump<1e-7,"field must be continuous across a nearest-region rank exchange");
