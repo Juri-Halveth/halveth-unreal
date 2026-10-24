@@ -4,6 +4,7 @@
 #include <cmath>
 #include <cstdint>
 #include <vector>
+#include "ResidentContinuity.h"
 
 namespace HalvethLife {
 struct Point { double x=0,y=0; };
@@ -13,7 +14,27 @@ enum class Temper { Warm, Blunt, Quiet, Curious };
 struct Resident {
     uint32_t id=0,seed=0;int realm=0;bool guard=false;Temper temper=Temper::Warm;
     Point position;Task task=Task::Wander;uint64_t decisions=0;double lastUpdate=0;
+    bool wasPhysical=false;
+    double retiredAt=-1;
+    HalvethContinuity::Pose physicalPose;
 };
+inline Point materializationPosition(const Resident& r){
+    if(r.guard&&!r.wasPhysical)return {25+(r.id<4?-3.:3.),-4.5};
+    return r.position;
+}
+inline bool synchronizePhysical(Resident& r,Point position,double now,const HalvethContinuity::Pose& pose){
+    if(!std::isfinite(position.x)||!std::isfinite(position.y)||!std::isfinite(now)
+       ||now<r.lastUpdate||!HalvethContinuity::finite(pose))return false;
+    // Position and its clock are one handoff. Updating only position lets the
+    // next background cohort consume time already simulated by CharacterMovement.
+    r.position=position;r.lastUpdate=now;r.physicalPose=pose;r.wasPhysical=true;
+    return true;
+}
+inline bool retirePhysical(Resident& r,Point position,double now,const HalvethContinuity::Pose& pose){
+    if(!synchronizePhysical(r,position,now,pose))return false;
+    r.retiredAt=now;
+    return true;
+}
 inline Point destination(const Resident& r,double seconds){
     const auto cycle=static_cast<uint32_t>(std::floor(std::max(0.,seconds)/24.));
     const auto a=mix(r.seed+cycle*131U),b=mix(a);constexpr double tau=6.283185307179586;

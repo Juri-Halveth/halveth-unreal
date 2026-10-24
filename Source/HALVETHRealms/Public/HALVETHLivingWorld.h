@@ -14,6 +14,7 @@ struct FHALVETHResidentBody {
     GENERATED_BODY()
     int32 Id=0;FVector Goal=FVector::ZeroVector,Origin=FVector::ZeroVector,Steering=FVector::ZeroVector;
     double Travel=0,TalkUntil=0,Blocked=0;
+    double OutsideViewSince=-1;
     UPROPERTY() TObjectPtr<AHALVETHCitizen> Actor;
     UPROPERTY() TObjectPtr<UTextRenderComponent> Label;
 };
@@ -29,6 +30,7 @@ public:
     bool Interact(AHALVETHCharacter* Player);
     FString GetStatus() const;
     int32 VisibleResidents() const {return Bodies.Num();}
+    uint32 ContinuityErrors() const {return ContinuityFailures;}
     bool Perceives(const AHALVETHCitizen* Observer,const AHALVETHCharacter* Player) const;
 private:
     UPROPERTY() TObjectPtr<AHALVETHRealmWorld> Realm;
@@ -40,6 +42,8 @@ private:
     int32 LastRealm=INDEX_NONE,BodyBudget=18,ActiveGuard=INDEX_NONE;
     double Time=0,ScheduleOrigin=0,BrainAt=0,PopulationAt=0,SpeakingUntil=0,SampleAt=0,BeamUntil=0;
     uint32 BackgroundCursor=0;
+    uint32 ContinuityFailures=0;
+    bool InitialPopulationPending=true;
     bool Probe=false,CaptureMode=false,ProbeFinished=false,ProbeOcclusion=false,ProbeFreeFlight=false,ProbeIndoor=false,ProbeSawPursuit=false;
     int32 ProbeStep=0,CaptureStep=0;
     double ProbeAt=0,HoldStarted=0,MeasuredActorMs=0,MeasuredBackgroundMs=0;
@@ -48,6 +52,7 @@ private:
     TArray<double> FrameTimes;
     double LastFrame=0;
     void RefreshBodies();
+    bool SavePhysicalState(const FHALVETHResidentBody& Body,bool Retiring);
     void AdvanceBodies(float Dt);
     void UpdateNotice(AHALVETHCharacter* Player);
     void ApplyNotice(HalvethLife::Event Event,AHALVETHCharacter* Player);

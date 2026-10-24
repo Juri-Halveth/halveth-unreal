@@ -12,6 +12,12 @@
 #include "Components/StaticMeshComponent.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "Engine/SkeletalMesh.h"
+#include "Engine/LocalPlayer.h"
+#include "Engine/GameViewportClient.h"
+#include "GameFramework/PlayerController.h"
+#include "SceneView.h"
+#include "ConvexVolume.h"
+#include "HALVETHTissueComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "IAnimationBudgetAllocator.h"
 #include "SkeletalMeshComponentBudgeted.h"
@@ -29,6 +35,7 @@ AHALVETHLivingWorld::AHALVETHLivingWorld(){
 }
 void AHALVETHLivingWorld::Initialize(AHALVETHRealmWorld* World,uint32 Seed){
     Realm=World;Residents=HalvethLife::population(Seed,4096);
+    InitialPopulationPending=true;ContinuityFailures=0;
     ScheduleOrigin=FMath::Fmod(Realm->GetSkyClockUnix(),86400.);
     for(auto& R:Residents){R.lastUpdate=ScheduleOrigin;R.task=HalvethLife::routine(R,ScheduleOrigin);R.position=HalvethLife::destination(R,ScheduleOrigin);}
     CivicBeam->SetStaticMesh(LoadObject<UStaticMesh>(nullptr,TEXT("/Engine/BasicShapes/Cylinder.Cylinder")));
@@ -37,12 +44,15 @@ void AHALVETHLivingWorld::Initialize(AHALVETHRealmWorld* World,uint32 Seed){
     if(auto* Budget=IAnimationBudgetAllocator::Get(GetWorld()))Budget->SetEnabled(true);
     if(auto* Setting=IConsoleManager::Get().FindConsoleVariable(TEXT("a.Budget.BudgetMs")))Setting->Set(3.f,ECVF_SetByCode);
     UE_LOG(LogTemp,Display,TEXT("LIVING_WORLD_READY records=4096 realms=4 physical_budget=%d animation_budget_ms=3 behaviour=authored_local no_network=true"),BodyBudget);
+    UE_LOG(LogTemp,Display,TEXT("LIVING_CONTINUITY_POLICY entry_m=50 exit_m=65 unseen_cap_m=100 unseen_grace_s=2 rematerialize_delay_s=3 selection=retain_then_admit visibility=expanded_actual_camera_frustum occlusion_claim=NONE boot_exemption=initial_population_only"));
 }
 void AHALVETHLivingWorld::EndPlay(const EEndPlayReason::Type Reason){
     PrepareRealmChange();Super::EndPlay(Reason);
 }
 void AHALVETHLivingWorld::PrepareRealmChange(){
-    for(auto& B:Bodies)if(B.Actor){Residents[B.Id].position={B.Actor->GetActorLocation().X/100,B.Actor->GetActorLocation().Y/100};B.Actor->Destroy();}
+    // Realm unload is an explicit scene transition, not ordinary budget eviction.
+    for(auto& B:Bodies)if(B.Actor){SavePhysicalState(B,true);B.Actor->Destroy();}
+    if(!Bodies.IsEmpty())UE_LOG(LogTemp,Display,TEXT("LIVING_CONTINUITY_TRANSITION reason=realm_unload bodies=%d model_now=%.6f fixture=%d fixture_step=%d"),Bodies.Num(),ScheduleOrigin+Time,Probe||CaptureMode,ProbeStep);
     Bodies.Empty();Notice={};LastRealm=INDEX_NONE;ActiveGuard=INDEX_NONE;
     if(CivicBeam)CivicBeam->SetVisibility(false);BeamUntil=0;PopulationAt=Time;
 }
@@ -63,51 +73,121 @@ bool AHALVETHLivingWorld::Supported(FVector& Location,const AActor* Ignore) cons
     FHitResult Hit;if(!GetWorld()->LineTraceSingleByObjectType(Hit,Location+FVector(0,0,600),Location-FVector(0,0,1800),FCollisionObjectQueryParams(ECC_WorldStatic),Q)||Hit.ImpactNormal.Z<.7)return false;
     Location.Z=Hit.ImpactPoint.Z+94;return true;
 }
+bool AHALVETHLivingWorld::SavePhysicalState(const FHALVETHResidentBody& B,bool Retiring){
+    if(!B.Actor)return false;
+    auto& Resident=Residents[B.Id];const FVector At=B.Actor->GetActorLocation();
+    auto Pose=Resident.physicalPose;Pose.heightMetres=At.Z/100.;Pose.yawDegrees=B.Actor->GetActorRotation().Yaw;
+    if(auto* Motion=Cast<UHALVETHGuideAnimInstance>(B.Actor->GetMesh()->GetAnimInstance())){
+        Pose.idleSeconds=Motion->Time;Pose.gaitPhase=Motion->GaitPhase;
+    }
+    const double Now=ScheduleOrigin+Time;
+    const bool Saved=Retiring?HalvethLife::retirePhysical(Resident,{At.X/100.,At.Y/100.},Now,Pose)
+        :HalvethLife::synchronizePhysical(Resident,{At.X/100.,At.Y/100.},Now,Pose);
+    if(!Saved){ContinuityFailures++;UE_LOG(LogTemp,Error,TEXT("LIVING_CONTINUITY_HANDOFF id=%d result=FAIL model_now=%.6f last_update=%.6f"),B.Id,Now,Resident.lastUpdate);return false;}
+    if(Retiring)UE_LOG(LogTemp,Display,TEXT("LIVING_CONTINUITY_HANDOFF id=%d result=STORED model_now=%.6f last_update=%.6f clock_error_s=%.9f x_cm=%.6f y_cm=%.6f z_cm=%.6f yaw_deg=%.6f idle_s=%.6f gait_phase=%.9f fixture=%d fixture_step=%d"),B.Id,Now,Resident.lastUpdate,FMath::Abs(Now-Resident.lastUpdate),At.X,At.Y,At.Z,Pose.yawDegrees,Pose.idleSeconds,Pose.gaitPhase,Probe||CaptureMode,ProbeStep);
+    return true;
+}
 void AHALVETHLivingWorld::RefreshBodies(){
     if(!Realm)return;const int32 R=Realm->GetCurrentRealm();
     if(LastRealm!=R){PrepareRealmChange();LastRealm=R;}
     auto* P=UGameplayStatics::GetPlayerPawn(this,0);if(!P)return;
+    const double Now=ScheduleOrigin+Time;const bool Boot=InitialPopulationPending;
+    HalvethContinuity::Policy Policy;Policy.bodyBudget=static_cast<std::size_t>(BodyBudget);
+    // Use the real local-player projection, including viewport/FOV constraints,
+    // not guard perception, pawn forward, a scene-capture camera or render timestamps.
+    FConvexVolume View;FSceneViewProjectionData Projection;bool HasView=false;
+    if(auto* PC=GetWorld()->GetFirstPlayerController())if(auto* Local=PC->GetLocalPlayer())
+        if(Local->ViewportClient&&Local->ViewportClient->Viewport
+           &&Local->GetProjectionData(Local->ViewportClient->Viewport,Projection)){
+            const FMatrix Matrix=Projection.ComputeViewProjectionMatrix();
+            if(!Matrix.ContainsNaN()&&Projection.GetConstrainedViewRect().Width()>0&&Projection.GetConstrainedViewRect().Height()>0){
+                GetViewFrustumBounds(View,Matrix,false,false);HasView=View.Planes.Num()>=4;
+            }
+        }
+    auto Visibility=[&](FVector At,double Radius){
+        if(!HasView||At.ContainsNaN()||!FMath::IsFinite(Radius))return HalvethContinuity::Visibility::Unknown;
+        return View.IntersectSphere(At,float(Radius+200.))?HalvethContinuity::Visibility::InView:HalvethContinuity::Visibility::OutsideView;
+    };
+    int32 Retained=0,Retired=0,Spawned=0,ViewProtected=0,DeferredView=0,DeferredBudget=0;
+    // Retirement is independent of candidate rank. A full budget blocks admission;
+    // it never evicts an existing visible or nearby body to make another slot.
+    for(int32 I=Bodies.Num()-1;I>=0;I--){
+        auto& B=Bodies[I];if(!B.Actor){Bodies.RemoveAt(I);continue;}
+        FVector Centre,Extent;B.Actor->GetActorBounds(false,Centre,Extent);
+        const auto Seen=Visibility(Centre,FMath::Max(250.,Extent.Size()));
+        const double Distance=FVector::Dist2D(B.Actor->GetActorLocation(),P->GetActorLocation())/100.;
+        const bool Pinned=B.Id==ActiveGuard&&Notice.stage!=HalvethLife::Stage::Quiet;
+        if(!HalvethContinuity::retire(Distance,Now,Seen,Pinned,B.OutsideViewSince,Policy)){
+            Retained++;ViewProtected+=Seen!=HalvethContinuity::Visibility::OutsideView;continue;
+        }
+        if(!SavePhysicalState(B,true)){Retained++;continue;}
+        UE_LOG(LogTemp,Display,TEXT("LIVING_CONTINUITY_RETIRE id=%d reason=outside_view_and_exit distance2d_m=%.3f unseen_s=%.3f model_now=%.6f fixture=%d fixture_step=%d"),B.Id,Distance,Now-B.OutsideViewSince,Now,Probe||CaptureMode,ProbeStep);
+        B.Actor->Destroy();Bodies.RemoveAt(I);Retired++;
+    }
+    auto Position=[](const HalvethLife::Resident& Resident){
+        // The gate is only the initial guard placement. Return visits use the
+        // saved/virtually advanced coordinates and saved height, never this reset.
+        const auto At=HalvethLife::materializationPosition(Resident);
+        return FVector(At.x*100,At.y*100,Resident.physicalPose.heightMetres*100);
+    };
     struct Choice{int32 Id;double Rank;};TArray<Choice> Choices;
-    for(auto& Resident:Residents)if(Resident.realm==R){
-        const FVector At(Resident.position.x*100,Resident.position.y*100,0);
-        double D=FVector::DistSquared2D(At,P->GetActorLocation());
-        const bool Existing=Bodies.ContainsByPredicate([&](const FHALVETHResidentBody& B){return B.Id==int32(Resident.id);});
-        // Do not materialize someone inside the player or on the narrow
-        // arrival stair. Existing walkers may use it and yield normally.
-        if(!Existing&&!Resident.guard&&(D<200.*200.||(R==0&&FMath::Abs(At.X-2500)<180&&At.Y>-1530&&At.Y<-820)))continue;
-        if(Resident.guard)D=-1000000.+double(Resident.id);
-        else if(Existing)D*=.55;
-        if(Resident.guard||D<5000.*5000.)Choices.Add({int32(Resident.id),D});
+    for(const auto& Resident:Residents)if(Resident.realm==R){
+        if(Bodies.ContainsByPredicate([&](const FHALVETHResidentBody& B){return B.Id==int32(Resident.id);}))continue;
+        const double D=FVector::DistSquared2D(Position(Resident),P->GetActorLocation());
+        if(D<=FMath::Square(Policy.enterMetres*100))Choices.Add({int32(Resident.id),Resident.guard?-1000000.+double(Resident.id):D});
     }
     Choices.Sort([](const Choice& A,const Choice& B){return A.Rank==B.Rank?A.Id<B.Id:A.Rank<B.Rank;});
-    if(Choices.Num()>BodyBudget)Choices.SetNum(BodyBudget);
-    for(int32 I=Bodies.Num()-1;I>=0;I--)if(!Choices.ContainsByPredicate([&](const Choice& C){return C.Id==Bodies[I].Id;})){
-        auto& B=Bodies[I];if(B.Actor){Residents[B.Id].position={B.Actor->GetActorLocation().X/100,B.Actor->GetActorLocation().Y/100};B.Actor->Destroy();}Bodies.RemoveAt(I);
-    }
-    for(const auto C:Choices){
-        if(Bodies.ContainsByPredicate([&](const FHALVETHResidentBody& B){return B.Id==C.Id;}))continue;
-        auto& Resident=Residents[C.Id];FVector At(Resident.position.x*100,Resident.position.y*100,0);
-        if(Resident.guard)At=FVector(2500+(C.Id<4?-300:300),-450,0);
+    for(int32 I=0;I<Choices.Num();I++){
+        if(Bodies.Num()>=BodyBudget){DeferredBudget=Choices.Num()-I;break;}
+        auto& Resident=Residents[Choices[I].Id];
+        // Finish only this admitted candidate's virtual interval before computing
+        // its spawn position and camera visibility. The remaining cohort stays live.
+        if(!HalvethLife::advance(Resident,Now))continue;
+        FVector At=Position(Resident);double Distance=FVector::Dist2D(At,P->GetActorLocation())/100.;
+        auto Seen=Visibility(At,250.);
+        if(!HalvethContinuity::materialize(static_cast<std::size_t>(Bodies.Num()),Distance,Now,Seen,Boot,Resident.retiredAt,Policy)){
+            DeferredView+=!Boot&&Seen!=HalvethContinuity::Visibility::OutsideView;continue;
+        }
+        if(!Resident.guard&&(Distance<2.||(R==0&&FMath::Abs(At.X-2500)<180&&At.Y>-1530&&At.Y<-820)))continue;
         if(!Supported(At))continue;
-        FActorSpawnParameters Params;Params.Owner=this;Params.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::DontSpawnIfColliding;
-        auto* Actor=GetWorld()->SpawnActor<AHALVETHCitizen>(At,FRotator(0,-90,0),Params);if(!Actor)continue;
-        FHALVETHResidentBody B;B.Id=C.Id;B.Actor=Actor;B.Origin=Actor->GetActorLocation();B.Goal=B.Origin;
         const TCHAR* AssetNames[]={TEXT("Scarlet"),TEXT("Lucinet"),TEXT("Rachel")};const FString Asset=AssetNames[Resident.guard?1:Resident.seed%3];
-        auto* Mesh=Actor->GetMesh();Mesh->SetSkeletalMeshAsset(LoadObject<USkeletalMesh>(nullptr,*(TEXT("/Game/Characters/")+Asset+TEXT(".")+Asset)));
+        auto* BodyMesh=LoadObject<USkeletalMesh>(nullptr,*(TEXT("/Game/Characters/")+Asset+TEXT(".")+Asset));if(!BodyMesh)continue;
+        const double Scale=1.+(int32(Resident.seed%13)-6)*.008;
+        const auto Bounds=BodyMesh->GetBounds();
+        const double Radius=FMath::Max(250.,(Bounds.Origin.Size()+Bounds.SphereRadius)*Scale+94.15);
+        Seen=Visibility(At,Radius);Distance=FVector::Dist2D(At,P->GetActorLocation())/100.;
+        if(!HalvethContinuity::materialize(static_cast<std::size_t>(Bodies.Num()),Distance,Now,Seen,Boot,Resident.retiredAt,Policy)){DeferredView++;continue;}
+        auto Pose=Resident.wasPhysical?HalvethContinuity::resume(Resident.physicalPose,Resident.retiredAt,Now):HalvethContinuity::Pose{};
+        if(!Resident.wasPhysical){Pose.idleSeconds=double(Resident.seed%12000)/1000.;Pose.gaitPhase=double((Resident.seed>>12)%1000)/1000.;}
+        FActorSpawnParameters Params;Params.Owner=this;Params.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::DontSpawnIfColliding;
+        auto* Actor=GetWorld()->SpawnActor<AHALVETHCitizen>(At,FRotator(0,Pose.yawDegrees,0),Params);if(!Actor)continue;
+        FHALVETHResidentBody B;B.Id=Choices[I].Id;B.Actor=Actor;B.Origin=Actor->GetActorLocation();B.Goal=B.Origin;
+        auto* Mesh=Actor->GetMesh();Mesh->SetSkeletalMeshAsset(BodyMesh);
         Mesh->SetAnimationMode(EAnimationMode::AnimationBlueprint);Mesh->SetAnimInstanceClass(UHALVETHGuideAnimInstance::StaticClass());
-        Mesh->SetRelativeScale3D(FVector(1.+(int32(Resident.seed%13)-6)*.008));
-        Mesh->VisibilityBasedAnimTickOption=EVisibilityBasedAnimTickOption::OnlyTickPoseWhenRendered;
+        Mesh->SetRelativeScale3D(FVector(Scale));Mesh->VisibilityBasedAnimTickOption=EVisibilityBasedAnimTickOption::OnlyTickPoseWhenRendered;
+        double GaitError=-1,IdleError=-1;
         if(auto* Motion=Cast<UHALVETHGuideAnimInstance>(Mesh->GetAnimInstance())){
             Motion->BaseIdle=LoadObject<UAnimSequence>(nullptr,*(TEXT("/Game/Characters/")+Asset+TEXT("Idle.")+Asset+TEXT("Idle")));
             Motion->Identity=int32(Resident.seed%3)+1;Motion->CruiseSpeed=110;
-            Motion->Time=double(Resident.seed%12000)/1000.;Motion->GaitPhase=double((Resident.seed>>12)%1000)/1000.;
+            Motion->Time=Pose.idleSeconds;Motion->GaitPhase=Pose.gaitPhase;
             Motion->ResponseSeconds=.14+double((Resident.seed>>16)%15)/100.;
+            GaitError=FMath::Abs(Motion->GaitPhase-Pose.gaitPhase);IdleError=FMath::Abs(Motion->Time-Pose.idleSeconds);
         }
         auto* BudgetMesh=CastChecked<USkeletalMeshComponentBudgeted>(Mesh);BudgetMesh->SetAutoCalculateSignificance(false);
         B.Label=NewObject<UTextRenderComponent>(Actor);Actor->AddInstanceComponent(B.Label);B.Label->SetupAttachment(Actor->GetRootComponent());B.Label->SetRelativeLocation(FVector(0,0,118));
-        B.Label->SetText(FText::FromString(ResidentName(C.Id)));B.Label->SetWorldSize(13);B.Label->SetHorizontalAlignment(EHTA_Center);B.Label->SetTextRenderColor(Resident.guard?FColor(130,200,255):FColor(225,206,162));B.Label->SetVisibility(false);B.Label->RegisterComponent();
-        Bodies.Add(B);
+        B.Label->SetText(FText::FromString(ResidentName(B.Id)));B.Label->SetWorldSize(13);B.Label->SetHorizontalAlignment(EHTA_Center);B.Label->SetTextRenderColor(Resident.guard?FColor(130,200,255):FColor(225,206,162));B.Label->SetVisibility(false);B.Label->RegisterComponent();
+        const bool Rematerialized=Resident.wasPhysical;
+        if(!SavePhysicalState(B,false)){Actor->Destroy();continue;}
+        Bodies.Add(B);Spawned++;
+        const double PositionError=FVector::Dist(Actor->GetActorLocation(),At);
+        const double YawError=FMath::Abs(FMath::FindDeltaAngleDegrees(Actor->GetActorRotation().Yaw,Pose.yawDegrees));
+        if(!FMath::IsFinite(PositionError)||!FMath::IsFinite(YawError)||!FMath::IsFinite(GaitError)||!FMath::IsFinite(IdleError)
+           ||PositionError>.01||YawError>.001||GaitError<0||GaitError>1e-9||IdleError<0||IdleError>1e-9)ContinuityFailures++;
+        UE_LOG(LogTemp,Display,TEXT("LIVING_CONTINUITY_SPAWN id=%d reason=%s rematerialized=%d guard=%d physical=%d model_now=%.6f last_update=%.6f x_cm=%.6f y_cm=%.6f z_cm=%.6f yaw_deg=%.6f idle_s=%.6f gait_phase=%.9f position_error_cm=%.9f yaw_error_deg=%.9f gait_error=%.9f idle_error_s=%.9f camera_known=%d fixture=%d fixture_step=%d"),B.Id,Boot?TEXT("initial_population"):TEXT("outside_view"),Rematerialized,Resident.guard,Bodies.Num(),Now,Resident.lastUpdate,At.X,At.Y,At.Z,Pose.yawDegrees,Pose.idleSeconds,Pose.gaitPhase,PositionError,YawError,GaitError,IdleError,HasView,Probe||CaptureMode,ProbeStep);
     }
+    InitialPopulationPending=false;
+    if(Bodies.Num()>BodyBudget){ContinuityFailures++;ensureMsgf(false,TEXT("Resident continuity exceeded its physical budget."));}
+    UE_LOG(LogTemp,Display,TEXT("LIVING_CONTINUITY time=%.3f realm=%d boot=%d camera_known=%d physical=%d budget=%d retained=%d protected_view=%d retired=%d spawned=%d deferred_view=%d deferred_budget=%d failures=%u fixture=%d fixture_step=%d"),Time,R,Boot,HasView,Bodies.Num(),BodyBudget,Retained,ViewProtected,Retired,Spawned,DeferredView,DeferredBudget,ContinuityFailures,Probe||CaptureMode,ProbeStep);
 }
 FHALVETHResidentBody* AHALVETHLivingWorld::Guard(){
     if(ActiveGuard!=INDEX_NONE)for(auto& B:Bodies)if(B.Id==ActiveGuard)return &B;
@@ -137,7 +217,7 @@ void AHALVETHLivingWorld::AdvanceBodies(float Dt){
     auto* P=Cast<AHALVETHCharacter>(UGameplayStatics::GetPlayerPawn(this,0));
     for(auto& B:Bodies){
         if(!B.Actor)continue;auto& Resident=Residents[B.Id];auto* Mesh=B.Actor->GetMesh();auto* Move=B.Actor->GetCharacterMovement();
-        const FVector At=B.Actor->GetActorLocation();B.Travel=FMath::Max(B.Travel,FVector::Dist2D(At,B.Origin));Resident.position={At.X/100,At.Y/100};Resident.lastUpdate=ScheduleOrigin+Time;
+        const FVector At=B.Actor->GetActorLocation();B.Travel=FMath::Max(B.Travel,FVector::Dist2D(At,B.Origin));SavePhysicalState(B,false);
         const auto Task=HalvethLife::routine(Resident,ScheduleOrigin+Time);if(Task!=Resident.task){Resident.task=Task;Resident.decisions++;}
         Move->MaxWalkSpeed=Resident.guard&&Notice.stage==HalvethLife::Stage::Pursuit?390:float(85+Resident.seed%50);
         const auto Desired=HalvethLife::destination(Resident,ScheduleOrigin+Time+Resident.id*.137);
@@ -148,7 +228,8 @@ void AHALVETHLivingWorld::AdvanceBodies(float Dt){
         if(Yield){const FVector Right=P->GetActorRightVector();const double Side=FVector::DotProduct(At-P->GetActorLocation(),Right)>=0?1.:-1.;B.Goal=At+Right*(Side*260);Move->MaxWalkSpeed=200;}
         Steer(B,B.Goal,Dt);
         if(Resident.task==HalvethLife::Task::Rest&&!Yield)B.Steering=FVector::ZeroVector;
-        CastChecked<USkeletalMeshComponentBudgeted>(Mesh)->SetComponentSignificance(float(1/(1+Distance/1500)),Distance<600,false,true,true);
+        const auto* Tissue=B.Actor->FindComponentByClass<UHALVETHTissueComponent>();const bool FullPose=Tissue&&Tissue->NeedsFullPose();
+        CastChecked<USkeletalMeshComponentBudgeted>(Mesh)->SetComponentSignificance(FullPose?10.f:float(1/(1+Distance/1500)),FullPose||Distance<600,FullPose,!FullPose,!FullPose);
         const bool Seen=P&&Distance<700&&Perceives(B.Actor,P);
         if(auto* Motion=Cast<UHALVETHGuideAnimInstance>(Mesh->GetAnimInstance())){
             Motion->DesiredSpeed=Move->IsMovingOnGround()?Move->Velocity.Size2D():0;Motion->CruiseSpeed=Move->MaxWalkSpeed;Motion->Speaking=Time<B.TalkUntil;

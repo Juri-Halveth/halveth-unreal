@@ -14,7 +14,8 @@ GENERATED = [f'Content/Garden/Terrain_R{i}.uasset' for i in range(4)] + [
     f'Content/Garden/T_MeadowSoil_{kind}.uasset' for kind in ['D','N','R']]
 SOURCES = ['Source/HALVETHRealms/Public/GardenField.h',
            'Source/HALVETHRealmsEditor/Private/GardenPrepareCommandlet.cpp',
-           'Source/HALVETHRealmsEditor/Private/GardenCharactersCommandlet.cpp']
+           'Source/HALVETHRealmsEditor/Private/GardenCharactersCommandlet.cpp',
+           'Source/HALVETHRealms/Public/TissueField.h']
 CHARACTERS = ['Scarlet', 'Lucinet', 'Rachel']
 CHARACTER_INPUTS = [f'ArtSource/Characters/{name}.fbx' for name in CHARACTERS] + [
     'ArtSource/Characters/skin_female.png', 'ArtSource/Characters/skin_male.png',
@@ -31,6 +32,7 @@ CHARACTER_ASSETS = [f'Content/Characters/{name}{suffix}.uasset'
 CHARACTER_ASSETS += [f'Content/Characters/{name}_{suffix}.uasset'
     for name in CHARACTERS for suffix in ['wardrobe','wardrobe_normal']]
 CHARACTER_ASSETS += [f'Content/Characters/T_{name}Hair.uasset' for name in CHARACTERS]
+CHARACTER_ASSETS += ['Content/Characters/M_TissueFieldProbe.uasset']
 BOUND = GENERATED + SOURCES + ['Content/Materials/M_HalvethSurface.uasset',
     'Content/VOID/M_Terrain.uasset', 'Content/VOID/M_Water.uasset','Source/HALVETHRealms/Public/GardenSoil.h'] + CHARACTER_INPUTS + CHARACTER_ASSETS
 GEOMETRY_BINDINGS = GENERATED + SOURCES[:2] + ['Content/Materials/M_HalvethSurface.uasset',
@@ -41,7 +43,7 @@ MEADOW_INPUTS = [f'ArtSource/PolyHaven/forest_ground_04/forest_ground_04_{kind}_
                  for kind in ['diff','nor_dx','rough']]
 BOUND += MEADOW_INPUTS
 GEOMETRY_BINDINGS += MEADOW_INPUTS
-HUMAN_BINDINGS = CHARACTER_INPUTS + CHARACTER_ASSETS + [SOURCES[2]]
+HUMAN_BINDINGS = CHARACTER_INPUTS + CHARACTER_ASSETS + SOURCES[2:]
 RECEIPT = ROOT / 'Saved/GARDEN-assets-bound.json'
 sha = lambda path: hashlib.sha256(path.read_bytes()).hexdigest()
 

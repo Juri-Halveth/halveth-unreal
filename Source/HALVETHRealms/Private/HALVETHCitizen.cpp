@@ -1,4 +1,5 @@
 #include "HALVETHCitizen.h"
+#include "HALVETHTissueComponent.h"
 #include "SkeletalMeshComponentBudgeted.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -12,4 +13,5 @@ AHALVETHCitizen::AHALVETHCitizen(const FObjectInitializer& Initializer)
     auto* Move=GetCharacterMovement();Move->bRunPhysicsWithNoController=true;Move->MaxWalkSpeed=110;Move->MaxAcceleration=380;
     Move->BrakingDecelerationWalking=480;Move->MaxStepHeight=45;Move->SetWalkableFloorAngle(50);Move->bOrientRotationToMovement=true;Move->RotationRate=FRotator(0,220,0);
     bUseControllerRotationYaw=false;
+    CreateDefaultSubobject<UHALVETHTissueComponent>(TEXT("TissueCarrier"));
 }

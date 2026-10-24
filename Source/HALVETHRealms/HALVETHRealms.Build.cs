@@ -6,7 +6,7 @@ public class HALVETHRealms : ModuleRules
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
         CppStandard = CppStandardVersion.Cpp20;
-        PublicDependencyModuleNames.AddRange(new[] { "Core", "CoreUObject", "Engine", "InputCore", "Json", "ProceduralMeshComponent", "AnimationBudgetAllocator" });
+        PublicDependencyModuleNames.AddRange(new[] { "Core", "CoreUObject", "Engine", "InputCore", "Json", "ProceduralMeshComponent", "AnimationBudgetAllocator", "RenderCore", "RHI" });
         AddEngineThirdPartyPrivateStaticDependencies(Target, "OpenSSL");
     }
 }
