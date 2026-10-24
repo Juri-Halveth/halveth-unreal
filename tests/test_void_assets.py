@@ -326,7 +326,9 @@ class VoidAssetTests(unittest.TestCase):
             ASSETS.download(record)
         self.assertNotEqual(Path(self.outputs[0].name), legacy)
         self.assertEqual(legacy.read_bytes(), b"unrelated partial")
-        self.assertEqual(list(self.art.rglob("*.part")), [legacy])
+        remaining = list(self.art.rglob("*.part"))
+        self.assertEqual(len(remaining), 1)
+        self.assertTrue(remaining[0].samefile(legacy))
 
     def test_concurrent_same_target_downloads_have_distinct_owned_temporaries(self):
         record = self.record()
