@@ -1,4 +1,5 @@
 #pragma once
+// SPDX-License-Identifier: MIT
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
 #include "GuideMotionMath.h"
@@ -31,5 +32,7 @@ public:
     double PlantDriftMax=0;
     int32 PlantSamples=0;
     float GroundCorrections[2]={0,0};
+    double HandForward[2]={3,3},WeightShift=0;
     HalvethMotion::Spring WalkSpring,YawSpring,PitchSpring,GestureSpring,ClothSpring;
+    HalvethMotion::Spring HandSprings[2],WeightShiftSpring;
 };

@@ -8,6 +8,7 @@
 #include "GameFramework/PlayerController.h"
 #include "Camera/CameraComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "HighResScreenshot.h"
 #include "Misc/Paths.h"
@@ -20,7 +21,16 @@ void AHALVETHLivingWorld::Shot(const TCHAR* Name){
     UE_LOG(LogTemp,Display,TEXT("LIVING_CAPTURE_SHOT name=%s time=%.3f bodies=%d notice=%d"),Name,Time,Bodies.Num(),int32(Notice.stage));
 }
 void AHALVETHLivingWorld::FinishProbe(bool Passed,const TCHAR* Reason){
-    ProbeFinished=true;int32 Moved=0;for(const auto& B:Bodies)Moved+=B.Travel>20;
+    ProbeFinished=true;int32 Moved=0,PawnBases=0;bool RejectsCharacterStep=true,StepNegativeControl=false;
+    auto* Player=UGameplayStatics::GetPlayerPawn(this,0);
+    for(const auto& B:Bodies)if(B.Actor){
+        Moved+=B.Travel>20;
+        if(auto* Base=B.Actor->GetMovementBase())PawnBases+=Base->GetOwner()&&Base->GetOwner()->IsA<APawn>();
+        auto* Capsule=B.Actor->GetCapsuleComponent();RejectsCharacterStep&=!Capsule->CanCharacterStepUp(Player);
+        if(!StepNegativeControl){const auto Previous=Capsule->CanCharacterStepUpOn;Capsule->CanCharacterStepUpOn=ECB_Yes;StepNegativeControl=Capsule->CanCharacterStepUp(Player);Capsule->CanCharacterStepUpOn=Previous;}
+    }
+    const bool Grounded=PawnBases==0&&RejectsCharacterStep&&StepNegativeControl;Passed&=Grounded;
+    UE_LOG(LogTemp,Display,TEXT("LIVING_GROUNDING pawn_bases=%d character_step_rejected=%d engine_step_negative_control=%d passed=%d"),PawnBases,RejectsCharacterStep,StepNegativeControl,Grounded);
     if(FrameTimes.Num()>10){FrameTimes.Sort();UE_LOG(LogTemp,Display,TEXT("LIVING_FRAME_SAMPLE frames=%d median_ms=%.3f p95_ms=%.3f body_brain_ms=%.3f remote_cohort_ms=%.3f"),FrameTimes.Num(),FrameTimes[FrameTimes.Num()/2],FrameTimes[FMath::Min(FrameTimes.Num()-1,int(FrameTimes.Num()*.95))],MeasuredActorMs,MeasuredBackgroundMs);}
     UE_LOG(LogTemp,Display,TEXT("LIVING_NATIVE_PROBE result=%s reason=%s records=%u physical=%d moved=%d free_flight=%d indoor_flight=%d wall_occlusion=%d warnings=%d holds=%d released=%d"),Passed?TEXT("PASS"):TEXT("FAIL"),Reason,uint32(Residents.size()),Bodies.Num(),Moved,ProbeFreeFlight,ProbeIndoor,ProbeOcclusion,Notice.warnings,Notice.holds,Notice.stage==HalvethLife::Stage::Cooling);
     FPlatformMisc::RequestExitWithStatus(false,Passed?0:5);
