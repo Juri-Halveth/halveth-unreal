@@ -21,6 +21,7 @@ public:
     bool VerifyGpuField() const;
     bool HasDeformedSurface() const {return Active&&!Failed&&Samples>20&&PeakDisplacement>.001&&BoundMaterials>0;}
     bool NeedsFullPose() const {return Active&&!Failed;}
+    void SuspendForAppearanceInspection(){SetSurfaceActive(false);SetComponentTickEnabled(false);}
 private:
     struct FPatch {
         int32 Bone=0;FVector Centre=FVector::ZeroVector;double Radius=5;

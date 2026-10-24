@@ -1,10 +1,12 @@
 # SPDX-License-Identifier: MIT
-"""Own wrapper around Blender's FBX parser/writer; bind numeric roundtrip."""
+"""Redact paths for each declared adult FBX; bind numeric roundtrip."""
 from pathlib import Path
 import sys,hashlib,json,array
 R=Path(__file__).resolve().parent
 import bpy
 from io_scene_fbx import parse_fbx,encode_bin,data_types
+sys.path.insert(0,str(R))
+from character_identities import IDENTITIES
 root=R.parents[0]/'ArtSource/Characters'
 methods={getattr(data_types,key):'add_'+key.lower() for key in ['BOOL','CHAR','INT8','INT16','INT32','INT64','FLOAT32','FLOAT64','BYTES','STRING','INT32_ARRAY','INT64_ARRAY','FLOAT32_ARRAY','FLOAT64_ARRAY','BOOL_ARRAY','BYTE_ARRAY']}
 def numeric_digest(element):
@@ -21,7 +23,8 @@ def numeric_digest(element):
 records=[]
 windows_user_marker=b':'+bytes([92])+b'Users'+bytes([92])
 slash_user_marker=b':'+bytes([47])+b'Users'+bytes([47])
-for name in ['Scarlet','Lucinet','Rachel']:
+for identity in IDENTITIES:
+ name=identity['name']
  p=root/(name+'.fbx');parsed,version=parse_fbx.parse(str(p));before=numeric_digest(parsed);changes=[]
  def clone(e):
   target=encode_bin.FBXElem(e.id)
@@ -40,4 +43,4 @@ manifest=json.loads((root/'characters.json').read_text())
 for c in manifest['characters']:c['fbxSha256']=next(r['sha256'] for r in records if r['name']==c['name'])
 (root/'characters.json').write_text(json.dumps(manifest,indent=2)+'\n')
 (root/'fbx-path-roundtrip.json').write_text(json.dumps({'schema':'halveth.fbx-path-redaction.v1','records':records,'scope':'Embedded local authoring paths converted to relative filenames; numeric geometry, indices, skeleton and animation properties retain the same parsed digest.'},indent=2)+'\n')
-print('Three FBX files retain numeric geometry/animation while embedded local paths are relative.')
+print(str(len(records))+' FBX files retain numeric geometry/animation while embedded local paths are relative.')

@@ -52,11 +52,22 @@
     "https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html"
   ],
   "authoredWardrobe": "wardrobe-sources.json",
-  "activeConstruction": "hm08-affine-proxy-v1",
+  "activeConstruction": "hm08-adult-smooth-surface-v2",
   "retiredActiveConstruction": [
     "cylindrical coat",
     "segmented tube sleeves",
     "ellipsoid footwear",
     "tube hair and cap"
-  ]
+  ],
+  "activeBodyBasis": {
+    "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+    "minimumAuthoredAgeYears": 25,
+    "fullAdultMacroTargets": true,
+    "targets": "Sources/targets/sources.json",
+    "staticCharacterArtOnly": true
+  },
+  "inactivePreservedWardrobe": "wardrobe-sources.json",
+  "activeWardrobe": null,
+  "activeFootwear": null,
+  "activeHairCards": null
 }

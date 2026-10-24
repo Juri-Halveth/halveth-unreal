@@ -16,23 +16,18 @@ SOURCES = ['Source/HALVETHRealms/Public/GardenField.h',
            'Source/HALVETHRealmsEditor/Private/GardenPrepareCommandlet.cpp',
            'Source/HALVETHRealmsEditor/Private/GardenCharactersCommandlet.cpp',
            'Source/HALVETHRealms/Public/TissueField.h']
-CHARACTERS = ['Scarlet', 'Lucinet', 'Rachel']
+CHARACTERS = ['Scarlet', 'Lucinet', 'Rachel', 'Tala', 'Orin', 'Ivo', 'Mara', 'Neri']
 CHARACTER_INPUTS = [f'ArtSource/Characters/{name}.fbx' for name in CHARACTERS] + [
     'ArtSource/Characters/skin_female.png', 'ArtSource/Characters/skin_male.png',
     'ArtSource/Characters/cloth_weave.png', 'ArtSource/Characters/cloth_normal.png',
-    'ArtSource/Characters/characters.json','ArtSource/Characters/footwear_diffuse.png']
-CHARACTER_INPUTS += [f'ArtSource/Characters/{name}_{suffix}.png'
-    for name in CHARACTERS for suffix in ['wardrobe','wardrobe_normal','hair']]
+    'ArtSource/Characters/characters.json']
 CHARACTER_ASSETS = [f'Content/Characters/{name}{suffix}.uasset'
     for name in CHARACTERS for suffix in ['', '_Skeleton', 'Idle']] + [
     'Content/Characters/skin_female.uasset', 'Content/Characters/skin_male.uasset',
-    'Content/Characters/cloth_weave.uasset', 'Content/Characters/cloth_normal.uasset','Content/Characters/footwear_diffuse.uasset'] + [
+    'Content/Characters/cloth_weave.uasset', 'Content/Characters/cloth_normal.uasset'] + [
     f'Content/Characters/{name}_{material}.uasset' for name in CHARACTERS
-    for material in ['Skin','Cloth','Leather','Footwear','Metal','Hair','Sclera','Iris','Pupil']]
-CHARACTER_ASSETS += [f'Content/Characters/{name}_{suffix}.uasset'
-    for name in CHARACTERS for suffix in ['wardrobe','wardrobe_normal']]
-CHARACTER_ASSETS += [f'Content/Characters/T_{name}Hair.uasset' for name in CHARACTERS]
-CHARACTER_ASSETS += ['Content/Characters/M_TissueFieldProbe.uasset']
+    for material in ['Skin','Hair','Sclera','Iris','Pupil','SkinProfile']]
+CHARACTER_ASSETS += ['Content/Characters/M_TissueFieldProbe.uasset','Content/Characters/M_AppearanceBackdrop.uasset']
 BOUND = GENERATED + SOURCES + ['Content/Materials/M_HalvethSurface.uasset',
     'Content/VOID/M_Terrain.uasset', 'Content/VOID/M_Water.uasset','Source/HALVETHRealms/Public/GardenSoil.h'] + CHARACTER_INPUTS + CHARACTER_ASSETS
 GEOMETRY_BINDINGS = GENERATED + SOURCES[:2] + ['Content/Materials/M_HalvethSurface.uasset',
@@ -89,6 +84,27 @@ def archive_generated():
             shutil.copy2(path, history/path.name)
             path.unlink()
 
+def archive_characters():
+    # Reimport from an empty generated slot table. FBX replacement otherwise
+    # retains obsolete garment sections/material overrides on the old mesh.
+    base = (ROOT/'Content/Characters').resolve()
+    history = ROOT/'Saved/history'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')/'Characters'
+    legacy = [f'Content/Characters/{name}_{suffix}.uasset'
+              for name in ['Scarlet','Lucinet','Rachel']
+              for suffix in ['Cloth','Leather','Footwear','Metal','wardrobe','wardrobe_normal']]
+    legacy += [f'Content/Characters/T_{name}Hair.uasset' for name in ['Scarlet','Lucinet','Rachel']]
+    legacy += ['Content/Characters/footwear_diffuse.uasset']
+    for rel in dict.fromkeys(CHARACTER_ASSETS+legacy):
+        path = (ROOT/rel).resolve()
+        if path.parent != base:raise SystemExit('Character asset is outside its generated directory.')
+        if path.is_file():
+            history.mkdir(parents=True,exist_ok=True)
+            saved = history/path.name
+            if saved.exists():raise SystemExit('Character recovery snapshot already exists.')
+            shutil.copy2(path,saved)
+            if sha(path)!=sha(saved):raise SystemExit('Character recovery copy mismatch.')
+            path.unlink()
+
 mode = sys.argv[1]
 if mode == 'bootstrap': bootstrap()
 elif mode == 'bind':
@@ -98,12 +114,13 @@ elif mode == 'bind':
 elif mode == 'verify':
     if any(not (ROOT/rel).is_file() for rel in BOUND) or not RECEIPT.is_file() or json.loads(RECEIPT.read_text())['files'] != snapshot():
         raise SystemExit('Garden generated assets need preparation for this source.')
-    print('GARDEN: four landscapes and three human meshes, skeletons, animations, materials and source bindings match.')
+    print('GARDEN: four landscapes and eight adult human meshes, skeletons, animations, materials and source bindings match.')
 elif mode == 'geometry-current':
     if not current(GEOMETRY_BINDINGS):raise SystemExit(1)
 elif mode == 'characters-current':
     if not current(HUMAN_BINDINGS):raise SystemExit(1)
 elif mode == 'archive-generated': archive_generated()
+elif mode == 'archive-characters': archive_characters()
 elif mode == 'qa':
     receipt = json.loads((ROOT/'Saved/HALVETH-runtime-smoke.json').read_text())
     if not receipt.get('passed'): raise SystemExit('Native gameplay check failed.')

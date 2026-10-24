@@ -41,7 +41,7 @@ void AHALVETHMeadow::Initialize(AHALVETHRealmWorld* Source){
         AddInstanceComponent(C);C->SetupAttachment(RootComponent);C->SetStaticMesh(Mesh);
         C->SetMobility(EComponentMobility::Movable);C->SetCollisionEnabled(ECollisionEnabled::NoCollision);
         C->SetCanEverAffectNavigation(false);C->SetCastShadow(false);
-        C->SetCullDistances(1900,3500);C->SetBoundsScale(1.2f);C->NumCustomDataFloats=1;C->RegisterComponent();
+        C->SetCullDistances(1900,3500);C->SetBoundsScale(1.2f);C->NumCustomDataFloats=2;C->RegisterComponent();
         TArray<FTransform> Empty;Empty.Init(FTransform(FQuat::Identity,FVector(0,0,-20000),FVector::ZeroVector),Grid*Grid);
         C->AddInstances(Empty,false,false,false);Groups.Add(C);
     }
@@ -53,24 +53,28 @@ void AHALVETHMeadow::RefreshCell(int32 Slot,FIntPoint Cell){
     const uint32 Seed=uint32(Cell.X)*374761393u+uint32(Cell.Y)*668265263u+uint32(Realm+1)*1442695041u;
     FRandomStream Random{int32(Seed)};
     for(int32 V=0;V<4;V++){
-        const double X=Cell.X*200.+(V%2)*100.+Random.FRandRange(8.,92.);
-        const double Y=Cell.Y*200.+(V/2)*100.+Random.FRandRange(8.,92.);
+        // Keep the same four slots per 2m cell, but reduce positional jitter so
+        // neighbouring low disks overlap instead of exposing metre-wide holes.
+        const double X=Cell.X*200.+(V%2)*100.+Random.FRandRange(35.,65.);
+        const double Y=Cell.Y*200.+(V/2)*100.+Random.FRandRange(35.,65.);
         const FVector4f Biome=GardenField::Color(X,Y,Realm);
+        const double Patch=.5+.5*FMath::Sin(X*.0023+FMath::Sin(Y*.0017));
+        const auto Style=HalvethMeadow::Habitat(Biome.Y,Biome.Z,Biome.X,Patch);
         FVector Ground,Normal;
         const bool Architecture=Realm==0&&X>1270&&X<3730&&Y>-1730&&Y<3580;
         const bool InWorld=FMath::Abs(X)<29200&&FMath::Abs(Y)<29200;
-        const bool Suitable=InWorld&&!Architecture&&Biome.Y>.43f&&Biome.X<.52f&&
-            Random.FRand()<FMath::Clamp((double(Biome.Y)-.28)*1.6,0.,.98)&&
+        const bool Suitable=InWorld&&!Architecture&&Random.FRand()<Style.density&&
             Field->TraceMeadowGround(X,Y,Ground,Normal)&&Ground.Z>-30&&Normal.Z>.82;
         FTransform Pose(FQuat::Identity,FVector(0,0,-20000),FVector::ZeroVector);
         if(Suitable){
             const FQuat Align=FQuat::FindBetweenNormals(FVector::UpVector,Normal);
             const FQuat Yaw(FVector::UpVector,Random.FRandRange(0.,2*PI));
-            const float Scale=Random.FRandRange(.88f,1.18f);
-            Pose=FTransform(Align*Yaw,Ground-Normal*1.2,FVector(Scale));LivePerCell[Slot]++;
+            const double Scale=Random.FRandRange(.94,1.02);
+            Pose=FTransform(Align*Yaw,Ground-Normal*.65,FVector(Scale*Style.widthScale,Scale*Style.widthScale,Scale*Style.heightScale));LivePerCell[Slot]++;
         }
         Groups[V]->UpdateInstanceTransform(Slot,Pose,false,false,true);
         CellPhases[V][Slot]=Random.FRand();Groups[V]->SetCustomDataValue(Slot,0,CellPhases[V][Slot],false);
+        Groups[V]->SetCustomDataValue(Slot,1,float(Style.vigour),false);
     }
     RootedClumps+=LivePerCell[Slot];Cells[Slot]=Cell;
 }
@@ -166,7 +170,7 @@ bool AHALVETHMeadow::ExportScene(){
         const auto Blade=HalvethMeadow::MakeBlade(0,I);const auto Local=HalvethMeadow::BladePoint(Blade,J*.5,0);
         const FVector World=Pose.TransformPosition(FVector(Local.x,Local.y,Local.z));
         if(J==0){FVector Ground,Normal;if(Field->TraceMeadowGround(World.X,World.Y,Ground,Normal)){MaxRootGap=FMath::Max(MaxRootGap,FMath::Abs(World.Z-Ground.Z));MaxLiftedGap=FMath::Max(MaxLiftedGap,FMath::Abs(World.Z+50-Ground.Z));RootChecks++;}}
-        const auto Wind=HalvethMeadow::Wind({World.X,World.Y,World.Z},J*.5,1.,Blade.phase+CellPhases[0][Slot]*2*PI);
+        const auto Wind=HalvethMeadow::Wind({World.X,World.Y,World.Z},J*.5,1.,Blade.phase+CellPhases[0][Slot]*2*PI,Blade.height);
         auto Point=MakeShared<FJsonObject>();Point->SetNumberField(TEXT("id"),I*3+J);Point->SetNumberField(TEXT("blade"),I);Point->SetNumberField(TEXT("heightFraction"),J*.5);
         Point->SetNumberField(TEXT("x"),World.X);Point->SetNumberField(TEXT("y"),World.Y);Point->SetNumberField(TEXT("z"),World.Z);
         Point->SetNumberField(TEXT("windXAt1s"),Wind.x);Point->SetNumberField(TEXT("windYAt1s"),Wind.y);Point->SetNumberField(TEXT("windZAt1s"),Wind.z);

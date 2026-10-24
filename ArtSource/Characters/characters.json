@@ -1,12 +1,58 @@
 {
-  "schema": "halveth.human-source.v1",
-  "geometryLicense": "CC0 anatomical MakeHuman hm08 + explicitly CC0 authored garments, footwear and hair; own morph/idle additions",
+  "schema": "halveth.human-source.v2",
+  "geometryLicense": "CC0 MakeHuman hm08 graphics/targets + CC0 authored eyes/brows/surface additions; MIT builder",
+  "construction": "hm08-adult-smooth-surface-v2",
+  "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
   "characters": [
     {
       "identity": 1,
       "name": "Scarlet",
-      "construction": "hm08-affine-proxy-v1",
-      "vertices": 31406,
+      "sourceSex": "female",
+      "adultAgeYears": 29,
+      "authoredHeightCm": 171,
+      "sourceArchetypeMix": {
+        "caucasian": 0.75,
+        "asian": 0.15,
+        "african": 0.1
+      },
+      "skinSource": "skin_female",
+      "skinTintLinear": [
+        1.0,
+        0.93,
+        0.88
+      ],
+      "proportions": {
+        "shoulders": 0.94,
+        "hips": 1.06,
+        "waist": 0.94,
+        "depth": 0.98,
+        "legs": 0.025,
+        "arms": 0.99
+      },
+      "faceTargets": {
+        "head/head-oval.target": 0.28,
+        "chin/chin-width-decr.target": 0.18,
+        "nose/nose-point-up.target": 0.09,
+        "mouth/mouth-scale-horiz-incr.target": 0.1,
+        "cheek/l-cheek-bones-incr.target": 0.2,
+        "cheek/r-cheek-bones-incr.target": 0.2
+      },
+      "browColorLinear": [
+        0.045,
+        0.018,
+        0.012
+      ],
+      "irisColorLinear": [
+        0.12,
+        0.21,
+        0.13
+      ],
+      "construction": "hm08-adult-smooth-surface-v2",
+      "vertices": 67696,
+      "faces": 68360,
+      "triangles": 133584,
+      "bodyVertices": 53514,
+      "bodyFaces": 53512,
       "bones": 163,
       "seconds": 12,
       "morphs": [
@@ -14,24 +60,343 @@
         "Talk",
         "Breath",
         "Smile",
-        "ClothLeft",
-        "ClothRight",
-        "HairLeft",
-        "HairRight"
+        "IdentityJaw",
+        "IdentityNose",
+        "IdentityCheek",
+        "IdentityBrow"
       ],
-      "faceTargets": {
-        "chin/chin-prominent-incr.target": 0.1,
-        "nose/nose-point-up.target": 0.1,
-        "cheek/l-cheek-bones-incr.target": 0.15,
-        "cheek/r-cheek-bones-incr.target": 0.15
+      "morphGeometry": {
+        "Blink": {
+          "changedVertices": 4217,
+          "maximumDisplacementCm": 0.9273528910879733,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Talk": {
+          "changedVertices": 3924,
+          "maximumDisplacementCm": 0.45123940020320713,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Breath": {
+          "changedVertices": 1522,
+          "maximumDisplacementCm": 0.23443412829643823,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Smile": {
+          "changedVertices": 1161,
+          "maximumDisplacementCm": 0.24593720111622758,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityJaw": {
+          "changedVertices": 3322,
+          "maximumDisplacementCm": 0.1994118689436018,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityNose": {
+          "changedVertices": 3193,
+          "maximumDisplacementCm": 0.13557403083555453,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityCheek": {
+          "changedVertices": 3166,
+          "maximumDisplacementCm": 0.17582051315499572,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityBrow": {
+          "changedVertices": 13938,
+          "maximumDisplacementCm": 0.14227294921875,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        }
       },
-      "fbxSha256": "56cb6fa9d8b710fd1646b4c04ccf3e76dc32a9a4628f5ad4dcf475793c71c2e1"
+      "materialSlots": [
+        "Skin",
+        "Sclera",
+        "Iris",
+        "Pupil",
+        "Hair"
+      ],
+      "bodyMinimumZCm": 0.0,
+      "skinAlbedoLinear": [
+        0.7021936952370085,
+        0.3368757510177971,
+        0.21356695106193382
+      ],
+      "skinAlbedoMeasurement": {
+        "texture": "skin_female.png",
+        "textureSha256": "e4547a04bab2244d8ec6bcb1d239f4cddb83f145d4ce2a5c7734ec514c8bebcf",
+        "method": "source-quad-UV-centroid; area-weighted within region; 0.6 face + 0.4 body",
+        "transfer": "IEC-sRGB-piecewise-to-linear-before-tint",
+        "samplePolygons": {
+          "face": 2668,
+          "body": 5766
+        },
+        "faceAlbedoLinear": [
+          0.7002185062549674,
+          0.2939509336850361,
+          0.19072559273351844
+        ],
+        "bodyAlbedoLinear": [
+          0.7051564787100703,
+          0.40126297701693864,
+          0.24782898855455687
+        ],
+        "scope": "Texture appearance estimate, not measured real skin reflectance"
+      },
+      "heightCm": 170.7424774169922,
+      "boundsCm": [
+        [
+          -52.60167694091797,
+          52.6016845703125
+        ],
+        [
+          -30.828800201416016,
+          9.307308197021484
+        ],
+        [
+          0.0,
+          170.7424774169922
+        ]
+      ],
+      "sourceBoundsCm": [
+        [
+          -52.60167694091797,
+          52.6016845703125
+        ],
+        [
+          -30.828800201416016,
+          9.307308197021484
+        ],
+        [
+          0.0,
+          170.7424774169922
+        ]
+      ],
+      "subdivision": {
+        "method": "Catmull-Clark",
+        "levels": 1,
+        "sameOperatorForAllMorphs": true,
+        "UVAndWeightsPreserved": true
+      },
+      "sourceTopology": {
+        "vertices": 13380,
+        "quads": 13378,
+        "fullBody": true,
+        "deletedCoveredFaces": 0,
+        "helperFacesExported": false
+      },
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "macroTargets": {
+        "macrodetails/caucasian-female-young.target": 0.7038461538461538,
+        "macrodetails/caucasian-female-old.target": 0.046153846153846156,
+        "macrodetails/asian-female-young.target": 0.14076923076923076,
+        "macrodetails/asian-female-old.target": 0.009230769230769232,
+        "macrodetails/african-female-young.target": 0.09384615384615386,
+        "macrodetails/african-female-old.target": 0.006153846153846155
+      },
+      "sourceBindings": [
+        {
+          "path": "Sources/targets/cheek/l-cheek-bones-incr.target",
+          "sha256": "244ffa39d2d2db94ff15130719346b4cae2236bf2a309c5682eac352da06be50",
+          "weight": 0.2
+        },
+        {
+          "path": "Sources/targets/cheek/r-cheek-bones-incr.target",
+          "sha256": "a393f67acce21568ab832091daadab267685d464492647cb0c4e8cb5af58c4c9",
+          "weight": 0.2
+        },
+        {
+          "path": "Sources/targets/chin/chin-width-decr.target",
+          "sha256": "ac081bd1652c203fc8973f20988a868a423a49f1fe6449cb974727fd46c26af1",
+          "weight": 0.18
+        },
+        {
+          "path": "Sources/targets/head/head-oval.target",
+          "sha256": "a17cd3a600588a344babe520fbd4d4edcb096db3328051fe692dfb997a1a678d",
+          "weight": 0.28
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-female-old.target",
+          "sha256": "c165e7caf01aaf45511ebc78a441c8c73ead13231af1a8c6666941345f088b61",
+          "weight": 0.006153846153846155
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-female-young.target",
+          "sha256": "92d61eeb3c164b421fd5a7c3537ee45e7e1a51de4d49bf312e19c3df2be1d8fc",
+          "weight": 0.09384615384615386
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-female-old.target",
+          "sha256": "1a90cb281df640df55fbce3acd6588f27b28affeb96a7f693f6f038aefc204d8",
+          "weight": 0.009230769230769232
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-female-young.target",
+          "sha256": "095fe79694fa19e1fe98d93009ec116199bd524e081c640351a10eccf2cca1eb",
+          "weight": 0.14076923076923076
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-female-old.target",
+          "sha256": "6560982486c4b1a7a0b1d82b0ad3f09770c16b4f87c8f949537dc9cfc941a0b0",
+          "weight": 0.046153846153846156
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-female-young.target",
+          "sha256": "118379f6e8ba9266247fdb8788a20e1df40a239f97ced0b9905bcbcc74f6e820",
+          "weight": 0.7038461538461538
+        },
+        {
+          "path": "Sources/targets/mouth/mouth-scale-horiz-incr.target",
+          "sha256": "ccfc39cca249883ebc46af6f2c96c4130df13a67ebce30a2550af17a48637770",
+          "weight": 0.1
+        },
+        {
+          "path": "Sources/targets/nose/nose-point-up.target",
+          "sha256": "c8d556af4cc6fe5fbf340b1950156fffad3835524a191b47074466f244a92047",
+          "weight": 0.09
+        }
+      ],
+      "eyes": [
+        {
+          "bone": "eye.L",
+          "centerCm": [
+            2.992960214614868,
+            -11.797115325927734,
+            159.5664520263672
+          ],
+          "forward": [
+            0.028069378808140755,
+            -0.9995607733726501,
+            -0.009505302645266056
+          ],
+          "globeRadiusCm": 1.178968378318541,
+          "irisRadiusCm": 0.6012738729424559,
+          "pupilRadiusCm": 0.24168851755530088,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        },
+        {
+          "bone": "eye.R",
+          "centerCm": [
+            -2.992960214614868,
+            -11.797115325927734,
+            159.5664520263672
+          ],
+          "forward": [
+            -0.028069378808140755,
+            -0.9995607733726501,
+            -0.009505302645266056
+          ],
+          "globeRadiusCm": 1.178968378318541,
+          "irisRadiusCm": 0.6012738729424559,
+          "pupilRadiusCm": 0.24168851755530088,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        }
+      ],
+      "scalp": "bald",
+      "eyebrows": "three-row-surface-fitted-curved-strands-v2",
+      "eyebrowGeometry": {
+        "construction": "three-row-surface-fitted-curved-strands-v2",
+        "rows": 3,
+        "hairsPerSide": [
+          182,
+          170
+        ],
+        "vertices": 10560,
+        "faces": 11264,
+        "rootRadiusCmRange": [
+          0.015011168176266724,
+          0.02497696989700704
+        ],
+        "actualCurveLengthCmRange": [
+          0.25984268591226434,
+          0.4889578525581783
+        ],
+        "designedLengthCmRange": [
+          0.25,
+          0.5
+        ],
+        "tubeSides": 6,
+        "curveSamples": 5,
+        "continuousBackingGeometry": false,
+        "deterministicPerIdentity": true
+      },
+      "ageInterpretation": "Static authored adult age; no biological simulation",
+      "fbxSha256": "e927a131e211ec7303afc2296bc4f9299f0d1cde7ddda6da9c789f613dd13a04"
     },
     {
       "identity": 2,
       "name": "Lucinet",
-      "construction": "hm08-affine-proxy-v1",
-      "vertices": 30672,
+      "sourceSex": "male",
+      "adultAgeYears": 36,
+      "authoredHeightCm": 184,
+      "sourceArchetypeMix": {
+        "caucasian": 0.6,
+        "asian": 0.1,
+        "african": 0.3
+      },
+      "skinSource": "skin_male",
+      "skinTintLinear": [
+        0.83,
+        0.7,
+        0.59
+      ],
+      "proportions": {
+        "shoulders": 1.08,
+        "hips": 0.96,
+        "waist": 0.99,
+        "depth": 1.06,
+        "legs": 0.005,
+        "arms": 1.035
+      },
+      "faceTargets": {
+        "head/head-rectangular.target": 0.32,
+        "chin/chin-width-incr.target": 0.38,
+        "chin/chin-prominent-incr.target": 0.16,
+        "nose/nose-curve-convex.target": 0.18,
+        "mouth/mouth-upperlip-volume-incr.target": 0.12
+      },
+      "browColorLinear": [
+        0.025,
+        0.018,
+        0.012
+      ],
+      "irisColorLinear": [
+        0.11,
+        0.15,
+        0.19
+      ],
+      "construction": "hm08-adult-smooth-surface-v2",
+      "vertices": 67426,
+      "faces": 68072,
+      "triangles": 133080,
+      "bodyVertices": 53514,
+      "bodyFaces": 53512,
       "bones": 163,
       "seconds": 12,
       "morphs": [
@@ -39,27 +404,339 @@
         "Talk",
         "Breath",
         "Smile",
-        "ClothLeft",
-        "ClothRight",
-        "HairLeft",
-        "HairRight"
+        "IdentityJaw",
+        "IdentityNose",
+        "IdentityCheek",
+        "IdentityBrow"
       ],
-      "faceTargets": {
-        "macrodetails/caucasian-male-young.target": 0.7,
-        "chin/chin-width-incr.target": 0.35,
-        "chin/chin-prominent-incr.target": 0.15,
-        "nose/nose-curve-convex.target": 0.1,
-        "nose/nose-scale-depth-incr.target": 0.1,
-        "cheek/l-cheek-volume-decr.target": 0.1,
-        "cheek/r-cheek-volume-decr.target": 0.1
+      "morphGeometry": {
+        "Blink": {
+          "changedVertices": 4216,
+          "maximumDisplacementCm": 1.0465393097552993,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Talk": {
+          "changedVertices": 3924,
+          "maximumDisplacementCm": 0.4512391481467574,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Breath": {
+          "changedVertices": 1522,
+          "maximumDisplacementCm": 0.23443412829643823,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Smile": {
+          "changedVertices": 1155,
+          "maximumDisplacementCm": 0.24597978980843072,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityJaw": {
+          "changedVertices": 3322,
+          "maximumDisplacementCm": 0.1994118689436018,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityNose": {
+          "changedVertices": 3195,
+          "maximumDisplacementCm": 0.13557297293209628,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityCheek": {
+          "changedVertices": 3159,
+          "maximumDisplacementCm": 0.17581942726510752,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityBrow": {
+          "changedVertices": 13690,
+          "maximumDisplacementCm": 0.14227294921875,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        }
       },
-      "fbxSha256": "78330b7f420b5d2ffa0af383f9edea716b991bc1967d77916e3134aa16f8fb01"
+      "materialSlots": [
+        "Skin",
+        "Sclera",
+        "Iris",
+        "Pupil",
+        "Hair"
+      ],
+      "bodyMinimumZCm": 0.0,
+      "skinAlbedoLinear": [
+        0.5322360029985017,
+        0.2282622887145176,
+        0.12456456851277152
+      ],
+      "skinAlbedoMeasurement": {
+        "texture": "skin_male.png",
+        "textureSha256": "3f94f3f6a5cab92dedf5cce392a87332312fc435f1cb44c6e7b897daef9a5fbb",
+        "method": "source-quad-UV-centroid; area-weighted within region; 0.6 face + 0.4 body",
+        "transfer": "IEC-sRGB-piecewise-to-linear-before-tint",
+        "samplePolygons": {
+          "face": 2668,
+          "body": 5766
+        },
+        "faceAlbedoLinear": [
+          0.5168921993097638,
+          0.1887422953790578,
+          0.10210688454319022
+        ],
+        "bodyAlbedoLinear": [
+          0.5552517085316087,
+          0.28754227871770727,
+          0.15825109446714347
+        ],
+        "scope": "Texture appearance estimate, not measured real skin reflectance"
+      },
+      "heightCm": 183.82876586914062,
+      "boundsCm": [
+        [
+          -57.46573257446289,
+          57.465728759765625
+        ],
+        [
+          -40.51785659790039,
+          10.349691390991211
+        ],
+        [
+          0.0,
+          183.82876586914062
+        ]
+      ],
+      "sourceBoundsCm": [
+        [
+          -57.46573257446289,
+          57.465728759765625
+        ],
+        [
+          -40.51785659790039,
+          10.349691390991211
+        ],
+        [
+          0.0,
+          183.82876586914062
+        ]
+      ],
+      "subdivision": {
+        "method": "Catmull-Clark",
+        "levels": 1,
+        "sameOperatorForAllMorphs": true,
+        "UVAndWeightsPreserved": true
+      },
+      "sourceTopology": {
+        "vertices": 13380,
+        "quads": 13378,
+        "fullBody": true,
+        "deletedCoveredFaces": 0,
+        "helperFacesExported": false
+      },
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "macroTargets": {
+        "macrodetails/caucasian-male-young.target": 0.4984615384615384,
+        "macrodetails/caucasian-male-old.target": 0.10153846153846154,
+        "macrodetails/asian-male-young.target": 0.08307692307692308,
+        "macrodetails/asian-male-old.target": 0.016923076923076926,
+        "macrodetails/african-male-young.target": 0.2492307692307692,
+        "macrodetails/african-male-old.target": 0.05076923076923077
+      },
+      "sourceBindings": [
+        {
+          "path": "Sources/targets/chin/chin-prominent-incr.target",
+          "sha256": "d2493ca5f69aabeb8557d77a56c49cfcf2062ff90c0cad03073d87990d11448b",
+          "weight": 0.16
+        },
+        {
+          "path": "Sources/targets/chin/chin-width-incr.target",
+          "sha256": "deef506bfe1883d9d4c38667332c9970785226566efbae4724fd3d60c02efcf4",
+          "weight": 0.38
+        },
+        {
+          "path": "Sources/targets/head/head-rectangular.target",
+          "sha256": "bbfcbd4d6334df18515e73abb707b8a948adb74e0aba88a728c8e146dd5f4e4b",
+          "weight": 0.32
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-male-old.target",
+          "sha256": "59ec94956b3525dbb30238d1239b2bce52adc3bfae091f12cd85d2570aa1933c",
+          "weight": 0.05076923076923077
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-male-young.target",
+          "sha256": "894abc1fbb3d28543a51fef16f89d5d4bdf9aa2e1534413339811a3d47818b7d",
+          "weight": 0.2492307692307692
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-male-old.target",
+          "sha256": "36dc5a3a135ded33885e814806b0e3668ca5bf44bddcebdee48ae75ae68bc3d3",
+          "weight": 0.016923076923076926
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-male-young.target",
+          "sha256": "ed2e8c191cb6b87b4a2d97c80486acb2604fa549316c7aa2a738a5d5a14334dc",
+          "weight": 0.08307692307692308
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-male-old.target",
+          "sha256": "b0d2b1d58cba0358af59833740e70229265f7da1c20a11240f4123b7192cfd6d",
+          "weight": 0.10153846153846154
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-male-young.target",
+          "sha256": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5",
+          "weight": 0.4984615384615384
+        },
+        {
+          "path": "Sources/targets/mouth/mouth-upperlip-volume-incr.target",
+          "sha256": "b124cbd9b9be318264f61a143da603b42e0357ed92b4b6afd1b31a83daaf8568",
+          "weight": 0.12
+        },
+        {
+          "path": "Sources/targets/nose/nose-curve-convex.target",
+          "sha256": "3426e9a53c65962bc75b25aae04759a03e818d708bc5445ffc4dfb812497a7ca",
+          "weight": 0.18
+        }
+      ],
+      "eyes": [
+        {
+          "bone": "eye.L",
+          "centerCm": [
+            3.064480781555176,
+            -13.362530708312988,
+            172.58460998535156
+          ],
+          "forward": [
+            0.042969681322574615,
+            -0.9888131618499756,
+            -0.14283610880374908
+          ],
+          "globeRadiusCm": 1.1919976898511029,
+          "irisRadiusCm": 0.6079188218240624,
+          "pupilRadiusCm": 0.2443595264194761,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        },
+        {
+          "bone": "eye.R",
+          "centerCm": [
+            -3.064480781555176,
+            -13.362530708312988,
+            172.58460998535156
+          ],
+          "forward": [
+            -0.042969681322574615,
+            -0.9888131618499756,
+            -0.14283610880374908
+          ],
+          "globeRadiusCm": 1.1919976898511029,
+          "irisRadiusCm": 0.6079188218240624,
+          "pupilRadiusCm": 0.2443595264194761,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        }
+      ],
+      "scalp": "bald",
+      "eyebrows": "three-row-surface-fitted-curved-strands-v2",
+      "eyebrowGeometry": {
+        "construction": "three-row-surface-fitted-curved-strands-v2",
+        "rows": 3,
+        "hairsPerSide": [
+          169,
+          174
+        ],
+        "vertices": 10290,
+        "faces": 10976,
+        "rootRadiusCmRange": [
+          0.015044684207965774,
+          0.024890675500783728
+        ],
+        "actualCurveLengthCmRange": [
+          0.2602078647247609,
+          0.48929274109767107
+        ],
+        "designedLengthCmRange": [
+          0.25,
+          0.5
+        ],
+        "tubeSides": 6,
+        "curveSamples": 5,
+        "continuousBackingGeometry": false,
+        "deterministicPerIdentity": true
+      },
+      "ageInterpretation": "Static authored adult age; no biological simulation",
+      "fbxSha256": "58b46f09290c027be12bf4982a55c8e8bc31dad09b162be595fe683ec2b4b042"
     },
     {
       "identity": 3,
       "name": "Rachel",
-      "construction": "hm08-affine-proxy-v1",
-      "vertices": 26670,
+      "sourceSex": "female",
+      "adultAgeYears": 34,
+      "authoredHeightCm": 165,
+      "sourceArchetypeMix": {
+        "caucasian": 0.55,
+        "asian": 0.4,
+        "african": 0.05
+      },
+      "skinSource": "skin_female",
+      "skinTintLinear": [
+        0.96,
+        0.86,
+        0.79
+      ],
+      "proportions": {
+        "shoulders": 0.92,
+        "hips": 1.02,
+        "waist": 0.98,
+        "depth": 1.01,
+        "legs": -0.012,
+        "arms": 0.97
+      },
+      "faceTargets": {
+        "head/head-round.target": 0.22,
+        "chin/chin-width-incr.target": 0.1,
+        "nose/nose-point-up.target": 0.13,
+        "mouth/mouth-scale-horiz-incr.target": 0.16,
+        "cheek/l-cheek-volume-decr.target": 0.08,
+        "cheek/r-cheek-volume-decr.target": 0.08
+      },
+      "browColorLinear": [
+        0.075,
+        0.038,
+        0.019
+      ],
+      "irisColorLinear": [
+        0.2,
+        0.12,
+        0.065
+      ],
+      "construction": "hm08-adult-smooth-surface-v2",
+      "vertices": 67336,
+      "faces": 67976,
+      "triangles": 132912,
+      "bodyVertices": 53514,
+      "bodyFaces": 53512,
       "bones": 163,
       "seconds": 12,
       "morphs": [
@@ -67,18 +744,1983 @@
         "Talk",
         "Breath",
         "Smile",
-        "ClothLeft",
-        "ClothRight",
-        "HairLeft",
-        "HairRight"
+        "IdentityJaw",
+        "IdentityNose",
+        "IdentityCheek",
+        "IdentityBrow"
       ],
-      "faceTargets": {
-        "chin/chin-width-incr.target": 0.2,
-        "nose/nose-point-up.target": 0.2,
-        "cheek/l-cheek-bones-incr.target": 0.1,
-        "cheek/r-cheek-bones-incr.target": 0.1
+      "morphGeometry": {
+        "Blink": {
+          "changedVertices": 4220,
+          "maximumDisplacementCm": 0.9342498708270124,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Talk": {
+          "changedVertices": 3934,
+          "maximumDisplacementCm": 0.45125427231646775,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Breath": {
+          "changedVertices": 1522,
+          "maximumDisplacementCm": 0.2344336515790618,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Smile": {
+          "changedVertices": 1161,
+          "maximumDisplacementCm": 0.2459515414264849,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityJaw": {
+          "changedVertices": 3322,
+          "maximumDisplacementCm": 0.19941091619058815,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityNose": {
+          "changedVertices": 3194,
+          "maximumDisplacementCm": 0.13557508873075788,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityCheek": {
+          "changedVertices": 3162,
+          "maximumDisplacementCm": 0.17582077270817104,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityBrow": {
+          "changedVertices": 13591,
+          "maximumDisplacementCm": 0.14228820718964685,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        }
       },
-      "fbxSha256": "a58c7c44109d0e416ce6be45405178e6d1704edbec4e45a311c05d1a1cd35007"
+      "materialSlots": [
+        "Skin",
+        "Sclera",
+        "Iris",
+        "Pupil",
+        "Hair"
+      ],
+      "bodyMinimumZCm": 0.0,
+      "skinAlbedoLinear": [
+        0.6733967336112694,
+        0.3097135674423387,
+        0.19059351777100197
+      ],
+      "skinAlbedoMeasurement": {
+        "texture": "skin_female.png",
+        "textureSha256": "e4547a04bab2244d8ec6bcb1d239f4cddb83f145d4ce2a5c7734ec514c8bebcf",
+        "method": "source-quad-UV-centroid; area-weighted within region; 0.6 face + 0.4 body",
+        "transfer": "IEC-sRGB-piecewise-to-linear-before-tint",
+        "samplePolygons": {
+          "face": 2668,
+          "body": 5766
+        },
+        "faceAlbedoLinear": [
+          0.6713557441456316,
+          0.2691622231715043,
+          0.16964918151175384
+        ],
+        "bodyAlbedoLinear": [
+          0.676458217809726,
+          0.3705405838485902,
+          0.22201002215987412
+        ],
+        "scope": "Texture appearance estimate, not measured real skin reflectance"
+      },
+      "heightCm": 164.76220703125,
+      "boundsCm": [
+        [
+          -51.59779357910156,
+          51.59779739379883
+        ],
+        [
+          -31.967365264892578,
+          9.297173500061035
+        ],
+        [
+          0.0,
+          164.76220703125
+        ]
+      ],
+      "sourceBoundsCm": [
+        [
+          -51.59779357910156,
+          51.59779739379883
+        ],
+        [
+          -31.967365264892578,
+          9.297173500061035
+        ],
+        [
+          0.0,
+          164.76220703125
+        ]
+      ],
+      "subdivision": {
+        "method": "Catmull-Clark",
+        "levels": 1,
+        "sameOperatorForAllMorphs": true,
+        "UVAndWeightsPreserved": true
+      },
+      "sourceTopology": {
+        "vertices": 13380,
+        "quads": 13378,
+        "fullBody": true,
+        "deletedCoveredFaces": 0,
+        "helperFacesExported": false
+      },
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "macroTargets": {
+        "macrodetails/caucasian-female-young.target": 0.4738461538461539,
+        "macrodetails/caucasian-female-old.target": 0.07615384615384617,
+        "macrodetails/asian-female-young.target": 0.34461538461538466,
+        "macrodetails/asian-female-old.target": 0.05538461538461539,
+        "macrodetails/african-female-young.target": 0.04307692307692308,
+        "macrodetails/african-female-old.target": 0.006923076923076924
+      },
+      "sourceBindings": [
+        {
+          "path": "Sources/targets/cheek/l-cheek-volume-decr.target",
+          "sha256": "527d19395f33c02caf3b32254e78702156cdf63c17e4c0e3dd79cca004fa27be",
+          "weight": 0.08
+        },
+        {
+          "path": "Sources/targets/cheek/r-cheek-volume-decr.target",
+          "sha256": "3a356f2f6434ccefa633981dff1b7866ce1feb8427918f35f81b6adffa4599b5",
+          "weight": 0.08
+        },
+        {
+          "path": "Sources/targets/chin/chin-width-incr.target",
+          "sha256": "deef506bfe1883d9d4c38667332c9970785226566efbae4724fd3d60c02efcf4",
+          "weight": 0.1
+        },
+        {
+          "path": "Sources/targets/head/head-round.target",
+          "sha256": "bd96b745b19432ac838f15438aa87e9002f597e59353861721e12e6da0f2c625",
+          "weight": 0.22
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-female-old.target",
+          "sha256": "c165e7caf01aaf45511ebc78a441c8c73ead13231af1a8c6666941345f088b61",
+          "weight": 0.006923076923076924
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-female-young.target",
+          "sha256": "92d61eeb3c164b421fd5a7c3537ee45e7e1a51de4d49bf312e19c3df2be1d8fc",
+          "weight": 0.04307692307692308
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-female-old.target",
+          "sha256": "1a90cb281df640df55fbce3acd6588f27b28affeb96a7f693f6f038aefc204d8",
+          "weight": 0.05538461538461539
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-female-young.target",
+          "sha256": "095fe79694fa19e1fe98d93009ec116199bd524e081c640351a10eccf2cca1eb",
+          "weight": 0.34461538461538466
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-female-old.target",
+          "sha256": "6560982486c4b1a7a0b1d82b0ad3f09770c16b4f87c8f949537dc9cfc941a0b0",
+          "weight": 0.07615384615384617
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-female-young.target",
+          "sha256": "118379f6e8ba9266247fdb8788a20e1df40a239f97ced0b9905bcbcc74f6e820",
+          "weight": 0.4738461538461539
+        },
+        {
+          "path": "Sources/targets/mouth/mouth-scale-horiz-incr.target",
+          "sha256": "ccfc39cca249883ebc46af6f2c96c4130df13a67ebce30a2550af17a48637770",
+          "weight": 0.16
+        },
+        {
+          "path": "Sources/targets/nose/nose-point-up.target",
+          "sha256": "c8d556af4cc6fe5fbf340b1950156fffad3835524a191b47074466f244a92047",
+          "weight": 0.13
+        }
+      ],
+      "eyes": [
+        {
+          "bone": "eye.L",
+          "centerCm": [
+            3.0296878814697266,
+            -12.312300682067871,
+            153.97996520996094
+          ],
+          "forward": [
+            0.03600412979722023,
+            -0.9989696145057678,
+            -0.02762908674776554
+          ],
+          "globeRadiusCm": 1.1726686958430659,
+          "irisRadiusCm": 0.5980610348799636,
+          "pupilRadiusCm": 0.2403970826478285,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        },
+        {
+          "bone": "eye.R",
+          "centerCm": [
+            -3.0296878814697266,
+            -12.312300682067871,
+            153.97996520996094
+          ],
+          "forward": [
+            -0.03600412979722023,
+            -0.9989696145057678,
+            -0.02762908674776554
+          ],
+          "globeRadiusCm": 1.1726686958430659,
+          "irisRadiusCm": 0.5980610348799636,
+          "pupilRadiusCm": 0.2403970826478285,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        }
+      ],
+      "scalp": "bald",
+      "eyebrows": "three-row-surface-fitted-curved-strands-v2",
+      "eyebrowGeometry": {
+        "construction": "three-row-surface-fitted-curved-strands-v2",
+        "rows": 3,
+        "hairsPerSide": [
+          170,
+          170
+        ],
+        "vertices": 10200,
+        "faces": 10880,
+        "rootRadiusCmRange": [
+          0.015013224591916879,
+          0.024967985818967142
+        ],
+        "actualCurveLengthCmRange": [
+          0.26002915647127767,
+          0.48934905298664677
+        ],
+        "designedLengthCmRange": [
+          0.25,
+          0.5
+        ],
+        "tubeSides": 6,
+        "curveSamples": 5,
+        "continuousBackingGeometry": false,
+        "deterministicPerIdentity": true
+      },
+      "ageInterpretation": "Static authored adult age; no biological simulation",
+      "fbxSha256": "4f27cef7498f21543f0ca3162e2e76b9faa5ca11dcb460ff109e81e4b5065452"
+    },
+    {
+      "identity": 4,
+      "name": "Tala",
+      "sourceSex": "female",
+      "adultAgeYears": 27,
+      "authoredHeightCm": 178,
+      "sourceArchetypeMix": {
+        "caucasian": 0.1,
+        "asian": 0.15,
+        "african": 0.75
+      },
+      "skinSource": "skin_female",
+      "skinTintLinear": [
+        0.44,
+        0.29,
+        0.19
+      ],
+      "proportions": {
+        "shoulders": 1.02,
+        "hips": 1.09,
+        "waist": 0.92,
+        "depth": 1.02,
+        "legs": 0.045,
+        "arms": 1.04
+      },
+      "faceTargets": {
+        "head/head-diamond.target": 0.28,
+        "nose/nose-width2-incr.target": 0.3,
+        "mouth/mouth-upperlip-volume-incr.target": 0.3,
+        "mouth/mouth-lowerlip-volume-incr.target": 0.28,
+        "cheek/l-cheek-bones-incr.target": 0.22,
+        "cheek/r-cheek-bones-incr.target": 0.22
+      },
+      "browColorLinear": [
+        0.013,
+        0.01,
+        0.008
+      ],
+      "irisColorLinear": [
+        0.12,
+        0.065,
+        0.029
+      ],
+      "construction": "hm08-adult-smooth-surface-v2",
+      "vertices": 67576,
+      "faces": 68232,
+      "triangles": 133360,
+      "bodyVertices": 53514,
+      "bodyFaces": 53512,
+      "bones": 163,
+      "seconds": 12,
+      "morphs": [
+        "Blink",
+        "Talk",
+        "Breath",
+        "Smile",
+        "IdentityJaw",
+        "IdentityNose",
+        "IdentityCheek",
+        "IdentityBrow"
+      ],
+      "morphGeometry": {
+        "Blink": {
+          "changedVertices": 4220,
+          "maximumDisplacementCm": 0.8948516938070251,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Talk": {
+          "changedVertices": 3925,
+          "maximumDisplacementCm": 0.4512390222474749,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Breath": {
+          "changedVertices": 1522,
+          "maximumDisplacementCm": 0.234433174860716,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Smile": {
+          "changedVertices": 1161,
+          "maximumDisplacementCm": 0.2459516304118046,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityJaw": {
+          "changedVertices": 3322,
+          "maximumDisplacementCm": 0.19941234531840157,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityNose": {
+          "changedVertices": 3193,
+          "maximumDisplacementCm": 0.13557508873075788,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityCheek": {
+          "changedVertices": 3160,
+          "maximumDisplacementCm": 0.17581978746347232,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityBrow": {
+          "changedVertices": 13841,
+          "maximumDisplacementCm": 0.14224242836690923,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "materialSlots": [
+        "Skin",
+        "Sclera",
+        "Iris",
+        "Pupil",
+        "Hair"
+      ],
+      "bodyMinimumZCm": 0.0,
+      "skinAlbedoLinear": [
+        0.3085258830604363,
+        0.10421320780355037,
+        0.0458065487544044
+      ],
+      "skinAlbedoMeasurement": {
+        "texture": "skin_female.png",
+        "textureSha256": "e4547a04bab2244d8ec6bcb1d239f4cddb83f145d4ce2a5c7734ec514c8bebcf",
+        "method": "source-quad-UV-centroid; area-weighted within region; 0.6 face + 0.4 body",
+        "transfer": "IEC-sRGB-piecewise-to-linear-before-tint",
+        "samplePolygons": {
+          "face": 2668,
+          "body": 5766
+        },
+        "faceAlbedoLinear": [
+          0.30729005491224964,
+          0.09021374927171874,
+          0.04067077358931963
+        ],
+        "bodyAlbedoLinear": [
+          0.3103796252827164,
+          0.12521239560129782,
+          0.053510211502031564
+        ],
+        "scope": "Texture appearance estimate, not measured real skin reflectance"
+      },
+      "heightCm": 177.74649047851562,
+      "boundsCm": [
+        [
+          -54.69096374511719,
+          54.69096755981445
+        ],
+        [
+          -31.80931282043457,
+          9.620171546936035
+        ],
+        [
+          0.0,
+          177.74649047851562
+        ]
+      ],
+      "sourceBoundsCm": [
+        [
+          -54.69096374511719,
+          54.69096755981445
+        ],
+        [
+          -31.80931282043457,
+          9.620171546936035
+        ],
+        [
+          0.0,
+          177.74649047851562
+        ]
+      ],
+      "subdivision": {
+        "method": "Catmull-Clark",
+        "levels": 1,
+        "sameOperatorForAllMorphs": true,
+        "UVAndWeightsPreserved": true
+      },
+      "sourceTopology": {
+        "vertices": 13380,
+        "quads": 13378,
+        "fullBody": true,
+        "deletedCoveredFaces": 0,
+        "helperFacesExported": false
+      },
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "macroTargets": {
+        "macrodetails/caucasian-female-young.target": 0.09692307692307693,
+        "macrodetails/caucasian-female-old.target": 0.0030769230769230774,
+        "macrodetails/asian-female-young.target": 0.1453846153846154,
+        "macrodetails/asian-female-old.target": 0.004615384615384616,
+        "macrodetails/african-female-young.target": 0.7269230769230769,
+        "macrodetails/african-female-old.target": 0.023076923076923078
+      },
+      "sourceBindings": [
+        {
+          "path": "Sources/targets/cheek/l-cheek-bones-incr.target",
+          "sha256": "244ffa39d2d2db94ff15130719346b4cae2236bf2a309c5682eac352da06be50",
+          "weight": 0.22
+        },
+        {
+          "path": "Sources/targets/cheek/r-cheek-bones-incr.target",
+          "sha256": "a393f67acce21568ab832091daadab267685d464492647cb0c4e8cb5af58c4c9",
+          "weight": 0.22
+        },
+        {
+          "path": "Sources/targets/head/head-diamond.target",
+          "sha256": "7072c718c8476ca38d6758fb7531fd945612d51acdca6555da8a8f770284c41d",
+          "weight": 0.28
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-female-old.target",
+          "sha256": "c165e7caf01aaf45511ebc78a441c8c73ead13231af1a8c6666941345f088b61",
+          "weight": 0.023076923076923078
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-female-young.target",
+          "sha256": "92d61eeb3c164b421fd5a7c3537ee45e7e1a51de4d49bf312e19c3df2be1d8fc",
+          "weight": 0.7269230769230769
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-female-old.target",
+          "sha256": "1a90cb281df640df55fbce3acd6588f27b28affeb96a7f693f6f038aefc204d8",
+          "weight": 0.004615384615384616
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-female-young.target",
+          "sha256": "095fe79694fa19e1fe98d93009ec116199bd524e081c640351a10eccf2cca1eb",
+          "weight": 0.1453846153846154
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-female-old.target",
+          "sha256": "6560982486c4b1a7a0b1d82b0ad3f09770c16b4f87c8f949537dc9cfc941a0b0",
+          "weight": 0.0030769230769230774
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-female-young.target",
+          "sha256": "118379f6e8ba9266247fdb8788a20e1df40a239f97ced0b9905bcbcc74f6e820",
+          "weight": 0.09692307692307693
+        },
+        {
+          "path": "Sources/targets/mouth/mouth-lowerlip-volume-incr.target",
+          "sha256": "dbdaf045b00c67bf8672d53bc8cf94eb3e3dea316de6fe18a278f7080564c65d",
+          "weight": 0.28
+        },
+        {
+          "path": "Sources/targets/mouth/mouth-upperlip-volume-incr.target",
+          "sha256": "b124cbd9b9be318264f61a143da603b42e0357ed92b4b6afd1b31a83daaf8568",
+          "weight": 0.3
+        },
+        {
+          "path": "Sources/targets/nose/nose-width2-incr.target",
+          "sha256": "13a9ab9ab6429a5875b47fe90cb33a4d754258af63819ee8913a93d61f312d76",
+          "weight": 0.3
+        }
+      ],
+      "eyes": [
+        {
+          "bone": "eye.L",
+          "centerCm": [
+            2.9828004837036133,
+            -11.398480415344238,
+            166.95993041992188
+          ],
+          "forward": [
+            0.028104783967137337,
+            -0.9995298385620117,
+            0.012255394831299782
+          ],
+          "globeRadiusCm": 1.186084800755213,
+          "irisRadiusCm": 0.6049032483851586,
+          "pupilRadiusCm": 0.24314738415481865,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        },
+        {
+          "bone": "eye.R",
+          "centerCm": [
+            -2.9828004837036133,
+            -11.398480415344238,
+            166.95993041992188
+          ],
+          "forward": [
+            -0.028104783967137337,
+            -0.9995298385620117,
+            0.012255394831299782
+          ],
+          "globeRadiusCm": 1.186084800755213,
+          "irisRadiusCm": 0.6049032483851586,
+          "pupilRadiusCm": 0.24314738415481865,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        }
+      ],
+      "scalp": "bald",
+      "eyebrows": "three-row-surface-fitted-curved-strands-v2",
+      "eyebrowGeometry": {
+        "construction": "three-row-surface-fitted-curved-strands-v2",
+        "rows": 3,
+        "hairsPerSide": [
+          177,
+          171
+        ],
+        "vertices": 10440,
+        "faces": 11136,
+        "rootRadiusCmRange": [
+          0.015037019396634706,
+          0.024989792776328193
+        ],
+        "actualCurveLengthCmRange": [
+          0.2604786257633305,
+          0.487489697986575
+        ],
+        "designedLengthCmRange": [
+          0.25,
+          0.5
+        ],
+        "tubeSides": 6,
+        "curveSamples": 5,
+        "continuousBackingGeometry": false,
+        "deterministicPerIdentity": true
+      },
+      "ageInterpretation": "Static authored adult age; no biological simulation",
+      "fbxSha256": "ae336b9eb0572d5680ccd84edd782fecdd797c1de565209342d7466668d61592"
+    },
+    {
+      "identity": 5,
+      "name": "Orin",
+      "sourceSex": "male",
+      "adultAgeYears": 54,
+      "authoredHeightCm": 176,
+      "sourceArchetypeMix": {
+        "caucasian": 0.55,
+        "asian": 0.25,
+        "african": 0.2
+      },
+      "skinSource": "skin_male",
+      "skinTintLinear": [
+        0.74,
+        0.56,
+        0.41
+      ],
+      "proportions": {
+        "shoulders": 1.12,
+        "hips": 1.04,
+        "waist": 1.12,
+        "depth": 1.14,
+        "legs": -0.035,
+        "arms": 0.99
+      },
+      "faceTargets": {
+        "head/head-square.target": 0.38,
+        "chin/chin-width-incr.target": 0.42,
+        "nose/nose-hump-incr.target": 0.25,
+        "nose/nose-scale-depth-incr.target": 0.2,
+        "mouth/mouth-scale-horiz-incr.target": 0.12
+      },
+      "browColorLinear": [
+        0.095,
+        0.078,
+        0.062
+      ],
+      "irisColorLinear": [
+        0.16,
+        0.11,
+        0.07
+      ],
+      "construction": "hm08-adult-smooth-surface-v2",
+      "vertices": 67456,
+      "faces": 68104,
+      "triangles": 133136,
+      "bodyVertices": 53514,
+      "bodyFaces": 53512,
+      "bones": 163,
+      "seconds": 12,
+      "morphs": [
+        "Blink",
+        "Talk",
+        "Breath",
+        "Smile",
+        "IdentityJaw",
+        "IdentityNose",
+        "IdentityCheek",
+        "IdentityBrow"
+      ],
+      "morphGeometry": {
+        "Blink": {
+          "changedVertices": 4220,
+          "maximumDisplacementCm": 1.0779876621509894,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Talk": {
+          "changedVertices": 3922,
+          "maximumDisplacementCm": 0.4512545243644696,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Breath": {
+          "changedVertices": 1522,
+          "maximumDisplacementCm": 0.234433174860716,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Smile": {
+          "changedVertices": 1155,
+          "maximumDisplacementCm": 0.24593737909721206,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityJaw": {
+          "changedVertices": 3321,
+          "maximumDisplacementCm": 0.19941234531840157,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityNose": {
+          "changedVertices": 3192,
+          "maximumDisplacementCm": 0.135574054878719,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityCheek": {
+          "changedVertices": 3166,
+          "maximumDisplacementCm": 0.17581953320587965,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityBrow": {
+          "changedVertices": 13718,
+          "maximumDisplacementCm": 0.14227294921875,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "materialSlots": [
+        "Skin",
+        "Sclera",
+        "Iris",
+        "Pupil",
+        "Hair"
+      ],
+      "bodyMinimumZCm": 0.0,
+      "skinAlbedoLinear": [
+        0.4745671213251814,
+        0.18259219963276485,
+        0.08659304913140083
+      ],
+      "skinAlbedoMeasurement": {
+        "texture": "skin_male.png",
+        "textureSha256": "3f94f3f6a5cab92dedf5cce392a87332312fc435f1cb44c6e7b897daef9a5fbb",
+        "method": "source-quad-UV-centroid; area-weighted within region; 0.6 face + 0.4 body",
+        "transfer": "IEC-sRGB-piecewise-to-linear-before-tint",
+        "samplePolygons": {
+          "face": 2668,
+          "body": 5766
+        },
+        "faceAlbedoLinear": [
+          0.4608887198894322,
+          0.1508851176050858,
+          0.07093446062281443
+        ],
+        "bodyAlbedoLinear": [
+          0.4950847234788053,
+          0.23015282267428339,
+          0.11008093189428042
+        ],
+        "scope": "Texture appearance estimate, not measured real skin reflectance"
+      },
+      "heightCm": 175.82920837402344,
+      "boundsCm": [
+        [
+          -63.17501449584961,
+          63.17501449584961
+        ],
+        [
+          -40.70273971557617,
+          11.115434646606445
+        ],
+        [
+          0.0,
+          175.82920837402344
+        ]
+      ],
+      "sourceBoundsCm": [
+        [
+          -63.17501449584961,
+          63.17501449584961
+        ],
+        [
+          -40.70273971557617,
+          11.115434646606445
+        ],
+        [
+          0.0,
+          175.82920837402344
+        ]
+      ],
+      "subdivision": {
+        "method": "Catmull-Clark",
+        "levels": 1,
+        "sameOperatorForAllMorphs": true,
+        "UVAndWeightsPreserved": true
+      },
+      "sourceTopology": {
+        "vertices": 13380,
+        "quads": 13378,
+        "fullBody": true,
+        "deletedCoveredFaces": 0,
+        "helperFacesExported": false
+      },
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "macroTargets": {
+        "macrodetails/caucasian-male-young.target": 0.3046153846153847,
+        "macrodetails/caucasian-male-old.target": 0.24538461538461542,
+        "macrodetails/asian-male-young.target": 0.13846153846153847,
+        "macrodetails/asian-male-old.target": 0.11153846153846154,
+        "macrodetails/african-male-young.target": 0.11076923076923079,
+        "macrodetails/african-male-old.target": 0.08923076923076924
+      },
+      "sourceBindings": [
+        {
+          "path": "Sources/targets/chin/chin-width-incr.target",
+          "sha256": "deef506bfe1883d9d4c38667332c9970785226566efbae4724fd3d60c02efcf4",
+          "weight": 0.42
+        },
+        {
+          "path": "Sources/targets/head/head-square.target",
+          "sha256": "001d0d135d964daf4ad99ba46a0f77c5bc2378f04e53c2b5a20242ab19cbf265",
+          "weight": 0.38
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-male-old.target",
+          "sha256": "59ec94956b3525dbb30238d1239b2bce52adc3bfae091f12cd85d2570aa1933c",
+          "weight": 0.08923076923076924
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-male-young.target",
+          "sha256": "894abc1fbb3d28543a51fef16f89d5d4bdf9aa2e1534413339811a3d47818b7d",
+          "weight": 0.11076923076923079
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-male-old.target",
+          "sha256": "36dc5a3a135ded33885e814806b0e3668ca5bf44bddcebdee48ae75ae68bc3d3",
+          "weight": 0.11153846153846154
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-male-young.target",
+          "sha256": "ed2e8c191cb6b87b4a2d97c80486acb2604fa549316c7aa2a738a5d5a14334dc",
+          "weight": 0.13846153846153847
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-male-old.target",
+          "sha256": "b0d2b1d58cba0358af59833740e70229265f7da1c20a11240f4123b7192cfd6d",
+          "weight": 0.24538461538461542
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-male-young.target",
+          "sha256": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5",
+          "weight": 0.3046153846153847
+        },
+        {
+          "path": "Sources/targets/mouth/mouth-scale-horiz-incr.target",
+          "sha256": "ccfc39cca249883ebc46af6f2c96c4130df13a67ebce30a2550af17a48637770",
+          "weight": 0.12
+        },
+        {
+          "path": "Sources/targets/nose/nose-hump-incr.target",
+          "sha256": "87f167e76cc908e8f28fed8623cf55e737f59499e8338cfe78f5d635382a5191",
+          "weight": 0.25
+        },
+        {
+          "path": "Sources/targets/nose/nose-scale-depth-incr.target",
+          "sha256": "6bb03c3065e048d6e9abbcfa58961bfbe1753a307be0d3de477cac6aeaf5f750",
+          "weight": 0.2
+        }
+      ],
+      "eyes": [
+        {
+          "bone": "eye.L",
+          "centerCm": [
+            3.0970067977905273,
+            -13.131564140319824,
+            164.57891845703125
+          ],
+          "forward": [
+            0.05367565155029297,
+            -0.9845805764198303,
+            -0.16649293899536133
+          ],
+          "globeRadiusCm": 1.1840761688733017,
+          "irisRadiusCm": 0.6038788461253839,
+          "pupilRadiusCm": 0.24273561461902685,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        },
+        {
+          "bone": "eye.R",
+          "centerCm": [
+            -3.0970067977905273,
+            -13.131564140319824,
+            164.57891845703125
+          ],
+          "forward": [
+            -0.05367565155029297,
+            -0.9845805764198303,
+            -0.16649293899536133
+          ],
+          "globeRadiusCm": 1.1840761688733017,
+          "irisRadiusCm": 0.6038788461253839,
+          "pupilRadiusCm": 0.24273561461902685,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        }
+      ],
+      "scalp": "bald",
+      "eyebrows": "three-row-surface-fitted-curved-strands-v2",
+      "eyebrowGeometry": {
+        "construction": "three-row-surface-fitted-curved-strands-v2",
+        "rows": 3,
+        "hairsPerSide": [
+          170,
+          174
+        ],
+        "vertices": 10320,
+        "faces": 11008,
+        "rootRadiusCmRange": [
+          0.015071067583707574,
+          0.024979598725974342
+        ],
+        "actualCurveLengthCmRange": [
+          0.2604546356623549,
+          0.48966929113474517
+        ],
+        "designedLengthCmRange": [
+          0.25,
+          0.5
+        ],
+        "tubeSides": 6,
+        "curveSamples": 5,
+        "continuousBackingGeometry": false,
+        "deterministicPerIdentity": true
+      },
+      "ageInterpretation": "Static authored adult age; no biological simulation",
+      "fbxSha256": "98f5ea9c68a0fd578a4b96290a7ac09b0718918d3e1ca10d0235cc631946da6d"
+    },
+    {
+      "identity": 6,
+      "name": "Ivo",
+      "sourceSex": "male",
+      "adultAgeYears": 43,
+      "authoredHeightCm": 188,
+      "sourceArchetypeMix": {
+        "caucasian": 0.85,
+        "asian": 0.1,
+        "african": 0.05
+      },
+      "skinSource": "skin_male",
+      "skinTintLinear": [
+        0.98,
+        0.91,
+        0.86
+      ],
+      "proportions": {
+        "shoulders": 0.98,
+        "hips": 0.94,
+        "waist": 0.9,
+        "depth": 0.94,
+        "legs": 0.035,
+        "arms": 1.05
+      },
+      "faceTargets": {
+        "head/head-oval.target": 0.25,
+        "chin/chin-prominent-incr.target": 0.28,
+        "nose/nose-curve-convex.target": 0.24,
+        "cheek/l-cheek-volume-decr.target": 0.27,
+        "cheek/r-cheek-volume-decr.target": 0.27
+      },
+      "browColorLinear": [
+        0.09,
+        0.066,
+        0.042
+      ],
+      "irisColorLinear": [
+        0.15,
+        0.22,
+        0.25
+      ],
+      "construction": "hm08-adult-smooth-surface-v2",
+      "vertices": 67216,
+      "faces": 67848,
+      "triangles": 132688,
+      "bodyVertices": 53514,
+      "bodyFaces": 53512,
+      "bones": 163,
+      "seconds": 12,
+      "morphs": [
+        "Blink",
+        "Talk",
+        "Breath",
+        "Smile",
+        "IdentityJaw",
+        "IdentityNose",
+        "IdentityCheek",
+        "IdentityBrow"
+      ],
+      "morphGeometry": {
+        "Blink": {
+          "changedVertices": 4216,
+          "maximumDisplacementCm": 1.0518798757293903,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Talk": {
+          "changedVertices": 3931,
+          "maximumDisplacementCm": 0.4512391481467574,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Breath": {
+          "changedVertices": 1522,
+          "maximumDisplacementCm": 0.23443412829643823,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Smile": {
+          "changedVertices": 1164,
+          "maximumDisplacementCm": 0.24593737909721206,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityJaw": {
+          "changedVertices": 3321,
+          "maximumDisplacementCm": 0.19941234531840157,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityNose": {
+          "changedVertices": 3194,
+          "maximumDisplacementCm": 0.13557506468777675,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityCheek": {
+          "changedVertices": 3161,
+          "maximumDisplacementCm": 0.17582025360143727,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityBrow": {
+          "changedVertices": 13470,
+          "maximumDisplacementCm": 0.14227294921875,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "materialSlots": [
+        "Skin",
+        "Sclera",
+        "Iris",
+        "Pupil",
+        "Hair"
+      ],
+      "bodyMinimumZCm": 0.0,
+      "skinAlbedoLinear": [
+        0.6284486970845502,
+        0.297344587857418,
+        0.18184987827971438
+      ],
+      "skinAlbedoMeasurement": {
+        "texture": "skin_male.png",
+        "textureSha256": "3f94f3f6a5cab92dedf5cce392a87332312fc435f1cb44c6e7b897daef9a5fbb",
+        "method": "source-quad-UV-centroid; area-weighted within region; 0.6 face + 0.4 body",
+        "transfer": "IEC-sRGB-piecewise-to-linear-before-tint",
+        "samplePolygons": {
+          "face": 2668,
+          "body": 5766
+        },
+        "faceAlbedoLinear": [
+          0.6101393234899001,
+          0.24610593344123544,
+          0.14909105475569703
+        ],
+        "bodyAlbedoLinear": [
+          0.6559127574765256,
+          0.37420256948169195,
+          0.23098811356574042
+        ],
+        "scope": "Texture appearance estimate, not measured real skin reflectance"
+      },
+      "heightCm": 187.7921142578125,
+      "boundsCm": [
+        [
+          -53.73529052734375,
+          53.735286712646484
+        ],
+        [
+          -36.77287673950195,
+          9.988642692565918
+        ],
+        [
+          0.0,
+          187.7921142578125
+        ]
+      ],
+      "sourceBoundsCm": [
+        [
+          -53.73529052734375,
+          53.735286712646484
+        ],
+        [
+          -36.77287673950195,
+          9.988642692565918
+        ],
+        [
+          0.0,
+          187.7921142578125
+        ]
+      ],
+      "subdivision": {
+        "method": "Catmull-Clark",
+        "levels": 1,
+        "sameOperatorForAllMorphs": true,
+        "UVAndWeightsPreserved": true
+      },
+      "sourceTopology": {
+        "vertices": 13380,
+        "quads": 13378,
+        "fullBody": true,
+        "deletedCoveredFaces": 0,
+        "helperFacesExported": false
+      },
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "macroTargets": {
+        "macrodetails/caucasian-male-young.target": 0.6146153846153846,
+        "macrodetails/caucasian-male-old.target": 0.2353846153846154,
+        "macrodetails/asian-male-young.target": 0.07230769230769231,
+        "macrodetails/asian-male-old.target": 0.027692307692307697,
+        "macrodetails/african-male-young.target": 0.036153846153846154,
+        "macrodetails/african-male-old.target": 0.013846153846153848
+      },
+      "sourceBindings": [
+        {
+          "path": "Sources/targets/cheek/l-cheek-volume-decr.target",
+          "sha256": "527d19395f33c02caf3b32254e78702156cdf63c17e4c0e3dd79cca004fa27be",
+          "weight": 0.27
+        },
+        {
+          "path": "Sources/targets/cheek/r-cheek-volume-decr.target",
+          "sha256": "3a356f2f6434ccefa633981dff1b7866ce1feb8427918f35f81b6adffa4599b5",
+          "weight": 0.27
+        },
+        {
+          "path": "Sources/targets/chin/chin-prominent-incr.target",
+          "sha256": "d2493ca5f69aabeb8557d77a56c49cfcf2062ff90c0cad03073d87990d11448b",
+          "weight": 0.28
+        },
+        {
+          "path": "Sources/targets/head/head-oval.target",
+          "sha256": "a17cd3a600588a344babe520fbd4d4edcb096db3328051fe692dfb997a1a678d",
+          "weight": 0.25
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-male-old.target",
+          "sha256": "59ec94956b3525dbb30238d1239b2bce52adc3bfae091f12cd85d2570aa1933c",
+          "weight": 0.013846153846153848
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-male-young.target",
+          "sha256": "894abc1fbb3d28543a51fef16f89d5d4bdf9aa2e1534413339811a3d47818b7d",
+          "weight": 0.036153846153846154
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-male-old.target",
+          "sha256": "36dc5a3a135ded33885e814806b0e3668ca5bf44bddcebdee48ae75ae68bc3d3",
+          "weight": 0.027692307692307697
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-male-young.target",
+          "sha256": "ed2e8c191cb6b87b4a2d97c80486acb2604fa549316c7aa2a738a5d5a14334dc",
+          "weight": 0.07230769230769231
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-male-old.target",
+          "sha256": "b0d2b1d58cba0358af59833740e70229265f7da1c20a11240f4123b7192cfd6d",
+          "weight": 0.2353846153846154
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-male-young.target",
+          "sha256": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5",
+          "weight": 0.6146153846153846
+        },
+        {
+          "path": "Sources/targets/nose/nose-curve-convex.target",
+          "sha256": "3426e9a53c65962bc75b25aae04759a03e818d708bc5445ffc4dfb812497a7ca",
+          "weight": 0.24
+        }
+      ],
+      "eyes": [
+        {
+          "bone": "eye.L",
+          "centerCm": [
+            3.0670816898345947,
+            -13.282779693603516,
+            176.19039916992188
+          ],
+          "forward": [
+            0.0430162139236927,
+            -0.9881472587585449,
+            -0.14735907316207886
+          ],
+          "globeRadiusCm": 1.1958492009061643,
+          "irisRadiusCm": 0.6098830924621438,
+          "pupilRadiusCm": 0.24514908618576367,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        },
+        {
+          "bone": "eye.R",
+          "centerCm": [
+            -3.0670816898345947,
+            -13.282779693603516,
+            176.19039916992188
+          ],
+          "forward": [
+            -0.0430162139236927,
+            -0.9881472587585449,
+            -0.14735907316207886
+          ],
+          "globeRadiusCm": 1.1958492009061643,
+          "irisRadiusCm": 0.6098830924621438,
+          "pupilRadiusCm": 0.24514908618576367,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        }
+      ],
+      "scalp": "bald",
+      "eyebrows": "three-row-surface-fitted-curved-strands-v2",
+      "eyebrowGeometry": {
+        "construction": "three-row-surface-fitted-curved-strands-v2",
+        "rows": 3,
+        "hairsPerSide": [
+          162,
+          174
+        ],
+        "vertices": 10080,
+        "faces": 10752,
+        "rootRadiusCmRange": [
+          0.015029573710874005,
+          0.02499811989360492
+        ],
+        "actualCurveLengthCmRange": [
+          0.2605963954838266,
+          0.4895041000135622
+        ],
+        "designedLengthCmRange": [
+          0.25,
+          0.5
+        ],
+        "tubeSides": 6,
+        "curveSamples": 5,
+        "continuousBackingGeometry": false,
+        "deterministicPerIdentity": true
+      },
+      "ageInterpretation": "Static authored adult age; no biological simulation",
+      "fbxSha256": "7974cffef5abebb20b4f68bd63916a65a75d469aa186e5262aaffdc8ceb943d6"
+    },
+    {
+      "identity": 7,
+      "name": "Mara",
+      "sourceSex": "female",
+      "adultAgeYears": 62,
+      "authoredHeightCm": 160,
+      "sourceArchetypeMix": {
+        "caucasian": 0.25,
+        "asian": 0.25,
+        "african": 0.5
+      },
+      "skinSource": "skin_female",
+      "skinTintLinear": [
+        0.6,
+        0.44,
+        0.31
+      ],
+      "proportions": {
+        "shoulders": 1.01,
+        "hips": 1.13,
+        "waist": 1.13,
+        "depth": 1.1,
+        "legs": -0.025,
+        "arms": 0.975
+      },
+      "faceTargets": {
+        "head/head-round.target": 0.28,
+        "head/head-fat-incr.target": 0.15,
+        "chin/chin-width-incr.target": 0.22,
+        "nose/nose-scale-depth-incr.target": 0.14,
+        "mouth/mouth-scale-horiz-decr.target": 0.12
+      },
+      "browColorLinear": [
+        0.15,
+        0.13,
+        0.11
+      ],
+      "irisColorLinear": [
+        0.12,
+        0.08,
+        0.04
+      ],
+      "construction": "hm08-adult-smooth-surface-v2",
+      "vertices": 67936,
+      "faces": 68616,
+      "triangles": 134032,
+      "bodyVertices": 53514,
+      "bodyFaces": 53512,
+      "bones": 163,
+      "seconds": 12,
+      "morphs": [
+        "Blink",
+        "Talk",
+        "Breath",
+        "Smile",
+        "IdentityJaw",
+        "IdentityNose",
+        "IdentityCheek",
+        "IdentityBrow"
+      ],
+      "morphGeometry": {
+        "Blink": {
+          "changedVertices": 4220,
+          "maximumDisplacementCm": 0.9274749714438251,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Talk": {
+          "changedVertices": 3924,
+          "maximumDisplacementCm": 0.4512391481467574,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Breath": {
+          "changedVertices": 1522,
+          "maximumDisplacementCm": 0.23443508172828287,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Smile": {
+          "changedVertices": 1165,
+          "maximumDisplacementCm": 0.2459515414264849,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityJaw": {
+          "changedVertices": 3322,
+          "maximumDisplacementCm": 0.199411392567664,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityNose": {
+          "changedVertices": 3194,
+          "maximumDisplacementCm": 0.1355740067923858,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityCheek": {
+          "changedVertices": 3165,
+          "maximumDisplacementCm": 0.1758211329037795,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityBrow": {
+          "changedVertices": 14207,
+          "maximumDisplacementCm": 0.14228820718964685,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "materialSlots": [
+        "Skin",
+        "Sclera",
+        "Iris",
+        "Pupil",
+        "Hair"
+      ],
+      "bodyMinimumZCm": 0.0,
+      "skinAlbedoLinear": [
+        0.42067603031077533,
+        0.15781825995808835,
+        0.07458094204441325
+      ],
+      "skinAlbedoMeasurement": {
+        "texture": "skin_female.png",
+        "textureSha256": "e4547a04bab2244d8ec6bcb1d239f4cddb83f145d4ce2a5c7734ec514c8bebcf",
+        "method": "source-quad-UV-centroid; area-weighted within region; 0.6 face + 0.4 body",
+        "transfer": "IEC-sRGB-piecewise-to-linear-before-tint",
+        "samplePolygons": {
+          "face": 2668,
+          "body": 5766
+        },
+        "faceAlbedoLinear": [
+          0.4197459292234993,
+          0.136992707354311,
+          0.06635530035579569
+        ],
+        "bodyAlbedoLinear": [
+          0.4220711819416894,
+          0.18905658886375434,
+          0.08691940457733958
+        ],
+        "scope": "Texture appearance estimate, not measured real skin reflectance"
+      },
+      "heightCm": 159.76687622070312,
+      "boundsCm": [
+        [
+          -57.250633239746094,
+          57.250633239746094
+        ],
+        [
+          -36.700069427490234,
+          8.821889877319336
+        ],
+        [
+          0.0,
+          159.76687622070312
+        ]
+      ],
+      "sourceBoundsCm": [
+        [
+          -57.250633239746094,
+          57.250633239746094
+        ],
+        [
+          -36.700069427490234,
+          8.821889877319336
+        ],
+        [
+          0.0,
+          159.76687622070312
+        ]
+      ],
+      "subdivision": {
+        "method": "Catmull-Clark",
+        "levels": 1,
+        "sameOperatorForAllMorphs": true,
+        "UVAndWeightsPreserved": true
+      },
+      "sourceTopology": {
+        "vertices": 13380,
+        "quads": 13378,
+        "fullBody": true,
+        "deletedCoveredFaces": 0,
+        "helperFacesExported": false
+      },
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "macroTargets": {
+        "macrodetails/caucasian-female-young.target": 0.1076923076923077,
+        "macrodetails/caucasian-female-old.target": 0.1423076923076923,
+        "macrodetails/asian-female-young.target": 0.1076923076923077,
+        "macrodetails/asian-female-old.target": 0.1423076923076923,
+        "macrodetails/african-female-young.target": 0.2153846153846154,
+        "macrodetails/african-female-old.target": 0.2846153846153846
+      },
+      "sourceBindings": [
+        {
+          "path": "Sources/targets/chin/chin-width-incr.target",
+          "sha256": "deef506bfe1883d9d4c38667332c9970785226566efbae4724fd3d60c02efcf4",
+          "weight": 0.22
+        },
+        {
+          "path": "Sources/targets/head/head-fat-incr.target",
+          "sha256": "075d18cdfea9e781ae0152132bfea97ea9b901ffdece8d5e6866cb1744f10056",
+          "weight": 0.15
+        },
+        {
+          "path": "Sources/targets/head/head-round.target",
+          "sha256": "bd96b745b19432ac838f15438aa87e9002f597e59353861721e12e6da0f2c625",
+          "weight": 0.28
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-female-old.target",
+          "sha256": "c165e7caf01aaf45511ebc78a441c8c73ead13231af1a8c6666941345f088b61",
+          "weight": 0.2846153846153846
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-female-young.target",
+          "sha256": "92d61eeb3c164b421fd5a7c3537ee45e7e1a51de4d49bf312e19c3df2be1d8fc",
+          "weight": 0.2153846153846154
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-female-old.target",
+          "sha256": "1a90cb281df640df55fbce3acd6588f27b28affeb96a7f693f6f038aefc204d8",
+          "weight": 0.1423076923076923
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-female-young.target",
+          "sha256": "095fe79694fa19e1fe98d93009ec116199bd524e081c640351a10eccf2cca1eb",
+          "weight": 0.1076923076923077
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-female-old.target",
+          "sha256": "6560982486c4b1a7a0b1d82b0ad3f09770c16b4f87c8f949537dc9cfc941a0b0",
+          "weight": 0.1423076923076923
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-female-young.target",
+          "sha256": "118379f6e8ba9266247fdb8788a20e1df40a239f97ced0b9905bcbcc74f6e820",
+          "weight": 0.1076923076923077
+        },
+        {
+          "path": "Sources/targets/mouth/mouth-scale-horiz-decr.target",
+          "sha256": "07a9ef160755467a470bd0a1df035143d83ebddbc12e4612e69e93a64644405c",
+          "weight": 0.12
+        },
+        {
+          "path": "Sources/targets/nose/nose-scale-depth-incr.target",
+          "sha256": "6bb03c3065e048d6e9abbcfa58961bfbe1753a307be0d3de477cac6aeaf5f750",
+          "weight": 0.14
+        }
+      ],
+      "eyes": [
+        {
+          "bone": "eye.L",
+          "centerCm": [
+            2.9221231937408447,
+            -13.16412353515625,
+            149.31419372558594
+          ],
+          "forward": [
+            0.03103896602988243,
+            -0.999346137046814,
+            -0.018542366102337837
+          ],
+          "globeRadiusCm": 1.1672684244532991,
+          "irisRadiusCm": 0.5953068964711826,
+          "pupilRadiusCm": 0.23929002701292632,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        },
+        {
+          "bone": "eye.R",
+          "centerCm": [
+            -2.9221231937408447,
+            -13.16412353515625,
+            149.31419372558594
+          ],
+          "forward": [
+            -0.03103896602988243,
+            -0.999346137046814,
+            -0.018542366102337837
+          ],
+          "globeRadiusCm": 1.1672684244532991,
+          "irisRadiusCm": 0.5953068964711826,
+          "pupilRadiusCm": 0.23929002701292632,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        }
+      ],
+      "scalp": "bald",
+      "eyebrows": "three-row-surface-fitted-curved-strands-v2",
+      "eyebrowGeometry": {
+        "construction": "three-row-surface-fitted-curved-strands-v2",
+        "rows": 3,
+        "hairsPerSide": [
+          183,
+          177
+        ],
+        "vertices": 10800,
+        "faces": 11520,
+        "rootRadiusCmRange": [
+          0.01500748464680559,
+          0.02498624158983989
+        ],
+        "actualCurveLengthCmRange": [
+          0.2602070473248123,
+          0.48893592522841806
+        ],
+        "designedLengthCmRange": [
+          0.25,
+          0.5
+        ],
+        "tubeSides": 6,
+        "curveSamples": 5,
+        "continuousBackingGeometry": false,
+        "deterministicPerIdentity": true
+      },
+      "ageInterpretation": "Static authored adult age; no biological simulation",
+      "fbxSha256": "3ade63c9374e885ae094b5e5873ef3756b084482f0532ab84d8a13b8095b58ec"
+    },
+    {
+      "identity": 8,
+      "name": "Neri",
+      "sourceSex": "male",
+      "adultAgeYears": 25,
+      "authoredHeightCm": 173,
+      "sourceArchetypeMix": {
+        "caucasian": 0.15,
+        "asian": 0.7,
+        "african": 0.15
+      },
+      "skinSource": "skin_male",
+      "skinTintLinear": [
+        0.72,
+        0.61,
+        0.51
+      ],
+      "proportions": {
+        "shoulders": 0.96,
+        "hips": 0.99,
+        "waist": 0.93,
+        "depth": 0.96,
+        "legs": 0.01,
+        "arms": 0.99
+      },
+      "faceTargets": {
+        "head/head-triangular.target": 0.28,
+        "chin/chin-width-decr.target": 0.2,
+        "nose/nose-curve-concave.target": 0.15,
+        "mouth/mouth-upperlip-volume-incr.target": 0.12,
+        "cheek/l-cheek-bones-incr.target": 0.28,
+        "cheek/r-cheek-bones-incr.target": 0.28
+      },
+      "browColorLinear": [
+        0.018,
+        0.014,
+        0.011
+      ],
+      "irisColorLinear": [
+        0.09,
+        0.06,
+        0.035
+      ],
+      "construction": "hm08-adult-smooth-surface-v2",
+      "vertices": 67576,
+      "faces": 68232,
+      "triangles": 133360,
+      "bodyVertices": 53514,
+      "bodyFaces": 53512,
+      "bones": 163,
+      "seconds": 12,
+      "morphs": [
+        "Blink",
+        "Talk",
+        "Breath",
+        "Smile",
+        "IdentityJaw",
+        "IdentityNose",
+        "IdentityCheek",
+        "IdentityBrow"
+      ],
+      "morphGeometry": {
+        "Blink": {
+          "changedVertices": 4218,
+          "maximumDisplacementCm": 0.9671783311252122,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Talk": {
+          "changedVertices": 3931,
+          "maximumDisplacementCm": 0.45123952636037423,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Breath": {
+          "changedVertices": 1522,
+          "maximumDisplacementCm": 0.23443460501284524,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "Smile": {
+          "changedVertices": 1159,
+          "maximumDisplacementCm": 0.24596562153287058,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityJaw": {
+          "changedVertices": 3323,
+          "maximumDisplacementCm": 0.1994118689436018,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityNose": {
+          "changedVertices": 3195,
+          "maximumDisplacementCm": 0.1355740067923858,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityCheek": {
+          "changedVertices": 3164,
+          "maximumDisplacementCm": 0.17582077270817104,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        },
+        "IdentityBrow": {
+          "changedVertices": 13830,
+          "maximumDisplacementCm": 0.14227294921875,
+          "weightRange": [
+            0.0,
+            1.0
+          ]
+        }
+      },
+      "materialSlots": [
+        "Skin",
+        "Sclera",
+        "Iris",
+        "Pupil",
+        "Hair"
+      ],
+      "bodyMinimumZCm": 0.0,
+      "skinAlbedoLinear": [
+        0.4617347025307934,
+        0.1985859469311223,
+        0.10762319504532944
+      ],
+      "skinAlbedoMeasurement": {
+        "texture": "skin_male.png",
+        "textureSha256": "3f94f3f6a5cab92dedf5cce392a87332312fc435f1cb44c6e7b897daef9a5fbb",
+        "method": "source-quad-UV-centroid; area-weighted within region; 0.6 face + 0.4 body",
+        "transfer": "IEC-sRGB-piecewise-to-linear-before-tint",
+        "samplePolygons": {
+          "face": 2668,
+          "body": 5766
+        },
+        "faceAlbedoLinear": [
+          0.4491447290460956,
+          0.16452143040279754,
+          0.08844908083979496
+        ],
+        "bodyAlbedoLinear": [
+          0.4806196627578401,
+          0.24968272172360947,
+          0.13638436635363116
+        ],
+        "scope": "Texture appearance estimate, not measured real skin reflectance"
+      },
+      "heightCm": 172.81724548339844,
+      "boundsCm": [
+        [
+          -55.001487731933594,
+          55.00148391723633
+        ],
+        [
+          -36.049842834472656,
+          10.002960205078125
+        ],
+        [
+          0.0,
+          172.81724548339844
+        ]
+      ],
+      "sourceBoundsCm": [
+        [
+          -55.001487731933594,
+          55.00148391723633
+        ],
+        [
+          -36.049842834472656,
+          10.002960205078125
+        ],
+        [
+          0.0,
+          172.81724548339844
+        ]
+      ],
+      "subdivision": {
+        "method": "Catmull-Clark",
+        "levels": 1,
+        "sameOperatorForAllMorphs": true,
+        "UVAndWeightsPreserved": true
+      },
+      "sourceTopology": {
+        "vertices": 13380,
+        "quads": 13378,
+        "fullBody": true,
+        "deletedCoveredFaces": 0,
+        "helperFacesExported": false
+      },
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "macroTargets": {
+        "macrodetails/caucasian-male-young.target": 0.15,
+        "macrodetails/asian-male-young.target": 0.7,
+        "macrodetails/african-male-young.target": 0.15
+      },
+      "sourceBindings": [
+        {
+          "path": "Sources/targets/cheek/l-cheek-bones-incr.target",
+          "sha256": "244ffa39d2d2db94ff15130719346b4cae2236bf2a309c5682eac352da06be50",
+          "weight": 0.28
+        },
+        {
+          "path": "Sources/targets/cheek/r-cheek-bones-incr.target",
+          "sha256": "a393f67acce21568ab832091daadab267685d464492647cb0c4e8cb5af58c4c9",
+          "weight": 0.28
+        },
+        {
+          "path": "Sources/targets/chin/chin-width-decr.target",
+          "sha256": "ac081bd1652c203fc8973f20988a868a423a49f1fe6449cb974727fd46c26af1",
+          "weight": 0.2
+        },
+        {
+          "path": "Sources/targets/head/head-triangular.target",
+          "sha256": "09f898db574e636a35b6d39f455e04bfa0bc0248c89d32ad3c959cdb65b8fd1f",
+          "weight": 0.28
+        },
+        {
+          "path": "Sources/targets/macrodetails/african-male-young.target",
+          "sha256": "894abc1fbb3d28543a51fef16f89d5d4bdf9aa2e1534413339811a3d47818b7d",
+          "weight": 0.15
+        },
+        {
+          "path": "Sources/targets/macrodetails/asian-male-young.target",
+          "sha256": "ed2e8c191cb6b87b4a2d97c80486acb2604fa549316c7aa2a738a5d5a14334dc",
+          "weight": 0.7
+        },
+        {
+          "path": "Sources/targets/macrodetails/caucasian-male-young.target",
+          "sha256": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5",
+          "weight": 0.15
+        },
+        {
+          "path": "Sources/targets/mouth/mouth-upperlip-volume-incr.target",
+          "sha256": "b124cbd9b9be318264f61a143da603b42e0357ed92b4b6afd1b31a83daaf8568",
+          "weight": 0.12
+        },
+        {
+          "path": "Sources/targets/nose/nose-curve-concave.target",
+          "sha256": "30dd70cfdf1ce1c77eabff12b49d238b05a3b36f95f2ba6f64d4b5b059292e58",
+          "weight": 0.15
+        }
+      ],
+      "eyes": [
+        {
+          "bone": "eye.L",
+          "centerCm": [
+            3.008370876312256,
+            -12.472843170166016,
+            161.88272094726562
+          ],
+          "forward": [
+            0.08581356704235077,
+            -0.9833695888519287,
+            -0.16006354987621307
+          ],
+          "globeRadiusCm": 1.181026536086729,
+          "irisRadiusCm": 0.6023235334042317,
+          "pupilRadiusCm": 0.24211043989777942,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        },
+        {
+          "bone": "eye.R",
+          "centerCm": [
+            -3.008370876312256,
+            -12.472843170166016,
+            161.88272094726562
+          ],
+          "forward": [
+            -0.08581356704235077,
+            -0.9833695888519287,
+            -0.16006354987621307
+          ],
+          "globeRadiusCm": 1.181026536086729,
+          "irisRadiusCm": 0.6023235334042317,
+          "pupilRadiusCm": 0.24211043989777942,
+          "irisUV": "disk-centered-0.5-radius-0.5-UV0",
+          "capSurface": "sphere-intersection-ring",
+          "maxScleraReliefCm": 0.009
+        }
+      ],
+      "scalp": "bald",
+      "eyebrows": "three-row-surface-fitted-curved-strands-v2",
+      "eyebrowGeometry": {
+        "construction": "three-row-surface-fitted-curved-strands-v2",
+        "rows": 3,
+        "hairsPerSide": [
+          180,
+          168
+        ],
+        "vertices": 10440,
+        "faces": 11136,
+        "rootRadiusCmRange": [
+          0.015018204915989986,
+          0.024960182542785314
+        ],
+        "actualCurveLengthCmRange": [
+          0.2599991474519509,
+          0.4893214266035348
+        ],
+        "designedLengthCmRange": [
+          0.25,
+          0.5
+        ],
+        "tubeSides": 6,
+        "curveSamples": 5,
+        "continuousBackingGeometry": false,
+        "deterministicPerIdentity": true
+      },
+      "ageInterpretation": "Static authored adult age; no biological simulation",
+      "fbxSha256": "e2d1887106c68a7c7a2336c3d1b1e60c3260b528b121fe8f64ad47b0fab7a43a"
     }
   ]
 }

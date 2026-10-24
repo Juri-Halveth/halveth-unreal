@@ -21,6 +21,7 @@
 #include "Materials/MaterialExpressionCameraPositionWS.h"
 #include "Materials/MaterialExpressionLocalPosition.h"
 #include "Materials/MaterialExpressionPerInstanceCustomData.h"
+#include "Materials/MaterialExpressionVertexInterpolator.h"
 #include "Materials/MaterialExpressionTime.h"
 #include "Materials/MaterialExpressionTextureSample.h"
 #include "Materials/MaterialExpressionTextureCoordinate.h"
@@ -95,11 +96,21 @@ UMaterial* Ground(){
 }
 UMaterial* Leaf(){
     auto* M=Material(TEXT("M_MeadowLeaf"));M->BlendMode=BLEND_Opaque;M->TwoSided=true;M->SetShadingModel(MSM_TwoSidedFoliage);
-    M->MaxWorldPositionOffsetDisplacement=90;
+    // Includes distance collapse of the tallest 24cm blade and small wind.
+    M->MaxWorldPositionOffsetDisplacement=32;
     auto* Color=Node<UMaterialExpressionVertexColor>(M);
-    auto* Rough=Node<UMaterialExpressionConstant>(M);Rough->R=.82;
-    auto* Subsurface=Node<UMaterialExpressionMultiply>(M);Subsurface->A.Expression=Color;Subsurface->ConstB=.42;
-    M->GetEditorOnlyData()->BaseColor.Expression=Color;M->GetEditorOnlyData()->Roughness.Expression=Rough;
+    auto* Vigour=Node<UMaterialExpressionPerInstanceCustomData>(M);Vigour->DataIndex=1;Vigour->ConstDefaultValue=.7f;
+    // These meshes deliberately do not use Nanite; instance data reaches the
+    // pixel material through an explicit vertex interpolator.
+    auto* InterpolatedVigour=Node<UMaterialExpressionVertexInterpolator>(M);InterpolatedVigour->Input.Expression=Vigour;
+    auto* Tint=Node<UMaterialExpressionCustom>(M);Tint->OutputType=CMOT_Float3;Tint->Inputs.Empty();
+    Input(Tint,TEXT("Color"),Color);Input(Tint,TEXT("Vigour"),InterpolatedVigour);
+    Tint->Code=TEXT("return Color.rgb*lerp(float3(1.08,.89,.91),float3(.95,1.0,.98),saturate(Vigour));");
+    auto* Rough=Node<UMaterialExpressionConstant>(M);Rough->R=.87;
+    auto* Specular=Node<UMaterialExpressionConstant>(M);Specular->R=.22;
+    auto* Subsurface=Node<UMaterialExpressionMultiply>(M);Subsurface->A.Expression=Tint;Subsurface->ConstB=.28;
+    M->GetEditorOnlyData()->BaseColor.Expression=Tint;M->GetEditorOnlyData()->Roughness.Expression=Rough;
+    M->GetEditorOnlyData()->Specular.Expression=Specular;
     M->GetEditorOnlyData()->SubsurfaceColor.Expression=Subsurface;
     auto* World=Node<UMaterialExpressionWorldPosition>(M);
     auto* Eye=Node<UMaterialExpressionCameraPositionWS>(M);
@@ -111,46 +122,49 @@ UMaterial* Leaf(){
     Input(Wind,TEXT("World"),World);Input(Wind,TEXT("Eye"),Eye);Input(Wind,TEXT("Local"),Local);
     Input(Wind,TEXT("Time"),Time);Input(Wind,TEXT("Phase"),Random);Input(Wind,TEXT("Height"),Color,4);
     Input(Wind,TEXT("UV"),UV);
-    Wind->Code=TEXT("struct RootedWind {\n")+FString(UTF8_TO_TCHAR(HalvethMeadow::WindHLSL))+TEXT("\n}; RootedWind W; float3 sway=W.HalvethMeadowWind(World,Height,Time,UV.x+Phase*6.2831853); float f=saturate((distance(World.xy,Eye.xy)-1900)/1500); f=f*f*(3-2*f); return sway*(1-f)+float3(0,0,-max(0,Local.z)*f);");
+    Wind->Code=TEXT("struct RootedWind {\n")+FString(UTF8_TO_TCHAR(HalvethMeadow::WindHLSL))+TEXT("\n}; RootedWind W; float3 sway=W.HalvethMeadowWind(World,Height,Time,UV.x+Phase*6.2831853,UV.y); float f=saturate((distance(World.xy,Eye.xy)-1900)/1500); f=f*f*(3-2*f); return sway*(1-f)+float3(0,0,-max(0,Local.z)*f);");
     M->GetEditorOnlyData()->WorldPositionOffset.Expression=Wind;
     M->PostEditChange();bool Changed=false;M->SetMaterialUsage(Changed,MATUSAGE_InstancedStaticMeshes);M->PostEditChange();
     FAssetRegistryModule::AssetCreated(M);return Save(M)?M:nullptr;
 }
 struct MeshData {
-    TArray<FVector3f> Points;TArray<FVector4f> Colors;TArray<int32> Indices;TArray<float> Phases;
-    int32 Point(FVector P,FVector4f C,float Phase=0){Colors.Add(C);Phases.Add(Phase);return Points.Add(FVector3f(P));}
+    TArray<FVector3f> Points;TArray<FVector4f> Colors;TArray<int32> Indices;TArray<float> Phases,Heights;
+    int32 Point(FVector P,FVector4f C,float Phase,float Height){Colors.Add(C);Phases.Add(Phase);Heights.Add(Height);return Points.Add(FVector3f(P));}
     void Tri(int32 A,int32 B,int32 C){Indices.Append({A,B,C});}
 };
 FVector V(HalvethMeadow::Vec P){return FVector(P.x,P.y,P.z);}
 bool Clump(int32 Variant,UMaterial* Material){
     MeshData G;
-    constexpr uint32 BladeCount=128;
+    constexpr uint32 BladeCount=HalvethMeadow::BladesPerClump;
+    int32 Flowers=0;
     for(uint32 I=0;I<BladeCount;I++){
         const auto Blade=HalvethMeadow::MakeBlade(Variant,I);
-        const float Hue=.78f+.3f*float(I%7)/6.f;
+        const int32 Segments=HalvethMeadow::Segments(Blade);
         const int32 Start=G.Points.Num();
-        for(int32 J=0;J<=6;J++){
-            const double T=J/6.;
-            const FVector4f Color(.025f*Hue+.018f*T,.061f*Hue+.055f*T,.007f+.009f*T,float(T));
-            for(int32 Side=-1;Side<=1;Side++){
+        for(int32 J=0;J<Segments;J++){
+            const double T=double(J)/Segments;
+            const auto Albedo=HalvethMeadow::Albedo(Blade,T);
+            const FVector4f Color(float(Albedo.x),float(Albedo.y),float(Albedo.z),float(T));
+            for(int32 Side : {-1,1}){
                 FVector P=V(HalvethMeadow::BladePoint(Blade,T,Side));
-                G.Point(P,Color,float(Blade.phase));
+                G.Point(P,Color,float(Blade.phase),float(Blade.height));
             }
         }
-        for(int32 J=0;J<6;J++)for(int32 S=0;S<2;S++){
-            const int32 A=Start+J*3+S,B=A+1,C=A+3,D=C+1;
-            if(J<5){G.Tri(A,C,B);G.Tri(B,C,D);}else G.Tri(A,C,B);
-        }
-        if(Variant>=2&&(I==7||I==29)){
+        const auto TipColor=HalvethMeadow::Albedo(Blade,1.0);
+        G.Point(V(HalvethMeadow::BladePoint(Blade,1.0,0.0)),
+            FVector4f(float(TipColor.x),float(TipColor.y),float(TipColor.z),1),float(Blade.phase),float(Blade.height));
+        HalvethMeadow::ForEachTriangle(Blade,[&G,Start](int32 A,int32 B,int32 C){G.Tri(Start+A,Start+B,Start+C);});
+        if(Variant>=2&&Blade.form==HalvethMeadow::Form::Tuft&&Flowers<2){
+            Flowers++;
             const FVector Head=V(HalvethMeadow::BladePoint(Blade,1,0));
             const FVector4f Bloom=Variant==2?FVector4f(.66f,.37f,.018f,1):FVector4f(.32f,.045f,.19f,1);
             // Petals are cupped triangles around a real stem, not a camera-facing sprite.
-            const int32 Centre=G.Point(Head,FVector4f(Bloom.X*.8f,Bloom.Y*.8f,Bloom.Z*.8f,1),float(Blade.phase));
+            const int32 Centre=G.Point(Head,FVector4f(Bloom.X*.8f,Bloom.Y*.8f,Bloom.Z*.8f,1),float(Blade.phase),float(Blade.height));
             for(int32 K=0;K<8;K++){
                 const double A=K*2*PI/8,B=(K+.5)*2*PI/8,C=(K+1)*2*PI/8;
-                const int32 P=G.Point(Head+FVector(2.2*FMath::Cos(A),2.2*FMath::Sin(A),.4),Bloom,float(Blade.phase));
-                const int32 Q=G.Point(Head+FVector(4*FMath::Cos(B),4*FMath::Sin(B),1.3),Bloom,float(Blade.phase));
-                const int32 R=G.Point(Head+FVector(2.2*FMath::Cos(C),2.2*FMath::Sin(C),.4),Bloom,float(Blade.phase));
+                const int32 P=G.Point(Head+FVector(1.4*FMath::Cos(A),1.4*FMath::Sin(A),.3),Bloom,float(Blade.phase),float(Blade.height));
+                const int32 Q=G.Point(Head+FVector(2.4*FMath::Cos(B),2.4*FMath::Sin(B),.75),Bloom,float(Blade.phase),float(Blade.height));
+                const int32 R=G.Point(Head+FVector(1.4*FMath::Cos(C),1.4*FMath::Sin(C),.3),Bloom,float(Blade.phase),float(Blade.height));
                 G.Tri(Centre,P,Q);G.Tri(Centre,Q,R);
             }
         }
@@ -162,6 +176,14 @@ bool Clump(int32 Variant,UMaterial* Material){
     FMeshDescription D;FStaticMeshAttributes A(D);A.Register();A.GetVertexInstanceUVs().SetNumChannels(1);
     const auto Group=D.CreatePolygonGroup();TArray<FVertexID> Points;
     for(auto P:G.Points){auto ID=D.CreateVertex();A.GetVertexPositions()[ID]=P;Points.Add(ID);}
+    // Area-weighted shared normals run continuously along the rolled ribbons.
+    // No third vertex column reintroduces a hard longitudinal centre crease.
+    TArray<FVector3f> Normals;Normals.Init(FVector3f::ZeroVector,G.Points.Num());
+    for(int32 I=0;I<G.Indices.Num();I+=3){
+        const FVector3f P=G.Points[G.Indices[I]],Q=G.Points[G.Indices[I+1]],R=G.Points[G.Indices[I+2]];
+        const FVector3f N=FVector3f::CrossProduct(Q-P,R-P);
+        for(int32 J=0;J<3;J++)Normals[G.Indices[I+J]]+=N;
+    }
     for(int32 I=0;I<G.Indices.Num();I+=3){
         const FVector3f P=G.Points[G.Indices[I]],Q=G.Points[G.Indices[I+1]],R=G.Points[G.Indices[I+2]];
         FVector3f Normal=FVector3f::CrossProduct(Q-P,R-P).GetSafeNormal();
@@ -169,8 +191,11 @@ bool Clump(int32 Variant,UMaterial* Material){
         TArray<FVertexInstanceID> Corners;
         for(int32 J=0;J<3;J++){
             const int32 Index=G.Indices[I+J];const auto ID=D.CreateVertexInstance(Points[Index]);Corners.Add(ID);
-            A.GetVertexInstanceNormals()[ID]=Normal;A.GetVertexInstanceColors()[ID]=G.Colors[Index];
-            A.GetVertexInstanceUVs().Set(ID,0,FVector2f(G.Phases[Index],G.Points[Index].Z/80));
+            const FVector3f SmoothNormal=Normals[Index].GetSafeNormal();
+            A.GetVertexInstanceNormals()[ID]=SmoothNormal.IsNearlyZero()?Normal:SmoothNormal;A.GetVertexInstanceColors()[ID]=G.Colors[Index];
+            // UV.x = phase, UV.y = authored whole-blade height in centimetres.
+            // Color alpha retains parametric height for exact root anchoring.
+            A.GetVertexInstanceUVs().Set(ID,0,FVector2f(G.Phases[Index],G.Heights[Index]));
         }
         D.CreatePolygon(Group,Corners);
     }

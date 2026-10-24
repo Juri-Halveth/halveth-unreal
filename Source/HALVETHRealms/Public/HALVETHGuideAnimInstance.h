@@ -18,6 +18,7 @@ public:
     UPROPERTY() TObjectPtr<UAnimSequence> BaseIdle;
     float DesiredSpeed=0,DesiredLookYaw=0,DesiredLookPitch=0;
     bool Speaking=false;
+    bool FreezeAppearancePose=false;
     int32 Identity=1;
     double Time=0,GaitPhase=0;
     float WalkWeight=0,LookYaw=0,LookPitch=0,Gesture=0;
@@ -33,6 +34,6 @@ public:
     int32 PlantSamples=0;
     float GroundCorrections[2]={0,0};
     double HandForward[2]={3,3},WeightShift=0;
-    HalvethMotion::Spring WalkSpring,YawSpring,PitchSpring,GestureSpring,ClothSpring;
+    HalvethMotion::Spring WalkSpring,YawSpring,PitchSpring,GestureSpring;
     HalvethMotion::Spring HandSprings[2],WeightShiftSpring;
 };

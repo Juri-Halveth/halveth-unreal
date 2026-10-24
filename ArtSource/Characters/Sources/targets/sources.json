@@ -1,8 +1,71 @@
 {
-  "recordedAtUtc": "2026-10-04T02:39:10.257193+00:00",
+  "recordedAtUtc": "2026-10-24T19:12:37.284353+00:00",
   "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
   "license": "MakeHuman core graphics CC0; https://static.makehumancommunity.org/about/license.html",
   "targets": [
+    {
+      "path": "cheek/l-cheek-bones-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/cheek/l-cheek-bones-incr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "244ffa39d2d2db94ff15130719346b4cae2236bf2a309c5682eac352da06be50",
+      "bytes": 1519,
+      "vertices": 63,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "cheek/l-cheek-volume-decr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/cheek/l-cheek-volume-decr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "527d19395f33c02caf3b32254e78702156cdf63c17e4c0e3dd79cca004fa27be",
+      "bytes": 3619,
+      "vertices": 194,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "cheek/r-cheek-bones-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/cheek/r-cheek-bones-incr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "a393f67acce21568ab832091daadab267685d464492647cb0c4e8cb5af58c4c9",
+      "bytes": 1514,
+      "vertices": 63,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "cheek/r-cheek-volume-decr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/cheek/r-cheek-volume-decr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "3a356f2f6434ccefa633981dff1b7866ce1feb8427918f35f81b6adffa4599b5",
+      "bytes": 3274,
+      "vertices": 194,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "chin/chin-prominent-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/chin/chin-prominent-incr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "d2493ca5f69aabeb8557d77a56c49cfcf2062ff90c0cad03073d87990d11448b",
+      "bytes": 2338,
+      "vertices": 115,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "chin/chin-width-decr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/chin/chin-width-decr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "ac081bd1652c203fc8973f20988a868a423a49f1fe6449cb974727fd46c26af1",
+      "bytes": 2853,
+      "vertices": 142,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "chin/chin-width-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/chin/chin-width-incr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "deef506bfe1883d9d4c38667332c9970785226566efbae4724fd3d60c02efcf4",
+      "bytes": 3706,
+      "vertices": 198,
+      "license": "CC0-1.0"
+    },
     {
       "path": "head/head-age-incr.target",
       "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/head/head-age-incr.target",
@@ -22,166 +85,175 @@
       ]
     },
     {
-      "path": "chin/chin-width-incr.target",
-      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/chin/chin-width-incr.target",
-      "sha256": "deef506bfe1883d9d4c38667332c9970785226566efbae4724fd3d60c02efcf4",
-      "vertices": 198,
-      "header": [
-        "# This is a target file for MakeHuman",
-        "# ",
-        "# This asset was explicitly released as CC0 in september 2020. The license",
-        "# text for CC0 can be found in the root of this repository.",
-        "#",
-        "# Original copyright (C) 2014 Manuel Bastioni ",
-        "#",
-        "# The copyright was explicitly transfered to other team members in 2016:",
-        "#",
-        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
-      ]
+      "path": "head/head-diamond.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/head/head-diamond.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "7072c718c8476ca38d6758fb7531fd945612d51acdca6555da8a8f770284c41d",
+      "bytes": 11876,
+      "vertices": 679,
+      "license": "CC0-1.0"
     },
     {
-      "path": "chin/chin-prominent-incr.target",
-      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/chin/chin-prominent-incr.target",
-      "sha256": "d2493ca5f69aabeb8557d77a56c49cfcf2062ff90c0cad03073d87990d11448b",
-      "vertices": 115,
-      "header": [
-        "# This is a target file for MakeHuman",
-        "# ",
-        "# This asset was explicitly released as CC0 in september 2020. The license",
-        "# text for CC0 can be found in the root of this repository.",
-        "#",
-        "# Original copyright (C) 2014 Manuel Bastioni ",
-        "#",
-        "# The copyright was explicitly transfered to other team members in 2016:",
-        "#",
-        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
-      ]
+      "path": "head/head-fat-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/head/head-fat-incr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "075d18cdfea9e781ae0152132bfea97ea9b901ffdece8d5e6866cb1744f10056",
+      "bytes": 14473,
+      "vertices": 742,
+      "license": "CC0-1.0"
     },
     {
-      "path": "nose/nose-curve-convex.target",
-      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/nose/nose-curve-convex.target",
-      "sha256": "3426e9a53c65962bc75b25aae04759a03e818d708bc5445ffc4dfb812497a7ca",
-      "vertices": 52,
-      "header": [
-        "# This is a target file for MakeHuman",
-        "# ",
-        "# This asset was explicitly released as CC0 in september 2020. The license",
-        "# text for CC0 can be found in the root of this repository.",
-        "#",
-        "# Original copyright (C) 2014 Manuel Bastioni ",
-        "#",
-        "# The copyright was explicitly transfered to other team members in 2016:",
-        "#",
-        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
-      ]
+      "path": "head/head-oval.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/head/head-oval.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "a17cd3a600588a344babe520fbd4d4edcb096db3328051fe692dfb997a1a678d",
+      "bytes": 36452,
+      "vertices": 2143,
+      "license": "CC0-1.0"
     },
     {
-      "path": "nose/nose-scale-depth-incr.target",
-      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/nose/nose-scale-depth-incr.target",
-      "sha256": "6bb03c3065e048d6e9abbcfa58961bfbe1753a307be0d3de477cac6aeaf5f750",
-      "vertices": 377,
-      "header": [
-        "# This is a target file for MakeHuman",
-        "# ",
-        "# This asset was explicitly released as CC0 in september 2020. The license",
-        "# text for CC0 can be found in the root of this repository.",
-        "#",
-        "# Original copyright (C) 2014 Manuel Bastioni ",
-        "#",
-        "# The copyright was explicitly transfered to other team members in 2016:",
-        "#",
-        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
-      ]
+      "path": "head/head-rectangular.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/head/head-rectangular.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "bbfcbd4d6334df18515e73abb707b8a948adb74e0aba88a728c8e146dd5f4e4b",
+      "bytes": 10633,
+      "vertices": 585,
+      "license": "CC0-1.0"
     },
     {
-      "path": "nose/nose-point-up.target",
-      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/nose/nose-point-up.target",
-      "sha256": "c8d556af4cc6fe5fbf340b1950156fffad3835524a191b47074466f244a92047",
-      "vertices": 77,
-      "header": [
-        "# This is a target file for MakeHuman",
-        "# ",
-        "# This asset was explicitly released as CC0 in september 2020. The license",
-        "# text for CC0 can be found in the root of this repository.",
-        "#",
-        "# Original copyright (C) 2014 Manuel Bastioni ",
-        "#",
-        "# The copyright was explicitly transfered to other team members in 2016:",
-        "#",
-        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
-      ]
+      "path": "head/head-round.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/head/head-round.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "bd96b745b19432ac838f15438aa87e9002f597e59353861721e12e6da0f2c625",
+      "bytes": 32961,
+      "vertices": 1974,
+      "license": "CC0-1.0"
     },
     {
-      "path": "cheek/l-cheek-bones-incr.target",
-      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/cheek/l-cheek-bones-incr.target",
-      "sha256": "244ffa39d2d2db94ff15130719346b4cae2236bf2a309c5682eac352da06be50",
-      "vertices": 63,
-      "header": [
-        "# This is a target file for MakeHuman",
-        "# ",
-        "# This asset was explicitly released as CC0 in september 2020. The license",
-        "# text for CC0 can be found in the root of this repository.",
-        "#",
-        "# Original copyright (C) 2014 Manuel Bastioni ",
-        "#",
-        "# The copyright was explicitly transfered to other team members in 2016:",
-        "#",
-        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
-      ]
+      "path": "head/head-square.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/head/head-square.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "001d0d135d964daf4ad99ba46a0f77c5bc2378f04e53c2b5a20242ab19cbf265",
+      "bytes": 12618,
+      "vertices": 693,
+      "license": "CC0-1.0"
     },
     {
-      "path": "cheek/r-cheek-bones-incr.target",
-      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/cheek/r-cheek-bones-incr.target",
-      "sha256": "a393f67acce21568ab832091daadab267685d464492647cb0c4e8cb5af58c4c9",
-      "vertices": 63,
-      "header": [
-        "# This is a target file for MakeHuman",
-        "# ",
-        "# This asset was explicitly released as CC0 in september 2020. The license",
-        "# text for CC0 can be found in the root of this repository.",
-        "#",
-        "# Original copyright (C) 2014 Manuel Bastioni ",
-        "#",
-        "# The copyright was explicitly transfered to other team members in 2016:",
-        "#",
-        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
-      ]
+      "path": "head/head-triangular.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/head/head-triangular.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "09f898db574e636a35b6d39f455e04bfa0bc0248c89d32ad3c959cdb65b8fd1f",
+      "bytes": 12676,
+      "vertices": 729,
+      "license": "CC0-1.0"
     },
     {
-      "path": "cheek/l-cheek-volume-decr.target",
-      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/cheek/l-cheek-volume-decr.target",
-      "sha256": "527d19395f33c02caf3b32254e78702156cdf63c17e4c0e3dd79cca004fa27be",
-      "vertices": 194,
-      "header": [
-        "# This is a target file for MakeHuman",
-        "# ",
-        "# This asset was explicitly released as CC0 in september 2020. The license",
-        "# text for CC0 can be found in the root of this repository.",
-        "#",
-        "# Original copyright (C) 2014 Manuel Bastioni ",
-        "#",
-        "# The copyright was explicitly transfered to other team members in 2016:",
-        "#",
-        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
-      ]
+      "path": "macrodetails/african-female-old.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/african-female-old.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "c165e7caf01aaf45511ebc78a441c8c73ead13231af1a8c6666941345f088b61",
+      "bytes": 408823,
+      "vertices": 19158,
+      "license": "CC0-1.0"
     },
     {
-      "path": "cheek/r-cheek-volume-decr.target",
-      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/cheek/r-cheek-volume-decr.target",
-      "sha256": "3a356f2f6434ccefa633981dff1b7866ce1feb8427918f35f81b6adffa4599b5",
-      "vertices": 194,
-      "header": [
-        "# This is a target file for MakeHuman",
-        "# ",
-        "# This asset was explicitly released as CC0 in september 2020. The license",
-        "# text for CC0 can be found in the root of this repository.",
-        "#",
-        "# Original copyright (C) 2014 Manuel Bastioni ",
-        "#",
-        "# The copyright was explicitly transfered to other team members in 2016:",
-        "#",
-        "# Copyright (C) 2020 Data Collection AB, https://www.datacollection.se"
-      ]
+      "path": "macrodetails/african-female-young.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/african-female-young.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "92d61eeb3c164b421fd5a7c3537ee45e7e1a51de4d49bf312e19c3df2be1d8fc",
+      "bytes": 411735,
+      "vertices": 19158,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "macrodetails/african-male-old.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/african-male-old.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "59ec94956b3525dbb30238d1239b2bce52adc3bfae091f12cd85d2570aa1933c",
+      "bytes": 411367,
+      "vertices": 19158,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "macrodetails/african-male-young.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/african-male-young.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "894abc1fbb3d28543a51fef16f89d5d4bdf9aa2e1534413339811a3d47818b7d",
+      "bytes": 406170,
+      "vertices": 19150,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "macrodetails/asian-female-old.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/asian-female-old.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "1a90cb281df640df55fbce3acd6588f27b28affeb96a7f693f6f038aefc204d8",
+      "bytes": 426301,
+      "vertices": 19150,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "macrodetails/asian-female-young.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/asian-female-young.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "095fe79694fa19e1fe98d93009ec116199bd524e081c640351a10eccf2cca1eb",
+      "bytes": 435553,
+      "vertices": 19150,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "macrodetails/asian-male-old.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/asian-male-old.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "36dc5a3a135ded33885e814806b0e3668ca5bf44bddcebdee48ae75ae68bc3d3",
+      "bytes": 427966,
+      "vertices": 19150,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "macrodetails/asian-male-young.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/asian-male-young.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "ed2e8c191cb6b87b4a2d97c80486acb2604fa549316c7aa2a738a5d5a14334dc",
+      "bytes": 421040,
+      "vertices": 19150,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "macrodetails/caucasian-female-old.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/caucasian-female-old.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "6560982486c4b1a7a0b1d82b0ad3f09770c16b4f87c8f949537dc9cfc941a0b0",
+      "bytes": 408930,
+      "vertices": 19156,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "macrodetails/caucasian-female-young.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/caucasian-female-young.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "118379f6e8ba9266247fdb8788a20e1df40a239f97ced0b9905bcbcc74f6e820",
+      "bytes": 420559,
+      "vertices": 19150,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "macrodetails/caucasian-male-old.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/caucasian-male-old.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "b0d2b1d58cba0358af59833740e70229265f7da1c20a11240f4123b7192cfd6d",
+      "bytes": 400125,
+      "vertices": 19158,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "macrodetails/caucasian-male-young.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/caucasian-male-young.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5",
+      "bytes": 396479,
+      "vertices": 19150,
+      "license": "CC0-1.0"
     },
     {
       "path": "macrodetails/universal-male-young-averagemuscle-averageweight.target",
@@ -190,10 +262,104 @@
       "vertices": 0
     },
     {
-      "path": "macrodetails/caucasian-male-young.target",
-      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/macrodetails/caucasian-male-young.target",
-      "sha256": "70e228ba7164737dae664454394536fc5935fa48d333c1a97d77e2dc6eacc5f5",
-      "vertices": 19150
+      "path": "mouth/mouth-lowerlip-volume-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/mouth/mouth-lowerlip-volume-incr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "dbdaf045b00c67bf8672d53bc8cf94eb3e3dea316de6fe18a278f7080564c65d",
+      "bytes": 3585,
+      "vertices": 187,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "mouth/mouth-scale-horiz-decr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/mouth/mouth-scale-horiz-decr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "07a9ef160755467a470bd0a1df035143d83ebddbc12e4612e69e93a64644405c",
+      "bytes": 12644,
+      "vertices": 838,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "mouth/mouth-scale-horiz-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/mouth/mouth-scale-horiz-incr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "ccfc39cca249883ebc46af6f2c96c4130df13a67ebce30a2550af17a48637770",
+      "bytes": 15657,
+      "vertices": 1004,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "mouth/mouth-upperlip-volume-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/mouth/mouth-upperlip-volume-incr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "b124cbd9b9be318264f61a143da603b42e0357ed92b4b6afd1b31a83daaf8568",
+      "bytes": 3600,
+      "vertices": 168,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "nose/nose-curve-concave.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/nose/nose-curve-concave.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "30dd70cfdf1ce1c77eabff12b49d238b05a3b36f95f2ba6f64d4b5b059292e58",
+      "bytes": 1906,
+      "vertices": 70,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "nose/nose-curve-convex.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/nose/nose-curve-convex.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "3426e9a53c65962bc75b25aae04759a03e818d708bc5445ffc4dfb812497a7ca",
+      "bytes": 1459,
+      "vertices": 52,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "nose/nose-hump-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/nose/nose-hump-incr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "87f167e76cc908e8f28fed8623cf55e737f59499e8338cfe78f5d635382a5191",
+      "bytes": 6836,
+      "vertices": 414,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "nose/nose-point-up.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/nose/nose-point-up.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "c8d556af4cc6fe5fbf340b1950156fffad3835524a191b47074466f244a92047",
+      "bytes": 1672,
+      "vertices": 77,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "nose/nose-scale-depth-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/nose/nose-scale-depth-incr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "6bb03c3065e048d6e9abbcfa58961bfbe1753a307be0d3de477cac6aeaf5f750",
+      "bytes": 5762,
+      "vertices": 377,
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "nose/nose-width2-incr.target",
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/data/targets/nose/nose-width2-incr.target",
+      "sourceCommit": "a8bc2d54ff0ac92e78ff71431b1023eda42bf482",
+      "sha256": "13a9ab9ab6429a5875b47fe90cb33a4d754258af63819ee8913a93d61f312d76",
+      "bytes": 2000,
+      "vertices": 90,
+      "license": "CC0-1.0"
     }
-  ]
+  ],
+  "adultMacroContract": {
+    "ageEndpointsYears": {
+      "young": 25,
+      "old": 90
+    },
+    "minimumAuthoredAgeYears": 25,
+    "noBabyOrChildTargets": true,
+    "interpretation": "Authored static adult appearance; no biological simulation or inferred real-person age",
+    "reference": "https://raw.githubusercontent.com/makehumancommunity/makehuman/a8bc2d54ff0ac92e78ff71431b1023eda42bf482/makehuman/apps/human.py"
+  }
 }

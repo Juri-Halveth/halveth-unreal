@@ -61,6 +61,7 @@ public:
     bool VerifyGuidePatrol() const;
     FVector GetGuidePosition(int32 Identity) const;
     AHALVETHGuideCharacter* GetGuideCharacter(int32 Identity) const;
+    void EnableAppearanceStudio();
     bool VerifyGroundDynamics() const;
     bool VerifySkyDynamics() const;
     double GetSkyClockUnix() const { return SkyClockUnix; }
@@ -141,6 +142,7 @@ private:
     TMap<int32, FVector> ReadablePositions;
     int32 CurrentRealm = 0;
     float Elapsed = 0;
+    bool AppearanceStudio=false;
     float LoveRemaining = 0;
     FLinearColor Accent = FLinearColor(0.9f, 0.08f, 0.22f);
 

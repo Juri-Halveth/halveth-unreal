@@ -18,6 +18,8 @@
 #include "SceneView.h"
 #include "ConvexVolume.h"
 #include "HALVETHTissueComponent.h"
+#include "HumanAppearance.h"
+#include "HumanAppearanceRuntime.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "IAnimationBudgetAllocator.h"
 #include "SkeletalMeshComponentBudgeted.h"
@@ -150,9 +152,10 @@ void AHALVETHLivingWorld::RefreshBodies(){
         }
         if(!Resident.guard&&(Distance<2.||(R==0&&FMath::Abs(At.X-2500)<180&&At.Y>-1530&&At.Y<-820)))continue;
         if(!Supported(At))continue;
-        const TCHAR* AssetNames[]={TEXT("Scarlet"),TEXT("Lucinet"),TEXT("Rachel")};const FString Asset=AssetNames[Resident.guard?1:Resident.seed%3];
+        const auto Appearance=HalvethAppearance::traits(Resident.seed);
+        const FString Asset=UTF8_TO_TCHAR(HalvethAppearance::Models[Appearance.model]);
         auto* BodyMesh=LoadObject<USkeletalMesh>(nullptr,*(TEXT("/Game/Characters/")+Asset+TEXT(".")+Asset));if(!BodyMesh)continue;
-        const double Scale=1.+(int32(Resident.seed%13)-6)*.008;
+        const double Scale=Appearance.heightScale;
         const auto Bounds=BodyMesh->GetBounds();
         const double Radius=FMath::Max(250.,(Bounds.Origin.Size()+Bounds.SphereRadius)*Scale+94.15);
         Seen=Visibility(At,Radius);Distance=FVector::Dist2D(At,P->GetActorLocation())/100.;
@@ -163,12 +166,13 @@ void AHALVETHLivingWorld::RefreshBodies(){
         auto* Actor=GetWorld()->SpawnActor<AHALVETHCitizen>(At,FRotator(0,Pose.yawDegrees,0),Params);if(!Actor)continue;
         FHALVETHResidentBody B;B.Id=Choices[I].Id;B.Actor=Actor;B.Origin=Actor->GetActorLocation();B.Goal=B.Origin;
         auto* Mesh=Actor->GetMesh();Mesh->SetSkeletalMeshAsset(BodyMesh);
+        HalvethAppearanceRuntime::Apply(Mesh,Resident.seed);
         Mesh->SetAnimationMode(EAnimationMode::AnimationBlueprint);Mesh->SetAnimInstanceClass(UHALVETHGuideAnimInstance::StaticClass());
         Mesh->SetRelativeScale3D(FVector(Scale));Mesh->VisibilityBasedAnimTickOption=EVisibilityBasedAnimTickOption::OnlyTickPoseWhenRendered;
         double GaitError=-1,IdleError=-1;
         if(auto* Motion=Cast<UHALVETHGuideAnimInstance>(Mesh->GetAnimInstance())){
             Motion->BaseIdle=LoadObject<UAnimSequence>(nullptr,*(TEXT("/Game/Characters/")+Asset+TEXT("Idle.")+Asset+TEXT("Idle")));
-            Motion->Identity=int32(Resident.seed%3)+1;Motion->CruiseSpeed=110;
+            Motion->Identity=int32(Appearance.model)+1;Motion->CruiseSpeed=110;
             Motion->Time=Pose.idleSeconds;Motion->GaitPhase=Pose.gaitPhase;
             Motion->ResponseSeconds=.14+double((Resident.seed>>16)%15)/100.;
             GaitError=FMath::Abs(Motion->GaitPhase-Pose.gaitPhase);IdleError=FMath::Abs(Motion->Time-Pose.idleSeconds);
@@ -236,10 +240,23 @@ void AHALVETHLivingWorld::AdvanceBodies(float Dt){
             Motion->BodyLoad=FMath::Clamp(double(Motion->DesiredSpeed)/390.,0.,1.);
             Motion->BodyBreathPhase=Time*(1.35+double(Resident.seed%31)/100.)+Resident.seed%19;
             Motion->BodyHeartPhase=Time*6.+Resident.seed%23;
-            if(P&&Seen){const FVector Local=Mesh->GetComponentTransform().InverseTransformVectorNoScale(P->GetActorLocation()+FVector(0,0,45)-Mesh->GetComponentLocation());Motion->DesiredLookYaw=FMath::Clamp(FMath::Atan2(FVector::DotProduct(Local,Motion->Right),FVector::DotProduct(Local,Motion->Forward)),-.65,.65);}
-            else Motion->DesiredLookYaw=0;
+            if(P&&Seen){
+                FVector View=P->GetPawnViewLocation();FRotator ViewRotation;
+                if(auto* Controller=GetWorld()->GetFirstPlayerController())Controller->GetPlayerViewPoint(View,ViewRotation);
+                const FVector Eyes=(Mesh->GetBoneLocation(TEXT("eye_L"))+Mesh->GetBoneLocation(TEXT("eye_R")))*.5;
+                const FVector Local=Mesh->GetComponentTransform().InverseTransformVectorNoScale(View-Eyes);
+                Motion->DesiredLookYaw=FMath::Clamp(FMath::Atan2(FVector::DotProduct(Local,Motion->Right),FVector::DotProduct(Local,Motion->Forward)),-.65,.65);
+                Motion->DesiredLookPitch=FMath::Clamp(FMath::Atan2(Local.Z,Local.Size2D()),-.3,.3);
+            }else {Motion->DesiredLookYaw=0;Motion->DesiredLookPitch=0;}
         }
-        if(B.Label){B.Label->SetVisibility(P&&Distance<450);if(P)B.Label->SetWorldRotation((P->GetActorLocation()-B.Label->GetComponentLocation()).Rotation());}
+        if(B.Label){
+            FVector View=P?P->GetPawnViewLocation():FVector::ZeroVector;FRotator Rotation;
+            if(auto* Controller=GetWorld()->GetFirstPlayerController())Controller->GetPlayerViewPoint(View,Rotation);
+            const FVector To=B.Label->GetComponentLocation()-View;
+            const bool Focus=P&&Distance<260&&FVector::DotProduct(To.GetSafeNormal(),Rotation.Vector())>.94;
+            B.Label->SetText(FText::FromString(TEXT("Ansprechen [E]")));B.Label->SetWorldSize(7);
+            B.Label->SetVisibility(Focus);if(Focus)B.Label->SetWorldRotation((-To).Rotation());
+        }
     }
 }
 void AHALVETHLivingWorld::ApplyNotice(HalvethLife::Event Event,AHALVETHCharacter* P){
