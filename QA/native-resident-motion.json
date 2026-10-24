@@ -2598,5 +2598,74 @@
     "Analytical C1 contact checks assume flat ground, constant speed and constant blend weight; native samples do not prove those conditions globally",
     "No full cloth simulation or universal natural motion claim",
     "Earlier meadow package and running game preserved in separate checkout"
-  ]
+  ],
+  "installedPackage": {
+    "schema": "halveth.astral-local-package.v2",
+    "builtAt": "2026-10-24T15:38:07.4514178Z",
+    "sourceDigest": "E2BC4B869A580D3735EFB7AFBBDA3D169724430F7B4211B76CEA17F6C749B1F2",
+    "launcherSha256": "AB3F1C19FFED772018B938DAC66ADEAB425CBAAF76A52245098B45D749D8B134",
+    "binarySha256": "2DFA08EA9864DB4098FFD38C788F80A1E2E906A418C9B257AFB8D73AC1447689",
+    "cookedPayload": [
+      {
+        "name": "global.ucas",
+        "bytes": 3215952,
+        "sha256": "51C727CEFBE005380836D4AFD521BD32BA28A31BB4320CC0C77C7A552AED0456"
+      },
+      {
+        "name": "global.utoc",
+        "bytes": 794,
+        "sha256": "2C24D7CE52C94FB22E6C44AE226A646EC9D5885F437CC53A0114FF223CB86386"
+      },
+      {
+        "name": "HALVETHRealms-Windows.pak",
+        "bytes": 11234937,
+        "sha256": "3C97F591A873AE0AB7DF7378BEACBBBC3AC945595A363ABDB06478DBDA45BB2C"
+      },
+      {
+        "name": "HALVETHRealms-Windows.ucas",
+        "bytes": 363414288,
+        "sha256": "BAEE3387815B2B88ED78EB0CB7D92E55F4945B1FA24FFD0557C5D83B6925DA54"
+      },
+      {
+        "name": "HALVETHRealms-Windows.utoc",
+        "bytes": 277957,
+        "sha256": "C7144E4F5049DBDA80BE5AFC04C883193FD067CEB2033D23DA51AE5CB1C24CED"
+      }
+    ],
+    "distribution": "LOCAL_DEVELOPMENT_ONLY"
+  },
+  "installedPackageWitness": {
+    "recordedAt": "2026-10-24T15:51:38.365373+00:00",
+    "log": ".local/resident-installed-motion.log",
+    "logSha256": "0da931b44f37a456aced97fbdcb6de49e8ff545d4f9de89bb2d8a0845524cd1e",
+    "armSamples": 240,
+    "elbowRangeDeg": [
+      25.0,
+      44.99003
+    ],
+    "idleMissingSamples": 0,
+    "threeLoadedSkeletalAnimations": true,
+    "gravityDropPassed": true,
+    "sourceDigestMatchesMediaPackage": true,
+    "cookedPayloadMatchesMediaPackage": true,
+    "binaryMatchesMediaPackage": false,
+    "limit": "A subsequent explicit Build run relinked the binary. Media remain bound to their original package; current executable was separately rendered and sampled."
+  },
+  "supportingDownloadFix": {
+    "path": "experiments/void-native/scripts/assets.py",
+    "sha256": "2087dfd8f0bf632735d957c2dffef984dee5378d09540203be793b6ee39d8736",
+    "scope": "Only atomic publication is serialized to prevent simultaneous Windows renames onto one target; input validation, budgets, hashes and cleanup unchanged",
+    "tests": "Existing50Python tests pass locally with1knownWindowslinkskip; same-target concurrent test passes64additionalrepetitions. FirstCIrevision exposed this Windowsrace; corrected PR workflow subsequently succeeded."
+  },
+  "startRoute": {
+    "entry": "Start-Astralis.cmd",
+    "desktopShortcut": "HALVETH Portal Garden.lnk",
+    "target": "Separate resident-motion checkout",
+    "backupVerified": true,
+    "cachedNativeProbe": ".local/resident-cached-probe.log",
+    "cachedNativeProbeSha256": "52975ef4a5ea6259b0ef944d743d0d0c030cdcbb60078198038970be8e258977",
+    "missingEngineSentinelUsed": true,
+    "result": "ASTRAL_NATIVE_PROBE result=PASS",
+    "normalUIClaim": "Shortcut metadata and native packaged execution checked separately; active older play window requires restart for new executable."
+  }
 }
