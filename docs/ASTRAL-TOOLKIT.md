@@ -25,8 +25,9 @@ Anwendung geerbter Modulsuchpfad den Hashvergleich nicht verhindert.
 Beim ersten Start baut der Helfer bei Bedarf das Paket. Dafür werden dieselben
 UE-5.8-/Windows-C++-Voraussetzungen und vorhandenen Assetquellen wie im
 Hauptprojekt verwendet. Spätere Starts vergleichen den Quellfingerprint.
-Das aktuelle lokale Entwicklungspaket liegt unter `.local/astral-sky-package/Windows`.
-Der Vorgänger unter `.local/astral-package/Windows` bleibt getrennt erhalten.
+Das aktuelle lokale Entwicklungspaket liegt unter `.local/living-world-package/Windows`.
+Die Vorgänger unter `.local/astral-sky-package/Windows` und
+`.local/astral-package/Windows` bleiben getrennt erhalten.
 
 - WASD/Maus: gehen und schauen; Leertaste: springen.
 - Der Blick kann den Zenit und Nadir durchqueren. Die Kamerarotation bleibt als
@@ -42,10 +43,13 @@ Der Vorgänger unter `.local/astral-package/Windows` bleibt getrennt erhalten.
 - **E** am aufgeschlagenen Buch: den vorhandenen Buchleser öffnen.
 - **B**: vorhandene Bibliothek; **Q**: Zauber wählen, **linke Maustaste**: wirken.
   Ein erfolgreicher Zauber aktiviert kurz den räumlichen Fokus.
-- Nach der dritten Ringausrichtung **J**: Levitation beginnen oder beenden.
+- **J**: Levitation jederzeit beginnen oder beenden, auch im Innenraum.
   WASD und Blickrichtung steuern; Leertaste steigt, Strg sinkt, Shift beschleunigt.
   Die kurze räumliche Spur folgt ausschließlich gemessenen Spielerpositionen.
   Sie wird nach 1,2 Sekunden entfernt und bei einem Teleportsprung verworfen.
+- **E** bei einem Bewohner: ansprechen. Die [Bewohnerlogik](LIVING-WORLD.md)
+  verbindet Blickkontakt, verschiedene Antworten, Tagesroutinen und eine
+  Verwarnung für zu schnellen Flug unmittelbar neben Menschen.
 
 Der Fokus ist ein Artefakt vor der Kamera. Anatomische Spielerhände sind in
 diesem Schritt noch nicht vorhanden. Der Übergang versetzt die Spielfigur an

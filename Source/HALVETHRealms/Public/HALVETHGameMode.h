@@ -5,6 +5,7 @@
 #include "HALVETHGameMode.generated.h"
 
 class AHALVETHRealmWorld;
+class AHALVETHLivingWorld;
 
 UCLASS(Config=Game)
 class HALVETHREALMS_API AHALVETHGameMode : public AGameModeBase
@@ -16,6 +17,7 @@ public:
     virtual void Tick(float DeltaSeconds) override;
     UPROPERTY(Config, EditAnywhere, Category="HALVETH") int32 WorldSeed = 127;
     AHALVETHRealmWorld* GetRealmWorld() const { return RealmWorld; }
+    AHALVETHLivingWorld* GetLivingWorld() const {return LivingWorld;}
     bool Travel(int32 Destination);
     void Interact(APawn* Pawn);
     void CastLove();
@@ -26,6 +28,7 @@ public:
     void Notify(const FString& Text);
 private:
     UPROPERTY() TObjectPtr<AHALVETHRealmWorld> RealmWorld;
+    UPROPERTY() TObjectPtr<AHALVETHLivingWorld> LivingWorld;
     int32 QualityIndex = 1;
     float MessageRemaining = 0;
     FString Message;

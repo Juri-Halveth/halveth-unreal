@@ -2,6 +2,7 @@
 #include "HALVETHCharacter.h"
 #include "HALVETHPlayerController.h"
 #include "HALVETHViewProbe.h"
+#include "HALVETHLivingWorld.h"
 #include "HALVETHAdventureComponent.h"
 #include "HALVETHKnowledgeComponent.h"
 #include "HALVETHTrainingTarget.h"
@@ -85,6 +86,7 @@ void AHALVETHGameMode::BeginPlay()
     int32 RequestedQuality = SavedQualityProfile(GEngine ? GEngine->GetGameUserSettings() : nullptr);
     FParse::Value(FCommandLine::Get(), TEXT("HalvethQuality="), RequestedQuality);
     ApplyQuality(FMath::Clamp(RequestedQuality, 0, 2), false);
+    if(!FParse::Param(FCommandLine::Get(),TEXT("HalvethLivingOff"))){LivingWorld=GetWorld()->SpawnActor<AHALVETHLivingWorld>();if(LivingWorld)LivingWorld->Initialize(RealmWorld,static_cast<uint32>(WorldSeed));}
     if(FParse::Param(FCommandLine::Get(),TEXT("HalvethViewProbe"))||FParse::Param(FCommandLine::Get(),TEXT("HalvethNightCapture")))GetWorld()->SpawnActor<AHALVETHViewProbe>();
     Notify(TEXT("Welcome home. B opens your living library. E gathers, speaks or enters a portal. L sends LOVE."));
 }
@@ -100,6 +102,7 @@ bool AHALVETHGameMode::Travel(int32 Destination)
     if (!RealmWorld || TravelCooldown > 0 || !HalvethLayout::CanTravel(RealmWorld->GetCurrentRealm(), Destination)) return false;
     if (auto* Pawn = Cast<AHALVETHCharacter>(UGameplayStatics::GetPlayerPawn(this, 0)))
         if (Pawn->GetAdventure()) Pawn->GetAdventure()->ClearTransientEffects();
+    if(LivingWorld)LivingWorld->PrepareRealmChange();
     RealmWorld->BuildRealm(Destination, static_cast<uint32>(WorldSeed));
     TravelCooldown = 0.65f;
     if (auto* Pawn = Cast<AHALVETHCharacter>(UGameplayStatics::GetPlayerPawn(this, 0)))

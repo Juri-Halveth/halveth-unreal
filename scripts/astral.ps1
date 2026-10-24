@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidateSet('Build','Play','Probe','Capture','ViewProbe','NightCapture')][string]$Mode='Play',
+    [ValidateSet('Build','Play','Probe','Capture','ViewProbe','NightCapture','LivingProbe','LivingCapture')][string]$Mode='Play',
     [string]$EngineRoot='C:\Program Files\Epic Games\UE_5.8'
 )
 $ErrorActionPreference='Stop'
@@ -10,8 +10,8 @@ if($PSVersionTable.PSEdition -eq 'Desktop'){
     Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility\Microsoft.PowerShell.Utility.psd1') -ErrorAction Stop
 }
 $astralRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
-$package=Join-Path $astralRoot '.local\astral-sky-package\Windows'
-$receipt=Join-Path $astralRoot '.local\astral-sky-build.json'
+$package=Join-Path $astralRoot '.local\living-world-package\Windows'
+$receipt=Join-Path $astralRoot '.local\living-world-build.json'
 function SourceDigest {
     $inputs=@(Get-ChildItem -LiteralPath (Join-Path $astralRoot 'Source'),(Join-Path $astralRoot 'Config') -Recurse -File)
     $inputs+=Get-Item -LiteralPath (Join-Path $astralRoot 'HALVETHRealms.uproject')
@@ -40,7 +40,7 @@ if($Mode -eq 'Build' -or -not $current){
         & $bash (Join-Path $astralRoot 'GARDEN.sh') prepare
         if($LASTEXITCODE -ne 0){throw 'Native Vorbereitung fehlgeschlagen.'}
     } finally {$env:GARDEN_ENGINE=$oldEngine}
-    $archive=[IO.Path]::GetFullPath((Join-Path $astralRoot '.local\astral-sky-package'))
+    $archive=[IO.Path]::GetFullPath((Join-Path $astralRoot '.local\living-world-package'))
     if(-not $archive.StartsWith($astralRoot+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)){throw 'Paketpfad liegt außerhalb des Projekts.'}
     & (Join-Path $EngineRoot 'Engine\Build\BatchFiles\RunUAT.bat') BuildCookRun "-project=$(Join-Path $astralRoot 'HALVETHRealms.uproject')" -noP4 -platform=Win64 -clientconfig=Development -build -cook -stage -pak -archive -nodebuginfo "-archivedirectory=$archive" '-UbtArgs=-MaxParallelActions=2 -NoUBA' -unattended
     if($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $exe) -or -not (Test-Path -LiteralPath $innerExe)){throw 'Windows-Paketbau fehlgeschlagen.'}
@@ -58,11 +58,13 @@ if($Mode -eq 'Probe'){$arguments+=@('-HalvethAstralProbe','-NullRHI')}
 if($Mode -eq 'Capture'){$arguments+=@('-HalvethAstralCapture','-HalvethSkyUnix=1791133200','-RenderOffscreen')}
 if($Mode -eq 'ViewProbe'){$arguments+=@('-HalvethViewProbe','-NullRHI')}
 if($Mode -eq 'NightCapture'){$arguments+=@('-HalvethNightCapture','-HalvethSkyUnix=1792790700','-RenderOffscreen')}
+if($Mode -eq 'LivingProbe'){$arguments+=@('-HalvethLivingProbe','-NullRHI')}
+if($Mode -eq 'LivingCapture'){$arguments+=@('-HalvethLivingCapture','-HalvethSkyUnix=1791115200','-RenderOffscreen')}
 $process=Start-Process -FilePath $innerExe -ArgumentList $arguments -WorkingDirectory $package -WindowStyle Hidden -PassThru
 if(-not $process.WaitForExit(120000)){$process.Kill();throw "Die isolierte Prüfung hat das Zeitlimit überschritten: $log"}
 if($process.ExitCode -ne 0){throw "Native Prüfung fehlgeschlagen: $log"}
-$predicate=switch($Mode){'Probe'{'ASTRAL_NATIVE_PROBE result=PASS'}'Capture'{'ASTRAL_CAPTURE result=PASS'}'ViewProbe'{'HALVETH_VIEW_PROBE result=PASS'}'NightCapture'{'HALVETH_NIGHT_CAPTURE result=PASS'}}
+$predicate=switch($Mode){'Probe'{'ASTRAL_NATIVE_PROBE result=PASS'}'Capture'{'ASTRAL_CAPTURE result=PASS'}'ViewProbe'{'HALVETH_VIEW_PROBE result=PASS'}'NightCapture'{'HALVETH_NIGHT_CAPTURE result=PASS'}'LivingProbe'{'LIVING_NATIVE_PROBE result=PASS'}'LivingCapture'{'LIVING_NATIVE_PROBE result=PASS'}}
 if(-not (Select-String -LiteralPath $log -Pattern $predicate -Quiet)){throw "Der aktuelle Lauf enthält keinen PASS-Beleg: $log"}
-Select-String -LiteralPath $log -Pattern 'ASTRAL_TRAVERSAL|ASTRAL_BOOK_PROBE|ASTRAL_FLIGHT_PROBE|ASTRAL_NATIVE_PROBE|ASTRAL_FRAME_SAMPLE|ASTRAL_CAPTURE result=|HALVETH_VIEW_|HALVETH_NIGHT_|GARDEN_ANGULAR_STARS|GARDEN_SKY_AUDIT' | ForEach-Object {$_.Line}
+Select-String -LiteralPath $log -Pattern 'ASTRAL_TRAVERSAL|ASTRAL_BOOK_PROBE|ASTRAL_FLIGHT_PROBE|ASTRAL_NATIVE_PROBE|ASTRAL_FRAME_SAMPLE|ASTRAL_CAPTURE result=|HALVETH_VIEW_|HALVETH_NIGHT_|GARDEN_ANGULAR_STARS|GARDEN_SKY_AUDIT|LIVING_' | ForEach-Object {$_.Line}
 Write-Output "Laufbeleg: $log"
 exit 0

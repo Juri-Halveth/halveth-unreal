@@ -19,6 +19,8 @@ public:
     void ResetToSpawn();
     bool ToggleAstralFlight();
     bool IsAstralFlying() const {return bAstralFlight;}
+    bool IsCivicHeld() const {return CivicHoldRemaining>0;}
+    void ApplyCivicHold(float Seconds);
     bool IsHelpVisible() const { return bHelpVisible; }
     bool IsCreditsVisible() const { return bCreditsVisible; }
     int32 GetReaderPanel() const { return ReaderPanel; }
@@ -33,6 +35,8 @@ private:
     bool bCreditsVisible = false;
     int32 ReaderPanel = 0;
     bool bAstralFlight=false,bFlightAscend=false,bFlightDescend=false;
+    float CivicHoldRemaining=0;
+    bool bHoldHover=false;
     void FlightToggle();
     void StopJumpOrAscend();
     void StopDescend();

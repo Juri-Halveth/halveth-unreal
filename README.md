@@ -5,7 +5,7 @@
 Der neue [Astralbereich und seine Werkzeuge](docs/ASTRAL-TOOLKIT.md) ergänzen das
 native Startgebiet um eine massive Steintreppe, eine Pforte mit drei
 ausrichtbaren Ringen, eine obere Archivterrasse, ein lesbares Buch sowie
-freischaltbare Levitation mit einer Spur aus der tatsächlichen Flugbahn.
+frei verfügbare Levitation mit einer Spur aus der tatsächlichen Flugbahn.
 Durch die geöffnete Pforte erscheint eine zusätzliche, an die Spielerkamera
 gebundene Live-Ansicht des Archivs.
 `Start-Astralis.cmd` baut bei Bedarf das lokale Windows-Paket und startet es.
@@ -27,6 +27,16 @@ aufeinander abgestimmt. `Start-Astralis.cmd` verwendet das neue lokale Paket,
 während das vorherige Paket getrennt erhalten bleibt.
 
 ![Nachtansicht aus dem korrigierten nativen Windows-Paket](Preview/NIGHT_GATE.png)
+
+Der nächste [Bewohner- und Flugschritt](docs/LIVING-WORLD.md) verbindet freie
+Levitation in Außen- und Innenräumen mit lokalen Bewohnern, verschiedenen
+Antworten und einer Verwarnung durch sichtfähige Wachen. Ein Register mit
+4.096 Zuständen wird getrennt von höchstens 18 körperlich dargestellten
+Bewohnern verwaltet. Das ist ein begrenzter, lokal berechneter Spielablauf;
+eine vollständig bevölkerte Welt oder eine mit Morrowind verglichene
+fünffache Bevölkerung ist damit noch nicht erreicht.
+
+![Bewohner und kurzer Fangimpuls im nativen Funktionstest](Preview/LIVING_WARNING_HOLD.png)
 
 ---
 
