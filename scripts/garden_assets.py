@@ -15,12 +15,13 @@ GENERATED = [f'Content/Garden/Terrain_R{i}.uasset' for i in range(4)] + [
 SOURCES = ['Source/HALVETHRealms/Public/GardenField.h',
            'Source/HALVETHRealmsEditor/Private/GardenPrepareCommandlet.cpp',
            'Source/HALVETHRealmsEditor/Private/GardenCharactersCommandlet.cpp',
-           'Source/HALVETHRealms/Public/TissueField.h']
+           'Source/HALVETHRealms/Public/TissueField.h','Source/HALVETHRealms/Public/SkinLayerShading.h']
 CHARACTERS = ['Scarlet', 'Lucinet', 'Rachel', 'Tala', 'Orin', 'Ivo', 'Mara', 'Neri']
 CHARACTER_INPUTS = [f'ArtSource/Characters/{name}.fbx' for name in CHARACTERS] + [
     'ArtSource/Characters/skin_female.png', 'ArtSource/Characters/skin_male.png',
     'ArtSource/Characters/cloth_weave.png', 'ArtSource/Characters/cloth_normal.png',
-    'ArtSource/Characters/characters.json']
+    'ArtSource/Characters/characters.json','ArtSource/Characters/skin_layers.json']
+CHARACTER_INPUTS += [f'ArtSource/Characters/{name}_skin_layers.png' for name in CHARACTERS]
 CHARACTER_ASSETS = [f'Content/Characters/{name}{suffix}.uasset'
     for name in CHARACTERS for suffix in ['', '_Skeleton', 'Idle']] + [
     'Content/Characters/skin_female.uasset', 'Content/Characters/skin_male.uasset',
@@ -28,6 +29,7 @@ CHARACTER_ASSETS = [f'Content/Characters/{name}{suffix}.uasset'
     f'Content/Characters/{name}_{material}.uasset' for name in CHARACTERS
     for material in ['Skin','Hair','Sclera','Iris','Pupil','SkinProfile']]
 CHARACTER_ASSETS += ['Content/Characters/M_TissueFieldProbe.uasset','Content/Characters/M_AppearanceBackdrop.uasset']
+CHARACTER_ASSETS += [f'Content/Characters/{name}_skin_layers.uasset' for name in CHARACTERS]
 BOUND = GENERATED + SOURCES + ['Content/Materials/M_HalvethSurface.uasset',
     'Content/VOID/M_Terrain.uasset', 'Content/VOID/M_Water.uasset','Source/HALVETHRealms/Public/GardenSoil.h'] + CHARACTER_INPUTS + CHARACTER_ASSETS
 GEOMETRY_BINDINGS = GENERATED + SOURCES[:2] + ['Content/Materials/M_HalvethSurface.uasset',
@@ -54,6 +56,14 @@ def bootstrap():
     missing = [rel for rel in CHARACTER_INPUTS if not (ROOT/rel).is_file()]
     if missing:
         raise SystemExit('Required CC0/own character sources are missing: '+', '.join(missing))
+    layers=json.loads((ROOT/'ArtSource/Characters/skin_layers.json').read_text())
+    if [c['name'] for c in layers['characters']] != CHARACTERS:
+        raise SystemExit('Skin layer catalogue differs from the eight bound bodies.')
+    for c in layers['characters']:
+        if (c['mask'] != c['name']+'_skin_layers.png'
+            or sha(ROOT/'ArtSource/Characters'/(c['name']+'.fbx')) != c['sourceFbxSha256']
+            or sha(ROOT/'ArtSource/Characters'/c['mask']) != c['maskSha256']):
+            raise SystemExit('Skin layer source changed; regenerate bound masks for '+c['name'])
     if not (ROOT/'Content/VOID/M_Terrain.uasset').is_file():
         options = [ROOT/'experiments/void-native', ROOT.parent/'HALVETH_VOID_UNREAL']
         if os.environ.get('GARDEN_VOID_ROOT'):

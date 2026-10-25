@@ -32,26 +32,27 @@ void AHALVETHGameMode::RunAppearanceCapture(float Dt){
     auto* PC=GetWorld()->GetFirstPlayerController();if(!P||!PC||!RealmWorld)return;
     MotionElapsed+=Dt;if(MotionElapsed<6)return;
     const double T=MotionElapsed-6;
-    const bool Studio=FParse::Param(FCommandLine::Get(),TEXT("HalvethAppearanceStudio"));
-    const int32 FinalStage=Studio?4:10;
+    const bool bLayerInspection=FParse::Param(FCommandLine::Get(),TEXT("HalvethSkinLayersCapture"));
+    const bool Studio=bLayerInspection||FParse::Param(FCommandLine::Get(),TEXT("HalvethAppearanceStudio"));
+    const int32 FinalStage=bLayerInspection?16:Studio?4:10;
     const int32 Stage=FMath::Min(FinalStage,FMath::FloorToInt(T/2.));
-    const int32 ModelIndex=Studio?0:Stage;
-    const FString Folder=FPaths::ProjectDir()/(Studio?TEXT("Preview/AppearanceStudio"):TEXT("Preview/Appearance"));
+    const int32 ModelIndex=bLayerInspection?Stage/2:Studio?0:Stage;
+    const FString Folder=FPaths::ProjectDir()/(bLayerInspection?TEXT("Preview/SkinLayers"):Studio?TEXT("Preview/AppearanceStudio"):TEXT("Preview/Appearance"));
     if(MotionStage!=Stage){
         MotionStage=Stage;P->DisableInput(PC);PC->SetIgnoreLookInput(true);PC->SetIgnoreMoveInput(true);
         P->GetCharacterMovement()->SetMovementMode(MOVE_Flying);ApplyQuality(1,false);
         if(auto* HUD=PC->GetHUD())HUD->bShowHUD=false;
         if(Stage==FinalStage){
             P->SetAppearanceInspectionFov(0);
-            FFileHelper::SaveStringToFile(MotionTiming,*(FPaths::ProjectDir()/(Studio?TEXT("QA/appearance-studio-frames.tsv"):TEXT("QA/appearance-frames.tsv"))));
-            UE_LOG(LogTemp,Display,TEXT("APPEARANCE_CAPTURE_COMPLETE subjects=%d environment_views=%d requested_frames=%d quality=1 fixture=true studio=%d aesthetic_acceptance=HUMAN_REVIEW"),Studio?1:8,Studio?0:2,MotionFrame,Studio);
+            FFileHelper::SaveStringToFile(MotionTiming,*(FPaths::ProjectDir()/(bLayerInspection?TEXT("QA/skin-layer-frames.tsv"):Studio?TEXT("QA/appearance-studio-frames.tsv"):TEXT("QA/appearance-frames.tsv"))));
+            UE_LOG(LogTemp,Display,TEXT("APPEARANCE_CAPTURE_COMPLETE subjects=%d environment_views=%d requested_frames=%d quality=1 fixture=true studio=%d skin_layers=%d aesthetic_acceptance=HUMAN_REVIEW"),bLayerInspection?8:Studio?1:8,Studio?0:2,MotionFrame,Studio,bLayerInspection);
             bMotionCapture=false;FPlatformMisc::RequestExit(false);return;
         }
         auto* Subject=RealmWorld->GetGuideCharacter(1);if(!Subject){bMotionCapture=false;FPlatformMisc::RequestExitWithStatus(false,6);return;}
         // This is a material/pose inspection, with explicit mesh replacement.
         // Normal walking and the shared live field are captured separately.
         if(auto* Tissue=Subject->FindComponentByClass<UHALVETHTissueComponent>())Tissue->SuspendForAppearanceInspection();
-        if(Stage<8){
+        if(bLayerInspection||Stage<8){
             const FString Name=UTF8_TO_TCHAR(HalvethAppearance::Models[ModelIndex]);
             const FString Path=TEXT("/Game/Characters/")+Name+TEXT(".")+Name;
             auto* Mesh=Subject->GetMesh();auto* Source=LoadObject<USkeletalMesh>(nullptr,*Path);
@@ -70,15 +71,17 @@ void AHALVETHGameMode::RunAppearanceCapture(float Dt){
             Subject->SetActorRotation(FRotator(0,0,0));
             if(Studio){
                 RealmWorld->EnableAppearanceStudio();
-                const float Amount=Stage==0?0.f:Stage==1?.04f:Stage==2?.08f:.2f;
+                const float Amount=bLayerInspection?.08f:Stage==0?0.f:Stage==1?.04f:Stage==2?.08f:.2f;
                 for(int32 Slot=0;Slot<Mesh->GetNumMaterials();Slot++){
                     float Existing;if(!Mesh->GetMaterial(Slot)||!Mesh->GetMaterial(Slot)->GetScalarParameterValue(FMaterialParameterInfo(TEXT("SkinScatter")),Existing))continue;
                     auto* Material=Mesh->CreateDynamicMaterialInstance(Slot);
                     Material->SetScalarParameterValue(TEXT("SkinScatter"),Amount);
                     Material->SetScalarParameterValue(TEXT("SkinRoughnessBias"),0.f);
                     Material->SetScalarParameterValue(TEXT("TissueEnabled"),0);
+                    if(bLayerInspection)Material->SetScalarParameterValue(TEXT("MakeupStrength"),Stage%2?.85f:0.f);
                 }
-                UE_LOG(LogTemp,Display,TEXT("APPEARANCE_STUDIO_PARAMETERS stage=%d skin_scatter=%.3f roughness_bias=0 same_subject_seed=7919 pose_time=0 gait=0 gaze_yaw_pitch=0 blink=0 talk=0 breath=.25 tissue_field=disabled"),Stage,Amount);
+                UE_LOG(LogTemp,Display,TEXT("APPEARANCE_STUDIO_PARAMETERS stage=%d skin_scatter=%.3f roughness_bias=0 subject_seed=%u pose_time=0 gait=0 gaze_yaw_pitch=0 blink=0 talk=0 breath=.25 tissue_field=disabled"),Stage,Amount,7919u*uint32(ModelIndex+1));
+                if(bLayerInspection)UE_LOG(LogTemp,Display,TEXT("SKIN_LAYER_CONTROL model=%s strength=%.3f scatter=.08 micro_strength=1 camera=held pose=held all_other_parameters=held"),*Name,Stage%2?.85f:0.f);
             }
             UE_LOG(LogTemp,Display,TEXT("APPEARANCE_SUBJECT model=%s adult=true wardrobe=removed fixture=true"),*Name);
         }
@@ -86,7 +89,7 @@ void AHALVETHGameMode::RunAppearanceCapture(float Dt){
     }
     auto* Subject=RealmWorld->GetGuideCharacter(1);if(!Subject)return;
     const FVector Base=Subject->GetMesh()->GetComponentLocation();
-    if(Stage<8){
+    if(bLayerInspection||Stage<8){
         P->SetAppearanceInspectionFov(30);
         const FVector Head=(Subject->GetMesh()->GetBoneLocation(TEXT("eye_L"))+Subject->GetMesh()->GetBoneLocation(TEXT("eye_R")))*.5;
         // Front + slightly oblique view in the SAME world lighting as normal play.
@@ -109,7 +112,7 @@ void AHALVETHGameMode::RunAppearanceCapture(float Dt){
     // One settled screenshot per cut, after >1 second of TAA and skin warm-up.
     if(T-Stage*2.>=1.25&&MotionFrame<=Stage){
         const TCHAR* StudioNames[]={TEXT("studio-no-sss.png"),TEXT("studio-scatter04.png"),TEXT("studio-scatter08.png"),TEXT("studio-scatter20.png")};
-        const FString Name=Studio?FString(StudioNames[Stage]):Stage<8?FString::Printf(TEXT("portrait-%s.png"),UTF8_TO_TCHAR(HalvethAppearance::Models[Stage]))
+        const FString Name=bLayerInspection?FString::Printf(TEXT("layers-%s-%s.png"),UTF8_TO_TCHAR(HalvethAppearance::Models[ModelIndex]),Stage%2?TEXT("on"):TEXT("off")):Studio?FString(StudioNames[Stage]):Stage<8?FString::Printf(TEXT("portrait-%s.png"),UTF8_TO_TCHAR(HalvethAppearance::Models[Stage]))
             :Stage==8?TEXT("world-body.png"):TEXT("meadow-ground.png");
         FScreenshotRequest::RequestScreenshot(Folder/Name,false,false);
         int32 Width=0,Height=0;PC->GetViewportSize(Width,Height);

@@ -1,0 +1,428 @@
+{
+  "schema": "halveth.anatomical-skin-layers.v1",
+  "operator": "rest-local-bone-ellipsoids-to-skin-UV-barycentric-v1",
+  "channels": [
+    "lips",
+    "cheeks",
+    "upper_eyelids",
+    "oily_zones"
+  ],
+  "resolution": [
+    2048,
+    2048
+  ],
+  "dataSpace": "LINEAR_UNORM8",
+  "coordinateContract": "FBX local centimetres; UV V upwards; PNG row 0 top",
+  "sourceGeometry": "Existing eight adult FBX files remain byte-for-byte unchanged",
+  "license": "CC0-1.0 for generated masks derived from CC0 geometry; MIT generator",
+  "characters": [
+    {
+      "name": "Scarlet",
+      "sourceFbxSha256": "e927a131e211ec7303afc2296bc4f9299f0d1cde7ddda6da9c789f613dd13a04",
+      "mask": "Scarlet_skin_layers.png",
+      "maskSha256": "e962ed425b0b824034c941ae65e9ca9ad2f5195f887f469ff1d44e8719f7b486",
+      "landmarksCm": {
+        "eyes": [
+          [
+            2.9929606914520264,
+            -11.797107696533203,
+            159.5664520263672
+          ],
+          [
+            -2.9929606914520264,
+            -11.797107696533203,
+            159.5664520263672
+          ]
+        ],
+        "mouth": [
+          -3.617965166824097e-13,
+          -15.237977981567383,
+          154.69332122802734
+        ],
+        "lipRadii": [
+          2.064312702417934,
+          1.7957764148712159,
+          0.7079345703125001
+        ],
+        "scale": 0.9976535638173422,
+        "eyeMid": [
+          0.0,
+          -11.797107696533203,
+          159.5664520263672
+        ]
+      },
+      "nonzeroPixelCountsAbove8": [
+        3087,
+        18480,
+        20050,
+        11041
+      ],
+      "maxima": [
+        254,
+        236,
+        248,
+        252
+      ],
+      "rasterisedSkinTriangles": 6650,
+      "bounds": "Only front face; no world-space lookup",
+      "anatomicalScope": "Authored cosmetic zones, not biological measurements"
+    },
+    {
+      "name": "Lucinet",
+      "sourceFbxSha256": "58b46f09290c027be12bf4982a55c8e8bc31dad09b162be595fe683ec2b4b042",
+      "mask": "Lucinet_skin_layers.png",
+      "maskSha256": "72e41741d9f9a88fd8cf6db5ae86be7dd965f4d8b1f69cddd3f9094011bc0f45",
+      "landmarksCm": {
+        "eyes": [
+          [
+            3.0644869804382324,
+            -13.362541198730469,
+            172.5845947265625
+          ],
+          [
+            -3.0644869804382324,
+            -13.362541198730469,
+            172.5845947265625
+          ]
+        ],
+        "mouth": [
+          -5.240788272103947e-13,
+          -16.618260383605957,
+          166.707275390625
+        ],
+        "lipRadii": [
+          2.2795571386805995,
+          1.8386921882629395,
+          1.066064453125
+        ],
+        "scale": 1.0214956601460774,
+        "eyeMid": [
+          0.0,
+          -13.362541198730469,
+          172.5845947265625
+        ]
+      },
+      "nonzeroPixelCountsAbove8": [
+        4357,
+        14183,
+        20088,
+        12256
+      ],
+      "maxima": [
+        253,
+        247,
+        250,
+        253
+      ],
+      "rasterisedSkinTriangles": 6584,
+      "bounds": "Only front face; no world-space lookup",
+      "anatomicalScope": "Authored cosmetic zones, not biological measurements"
+    },
+    {
+      "name": "Rachel",
+      "sourceFbxSha256": "4f27cef7498f21543f0ca3162e2e76b9faa5ca11dcb460ff109e81e4b5065452",
+      "mask": "Rachel_skin_layers.png",
+      "maskSha256": "8a82755fcfe2cc7f60dd9b3dfe8d0af8ecbe7820b7d8ec11fc025f5039c76a11",
+      "landmarksCm": {
+        "eyes": [
+          [
+            3.029689311981201,
+            -12.312292098999023,
+            153.97998046875
+          ],
+          [
+            -3.029690742492676,
+            -12.312299728393555,
+            153.97998046875
+          ]
+        ],
+        "mouth": [
+          4.535697785781369e-14,
+          -15.507462978363037,
+          148.9689483642578
+        ],
+        "lipRadii": [
+          2.0874416530132995,
+          1.8178140163421632,
+          0.7141601562500001
+        ],
+        "scale": 1.0098966757456462,
+        "eyeMid": [
+          -7.152557373046875e-07,
+          -12.312295913696289,
+          153.97998046875
+        ]
+      },
+      "nonzeroPixelCountsAbove8": [
+        3313,
+        17779,
+        20525,
+        12687
+      ],
+      "maxima": [
+        254,
+        236,
+        246,
+        252
+      ],
+      "rasterisedSkinTriangles": 6748,
+      "bounds": "Only front face; no world-space lookup",
+      "anatomicalScope": "Authored cosmetic zones, not biological measurements"
+    },
+    {
+      "name": "Tala",
+      "sourceFbxSha256": "ae336b9eb0572d5680ccd84edd782fecdd797c1de565209342d7466668d61592",
+      "mask": "Tala_skin_layers.png",
+      "maskSha256": "4357e8d5b414064abb96b5f12fa9add683952328a982bb5863f3778fa8b1dc98",
+      "landmarksCm": {
+        "eyes": [
+          [
+            2.9828031063079834,
+            -11.398486137390137,
+            166.95994567871094
+          ],
+          [
+            -2.982801914215088,
+            -11.398473739624023,
+            166.95994567871094
+          ]
+        ],
+        "mouth": [
+          1.742781402047991e-13,
+          -15.299652099609375,
+          162.22415161132812
+        ],
+        "lipRadii": [
+          2.161919224262508,
+          1.7896815061569213,
+          0.595458984375
+        ],
+        "scale": 0.9942675034205118,
+        "eyeMid": [
+          5.960464477539062e-07,
+          -11.39847993850708,
+          166.95994567871094
+        ]
+      },
+      "nonzeroPixelCountsAbove8": [
+        2969,
+        18846,
+        20047,
+        12692
+      ],
+      "maxima": [
+        254,
+        230,
+        247,
+        251
+      ],
+      "rasterisedSkinTriangles": 6810,
+      "bounds": "Only front face; no world-space lookup",
+      "anatomicalScope": "Authored cosmetic zones, not biological measurements"
+    },
+    {
+      "name": "Orin",
+      "sourceFbxSha256": "98f5ea9c68a0fd578a4b96290a7ac09b0718918d3e1ca10d0235cc631946da6d",
+      "mask": "Orin_skin_layers.png",
+      "maskSha256": "5323b4e11d09a19db5a55ac6a78f5057d1da5aabe2be71d259722d6cee9f76af",
+      "landmarksCm": {
+        "eyes": [
+          [
+            3.0970046520233154,
+            -13.131413459777832,
+            164.57994079589844
+          ],
+          [
+            -3.0970046520233154,
+            -13.131413459777832,
+            164.57994079589844
+          ]
+        ],
+        "mouth": [
+          1.4615039213572434e-11,
+          -16.236330032348633,
+          158.50143432617188
+        ],
+        "lipRadii": [
+          2.2993215322267977,
+          1.8582027912139891,
+          0.981787109375
+        ],
+        "scale": 1.0323348840077717,
+        "eyeMid": [
+          0.0,
+          -13.131413459777832,
+          164.57994079589844
+        ]
+      },
+      "nonzeroPixelCountsAbove8": [
+        3977,
+        13771,
+        20146,
+        11751
+      ],
+      "maxima": [
+        253,
+        249,
+        250,
+        253
+      ],
+      "rasterisedSkinTriangles": 6358,
+      "bounds": "Only front face; no world-space lookup",
+      "anatomicalScope": "Authored cosmetic zones, not biological measurements"
+    },
+    {
+      "name": "Ivo",
+      "sourceFbxSha256": "7974cffef5abebb20b4f68bd63916a65a75d469aa186e5262aaffdc8ceb943d6",
+      "mask": "Ivo_skin_layers.png",
+      "maskSha256": "9217c2d5b0aa1a0d80ab56c04a87d68f7c31f26595dfcd51e3449340d399d46c",
+      "landmarksCm": {
+        "eyes": [
+          [
+            3.0670838356018066,
+            -13.282910346984863,
+            176.18960571289062
+          ],
+          [
+            -3.0670852661132812,
+            -13.282913208007812,
+            176.18959045410156
+          ]
+        ],
+        "mouth": [
+          -5.8349792012024615e-12,
+          -16.326400756835938,
+          170.26642608642578
+        ],
+        "lipRadii": [
+          2.198143690833553,
+          1.8402507305145264,
+          1.0904541015625
+        ],
+        "scale": 1.0223615169525146,
+        "eyeMid": [
+          -7.152557373046875e-07,
+          -13.282911777496338,
+          176.1895980834961
+        ]
+      },
+      "nonzeroPixelCountsAbove8": [
+        4361,
+        14173,
+        19994,
+        11915
+      ],
+      "maxima": [
+        253,
+        249,
+        250,
+        255
+      ],
+      "rasterisedSkinTriangles": 6484,
+      "bounds": "Only front face; no world-space lookup",
+      "anatomicalScope": "Authored cosmetic zones, not biological measurements"
+    },
+    {
+      "name": "Mara",
+      "sourceFbxSha256": "3ade63c9374e885ae094b5e5873ef3756b084482f0532ab84d8a13b8095b58ec",
+      "mask": "Mara_skin_layers.png",
+      "maskSha256": "622daf321f341a064c443cc03908d729e681994d944d4f15122c12d53b7964a1",
+      "landmarksCm": {
+        "eyes": [
+          [
+            2.922128677368164,
+            -13.164114952087402,
+            149.314208984375
+          ],
+          [
+            -2.922126531600952,
+            -13.164113998413086,
+            149.314208984375
+          ]
+        ],
+        "mouth": [
+          1.3180304287221944e-13,
+          -16.69421100616455,
+          144.5024185180664
+        ],
+        "lipRadii": [
+          1.9924158751966614,
+          1.753276562690735,
+          0.6568115234375
+        ],
+        "scale": 0.974042534828186,
+        "eyeMid": [
+          1.0728836059570312e-06,
+          -13.164114475250244,
+          149.314208984375
+        ]
+      },
+      "nonzeroPixelCountsAbove8": [
+        2892,
+        18474,
+        20270,
+        12477
+      ],
+      "maxima": [
+        254,
+        231,
+        245,
+        250
+      ],
+      "rasterisedSkinTriangles": 6756,
+      "bounds": "Only front face; no world-space lookup",
+      "anatomicalScope": "Authored cosmetic zones, not biological measurements"
+    },
+    {
+      "name": "Neri",
+      "sourceFbxSha256": "e2d1887106c68a7c7a2336c3d1b1e60c3260b528b121fe8f64ad47b0fab7a43a",
+      "mask": "Neri_skin_layers.png",
+      "maskSha256": "d9ab412509df82d59df5a224c2a9902fb6c2c51ee0754edec4c408f595f233ed",
+      "landmarksCm": {
+        "eyes": [
+          [
+            3.0083677768707275,
+            -12.472970008850098,
+            161.88186645507812
+          ],
+          [
+            -3.0083677768707275,
+            -12.472970008850098,
+            161.88186645507812
+          ]
+        ],
+        "mouth": [
+          4.683704053938531e-13,
+          -15.26843786239624,
+          156.2980728149414
+        ],
+        "lipRadii": [
+          2.159304296971093,
+          1.8050206661224366,
+          1.0687255859375
+        ],
+        "scale": 1.0027892589569092,
+        "eyeMid": [
+          0.0,
+          -12.472970008850098,
+          161.88186645507812
+        ]
+      },
+      "nonzeroPixelCountsAbove8": [
+        4610,
+        13024,
+        21065,
+        13471
+      ],
+      "maxima": [
+        252,
+        239,
+        239,
+        246
+      ],
+      "rasterisedSkinTriangles": 7136,
+      "bounds": "Only front face; no world-space lookup",
+      "anatomicalScope": "Authored cosmetic zones, not biological measurements"
+    }
+  ]
+}

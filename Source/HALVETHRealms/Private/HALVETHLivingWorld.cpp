@@ -240,14 +240,10 @@ void AHALVETHLivingWorld::AdvanceBodies(float Dt){
             Motion->BodyLoad=FMath::Clamp(double(Motion->DesiredSpeed)/390.,0.,1.);
             Motion->BodyBreathPhase=Time*(1.35+double(Resident.seed%31)/100.)+Resident.seed%19;
             Motion->BodyHeartPhase=Time*6.+Resident.seed%23;
-            if(P&&Seen){
-                FVector View=P->GetPawnViewLocation();FRotator ViewRotation;
-                if(auto* Controller=GetWorld()->GetFirstPlayerController())Controller->GetPlayerViewPoint(View,ViewRotation);
-                const FVector Eyes=(Mesh->GetBoneLocation(TEXT("eye_L"))+Mesh->GetBoneLocation(TEXT("eye_R")))*.5;
-                const FVector Local=Mesh->GetComponentTransform().InverseTransformVectorNoScale(View-Eyes);
-                Motion->DesiredLookYaw=FMath::Clamp(FMath::Atan2(FVector::DotProduct(Local,Motion->Right),FVector::DotProduct(Local,Motion->Forward)),-.65,.65);
-                Motion->DesiredLookPitch=FMath::Clamp(FMath::Atan2(Local.Z,Local.Size2D()),-.3,.3);
-            }else {Motion->DesiredLookYaw=0;Motion->DesiredLookPitch=0;}
+            FVector View=P?P->GetPawnViewLocation():FVector::ZeroVector;FRotator ViewRotation;
+            if(auto* Controller=GetWorld()->GetFirstPlayerController())Controller->GetPlayerViewPoint(View,ViewRotation);
+            const FVector Face=Mesh->GetComponentTransform().TransformPosition(Motion->RefGazeOrigin);
+            Motion->ObserveLookTarget(View,P&&Seen,FVector::DotProduct((Face-View).GetSafeNormal(),ViewRotation.Vector())>.94);
         }
         if(B.Label){
             FVector View=P?P->GetPawnViewLocation():FVector::ZeroVector;FRotator Rotation;

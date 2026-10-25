@@ -547,9 +547,6 @@ void AHALVETHRealmWorld::Tick(float DeltaSeconds)
             if(GuideBoneBaseline[I].Equals(FQuat::Identity))GuideBoneBaseline[I]=Bone;
             else if(GuideBoneBaseline[I].AngularDistance(Bone)>.0005f)GuidePoseChanged[I]=true;
         }
-        const float Phase=FMath::Fmod(Elapsed+I*1.37f,4.8f);
-        const float Blink=Phase<.09f?Phase/.09f:Phase<.18f?( .18f-Phase)/.09f:0;
-        Body->SetMorphTarget(TEXT("Blink"),Blink);
         auto* GuideActor=GuideActors.IsValidIndex(I)?GuideActors[I].Get():nullptr;if(!GuideActor)continue;
         auto* Movement=GuideActor->GetCharacterMovement();
         auto& Phys=GuideBodyStates[I];auto& Genes=GuideProfiles[I];
@@ -567,7 +564,7 @@ void AHALVETHRealmWorld::Tick(float DeltaSeconds)
             &&Player->GetAdventure()->IsSpeakingTo(Body->ComponentTags[0]);
         // Ordinary proximity permits movement. A conversation pauses it;
         // development still portraits explicitly hold their nearby subjects.
-        const bool PortraitHold=Near&&(FParse::Param(FCommandLine::Get(),TEXT("HalvethVisual"))||FParse::Param(FCommandLine::Get(),TEXT("HalvethAppearanceCapture")));
+        const bool PortraitHold=Near&&(FParse::Param(FCommandLine::Get(),TEXT("HalvethVisual"))||FParse::Param(FCommandLine::Get(),TEXT("HalvethAppearanceCapture"))||FParse::Param(FCommandLine::Get(),TEXT("HalvethSkinLayersCapture"))||FParse::Param(FCommandLine::Get(),TEXT("HalvethGazeCapture")));
         if(!Speaking&&!PortraitHold) {
             if(Phys.muscleReserve<.22&&Elapsed>=GuideRestUntil[I]){
                 GuideRestUntil[I]=Elapsed+12;GuideDecisionAt[I]=GuideRestUntil[I];
@@ -643,11 +640,8 @@ void AHALVETHRealmWorld::Tick(float DeltaSeconds)
         Motion->Speaking=Speaking;
         FVector View=Player?Player->GetPawnViewLocation():FVector::ZeroVector;FRotator ViewRotation;
         if(auto* Controller=GetWorld()->GetFirstPlayerController())Controller->GetPlayerViewPoint(View,ViewRotation);
-        const FVector Eyes=(Body->GetBoneLocation(TEXT("eye_L"))+Body->GetBoneLocation(TEXT("eye_R")))*.5;
-        const FVector EyeTarget=Body->GetComponentTransform().InverseTransformVectorNoScale(View-Eyes);
-        Motion->DesiredLookYaw=Near?FMath::Clamp(FMath::Atan2(FVector::DotProduct(EyeTarget,Motion->Right),FVector::DotProduct(EyeTarget,Motion->Forward)),-.7,.7):.18*FMath::Sin(Elapsed*.41+I);
-        Motion->DesiredLookPitch=Near?FMath::Clamp(FMath::Atan2(EyeTarget.Z,EyeTarget.Size2D()),-.22,.22):.03*FMath::Sin(Elapsed*.61+I);
-        Body->SetMorphTarget(TEXT("Talk"),Speaking?.5f*FMath::Max(0.f,FMath::Sin(Elapsed*5.2f+I)):0.f);
+        const FVector Face=Body->GetComponentTransform().TransformPosition(Motion->RefGazeOrigin);
+        Motion->ObserveLookTarget(View,Near,FVector::DotProduct((Face-View).GetSafeNormal(),ViewRotation.Vector())>.94);
         FVector Hand=Body->GetBoneLocation(TEXT("wrist_R"),EBoneSpaces::ComponentSpace);
         FQuat Head=Body->GetBoneQuaternion(TEXT("head"),EBoneSpaces::ComponentSpace);
         if(GuideHandBaseline[I].IsNearlyZero()){GuideHandBaseline[I]=Hand;GuideHeadBaseline[I]=Head;}

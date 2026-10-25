@@ -9,7 +9,23 @@ Ein eigenständiger C++-Spielprototyp für Unreal Engine. Portalwelten, eine int
 [**Projekt öffnen →**](https://github.com/Juri-Halveth/halveth-unreal/releases) · [Arbeitsproben](https://juri-halveth.github.io/koennen/) · [Portfolio](https://juri-halveth.github.io/)
 
 
-## Sichtbar überarbeitete Figuren und kurze Wiese
+## Örtliche Hautschichten und sanfte Blickreaktionen
+
+Der [Figurenschritt vom 25.10.2026](docs/SKIN-LAYERS-AND-GAZE.md) ergänzt
+individuell gebundene Masken für Lippen, Wangen, Lider und ölige Hautzonen.
+Farbe, Rauheit und begrenzte Feinstruktur folgen den vorhandenen Haut-UVs,
+Morphs und dem gemeinsamen Oberflächenfeld. Die acht Körper bleiben erhalten.
+
+![Native Studioansicht mit örtlichen Hautschichten](Preview/SKIN_LAYERS_SCARLET_ON.png)
+
+Der [Vergleich ohne die neuen Schichten](Preview/SKIN_LAYERS_SCARLET_OFF.png)
+verwendet dasselbe Modell, dieselbe tatsächliche Pose, Kamera und EV12-Beleuchtung.
+Es ist eine isolierte Materialansicht. Im normalen Spiel reagieren getrennte
+Augen-/Kopfkanäle auf Sicht, Nähe und Ansprechen; eine Wand unterbricht die Sicht.
+Die [native Bindung](QA/native-skin-layers-gaze.json) trennt diese Prüfungen,
+Bewegungsstichprobe und noch offene menschliche Sichtabnahme.
+
+## Vorheriger Figuren- und Wiesenumbau
 
 **Sichtbarer Umbau vom 24.10.2026:** Der neue
 [Figuren- und Wiesenstand](docs/VISIBLE-BODIES-AND-MEADOW.md) ersetzt die drei

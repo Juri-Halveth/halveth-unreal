@@ -30,11 +30,12 @@ function SourceDigest {
     # The visible source art is part of the normal-start cache identity too.
     # Otherwise a regenerated body can leave an old cooked body "current".
     $characterRoot=Join-Path $astralRoot 'ArtSource\Characters'
-    $inputs+=Get-Item -LiteralPath (Join-Path $characterRoot 'characters.json'),(Join-Path $characterRoot 'MANIFEST.json')
+    $inputs+=Get-Item -LiteralPath (Join-Path $characterRoot 'characters.json'),(Join-Path $characterRoot 'MANIFEST.json'),(Join-Path $characterRoot 'skin_layers.json')
     $characterManifest=Get-Content -LiteralPath (Join-Path $characterRoot 'characters.json') -Raw | ConvertFrom-Json
     foreach($character in $characterManifest.characters){
         if($character.name -cnotmatch '^[A-Za-z][A-Za-z0-9]{0,31}$'){throw 'Ungültiger Charaktername im gebundenen Inventar.'}
         $inputs+=Get-Item -LiteralPath (Join-Path $characterRoot ($character.name+'.fbx'))
+        $inputs+=Get-Item -LiteralPath (Join-Path $characterRoot ($character.name+'_skin_layers.png'))
     }
     $inputs+=Get-Item -LiteralPath (Join-Path $characterRoot 'skin_female.png'),(Join-Path $characterRoot 'skin_male.png')
     $lines=@($inputs | Sort-Object FullName | ForEach-Object { $_.FullName.Substring($astralRoot.Length)+':'+(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash })
