@@ -53,6 +53,11 @@ private:
     FString MotionTiming;
     void RunMotionCapture(float DeltaSeconds);
     void RunAppearanceCapture(float DeltaSeconds);
+    void RunGazeCapture(float DeltaSeconds);
+    TObjectPtr<AActor> GazeOccluder;
+    int32 GazeVisibleSamples=0,GazeOccludedSamples=0,GazeLeadSamples=0,GazeSpeakingSamples=0;
+    double GazeEyeTravel=0,GazeHeadTravel=0;
+    FQuat GazeEyeBaseline=FQuat::Identity,GazeHeadBaseline=FQuat::Identity;
     double MotionDropStartZ=0,MotionDropMinVz=0,MotionDropLandingError=0;
     bool MotionDropFalling=false,MotionDropLanded=false;
 };

@@ -10,6 +10,8 @@
 #include "Components/TextRenderComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Materials/MaterialInterface.h"
+#include "EngineUtils.h"
+#include "GameFramework/Character.h"
 
 void AHALVETHRealmWorld::EnableAppearanceStudio(){
     if(AppearanceStudio)return;AppearanceStudio=true;
@@ -25,6 +27,12 @@ void AHALVETHRealmWorld::EnableAppearanceStudio(){
     TArray<UPointLightComponent*> Points;GetComponents(Points);for(auto* Point:Points)Point->SetVisibility(false);
     TArray<UTextRenderComponent*> Labels;GetComponents(Labels);for(auto* Text:Labels)Text->SetVisibility(false);
     auto* Subject=GetGuideCharacter(1);if(!Subject)return;
+    int32 HiddenCharacters=0;
+    for(TActorIterator<ACharacter> It(GetWorld());It;++It){
+        if(*It==Subject)continue;
+        It->SetActorHiddenInGame(true);HiddenCharacters++;
+    }
+    UE_LOG(LogTemp,Display,TEXT("APPEARANCE_STUDIO_ISOLATION hidden_other_characters=%d retained_subject=%s scope=explicit_studio_process_only"),HiddenCharacters,*Subject->GetName());
     const FVector Base=Subject->GetMesh()->GetComponentLocation();
     auto* Back=Shape(CubeMesh,Base-GetActorLocation()+FVector(-90,0,160),FVector(.1f,12.f,6.f),FLinearColor(.18f,.18f,.18f),0,false);
     Back->SetMaterial(0,LoadObject<UMaterialInterface>(nullptr,TEXT("/Game/Characters/M_AppearanceBackdrop.M_AppearanceBackdrop")));Back->SetCastShadow(false);

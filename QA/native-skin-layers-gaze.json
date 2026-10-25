@@ -1,0 +1,1622 @@
+{
+  "schema": "halveth.skin-layers-gaze-candidate.v1",
+  "recordedAtUtc": "2026-10-25T05:20:33.376920+00:00",
+  "status": "NATIVE_SKIN_GAZE_CANDIDATE_NOT_HUMAN_ACCEPTED",
+  "baseCommit": "209b01c84cb38b78a842fac910853568f3aac817",
+  "currentUserReview": "PENDING",
+  "visualReview": {
+    "primaryStudioImages": [
+      "layers-Scarlet-off.png",
+      "layers-Scarlet-on.png",
+      "layers-Tala-on.png",
+      "layers-Mara-on.png"
+    ],
+    "primaryFinalGazeFrames": [
+      16,
+      17,
+      18,
+      21,
+      115,
+      140
+    ],
+    "secondReviewReported": "All eight final ON studio images plus Scarlet OFF; final gaze stills 20,44,121,159; same source/evidence cluster",
+    "fullVideoPlayback": "NOT_PERFORMED",
+    "finding": "Local cosmetic effect and orientation/occlusion/recovery visible; model-like anatomy, eyes and environment remain art limitations"
+  },
+  "packageBuild": {
+    "schema": "halveth.astral-local-package.v2",
+    "builtAt": "2026-10-25T05:12:22.5815641Z",
+    "sourceDigest": "B0441EFF0232A8F8E63D58E9B1764FF5E289B638CC17202943CD99B5BF5AC053",
+    "launcherSha256": "AB3F1C19FFED772018B938DAC66ADEAB425CBAAF76A52245098B45D749D8B134",
+    "binarySha256": "FEA8903744A0BDAB6FDE15FC8D02CE3414F66825FC647F7EAAA4482C3575FA8E",
+    "cookedPayload": [
+      {
+        "name": "global.ucas",
+        "bytes": 3216176,
+        "sha256": "140844B9F6C7E474C1423E77A913AA97482BF36BF27D7A6CD2F66110955CF9AA"
+      },
+      {
+        "name": "global.utoc",
+        "bytes": 794,
+        "sha256": "B0B3C8FC8E6417EC7AFB9E0A92F459F6EC5EC0265ADB96F7D011490BA3C8DD4E"
+      },
+      {
+        "name": "HALVETHRealms-Windows.pak",
+        "bytes": 11234937,
+        "sha256": "4C4CC476EA5B890B7CCC90A6AEBD8432946F3D4951D8874A006532775D8DF4C9"
+      },
+      {
+        "name": "HALVETHRealms-Windows.ucas",
+        "bytes": 364071424,
+        "sha256": "63FD4A37874AA39BF809B743A0D73AC1E2FCAB8579B40664C78608968EAA673F"
+      },
+      {
+        "name": "HALVETHRealms-Windows.utoc",
+        "bytes": 289596,
+        "sha256": "476A54036F9894EF5C4E2CF3CB67876953DDF8C42D5E6CF161B32D06B206DD95"
+      }
+    ],
+    "distribution": "LOCAL_DEVELOPMENT_ONLY"
+  },
+  "executable": {
+    "path": ".local/meadow-package/Windows/HALVETHRealms/Binaries/Win64/HALVETHRealms.exe",
+    "bytes": 340586496,
+    "sha256": "fea8903744a0bdab6fde15fc8d02ce3414f66825fc647f7eaaa4482c3575fa8e"
+  },
+  "maskSources": {
+    "path": "ArtSource/Characters/skin_layers.json",
+    "bytes": 11428,
+    "sha256": "582655dc15753de357254c2f12b3216238f5f784ea15a73572899d6a229d1f2e"
+  },
+  "materialAB": {
+    "pairs": [
+      {
+        "model": "Scarlet",
+        "images": [
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Scarlet-off.png",
+            "bytes": 1649652,
+            "sha256": "f8ceda61325daf498e7fa9027ef51ae332eb9ad31d6bf7e724f00522d3255d82",
+            "width": 1920,
+            "height": 1080
+          },
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Scarlet-on.png",
+            "bytes": 1876251,
+            "sha256": "df407412f3ef1ba67ead90e826e9959d6e703f7cc72f19eb1b190e699abfe629",
+            "width": 1920,
+            "height": 1080
+          }
+        ],
+        "actualCamera": [
+          "X=-459.592 Y=-911.748 Z=161.895",
+          "P=0.000000 Y=166.582593 R=0.000000"
+        ],
+        "actualMesh": "X=-574.427 Y=-887.168 Z=-0.000",
+        "actualPose": [
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.250000",
+          "X=-562.630 Y=-890.160 Z=159.895",
+          "X=-562.630 Y=-884.175 Z=159.895",
+          "X=-0.488382435 Y=0.488384471 Z=-0.511354286 W=0.511351152"
+        ],
+        "seed": 7919,
+        "makeupStrength": [
+          0,
+          0.85
+        ]
+      },
+      {
+        "model": "Lucinet",
+        "images": [
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Lucinet-off.png",
+            "bytes": 1697288,
+            "sha256": "73eb7d26cbcc5c1d1b444e56c31b9556312d1ea5742b76dc03d15c3cc00db195",
+            "width": 1920,
+            "height": 1080
+          },
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Lucinet-on.png",
+            "bytes": 1743757,
+            "sha256": "7160296d7c558718cb0df5222f4046b00948b75013ebab7eb8d06a57b87976ad",
+            "width": 1920,
+            "height": 1080
+          }
+        ],
+        "actualCamera": [
+          "X=-457.986 Y=-911.574 Z=175.081",
+          "P=0.000000 Y=166.679443 R=0.000000"
+        ],
+        "actualMesh": "X=-574.427 Y=-887.168 Z=-0.000",
+        "actualPose": [
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.250000",
+          "X=-561.065 Y=-890.232 Z=173.081",
+          "X=-561.065 Y=-884.103 Z=173.081",
+          "X=0.498421079 Y=-0.498428015 Z=0.501579636 W=-0.501561372"
+        ],
+        "seed": 15838,
+        "makeupStrength": [
+          0,
+          0.85
+        ]
+      },
+      {
+        "model": "Rachel",
+        "images": [
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Rachel-off.png",
+            "bytes": 1523789,
+            "sha256": "7c0fa64c9b298023631206b54be8c66980d23935f383912a31d713248f1cbac8",
+            "width": 1920,
+            "height": 1080
+          },
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Rachel-on.png",
+            "bytes": 1574289,
+            "sha256": "8d1d0fbcf977adc17b253e4f2c94a29a7418cd694544c16f39aff1018d5a0405",
+            "width": 1920,
+            "height": 1080
+          }
+        ],
+        "actualCamera": [
+          "X=-458.866 Y=-910.844 Z=156.411",
+          "P=0.000000 Y=167.084715 R=0.000000"
+        ],
+        "actualMesh": "X=-574.427 Y=-887.168 Z=-0.000",
+        "actualPose": [
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.250000",
+          "X=-562.115 Y=-890.198 Z=154.411",
+          "X=-562.115 Y=-884.138 Z=154.411",
+          "X=-0.489469483 Y=0.489465133 Z=-0.510310907 W=0.510319789"
+        ],
+        "seed": 23757,
+        "makeupStrength": [
+          0,
+          0.85
+        ]
+      },
+      {
+        "model": "Tala",
+        "images": [
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Tala-off.png",
+            "bytes": 1466642,
+            "sha256": "5a2660a6f05595b5f9af906fa5c369d4be45bfcb07ad928bcbba407733c3fb79",
+            "width": 1920,
+            "height": 1080
+          },
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Tala-on.png",
+            "bytes": 1526267,
+            "sha256": "c54a11b188e9d4e71e7590d32a73f6a13736b0c55b22d52332c56582f14af7ac",
+            "width": 1920,
+            "height": 1080
+          }
+        ],
+        "actualCamera": [
+          "X=-460.113 Y=-912.257 Z=169.239",
+          "P=0.000000 Y=166.299381 R=0.000000"
+        ],
+        "actualMesh": "X=-574.427 Y=-887.168 Z=-0.000",
+        "actualPose": [
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.250000",
+          "X=-563.028 Y=-890.151 Z=167.239",
+          "X=-563.028 Y=-884.185 Z=167.239",
+          "X=-0.481898795 Y=0.481902361 Z=-0.517474585 W=0.517458906"
+        ],
+        "seed": 31676,
+        "makeupStrength": [
+          0,
+          0.85
+        ]
+      },
+      {
+        "model": "Orin",
+        "images": [
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Orin-off.png",
+            "bytes": 1499391,
+            "sha256": "811abcef6d1d07f33f4a9972abc436a7f8d1fc4ada37e6692fca0bb7c0d5dd15",
+            "width": 1920,
+            "height": 1080
+          },
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Orin-on.png",
+            "bytes": 1550145,
+            "sha256": "fd643cdb6e03c84d6c6c56fde6a87823ec9b7a07527f384009447a5b97458b33",
+            "width": 1920,
+            "height": 1080
+          }
+        ],
+        "actualCamera": [
+          "X=-458.194 Y=-911.477 Z=166.949",
+          "P=0.000000 Y=166.732848 R=0.000000"
+        ],
+        "actualMesh": "X=-574.427 Y=-887.168 Z=-0.000",
+        "actualPose": [
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.250000",
+          "X=-561.296 Y=-890.264 Z=164.949",
+          "X=-561.297 Y=-884.071 Z=164.950",
+          "X=0.500124064 Y=-0.500117631 Z=0.499870890 W=-0.499887357"
+        ],
+        "seed": 39595,
+        "makeupStrength": [
+          0,
+          0.85
+        ]
+      },
+      {
+        "model": "Ivo",
+        "images": [
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Ivo-off.png",
+            "bytes": 1595525,
+            "sha256": "c2dd00d86fd9aa291f4b5652a1ff97b31025c4b0b8fc3998d53a702165b6ce1a",
+            "width": 1920,
+            "height": 1080
+          },
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Ivo-on.png",
+            "bytes": 1638905,
+            "sha256": "88678f4d9c5da6b66a405149d5825469fa078f5608cf4ea1bfbcc6f7b96e627b",
+            "width": 1920,
+            "height": 1080
+          }
+        ],
+        "actualCamera": [
+          "X=-457.974 Y=-911.188 Z=178.630",
+          "P=0.000000 Y=166.894142 R=0.000000"
+        ],
+        "actualMesh": "X=-574.427 Y=-887.168 Z=-0.000",
+        "actualPose": [
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.250000",
+          "X=-561.144 Y=-890.235 Z=176.629",
+          "X=-561.144 Y=-884.101 Z=176.630",
+          "X=0.500535501 Y=-0.500531181 Z=0.499459687 W=-0.499472492"
+        ],
+        "seed": 47514,
+        "makeupStrength": [
+          0,
+          0.85
+        ]
+      },
+      {
+        "model": "Mara",
+        "images": [
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Mara-off.png",
+            "bytes": 1469438,
+            "sha256": "7d4ac153d4256ccaf6e97c526b90f57e88181546a4fcb4d4840f57bdedcaa1d6",
+            "width": 1920,
+            "height": 1080
+          },
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Mara-on.png",
+            "bytes": 1523995,
+            "sha256": "f20dce105187d776bbb715f40f17f749dc401b882b56cb99ef27ffab6734b924",
+            "width": 1920,
+            "height": 1080
+          }
+        ],
+        "actualCamera": [
+          "X=-456.984 Y=-905.793 Z=151.832",
+          "P=0.000000 Y=169.872872 R=0.000000"
+        ],
+        "actualMesh": "X=-574.427 Y=-887.168 Z=-0.000",
+        "actualPose": [
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.250000",
+          "X=-561.263 Y=-890.090 Z=149.832",
+          "X=-561.263 Y=-884.245 Z=149.832",
+          "X=0.485784720 Y=-0.485777233 Z=0.513818122 W=-0.513833264"
+        ],
+        "seed": 55433,
+        "makeupStrength": [
+          0,
+          0.85
+        ]
+      },
+      {
+        "model": "Neri",
+        "images": [
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Neri-off.png",
+            "bytes": 1528094,
+            "sha256": "68fe00c6beddae1b8ba20562ac2a927cdb5ce0e990af1520c86ac4073b4eb606",
+            "width": 1920,
+            "height": 1080
+          },
+          {
+            "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/SkinLayers/layers-Neri-on.png",
+            "bytes": 1591665,
+            "sha256": "32239e4c817726da6a280bd83fe7b942b9674a4bb106eca37b68295647dcaf7b",
+            "width": 1920,
+            "height": 1080
+          }
+        ],
+        "actualCamera": [
+          "X=-458.975 Y=-911.992 Z=164.328",
+          "P=0.000000 Y=166.446584 R=0.000000"
+        ],
+        "actualMesh": "X=-574.427 Y=-887.168 Z=-0.000",
+        "actualPose": [
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.000000",
+          "0.250000",
+          "X=-561.955 Y=-890.176 Z=162.328",
+          "X=-561.954 Y=-884.159 Z=162.328",
+          "X=0.480573067 Y=-0.480571323 Z=0.518696849 W=-0.518704453"
+        ],
+        "seed": 63352,
+        "makeupStrength": [
+          0,
+          0.85
+        ]
+      }
+    ],
+    "log": {
+      "path": ".local/skin-gaze-Layers-20261025T051401Z-6fdc5c5c.log",
+      "bytes": 180317,
+      "sha256": "3cabe45638848cb7de50b65bad0354315e66544580b99b3b7931878247fa0125"
+    },
+    "runner": {
+      "path": ".local/skin-gaze-Layers-latest.json",
+      "bytes": 425,
+      "sha256": "f5eb6793b80fcec8f6952c86a88e19b0f9537587982c3b4ad2791e4ca2d25492"
+    },
+    "scope": "Same actual camera, mesh, eye/head pose and seed within each pair; isolated EV12 studio; live skin field off"
+  },
+  "gaze": {
+    "native": {
+      "schema": "halveth.gaze-native.v1",
+      "passed": true,
+      "frames": 165,
+      "observedHz": 14.999999218,
+      "visibleSamples": 146,
+      "occludedSamples": 14,
+      "eyeLeadSamples": 53,
+      "speakingSamples": 95,
+      "observedEyeTravelRadians": 0.41328589,
+      "observedHeadTravelRadians": 0.301673815,
+      "sharedFieldPassed": true,
+      "isFrameRateBenchmark": false,
+      "scope": "Declared moving player camera; one stationary live guide, actual interaction and blocking wall; no forced gaze values"
+    },
+    "observedSamplingHz": 14.999999218445161,
+    "frames": [
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0000.png",
+        "bytes": 1817146,
+        "sha256": "6a8b7081a109e3fd37c632a2fe51c9192e93be85f60c79f8520a28134d43960e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0001.png",
+        "bytes": 1785958,
+        "sha256": "797d572d17c4321bbe613dc97f3b44c7b6585ad9c0aac41024e32f180686997e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0002.png",
+        "bytes": 1774355,
+        "sha256": "dbef8ab372a02e41b209a358194f51062ccadf49667375ad8ad47a3694a7361c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0003.png",
+        "bytes": 1770088,
+        "sha256": "076f2802768bf253c9287fc4dee62825557d85860e41065727c6b79c8daaa4bb",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0004.png",
+        "bytes": 1765303,
+        "sha256": "fcc5dbde5e8465a0dd086fc80c56740623a37b9849be97dceded71af9a3ad921",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0005.png",
+        "bytes": 1758660,
+        "sha256": "8aab1189d333225b254ece4209906c89f5dc191c0c5e0c9df81c22c8f6be8700",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0006.png",
+        "bytes": 1762444,
+        "sha256": "98dcd2afac3ed114c8e40eb7d1355082f27930f83c6b997b6da6d5f2e92b0105",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0007.png",
+        "bytes": 1764660,
+        "sha256": "24538fd792d2fe3e9f2fd3d9488126e96a6852835ecb86aa8bd6a5e1013daae6",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0008.png",
+        "bytes": 1769223,
+        "sha256": "2c525675843f27334e2f08c75d2ef88371629675dc966744140fd214c91ab20a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0009.png",
+        "bytes": 1771931,
+        "sha256": "94698022149d6c5544ebd0ac89d8af6abf4b1fdb084e7d577fc075384e6b1f0f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0010.png",
+        "bytes": 1772973,
+        "sha256": "1daba9df154b0278b5b99707ef0f4546b2478bd569745588321b369e5406c4e8",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0011.png",
+        "bytes": 1776127,
+        "sha256": "180aac8536c6890c231d5a64cda436f50178b6fba697a2d074b32a614b3a7d6c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0012.png",
+        "bytes": 1777399,
+        "sha256": "e88e8d2ffdcf0169ffa838afdf9fa02bf21b3599388be999a0b6ba67aa4b59db",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0013.png",
+        "bytes": 1780584,
+        "sha256": "c88ed7e5b23626638baef72ab82bd23a5ed2145d943b1bd14aacb8bde840247c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0014.png",
+        "bytes": 1783138,
+        "sha256": "7f4fa28d91b5eaf88b96920daf2d387f368aabf204f0c69891ec4ff94be7ec42",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0015.png",
+        "bytes": 1849586,
+        "sha256": "30d9029a474d3143ca4388aa2054b578243db5fe3059fda4fb9adcc1bd79e630",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0016.png",
+        "bytes": 1822845,
+        "sha256": "f727faf39f7418a059c78ceec594862185f6820545b22027f3b85b72792c9e91",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0017.png",
+        "bytes": 1811371,
+        "sha256": "1d000c22327e7e9d8174d1725906a6f9df8db8bda48b9ccfd7cd1f7bd8dfa2f0",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0018.png",
+        "bytes": 1805117,
+        "sha256": "239e0b2602f68f7c1023031fbc0de791672f0f904c104424693a5488befad4c0",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0019.png",
+        "bytes": 1808560,
+        "sha256": "ea487c921c7fdc13b976048caa1529c52ac7a5fe6e6faf7f4f0bbab5322d7633",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0020.png",
+        "bytes": 1809623,
+        "sha256": "c0fb480aa9301c3584da3f6163709942fddbc680679e669a2aa337bbfaaf4976",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0021.png",
+        "bytes": 1814754,
+        "sha256": "e1e5338e7b23b36c6e9875fbb567a1974cd8208390e1473ee7b2add80f38d0c3",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0022.png",
+        "bytes": 1821701,
+        "sha256": "0d203462724f3cea04e739086437c4fb3c5fcd9be77bea2cb9ab2068564a4765",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0023.png",
+        "bytes": 1824242,
+        "sha256": "228d6099ac70d6cfb3a70e16668a6303f0d5b02ac1e78e8c9781b06af6ade679",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0024.png",
+        "bytes": 1829176,
+        "sha256": "4125fae69c986bc99f82426b9b30a4ed0e9bed5424e1fcd6cb26dacb32259230",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0025.png",
+        "bytes": 1833181,
+        "sha256": "2f648b4bc38ebe1fde7e7c9d71b0413906b0b2280603d02c19276a9f5f192a7d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0026.png",
+        "bytes": 1836312,
+        "sha256": "1adfc1752855fc4a5992fa16b49a6e007513abf6ca99fb8848e66da11ad9a3a7",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0027.png",
+        "bytes": 1839066,
+        "sha256": "077328c68b17ea3b9a059a9e6a8371a586c3ae4228b2245c446d45d78097f874",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0028.png",
+        "bytes": 1842535,
+        "sha256": "3662e0c5503b6f2c455d614b7f4d952414fb59a1d8f41635382f20f779f419aa",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0029.png",
+        "bytes": 1844166,
+        "sha256": "e3875728cab5742d36273f2c5f46b0be23a2abe9a0387267dc06c9155ba9f5b4",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0030.png",
+        "bytes": 1846249,
+        "sha256": "756aac21f9977b61eb3afcf8386286a94cc9ea789d72f279ce1af2b6519a4c89",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0031.png",
+        "bytes": 1848196,
+        "sha256": "1310ceaa013e2f36e149783cbaf686cf5993b9bd1d75a03aa566101f1d24dbfd",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0032.png",
+        "bytes": 1849462,
+        "sha256": "c2f25ee976549eb33baea6d890c493c7425116a667528fc52165e8362411d8cf",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0033.png",
+        "bytes": 1852875,
+        "sha256": "cf5158783015939a8aea57db74797b2789e37a24d22368438da9f9a54521d1af",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0034.png",
+        "bytes": 1852333,
+        "sha256": "6ff92a8bc012ef743ff68a8bff981c1b08281cfe21c042fca65e42552dd726cf",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0035.png",
+        "bytes": 1854940,
+        "sha256": "8b22d5dcb2c5808db832b58386ad1c93288eb08ffac8af26c1c1b205f11f96b1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0036.png",
+        "bytes": 1857126,
+        "sha256": "45750005d00b08778aa5a7967ef20bc3b6eb9ea5c27031e073f65940f7845c2e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0037.png",
+        "bytes": 1858709,
+        "sha256": "d83e72d63630b12968f4a1a37ab4d5d747aa1e3c508c9e0e418598b817fa648f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0038.png",
+        "bytes": 1860040,
+        "sha256": "37787caca644e526b0c49f2f080bdd94013441e828e633195bb70c2fab58d56d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0039.png",
+        "bytes": 1860842,
+        "sha256": "ea834239c9a8f049b577cc0110311723ca42b3c8ae0d74fb6c68b07c254ed046",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0040.png",
+        "bytes": 1861187,
+        "sha256": "6b38a51a331d7d50514eb14c98e94536e05c7151369551bcad3f52987e015d5e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0041.png",
+        "bytes": 1863120,
+        "sha256": "ae27d22318f2637a14ba59ec76d7cb087c3d59aa031c91bdbf6ad09335cb6170",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0042.png",
+        "bytes": 1791942,
+        "sha256": "7a916d48c2b93eeb54eb851312101b32a8ae9a9dbf0bb2fef0eb42ae38926da6",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0043.png",
+        "bytes": 1769657,
+        "sha256": "f18dbf63775f3e332c209e7e0a75a308fc17d88bf96ff914ccbb4a6b95320cf2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0044.png",
+        "bytes": 1758533,
+        "sha256": "f1425f657d57f1deddfe13348c5229a66e6b6ab45efa4bfbb673ad3aca00f141",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0045.png",
+        "bytes": 1749832,
+        "sha256": "0a68989e2aaf2166f5e30c02eecedb35a72aa76ca3b9ea58595ee87711e2fa5d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0046.png",
+        "bytes": 1751597,
+        "sha256": "4cc6293daaad8139620c23533979e54c6e8bc3fba62c1f2824d3da1b21b2ad07",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0047.png",
+        "bytes": 1754561,
+        "sha256": "c398f1e960d7030eeb82479a9d551ca26c79053f2984277e37be6c22b446431f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0048.png",
+        "bytes": 1761076,
+        "sha256": "cdb6926d0cb9c5704c575924fc245e7a552256c706771cbca6b1ea9dda8ba6ab",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0049.png",
+        "bytes": 1764501,
+        "sha256": "239d2a4cd79f1554bad27a890b729e1c05e0a1a7eb2717ec8baa36ab3bfaf57d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0050.png",
+        "bytes": 1769881,
+        "sha256": "447cdf74fd9ac8e069568a600564904525f3b475b3cbfa5449bf633f8b64d831",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0051.png",
+        "bytes": 1773067,
+        "sha256": "d26fd85b7db209559d4cb67a45c8d37c92d0567ad68d8c3e693603f54a5b0af1",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0052.png",
+        "bytes": 1777226,
+        "sha256": "b02db6d197f2ad404a43a9f2a3e7350e03c8f51bb2a7247dd80ee9a14c2c0339",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0053.png",
+        "bytes": 1780486,
+        "sha256": "1b9ea222eed3c2d3f08e20bc81cbfbf837a240502cb70f8655bdb5ac4e6fcb9f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0054.png",
+        "bytes": 1782097,
+        "sha256": "b07bc2e4ddb9699ba91eb2da5b8303f00cf523a9f60693f1d91f49df6be716d3",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0055.png",
+        "bytes": 1784424,
+        "sha256": "67e7c7477d992eb5807ba53e41f289004ac89c8e13ce75043f8e7fdf828db427",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0056.png",
+        "bytes": 1784534,
+        "sha256": "256fe617f4866e179f853c13d28dab15dd256f0496c0c303ab72588b5ddf46a5",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0057.png",
+        "bytes": 1786825,
+        "sha256": "146b359f3c39ccb2c146811db64df7fddc9f9141bd02a903c44996baf9742820",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0058.png",
+        "bytes": 1787916,
+        "sha256": "3f30da92c3b8c7879d3139a67cbb05b858eea7e304dd05cabee371f681ab5d88",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0059.png",
+        "bytes": 1790244,
+        "sha256": "9416b99c14514d62e15c327037355ce61cb4354417fb917e31e707bc5affcfde",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0060.png",
+        "bytes": 1792066,
+        "sha256": "1f49d82812ddf8f3e0b17c209f376108391c28aab6d5da91818e05ffcbad88f0",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0061.png",
+        "bytes": 1792737,
+        "sha256": "a971670ae25c2239e23e0443d21968071e16e1e416afc427b0fe27f385446adf",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0062.png",
+        "bytes": 1794794,
+        "sha256": "3c0176d3bc4647c049cc8f387286e9e98a5e163ed483e07fb46ed1232cac4ce0",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0063.png",
+        "bytes": 1795681,
+        "sha256": "b536cd5a06edcef3b257a7e7474061116a5917622874a6a498402b32d3919521",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0064.png",
+        "bytes": 1796298,
+        "sha256": "09a865f724869ad5b767beec8bd87bccf200b89d83ebbff5ddd6d3595562f40e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0065.png",
+        "bytes": 1798608,
+        "sha256": "e023ce361533a800793f5f682332553d96ab9b14b7a8f725922a0cc21ba7db47",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0066.png",
+        "bytes": 1799720,
+        "sha256": "b0b3145e745b31f0bb388121d3e973f1c39632e0c3a58fedfcc54d96fbc10548",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0067.png",
+        "bytes": 1800236,
+        "sha256": "690a9802902449e8f6167084062ad33f821587f21180edbbe78e9ca30ce960a6",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0068.png",
+        "bytes": 1801017,
+        "sha256": "2c24f4a55351a8149ea38338f0d1ffb02c14e3b3f79dff7b15b814111aaaab37",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0069.png",
+        "bytes": 1798648,
+        "sha256": "acce7ca828b0c21cf44d10a987384e8b5b5efe96d2d7d5c6243197f37f26f12c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0070.png",
+        "bytes": 1774756,
+        "sha256": "9ca1334ee11b7c27f551b59a3a4fe038520c3f95e7db2bb8b70dd7f284a52430",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0071.png",
+        "bytes": 1763848,
+        "sha256": "66ce83260efdb5990b75c8fad0dc31b5015febaff3d2b2ab7796c37ee1955c7a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0072.png",
+        "bytes": 1753940,
+        "sha256": "43d45f53c177d4da98e6e7b9f60b73066477b141a265ac82e8f669a2292d93e2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0073.png",
+        "bytes": 1750821,
+        "sha256": "fb3d6b7190e901dbdf60b3cb97f03e33ab5729b42f79035d7f0390f9a8d69ab8",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0074.png",
+        "bytes": 1750189,
+        "sha256": "76a4f35719d641aa3fcb0f85be2b57664fa4c0b33f5abdbe8ec02c8383a3722f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0075.png",
+        "bytes": 1756951,
+        "sha256": "a679964b4a4af3a2a8e98eeae3b418cf9846924bf89096ea7f8f8c84cb4487f2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0076.png",
+        "bytes": 1760435,
+        "sha256": "6913818576c9d9c34ee0fd692d5dcd834cffeaba225e90f6746c3f29d6bdf991",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0077.png",
+        "bytes": 1765071,
+        "sha256": "056628e6d81176992d895b6cd9b470fef90df4d42e1b208877d9477b03bbf1a5",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0078.png",
+        "bytes": 1765391,
+        "sha256": "54642da5f7a41fc66a2f7de5562f41ab7b8702b55540549594f4f69d127cfdb9",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0079.png",
+        "bytes": 1768534,
+        "sha256": "2b8833ace73d287cc20015eb2ba25ef02b339b51c5cfbe6e0a7ab168a529aca7",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0080.png",
+        "bytes": 1771923,
+        "sha256": "8dda30f839eaaff22675a42831f83a6bdb5790705339f0265eed6c7fb32bf3d5",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0081.png",
+        "bytes": 1775393,
+        "sha256": "557e0f10d1112f8e455592e8c3a4b5188e195fe8614b6b2bba0504ada987d61d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0082.png",
+        "bytes": 1778151,
+        "sha256": "32e792b3f6730b10f242b995b32c6116aad3393b1b20c9148dfb0e0eac440227",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0083.png",
+        "bytes": 1780424,
+        "sha256": "8fae6d7c243b9a7b1198705522464391f5103999786ea9e8bff0999fbb73f724",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0084.png",
+        "bytes": 1781792,
+        "sha256": "dfebf38d40681de73b2476576a80c085f88ee48a80fe0a672942238c33c8d3e3",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0085.png",
+        "bytes": 1783693,
+        "sha256": "c13ad851e1eb4a01b5305763bc8fe2f27319da5fbfed2f5e447e7749139eb4df",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0086.png",
+        "bytes": 1785874,
+        "sha256": "7586e6c38656929afc3c72aff3fdf847f03b2b7f96065bb9371766a553fc60f2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0087.png",
+        "bytes": 1787178,
+        "sha256": "ca89d85163fa7ced4bc20e746decbef48b1f186f63986fbe49544b7ce51673af",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0088.png",
+        "bytes": 1788506,
+        "sha256": "dcf27ac212e3da5b41494b8f0ebd833382325dedd769ae983cff8f6021c6fea2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0089.png",
+        "bytes": 1788607,
+        "sha256": "ea018660cd1a079bab47607e521c42e2fe714dc619aa6e86329e9bcaab819669",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0090.png",
+        "bytes": 1925027,
+        "sha256": "64f142e97a264406f3a3ad8cac9929e5c7ab7b18f7dccc013b4710ff18584696",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0091.png",
+        "bytes": 1916962,
+        "sha256": "a20cb110792e5c9017e5b118b0bdec7c96a4c389e48e2a8f6a5a6ee4824277dd",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0092.png",
+        "bytes": 1902324,
+        "sha256": "f862848b2429c48c6a5dba9f7b660539b085f469dde1fc43ba9c2f472daf89b4",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0093.png",
+        "bytes": 1893675,
+        "sha256": "c1cc932465e1a735f88b29d576aa0800fd08e99e363caac88e4392901729135e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0094.png",
+        "bytes": 1892057,
+        "sha256": "61092776712a75cc70386a0d941aa26b614fc29876f7a33c3bc93c52fdc7cbb0",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0095.png",
+        "bytes": 1889433,
+        "sha256": "ac71d8e9f665bd93a836fc524878d24f7b0acc363e87730b429aad31b4d95e44",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0096.png",
+        "bytes": 1897023,
+        "sha256": "f65a9a9b579468f636c84da61a84860ce96d8cf69852f836dc334e0be4194657",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0097.png",
+        "bytes": 1901581,
+        "sha256": "76cb4af2195df50f66c967a098343c46cb19c688f35fae02163b5d098bab77dc",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0098.png",
+        "bytes": 1903200,
+        "sha256": "5d04da6962555878abca97e8ea72173176e8443a92d28016374ef3337545335c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0099.png",
+        "bytes": 1907764,
+        "sha256": "06148b800f0a5556029fbf19b88d8f9662e770a4c6b8eee225bae6d0086df6ce",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0100.png",
+        "bytes": 1907527,
+        "sha256": "8aecd20e230392d17a3428b4824562f8b4f142654565ffb3c31b883946fd5f89",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0101.png",
+        "bytes": 1911118,
+        "sha256": "c0e32824e6ffdc5cf05e95e99787c9e5eb65f6727f6311fabb368c541fa171f5",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0102.png",
+        "bytes": 1914243,
+        "sha256": "0a44f9a2aab3afc3e92f6a583e7c5958474fd76f366aa31c6aa5116c0a107414",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0103.png",
+        "bytes": 1916535,
+        "sha256": "0f42f64035ca73f5efbe51b74461585dcb7da54902fd1e2e7029a081fb818aee",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0104.png",
+        "bytes": 1918628,
+        "sha256": "a81e1d69d8c2240e19669a957b1e458b7daaf5484a5aa211f7b7dd53dfff5942",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0105.png",
+        "bytes": 1917920,
+        "sha256": "c86ffbaa5a04fa83d633d280ed48583d3a7c9c7085d9e2ea743cc0d9135393fc",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0106.png",
+        "bytes": 1917484,
+        "sha256": "6a807583a3d183580a1bb73b078ec9f6b99369e55742b0611d2de64d8ceea67c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0107.png",
+        "bytes": 1920251,
+        "sha256": "ba904c793841fdb6b52aedc4182d5d372012bb5a17c780aef04917c8e1220c02",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0108.png",
+        "bytes": 872771,
+        "sha256": "81bee836494a931bd4cc28b5596ca9ce3d8235326010273a27519d76f413076e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0109.png",
+        "bytes": 858979,
+        "sha256": "c3cfbf7824cb2e7f839b729678629ea751aecc32fb7d8ce9674355f2d81a3b17",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0110.png",
+        "bytes": 850031,
+        "sha256": "026bd015553013610adfafa3020e60bfa41744a7afb2d39a9d1921e4837f029a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0111.png",
+        "bytes": 837377,
+        "sha256": "e18ebd23912e53f6425c6ee4eddfe28cf3c339df88beccd60d0fe3ee25d75b9e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0112.png",
+        "bytes": 838950,
+        "sha256": "6176f341ae067af223ef3707f796cd2ca9a014bbcfa52a1632154f63692ef11f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0113.png",
+        "bytes": 842730,
+        "sha256": "c369b3d28ac906d8d92d1a406ff9c8e6aa2356bbcc2a9ef9e7098a93e61ed7ad",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0114.png",
+        "bytes": 847692,
+        "sha256": "a819f44bd1c10d5a42aac95c7c2e4fc7d39448235e2751d130cf31946a1c95eb",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0115.png",
+        "bytes": 853106,
+        "sha256": "1eb5584f33e939492d064342f8dd8323f8a7e144f9ad60e093fc92b1972b8f6d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0116.png",
+        "bytes": 856381,
+        "sha256": "e6b42604f9a6e95302b5d765d7d3725fe9401e81d7408ab8ec341173f7615bf2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0117.png",
+        "bytes": 860925,
+        "sha256": "3e263a3c664a16d5de047dd15171b5fe82b888d3b30c36e673189d15fd8a86d2",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0118.png",
+        "bytes": 865145,
+        "sha256": "91644af476e610549ea67548965387f78520c48707fb6ba3ddefe19d8ad8281a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0119.png",
+        "bytes": 870205,
+        "sha256": "f5221994e31756bed14b8ec26917ff7db3742d099df960bce0d657333e47731d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0120.png",
+        "bytes": 874693,
+        "sha256": "41e9793035981c37a86a480feadec3c1fb13510fac799cc4a0f3d20e86de1cbf",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0121.png",
+        "bytes": 880690,
+        "sha256": "20e6cfdee0e7fc04d6ddd10c0e5dc5ff21c3f330ce23378d2916f84ba4a58348",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0122.png",
+        "bytes": 884021,
+        "sha256": "07934b430494d9cb65188f213271b415f35dd8b026ee97bbc02eba26b5dbb2f9",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0123.png",
+        "bytes": 886433,
+        "sha256": "dc72e3ce667aca6f01dc6f4237889a9bf750304d8cb5cdfbf95b0ff9233d5762",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0124.png",
+        "bytes": 892211,
+        "sha256": "91fbc2bffc98f6a6b4f4cdd5e5d374a61c7b7385dabee4043bc2c895ad30c2f5",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0125.png",
+        "bytes": 895400,
+        "sha256": "305071e3f1805741bd7a8c27e5caa71da649c149361ef2e5a753a3dd264deda7",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0126.png",
+        "bytes": 1682055,
+        "sha256": "bf8262af6e816ff11ac880d8693c0fc290ce389de076a97a4fa6993932d2ad6d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0127.png",
+        "bytes": 1713372,
+        "sha256": "28dbd92d285ae3cee3f97e0cffc2b5e7f4d9ef06a264602fdba615af6ccab21c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0128.png",
+        "bytes": 1707778,
+        "sha256": "939d5411f5cab9362f2b27fd8c90b298fc5910886ba1b09316756e18fe3e11ad",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0129.png",
+        "bytes": 1713363,
+        "sha256": "8f4a40ce277a927a17be9571d55e003d1a65ca828ece0ace5773d9383a932e36",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0130.png",
+        "bytes": 1715808,
+        "sha256": "8f208783eea90182ada7622badfebe88f296a2ec958bb59fc062d892fd5f6ac5",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0131.png",
+        "bytes": 1715113,
+        "sha256": "0b42571063bab91f37b465853f093a12d6567bbbad01fffa3daf925fcebc307d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0132.png",
+        "bytes": 1722526,
+        "sha256": "0bc3adabcc8a69aa65a71f3f7d252c4dae4c84e0ead7792fea6fdbe2029c0ecc",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0133.png",
+        "bytes": 1724548,
+        "sha256": "ce0102394dfb3a6b080ada4b72bba21506c454d998dfbb8a43fbb18bf80b3c0e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0134.png",
+        "bytes": 1729527,
+        "sha256": "66563f8fe6429a6bfa3924202821c3927a4ea00361cf9a00cb1872fc6e2b2a9f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0135.png",
+        "bytes": 1730709,
+        "sha256": "d9da62faa6c6bab9108d0e67a7a3c6902fa3f3c64ff88fa2bf311d9eea7f1a7f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0136.png",
+        "bytes": 1732441,
+        "sha256": "2de35e65f62e3f4dc6e284da692eb05eb1b4c48dc0d82fbb5dd43bf37316079c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0137.png",
+        "bytes": 1735190,
+        "sha256": "953e1bdc772c73c7720e35ab4360ae99182f83fba58844e94c97eafb26eb00fa",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0138.png",
+        "bytes": 1737342,
+        "sha256": "bf6fa8a48f54836888c102da9545f20147da3ece9c504d505da833b3ef06cc90",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0139.png",
+        "bytes": 1741835,
+        "sha256": "98fa16551b1634969a331d2a3fb59b16fb9e7bd77ba6c5d47d0a7c0450bd1143",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0140.png",
+        "bytes": 1742867,
+        "sha256": "92390dae0a8ef77d2718a7e5d2a5da4e04b95fbd7e5a380b55511026fc9408dd",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0141.png",
+        "bytes": 1746655,
+        "sha256": "0549a22e56b42c38fe99b3316dd95aab2dc920dcaf9fd692159c0fb138d41c45",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0142.png",
+        "bytes": 1748350,
+        "sha256": "6cdcc53990320f2ecbda6aff162a477eb5c92084d9d5200b9d6d184c4681aa6d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0143.png",
+        "bytes": 1757795,
+        "sha256": "18d904e2c4b8ccf915eb5e5aab7e424d454886eab3f2dbf89022149674012f68",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0144.png",
+        "bytes": 1771931,
+        "sha256": "b46318245958615d6e68760c535048481221e0b33f04d5cdb09ee09d526a5c6f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0145.png",
+        "bytes": 1783959,
+        "sha256": "4be32b3acce6495c4a9963fac67d74c3a18312a7a7b17b97de26d30608442b2c",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0146.png",
+        "bytes": 1784024,
+        "sha256": "c46fe6cc83692f666fda92cbb1bd0479ce7b62c226105dec28a3ad860607a949",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0147.png",
+        "bytes": 1785212,
+        "sha256": "b4db7ed93c262b9b2dc0d6bdd1745bb9729289dd663726268dea72f3013363ee",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0148.png",
+        "bytes": 1786264,
+        "sha256": "c347764b2066f03e2f474c74f15f953a41f04552bbc887e88803906f221f5ae3",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0149.png",
+        "bytes": 1788650,
+        "sha256": "26c504e3d42b49760b3ada5fc8fd918b5bdd49833c04676a302bed55076d5404",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0150.png",
+        "bytes": 1789088,
+        "sha256": "f52ed48114351cc5249b50a5e1d0474af84ff544ad5666b5e25abdbbab71239d",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0151.png",
+        "bytes": 1791024,
+        "sha256": "b1cabf1fdd3b1a53b86e4dca26f1eb140c3a18b3329fe1b92c39a3214ebefe1f",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0152.png",
+        "bytes": 1792981,
+        "sha256": "98416a6cf207a32796d43cbb5e1488add7d554b497f58cd8cf58a6a1a09979db",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0153.png",
+        "bytes": 1793143,
+        "sha256": "6b9d4c51b0a27ee3b8746449c8f59819ad1615e614b6caa67809e0b94ff38346",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0154.png",
+        "bytes": 1794370,
+        "sha256": "1874f51f3fa2273f3c923fa39ae211747473cda9295b107fc4b69d667769f81a",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0155.png",
+        "bytes": 1794786,
+        "sha256": "aca014762890cf77fb19751195118bd696d49404bde7be7100fbc6a7e711e972",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0156.png",
+        "bytes": 1796328,
+        "sha256": "2978c864fb5246dde7038e13ae0f4ad9f5d642230dd6b904b9610baf3f16e1aa",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0157.png",
+        "bytes": 1798515,
+        "sha256": "6f1e189557a75ff95f9619b8e42b6da425a1354782b6fccc8fc1c1df0b088fc5",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0158.png",
+        "bytes": 1798759,
+        "sha256": "ee173e7ccfcf0a976ec74e28b176fd7257865acb16497e864b77543d35a42ad3",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0159.png",
+        "bytes": 1800149,
+        "sha256": "e5238589b02d2d530d45451f9645b910a3c06c7473e14209caebd40abdfa5bea",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0160.png",
+        "bytes": 1801287,
+        "sha256": "f20e783c3e409604ab833e2d8598f7407399a29d6b37994c929f4fb5842e8255",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0161.png",
+        "bytes": 1802728,
+        "sha256": "62a0f224c2449cd8e2c55394a0812fb77c5cb847f5d28934d4a535534ee34a1e",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0162.png",
+        "bytes": 1802417,
+        "sha256": "ecaf789e1402107419b22d86ca22cd2cafd0bd2e5364c6ad826e65df97a63eac",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0163.png",
+        "bytes": 1803742,
+        "sha256": "b1a48a017eea29ccaad3d44e88211cdceded3f8452e934207490b03ce5aa4098",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "path": ".local/meadow-package/Windows/HALVETHRealms/Preview/Gaze/frame-0164.png",
+        "bytes": 1803834,
+        "sha256": "0777ce564d843fb9a5b20e4492a31a5cc26d2aeb9e0d3c66a9a8473f4e2b8921",
+        "width": 1280,
+        "height": 720
+      }
+    ],
+    "timing": {
+      "path": ".local/meadow-package/Windows/HALVETHRealms/QA/gaze-frames.tsv",
+      "bytes": 40581,
+      "sha256": "1922f61605e35e0feb98d7b239e263ad73349a2e577ebdde0b77b1a0f3b156c8"
+    },
+    "log": {
+      "path": ".local/skin-gaze-Gaze-20261025T051420Z-17847786.log",
+      "bytes": 283725,
+      "sha256": "41d8249306c557cb7aefa4f732823fdcee6c4c0ce489d10f3b56960c9acd52d0"
+    },
+    "runner": {
+      "path": ".local/skin-gaze-Gaze-latest.json",
+      "bytes": 416,
+      "sha256": "9d3f7402955ce8307c88d5911ad905dea6f65996cd85f3f0d10b525e15577c68"
+    },
+    "video": {
+      "path": ".local/SKIN_GAZE_11s.mp4",
+      "bytes": 6071020,
+      "sha256": "77fbd48e9e9426fea2281bba1ce5ca311a42113bd7f12181beacca7bf1adf2bd",
+      "frames": 165,
+      "durationSeconds": 11.0,
+      "encodedFps": 15,
+      "audio": "NONE"
+    },
+    "fieldMaterialCount": 5,
+    "scope": "Declared moving player camera, stationary live guide, real interaction and visible blocking wall; five-material field active"
+  },
+  "normalStart": {
+    "entry": "Start-Astralis.cmd",
+    "probe": {
+      "path": ".local/skin-gaze-cached-start-probe.log",
+      "bytes": 17135,
+      "sha256": "6f70158b1c50d1cc33eaa0a7396e2f80be4b6ebcb395db59857bedf4e1e8b51a"
+    }
+  },
+  "limits": [
+    "No biological skin/sensory simulation claim",
+    "No human visual-quality acceptance inferred",
+    "Controller state and last evaluated bone quaternions are different observations; not a synchronous GPU trace",
+    "GPU probe checks the shared deformation field, not every final skinned pixel",
+    "Fixed simulation/offscreen screenshots and encoded FPS are not normal-play performance measurements"
+  ]
+}

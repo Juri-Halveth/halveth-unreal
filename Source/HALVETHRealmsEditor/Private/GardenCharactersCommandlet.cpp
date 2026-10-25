@@ -24,6 +24,7 @@
 #include "UObject/SavePackage.h"
 #include "HAL/IConsoleManager.h"
 #include "TissueField.h"
+#include "SkinLayerShading.h"
 #include "Materials/MaterialExpressionCustom.h"
 #include "Materials/MaterialExpressionTextureObjectParameter.h"
 #include "Materials/MaterialExpressionScalarParameter.h"
@@ -46,16 +47,16 @@ bool Save(UObject* O) {
     return UPackage::SavePackage(P,O,*FPackageName::LongPackageNameToFilename(P->GetName(),FPackageName::GetAssetPackageExtension()),A);
 }
 template<class T> T* E(UMaterial* M) { auto* R=NewObject<T>(M);M->GetExpressionCollection().AddExpression(R);return R; }
-UTexture2D* Texture(const FString& Name,bool Normal=false,const FString& AssetName=FString()) {
+UTexture2D* Texture(const FString& Name,bool Normal=false,const FString& AssetName=FString(),bool Mask=false) {
     const FString Destination=AssetName.IsEmpty()?Name:AssetName;
     auto* T=NewObject<UAssetImportTask>();T->Filename=FPaths::ProjectDir()/TEXT("ArtSource/Characters")/(Name+TEXT(".png"));
     T->DestinationPath=TEXT("/Game/Characters");T->DestinationName=Destination;T->bAutomated=true;T->bSave=true;T->bReplaceExisting=true;
     auto* F=NewObject<UTextureFactory>();F->SuppressImportOverwriteDialog();T->Factory=F;
     FModuleManager::LoadModuleChecked<FAssetToolsModule>(TEXT("AssetTools")).Get().ImportAssetTasks({T});
-    for(auto* O:T->GetObjects()) if(auto* R=Cast<UTexture2D>(O)) {R->LODGroup=TEXTUREGROUP_Character;if(Normal){R->CompressionSettings=TC_Normalmap;R->SRGB=false;}R->PostEditChange();Save(R);return R;}
+    for(auto* O:T->GetObjects()) if(auto* R=Cast<UTexture2D>(O)) {R->LODGroup=TEXTUREGROUP_Character;if(Normal){R->CompressionSettings=TC_Normalmap;R->SRGB=false;}if(Mask){R->CompressionSettings=TC_Masks;R->SRGB=false;R->CompressionNoAlpha=false;R->AddressX=TA_Clamp;R->AddressY=TA_Clamp;}R->PostEditChange();Save(R);return R;}
     return nullptr;
 }
-UMaterial* Material(const FString& Name,FLinearColor Color,float Metallic,float Rough,UTexture2D* Tex=nullptr,bool Tint=false,UTexture2D* Normal=nullptr,bool Hair=false,bool Skin=false,FLinearColor SkinAlbedo=FLinearColor::Black) {
+UMaterial* Material(const FString& Name,FLinearColor Color,float Metallic,float Rough,UTexture2D* Tex=nullptr,bool Tint=false,UTexture2D* Normal=nullptr,bool Hair=false,bool Skin=false,FLinearColor SkinAlbedo=FLinearColor::Black,UTexture2D* LayerMask=nullptr) {
     FString Path=TEXT("/Game/Characters/")+Name;
     auto* M=LoadObject<UMaterial>(nullptr,*(Path+TEXT(".")+Name));
     const bool Created=M==nullptr;
@@ -95,6 +96,11 @@ UMaterial* Material(const FString& Name,FLinearColor Color,float Metallic,float 
         auto* Amount=E<UMaterialExpressionScalarParameter>(M);Amount->ParameterName=TEXT("SkinScatter");Amount->DefaultValue=.08f;M->GetEditorOnlyData()->Opacity.Expression=Amount;
         auto* Spec=E<UMaterialExpressionScalarParameter>(M);Spec->ParameterName=TEXT("SkinSpecular");Spec->DefaultValue=.35f;M->GetEditorOnlyData()->Specular.Expression=Spec;
         auto* UV=E<UMaterialExpressionTextureCoordinate>(M);
+        check(LayerMask);
+        auto* MaskSample=E<UMaterialExpressionTextureSample>(M);MaskSample->Texture=LayerMask;MaskSample->SamplerType=SAMPLERTYPE_Masks;MaskSample->Coordinates.Expression=UV;
+        auto* Masks=E<UMaterialExpressionAppendVector>(M);Masks->A.Expression=MaskSample;Masks->B.Expression=MaskSample;Masks->B.OutputIndex=4;
+        auto* Strength=E<UMaterialExpressionScalarParameter>(M);Strength->ParameterName=TEXT("MakeupStrength");Strength->DefaultValue=.85f;
+        auto* Micro=E<UMaterialExpressionScalarParameter>(M);Micro->ParameterName=TEXT("MicroDetailStrength");Micro->DefaultValue=1.f;
         // Authored, antialiased microdetail in tangent space. The frequency is
         // faded with pixel footprint: distant people do not sparkle or crawl.
         auto* Detail=E<UMaterialExpressionCustom>(M);Detail->OutputType=CMOT_Float4;
@@ -108,10 +114,15 @@ float2 p=UV*480.0,cell=floor(p),f=frac(p);float nearest=10.;float2 delta=0.;
 float footprint=max(length(ddx(p)),length(ddy(p)));
 float visible=1-smoothstep(.35,1.4,footprint);
 float2 n=-delta*.18*exp(-nearest*24.)*visible;
+float lip=saturate(Masks.r)*saturate(Strength);
+n*=saturate(MicroStrength)*lerp(1.,.52,lip);
+float grooveVisible=1.-smoothstep(.4,1.3,fwidth(UV.x)*1600.);
+n.x+=.009*lip*sin(UV.x*1600.+sin(UV.y*101.))*grooveVisible*saturate(MicroStrength);
 float oil=.5+.5*sin(UV.x*37.+sin(UV.y*29.));
 return float4(n,.43+.12*oil-.035*exp(-nearest*18.)*visible,.2);
 )HLSL");
         FCustomInput In;In.InputName=TEXT("UV");In.Input.Expression=UV;Detail->Inputs.Add(In);
+        for(auto Pair:{TPair<FName,UMaterialExpression*>(TEXT("Masks"),Masks),TPair<FName,UMaterialExpression*>(TEXT("Strength"),Strength),TPair<FName,UMaterialExpression*>(TEXT("MicroStrength"),Micro)}){FCustomInput Input;Input.InputName=Pair.Key;Input.Input.Expression=Pair.Value;Detail->Inputs.Add(Input);}
         auto* XY=E<UMaterialExpressionComponentMask>(M);XY->Input.Expression=Detail;XY->R=true;XY->G=true;XY->B=false;XY->A=false;
         auto* N=E<UMaterialExpressionAppendVector>(M);N->A.Expression=XY;auto* One=E<UMaterialExpressionConstant>(M);One->R=1;N->B.Expression=One;
         auto* Unit=E<UMaterialExpressionNormalize>(M);Unit->VectorInput.Expression=N;M->GetEditorOnlyData()->Normal.Expression=Unit;
@@ -119,6 +130,14 @@ return float4(n,.43+.12*oil-.035*exp(-nearest*18.)*visible,.2);
         auto* Bias=E<UMaterialExpressionScalarParameter>(M);Bias->ParameterName=TEXT("SkinRoughnessBias");Bias->DefaultValue=0;
         auto* Biased=E<UMaterialExpressionAdd>(M);Biased->A.Expression=Roughness;Biased->B.Expression=Bias;
         M->GetEditorOnlyData()->Roughness.Expression=Biased;
+        auto* Layers=E<UMaterialExpressionCustom>(M);Layers->OutputType=CMOT_Float4;Layers->Code=UTF8_TO_TCHAR(HalvethSkinLayers::Composite);
+        auto* Lip=E<UMaterialExpressionVectorParameter>(M);Lip->ParameterName=TEXT("LipPigment");Lip->DefaultValue=FLinearColor(1.10f,.60f,.67f);
+        auto* Cheek=E<UMaterialExpressionVectorParameter>(M);Cheek->ParameterName=TEXT("CheekPigment");Cheek->DefaultValue=FLinearColor(1.035f,.83f,.85f);
+        auto* Lid=E<UMaterialExpressionVectorParameter>(M);Lid->ParameterName=TEXT("LidPigment");Lid->DefaultValue=FLinearColor(.70f,.58f,.59f);
+        for(auto Pair:{TPair<FName,UMaterialExpression*>(TEXT("Base"),Mix),TPair<FName,UMaterialExpression*>(TEXT("Rough"),Biased),TPair<FName,UMaterialExpression*>(TEXT("Masks"),Masks),TPair<FName,UMaterialExpression*>(TEXT("Strength"),Strength),TPair<FName,UMaterialExpression*>(TEXT("LipTint"),Lip),TPair<FName,UMaterialExpression*>(TEXT("CheekTint"),Cheek),TPair<FName,UMaterialExpression*>(TEXT("LidTint"),Lid)}){FCustomInput Input;Input.InputName=Pair.Key;Input.Input.Expression=Pair.Value;Layers->Inputs.Add(Input);}
+        auto* LayerColor=E<UMaterialExpressionComponentMask>(M);LayerColor->Input.Expression=Layers;LayerColor->R=true;LayerColor->G=true;LayerColor->B=true;LayerColor->A=false;
+        auto* LayerRough=E<UMaterialExpressionComponentMask>(M);LayerRough->Input.Expression=Layers;LayerRough->R=false;LayerRough->G=false;LayerRough->B=false;LayerRough->A=true;
+        M->GetEditorOnlyData()->BaseColor.Expression=LayerColor;M->GetEditorOnlyData()->Roughness.Expression=LayerRough;
     }
     if(Name.EndsWith(TEXT("_Iris"))){
         M->SetShadingModel(MSM_ClearCoat);
@@ -191,6 +210,8 @@ int32 UGardenCharactersCommandlet::Main(const FString& Params) {
         };
         FLinearColor SkinAlbedo,BrowColor,IrisColor;
         if(!ReadColor(TEXT("skinAlbedoLinear"),SkinAlbedo)||!ReadColor(TEXT("browColorLinear"),BrowColor)||!ReadColor(TEXT("irisColorLinear"),IrisColor))return 8;
+        auto* LayerMask=Texture(N+TEXT("_skin_layers"),false,FString(),true);if(!LayerMask||LayerMask->SRGB||LayerMask->CompressionSettings!=TC_Masks)return 9;
+        UE_LOG(LogTemp,Display,TEXT("SKIN_LAYER_IMPORT model=%s linear=true compression=masks alpha=retained uv=0"),*N);
         // Texture imports can load Interchange after the commandlet starts.
         // Bind the skeletal importer after that module registration, explicitly.
         auto* FbxRoute=IConsoleManager::Get().FindConsoleVariable(TEXT("Interchange.FeatureFlags.Import.FBX"));
@@ -231,7 +252,7 @@ int32 UGardenCharactersCommandlet::Main(const FString& Params) {
             else if(S==TEXT("Iris")){C=IrisColor;Rough=.16;}
             else if(S==TEXT("Pupil")){C={.002,.002,.002};Rough=.2;}
             else {UE_LOG(LogTemp,Error,TEXT("GARDEN_CHARACTER_UNKNOWN_MATERIAL_SLOT %s %s"),*N,*S);return 5;}
-            Materials.Add(S,Material(N+TEXT("_")+S,C,Metal,Rough,Tex,false,nullptr,false,S==TEXT("Skin"),SkinAlbedo));
+            Materials.Add(S,Material(N+TEXT("_")+S,C,Metal,Rough,Tex,false,nullptr,false,S==TEXT("Skin"),SkinAlbedo,LayerMask));
         }
         for(FSkeletalMaterial& Slot:Mesh->GetMaterials()) {
             FString S=Slot.MaterialSlotName.ToString();int32 Dot;if(S.FindChar('.',Dot))S=S.Left(Dot);

@@ -19,7 +19,7 @@ struct FGuideProxy : FAnimInstanceProxy {
     explicit FGuideProxy(UAnimInstance* I):FAnimInstanceProxy(I){}
     UAnimSequence* Idle=nullptr;
     double Time=0,Phase=0;
-    float Walk=0,Yaw=0,Pitch=0,Gesture=0;
+    float Walk=0,Yaw=0,Pitch=0,EyeYaw=0,EyePitch=0,Gesture=0;
     double HandForward[2]={3,3},WeightShift=0;
     FVector Forward,Right,Feet[2],Normals[2];float Ground[2]={0,0};
     virtual void PostEvaluate(UAnimInstance* I) override {
@@ -32,7 +32,7 @@ struct FGuideProxy : FAnimInstanceProxy {
         FAnimInstanceProxy::PreUpdate(I,Dt);
         auto* A=CastChecked<UHALVETHGuideAnimInstance>(I);
         Idle=A->BaseIdle;Time=A->Time;Phase=A->GaitPhase;Walk=A->WalkWeight;
-        Yaw=A->LookYaw;Pitch=A->LookPitch;Gesture=A->Gesture;
+        Yaw=A->LookYaw;Pitch=A->LookPitch;EyeYaw=A->EyeYaw;EyePitch=A->EyePitch;Gesture=A->Gesture;
         HandForward[0]=A->HandForward[0];HandForward[1]=A->HandForward[1];WeightShift=A->WeightShift;
         Forward=A->Forward;Right=A->Right;
         for(int S=0;S<2;S++){Feet[S]=A->FootTargets[S];Normals[S]=A->GroundNormals[S];Ground[S]=A->GroundCorrections[S];}
@@ -81,11 +81,12 @@ struct FGuideProxy : FAnimInstanceProxy {
         const FVector YawAxis=FVector::CrossProduct(Forward,Right).GetSafeNormal();
         const FVector PitchAxis=FVector::CrossProduct(Forward,FVector::UpVector).GetSafeNormal();
         Rotate(TEXT("neck03"),YawAxis,Yaw*.30);
-        Rotate(TEXT("head"),YawAxis,Yaw*.62);
-        Rotate(TEXT("head"),PitchAxis,Pitch*.90);
+        Rotate(TEXT("head"),YawAxis,Yaw*.70);
+        Rotate(TEXT("neck03"),PitchAxis,Pitch*.30);
+        Rotate(TEXT("head"),PitchAxis,Pitch*.70);
         for(FName Eye:{FName(TEXT("eye.L")),FName(TEXT("eye.R"))}){
-            Rotate(Eye,YawAxis,Yaw*.08);
-            Rotate(Eye,PitchAxis,Pitch*.10);
+            Rotate(Eye,YawAxis,EyeYaw);
+            Rotate(Eye,PitchAxis,EyePitch);
         }
         auto Limb=[&](const FString& Upper,const FString& Lower,const FString& End,const FString& Side,FVector Goal,FVector Pole){
             FName Names[]={FName(*(Upper+TEXT("01.")+Side)),FName(*(Upper+TEXT("02.")+Side)),FName(*(Lower+TEXT("01.")+Side)),FName(*(Lower+TEXT("02.")+Side)),FName(*(End+TEXT(".")+Side))};
@@ -147,6 +148,8 @@ void UHALVETHGuideAnimInstance::NativeInitializeAnimation(){
     for(int I=0;I<Local.Num();I++){int Parent=Ref.GetParentIndex(I);World[I]=Parent>=0?Local[I]*World[Parent]:Local[I];}
     auto Pos=[&](FName N){int I=Ref.FindBoneIndex(FName(*N.ToString().Replace(TEXT("."),TEXT("_"))));return I==INDEX_NONE?FVector::ZeroVector:World[I].GetLocation();};
     RefFeet[0]=Pos(TEXT("foot.L"));RefFeet[1]=Pos(TEXT("foot.R"));
+    RefGazeOrigin=(Pos(TEXT("eye.L"))+Pos(TEXT("eye.R")))*.5;
+    Gaze=HalvethGaze::State{};LookYaw=0;LookPitch=0;EyeYaw=0;EyePitch=0;
     Forward=(Pos(TEXT("toe3-1.L"))-RefFeet[0]);Forward.Z=0;Forward.Normalize();
     Right=RefFeet[1]-RefFeet[0];Right.Z=0;Right.Normalize();
     // The authored A-pose spreads the feet for rigging. Preserve its coordinate
@@ -164,11 +167,33 @@ void UHALVETHGuideAnimInstance::NativeInitializeAnimation(){
     UE_LOG(LogTemp,Display,TEXT("GARDEN_MOTION_RIG left_foot=%s right_foot=%s forward=%s right=%s"),*RefFeet[0].ToString(),*RefFeet[1].ToString(),*Forward.ToString(),*Right.ToString());
     static bool Printed=false;if(!Printed){Printed=true;FString Names;for(int I=0;I<Local.Num();I++)Names+=Ref.GetBoneName(I).ToString()+TEXT(",");UE_LOG(LogTemp,Display,TEXT("GARDEN_MOTION_BONES %s"),*Names);}
 }
+void UHALVETHGuideAnimInstance::ObserveLookTarget(const FVector& Target,bool Eligible,bool ViewerLooksAtFace){
+    auto* Mesh=GetSkelMeshComponent();auto* World=GetWorld();
+    VisibleLookTarget=false;ViewerEyeContact=false;
+    if(!Mesh||!World||Target.ContainsNaN())return;
+    // The neutral eye origin is transformed once by the BODY, not by the last
+    // evaluated head/eye rotation. No target feedback from a rotating eyeball.
+    const FVector Origin=Mesh->GetComponentTransform().TransformPosition(RefGazeOrigin);
+    const FVector Local=Mesh->GetComponentTransform().InverseTransformVectorNoScale(Target-Origin);
+    const double Yaw=FMath::Atan2(FVector::DotProduct(Local,Right),FVector::DotProduct(Local,Forward));
+    const double Pitch=FMath::Atan2(Local.Z,Local.Size2D());
+    if(!Eligible||Local.Size()>750||FMath::Abs(Yaw)>1.22||FMath::Abs(Pitch)>.65){DesiredLookYaw=0;DesiredLookPitch=0;SightClear=false;return;}
+    const double Now=World->GetTimeSeconds();
+    if(Now>=NextSightCheck||FVector::DistSquared(Target,LastSightEndpoint)>1600){
+        FHitResult Hit;FCollisionQueryParams Query(SCENE_QUERY_STAT(GuideFaceSight),true);
+        Query.AddIgnoredActor(Mesh->GetOwner());Query.AddIgnoredActor(UGameplayStatics::GetPlayerPawn(World,0));
+        SightClear=!World->LineTraceSingleByChannel(Hit,Origin,Target,ECC_Visibility,Query);
+        NextSightCheck=Now+.12;LastSightEndpoint=Target;
+    }
+    VisibleLookTarget=SightClear;ViewerEyeContact=SightClear&&ViewerLooksAtFace;
+    DesiredLookYaw=SightClear?FMath::Clamp(Yaw,-.85,.85):0;
+    DesiredLookPitch=SightClear?FMath::Clamp(Pitch,-.36,.36):0;
+}
 void UHALVETHGuideAnimInstance::NativeUpdateAnimation(float Dt){
     Super::NativeUpdateAnimation(Dt);if(!FMath::IsFinite(Dt)||Dt<=0)return;
     auto* Body=GetSkelMeshComponent();if(!Body)return;
     if(FreezeAppearancePose){
-        Time=0;GaitPhase=0;WalkWeight=0;LookYaw=0;LookPitch=0;Gesture=0;WeightShift=0;
+        Time=0;GaitPhase=0;WalkWeight=0;LookYaw=0;LookPitch=0;EyeYaw=0;EyePitch=0;Gaze=HalvethGaze::State{};Gesture=0;WeightShift=0;
         for(int32 Side=0;Side<2;Side++){HandForward[Side]=3;FootTargets[Side]=RefFeet[Side];GroundNormals[Side]=FVector::UpVector;}
         Body->SetMorphTarget(TEXT("Blink"),0);Body->SetMorphTarget(TEXT("Talk"),0);
         Body->SetMorphTarget(TEXT("Breath"),.25f);Body->SetMorphTarget(TEXT("Smile"),0);return;
@@ -182,8 +207,9 @@ void UHALVETHGuideAnimInstance::NativeUpdateAnimation(float Dt){
     Time+=Dt;
     WalkSpring.update(FMath::Clamp(DesiredSpeed/FMath::Max(1.,CruiseSpeed),0.,1.),Dt,7);WalkWeight=WalkSpring.position;
     GaitPhase+=.6*DesiredSpeed/(48.*FMath::Max(.08f,WalkWeight))*Dt;
-    YawSpring.update(DesiredLookYaw,Dt,1.1/FMath::Max(.12,ResponseSeconds));LookYaw=YawSpring.position;
-    PitchSpring.update(DesiredLookPitch,Dt,1.3/FMath::Max(.12,ResponseSeconds));LookPitch=PitchSpring.position;
+    Gaze.step(DesiredLookYaw,DesiredLookPitch,VisibleLookTarget,Dt);
+    Gaze.updateContact(ViewerEyeContact,Dt);
+    LookYaw=Gaze.headYaw;LookPitch=Gaze.headPitch;EyeYaw=Gaze.eyeYaw;EyePitch=Gaze.eyePitch;
     GestureSpring.update(Speaking?1:0,Dt,5);Gesture=GestureSpring.position;
     WeightShiftSpring.update(.3*FMath::Sin(Time*.71)+.85*WalkWeight*FMath::Sin(GaitPhase*2*PI),Dt,9);
     WeightShift=WeightShiftSpring.position;
@@ -221,10 +247,10 @@ void UHALVETHGuideAnimInstance::NativeUpdateAnimation(float Dt){
     // faces previously stayed fixed unless the guide dialogue controller ran.
     const double BlinkTime=FMath::Fmod(Time+Identity*.731,3.1+Identity*.173);
     const double Blink=FMath::Max(0.,1.-FMath::Abs(BlinkTime-.12)/.12);
-    Body->SetMorphTarget(TEXT("Blink"),Blink*Blink*(3.-2.*Blink));
+    Body->SetMorphTarget(TEXT("Blink"),FMath::Max(Blink*Blink*(3.-2.*Blink),Gaze.shiftBlink()));
     Body->SetMorphTarget(TEXT("Talk"),Gesture*(.18+.22*FMath::Sin(Time*8.4+Identity)));
     Body->SetMorphTarget(TEXT("Breath"),(.4+BodyLoad)*(.5+.5*FMath::Sin(BodyBreathPhase))+.015*(.5+.5*FMath::Sin(BodyHeartPhase)));
-    Body->SetMorphTarget(TEXT("Smile"),.35*Gesture);
+    Body->SetMorphTarget(TEXT("Smile"),.35*Gesture+.08*Gaze.attention*(.2+.8*Gaze.contactExpression));
 }
 void UHALVETHGuideAnimInstance::LogPoseAudit(const TCHAR* Context) const {
     const auto* Body=GetSkelMeshComponent();if(!Body||!PoseAuditReady)return;

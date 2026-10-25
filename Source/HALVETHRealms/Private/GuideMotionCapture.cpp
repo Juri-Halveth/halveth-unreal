@@ -20,6 +20,7 @@
 
 // Explicit native capture only; ordinary play keeps its input and camera.
 void AHALVETHGameMode::RunMotionCapture(float Dt){
+    if(FParse::Param(FCommandLine::Get(),TEXT("HalvethGazeCapture"))){RunGazeCapture(Dt);return;}
     if(FParse::Param(FCommandLine::Get(),TEXT("HalvethAppearanceCapture"))){RunAppearanceCapture(Dt);return;}
     auto* P=Cast<AHALVETHCharacter>(UGameplayStatics::GetPlayerPawn(this,0));
     auto* PC=GetWorld()->GetFirstPlayerController();if(!P||!PC||!RealmWorld)return;
