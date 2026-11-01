@@ -4,6 +4,10 @@
 
 # Portal Garden – Fantasy-Spielprototyp mit C++ und Unreal Engine
 
+![HALVETH / NETZ – Portal Garden: leuchtendes Tor und wachsender Garten](HALVETH_NETZ_HERO.svg)
+
+**HALVETH / NETZ · Welten.** [Starship Lab öffnen](https://juri-halveth.github.io/universum/) und dort die Projektkarte „HALVETH UNREAL“ auswählen.
+
 Ein eigenständiger C++-Spielprototyp für Unreal Engine. Portalwelten, eine interaktive Bibliothek und Bau- und Rezeptsysteme verbinden Gestaltung mit nativer Spielentwicklung.
 
 [**Projekt öffnen →**](https://github.com/Juri-Halveth/halveth-unreal/releases) · [Arbeitsproben](https://juri-halveth.github.io/koennen/) · [Portfolio](https://juri-halveth.github.io/)
