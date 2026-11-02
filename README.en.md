@@ -2,6 +2,8 @@
 
 # Portal Garden – C++ fantasy game prototype for Unreal Engine
 
+**[Open the published Windows preview v0.1.0](https://github.com/Juri-Halveth/halveth-unreal/releases/tag/v0.1.0).** It is an unsigned pre-release. The [0.2 native validation](docs/NATIVE-VALIDATION-0.2.0.md) describes a separate source and test state, not a published 0.2 release.
+
 **Concise project guide · EN / RU**
 
 An independent native C++ world prototype built for Unreal Engine 5.8. The documented play loop connects four realms with exploration, an original living library, recipes, crafting, enchantment, construction and local persistence.
