@@ -1,0 +1,173 @@
+{
+  "schema": "halveth.nasa-sun.v1",
+  "source": "NASA/JPL Horizons",
+  "apiSignature": {
+    "source": "NASA/JPL Horizons API",
+    "version": "1.2"
+  },
+  "requestUrl": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&OBJ_DATA=%27YES%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27OBSERVER%27&CENTER=%27coord%40399%27&COORD_TYPE=%27GEODETIC%27&SITE_COORD=%270%2C45%2C0%27&START_TIME=%272026-10-04%27&STOP_TIME=%272026-10-05%27&STEP_SIZE=%271+h%27&QUANTITIES=%274%27&CSV_FORMAT=%27YES%27&ANG_FORMAT=%27DEG%27&APPARENT=%27AIRLESS%27",
+  "fetchedAtUtc": "2026-10-04T14:07:41.035143+00:00",
+  "rawResponseSha256": "1f3205ce095bdfe8ec4bad3990e32a4ad856f7f1df4e2e14f09a77ed1eb891cb",
+  "target": "Sun (10)",
+  "observer": {
+    "kind": "DECLARED_VIRTUAL_SITE",
+    "longitudeDegrees": 0,
+    "latitudeDegrees": 45,
+    "altitudeKilometres": 0
+  },
+  "coverageHours": 24,
+  "sampleIntervalSeconds": 3600,
+  "rendering": "Direction interpolation between hourly samples; not a live weather service",
+  "samples": [
+    {
+      "utc": "2026-10-04T00:00:00Z",
+      "unixSeconds": 1791072000,
+      "azimuthDegrees": 4.250547,
+      "altitudeDegrees": -49.198747
+    },
+    {
+      "utc": "2026-10-04T01:00:00Z",
+      "unixSeconds": 1791075600,
+      "azimuthDegrees": 26.21859,
+      "altitudeDegrees": -46.409963
+    },
+    {
+      "utc": "2026-10-04T02:00:00Z",
+      "unixSeconds": 1791079200,
+      "azimuthDegrees": 45.017251,
+      "altitudeDegrees": -40.228066
+    },
+    {
+      "utc": "2026-10-04T03:00:00Z",
+      "unixSeconds": 1791082800,
+      "azimuthDegrees": 60.350303,
+      "altitudeDegrees": -31.800582
+    },
+    {
+      "utc": "2026-10-04T04:00:00Z",
+      "unixSeconds": 1791086400,
+      "azimuthDegrees": 73.132955,
+      "altitudeDegrees": -22.074252
+    },
+    {
+      "utc": "2026-10-04T05:00:00Z",
+      "unixSeconds": 1791090000,
+      "azimuthDegrees": 84.411614,
+      "altitudeDegrees": -11.693789
+    },
+    {
+      "utc": "2026-10-04T06:00:00Z",
+      "unixSeconds": 1791093600,
+      "azimuthDegrees": 95.067712,
+      "altitudeDegrees": -1.111669
+    },
+    {
+      "utc": "2026-10-04T07:00:00Z",
+      "unixSeconds": 1791097200,
+      "azimuthDegrees": 105.856248,
+      "altitudeDegrees": 9.295327
+    },
+    {
+      "utc": "2026-10-04T08:00:00Z",
+      "unixSeconds": 1791100800,
+      "azimuthDegrees": 117.500596,
+      "altitudeDegrees": 19.13188
+    },
+    {
+      "utc": "2026-10-04T09:00:00Z",
+      "unixSeconds": 1791104400,
+      "azimuthDegrees": 130.743806,
+      "altitudeDegrees": 27.898971
+    },
+    {
+      "utc": "2026-10-04T10:00:00Z",
+      "unixSeconds": 1791108000,
+      "azimuthDegrees": 146.252487,
+      "altitudeDegrees": 34.92227
+    },
+    {
+      "utc": "2026-10-04T11:00:00Z",
+      "unixSeconds": 1791111600,
+      "azimuthDegrees": 164.210364,
+      "altitudeDegrees": 39.364738
+    },
+    {
+      "utc": "2026-10-04T12:00:00Z",
+      "unixSeconds": 1791115200,
+      "azimuthDegrees": 183.699681,
+      "altitudeDegrees": 40.470744
+    },
+    {
+      "utc": "2026-10-04T13:00:00Z",
+      "unixSeconds": 1791118800,
+      "azimuthDegrees": 202.790739,
+      "altitudeDegrees": 38.014308
+    },
+    {
+      "utc": "2026-10-04T14:00:00Z",
+      "unixSeconds": 1791122400,
+      "azimuthDegrees": 219.83951,
+      "altitudeDegrees": 32.473063
+    },
+    {
+      "utc": "2026-10-04T15:00:00Z",
+      "unixSeconds": 1791126000,
+      "azimuthDegrees": 234.407831,
+      "altitudeDegrees": 24.681034
+    },
+    {
+      "utc": "2026-10-04T16:00:00Z",
+      "unixSeconds": 1791129600,
+      "azimuthDegrees": 246.936243,
+      "altitudeDegrees": 15.424798
+    },
+    {
+      "utc": "2026-10-04T17:00:00Z",
+      "unixSeconds": 1791133200,
+      "azimuthDegrees": 258.147503,
+      "altitudeDegrees": 5.304463
+    },
+    {
+      "utc": "2026-10-04T18:00:00Z",
+      "unixSeconds": 1791136800,
+      "azimuthDegrees": 268.776226,
+      "altitudeDegrees": -5.232119
+    },
+    {
+      "utc": "2026-10-04T19:00:00Z",
+      "unixSeconds": 1791140400,
+      "azimuthDegrees": 279.547044,
+      "altitudeDegrees": -15.809315
+    },
+    {
+      "utc": "2026-10-04T20:00:00Z",
+      "unixSeconds": 1791144000,
+      "azimuthDegrees": 291.253035,
+      "altitudeDegrees": -26.036699
+    },
+    {
+      "utc": "2026-10-04T21:00:00Z",
+      "unixSeconds": 1791147600,
+      "azimuthDegrees": 304.849682,
+      "altitudeDegrees": -35.407231
+    },
+    {
+      "utc": "2026-10-04T22:00:00Z",
+      "unixSeconds": 1791151200,
+      "azimuthDegrees": 321.423768,
+      "altitudeDegrees": -43.171931
+    },
+    {
+      "utc": "2026-10-04T23:00:00Z",
+      "unixSeconds": 1791154800,
+      "azimuthDegrees": 341.642497,
+      "altitudeDegrees": -48.265308
+    },
+    {
+      "utc": "2026-10-05T00:00:00Z",
+      "unixSeconds": 1791158400,
+      "azimuthDegrees": 4.399218,
+      "altitudeDegrees": -49.57949
+    }
+  ]
+}

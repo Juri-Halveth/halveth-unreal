@@ -18,7 +18,7 @@ void AHALVETHRealmWorld::InitializeEarthSky(){
     FParse::Value(FCommandLine::Get(),TEXT("HalvethSkyUnix="),SkyClockUnix);
     FParse::Value(FCommandLine::Get(),TEXT("HalvethSkyTimeScale="),SkyTimeScale);
     FString Raw;TSharedPtr<FJsonObject> Doc;
-    if(FFileHelper::LoadFileToString(Raw,*(FPaths::ProjectDir()/TEXT("assets/sky/ephemeris.json")))&&FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Raw),Doc)&&Doc.IsValid()){
+    if(FFileHelper::LoadFileToString(Raw,*(FPaths::ProjectContentDir()/TEXT("sky/ephemeris.json")))&&FJsonSerializer::Deserialize(TJsonReaderFactory<>::Create(Raw),Doc)&&Doc.IsValid()){
         const TArray<TSharedPtr<FJsonValue>>* Samples=nullptr;
         if(Doc->TryGetArrayField(TEXT("samples"),Samples)&&Samples->Num()==25){
             SkyFirstUnix=(*Samples)[0]->AsObject()->GetNumberField(TEXT("unixSeconds"));SkyLastUnix=(*Samples)[24]->AsObject()->GetNumberField(TEXT("unixSeconds"));
@@ -45,10 +45,10 @@ void AHALVETHRealmWorld::TickEarthSky(float Dt){
     Time=FMath::Fmod(Time,86400.);if(Time<0)Time+=86400.;double Fraction=Time/3600;int I=FMath::Clamp(FMath::FloorToInt(Fraction),0,23);
     FVector Direction=FMath::Lerp(SunDirections[I],SunDirections[I+1],Fraction-I).GetSafeNormal();
     double Height=Direction.Z;Sun->SetRelativeRotation((-Direction).Rotation());
-    Sun->SetIntensity(Height>-.02?48000*FMath::Clamp((Height+.02)/.12,0.,1.):0);
+    Sun->SetIntensity(Height>-.02?42000*FMath::Clamp((Height+.02)/.12,0.,1.):0);
     const double Warm=FMath::Clamp((.25-Height)/.25,0.,1.);
     Sun->SetLightColor(FMath::Lerp(FLinearColor(1,.98,.92),FLinearColor(1,.32,.12),Warm));
-    Sky->SetIntensity(FMath::Lerp(.18,1.4,FMath::Clamp((Height+.10)/.25,0.,1.)));
+    Sky->SetIntensity(FMath::Lerp(.18,1.65,FMath::Clamp((Height+.10)/.25,0.,1.)));
     const double Day=FMath::Clamp((Height+.08)/.18,0.,1.);
     NightFill->SetIntensity(.30*(1-Day));
     // A bounded histogram exposure can compensate retained indirect lighting

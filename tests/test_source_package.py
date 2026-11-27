@@ -3,7 +3,7 @@ import base64
 import hashlib
 import importlib.util
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import tempfile
 import unittest
 import zipfile
@@ -38,6 +38,15 @@ def fixture(root: Path):
 
 
 class SourcePackageTests(unittest.TestCase):
+    def test_sky_source_is_staged_for_native_package_and_export(self):
+        sky = ROOT / "Content/sky/ephemeris.json"
+        self.assertEqual(sky.read_bytes(), (ROOT / "assets/sky/ephemeris.json").read_bytes())
+        self.assertIn('+DirectoriesToAlwaysStageAsNonUFS=(Path="sky")',
+                      (ROOT / "Config/DefaultGame.ini").read_text(encoding="utf-8"))
+        self.assertIn('FPaths::ProjectContentDir()/TEXT("sky/ephemeris.json")',
+                      (ROOT / "Source/HALVETHRealms/Private/GardenEarthSky.cpp").read_text(encoding="utf-8"))
+        self.assertTrue(EXPORT.allowed(PurePosixPath("Content/sky/ephemeris.json")))
+
     def test_character_source_is_exported_and_changed_bytes_are_rejected(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
