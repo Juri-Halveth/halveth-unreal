@@ -54,6 +54,9 @@ class SourcePackageTests(unittest.TestCase):
             with zipfile.ZipFile(archive) as bundle:
                 self.assertIn("HALVETH-Unreal/Source/Layout.h", bundle.namelist())
                 self.assertIn("HALVETH-Unreal/SOURCE-MANIFEST.json", bundle.namelist())
+                for linked_file in ("README.en.md", "README.ru.md", "HALVETH_NETZ_HERO.svg"):
+                    self.assertEqual(bundle.read("HALVETH-Unreal/" + linked_file),
+                                     (root / linked_file).read_bytes())
                 self.assertEqual(bundle.read("HALVETH-Unreal/Source/Layout.h"), (root / "Source/Layout.h").read_bytes())
                 for name in bundle.namelist():
                     self.assertNotIn(b"PRIVATE_SENTINEL_DO_NOT_EXPORT", bundle.read(name))

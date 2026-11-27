@@ -16,7 +16,8 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 ROOT_FILES = frozenset({
-    "HALVETHRealms.uproject", "README.md", "LICENSE", "THIRD-PARTY-NOTICES.md", ".gitignore", ".gitattributes",
+    "HALVETHRealms.uproject", "README.md", "README.en.md", "README.ru.md", "HALVETH_NETZ_HERO.svg",
+    "LICENSE", "THIRD-PARTY-NOTICES.md", ".gitignore", ".gitattributes",
 })
 TREE_EXTENSIONS = {
     "Source": {".h", ".cpp", ".cs"},
