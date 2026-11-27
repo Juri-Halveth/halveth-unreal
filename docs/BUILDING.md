@@ -1,5 +1,7 @@
 # Rebuild and package notices
 
+After `-Stage Build`, run `-Stage Smoke` to exercise gameplay in the native engine. The smoke stage creates the original tint-and-glow material from C++ and runs the game with NullRHI. Its JSON result is written to `Saved/HALVETH-runtime-smoke.json`. For a rendered game, `-Stage Prepare` also imports the two ground materials. Packaging requires all three materials.
+
 The Windows helper uses Unreal's development packaging path, passes `-MaxParallelActions=2` and `-NoUBA`, and packages with `-nodebuginfo`. The local build confirmed the two-action limit, while its log still identified a UBA local executor; the flag alone is not evidence that UBA was disabled. Copying notices does not invoke compilation or UAT.
 
 Before a full package build, prepare a reviewed runtime-notice companion with schema `halveth.runtime-notices.v1`. Supply it explicitly:

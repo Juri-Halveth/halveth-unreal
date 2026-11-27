@@ -37,17 +37,28 @@ if ($Stage -in @('Prepare', 'All')) {
     } finally { $env:GARDEN_ENGINE = $previousGardenEngine }
 }
 if ($Stage -in @('Smoke', 'All')) {
-    $smokeStartedAt = [DateTime]::UtcNow
-    & $editor $projectFile -game -HalvethSmokeTest -NullRHI -unattended -nosound -log
+    $runRoot = Join-Path $projectRoot ('Saved\Tests\smoke-' + [Guid]::NewGuid().ToString('N'))
+    New-Item -ItemType Directory -Path $runRoot | Out-Null
+    if ($Stage -eq 'Smoke') {
+        & $editor $projectFile -run=HALVETHPrepare -SurfaceOnly -NullRHI -unattended -nop4 -nosound "-UserDir=$runRoot"
+        if ($LASTEXITCODE -ne 0) { throw "Game-state material preparation failed ($LASTEXITCODE)." }
+    }
+    & $editor $projectFile -game -HalvethSmokeTest -NullRHI -unattended -nosound "-UserDir=$runRoot"
     if ($LASTEXITCODE -ne 0) { throw "Runtime smoke failed ($LASTEXITCODE)." }
-    $receiptPath = Join-Path $projectRoot 'Saved\HALVETH-runtime-smoke.json'
-    if ((Get-Item -LiteralPath $receiptPath).LastWriteTimeUtc -lt $smokeStartedAt.AddSeconds(-2)) { throw 'Runtime receipt predates this test run.' }
+    $receiptPath = Join-Path $runRoot 'Saved\HALVETH-runtime-smoke.json'
     $receipt = Get-Content -LiteralPath $receiptPath -Raw | ConvertFrom-Json
-    if (-not $receipt.passed) { throw 'Runtime receipt does not report a passing game-state test.' }
+    Copy-Item -LiteralPath $receiptPath -Destination (Join-Path $projectRoot 'Saved\HALVETH-runtime-smoke.json') -Force
+    if ($receipt.passed -isnot [bool] -or -not $receipt.passed) {
+        throw "Game-state test did not pass: $($receipt.detail)"
+    }
 }
 if ($Stage -in @('Package', 'All')) {
-    $material = Join-Path $projectRoot 'Content\Materials\M_HalvethSurface.uasset'
-    if (-not (Test-Path -LiteralPath $material)) { throw 'Run Prepare before packaging.' }
+    foreach ($name in @('M_HalvethSurface', 'M_PH_CobblestoneFloor03', 'M_PH_ForestGround04')) {
+        $material = Join-Path $projectRoot "Content\Materials\$name.uasset"
+        if (-not (Test-Path -LiteralPath $material -PathType Leaf)) {
+            throw "Missing packaged material $name. Run Prepare before packaging."
+        }
+    }
     $archive = Join-Path $projectRoot 'Builds'
     & $uat BuildCookRun "-project=$projectFile" -noP4 -platform=Win64 -clientconfig=Development -build -cook -stage -pak -archive -nodebuginfo "-archivedirectory=$archive" '-UbtArgs=-MaxParallelActions=2 -NoUBA' -unattended
     if ($LASTEXITCODE -ne 0) { throw "Packaging failed ($LASTEXITCODE)." }
