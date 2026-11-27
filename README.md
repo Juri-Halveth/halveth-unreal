@@ -1,4 +1,19 @@
-# HALVETH Portal Garden — anatomical characters, ground response and Earth sky
+<!-- HUB_LANGUAGES_V1 -->
+[Original / Deutsch](README.md) · [English](README.en.md) · [Русский](README.ru.md)
+<!-- /HUB_LANGUAGES_V1 -->
+
+# Portal Garden – Fantasy-Spielprototyp mit C++ und Unreal Engine
+
+Ein eigenständiger C++-Spielprototyp für Unreal Engine. Portalwelten, eine interaktive Bibliothek und Bau- und Rezeptsysteme verbinden Gestaltung mit nativer Spielentwicklung.
+
+**Direkt ausprobieren:** [Veröffentlichte Windows-Vorschau v0.1.0 öffnen](https://github.com/Juri-Halveth/halveth-unreal/releases/tag/v0.1.0).
+Das Release ist eine unsignierte Vorabfassung; die weiter unten beschriebene 0.2-Validierung bezeichnet einen getrennten Quell- und Prüfstand, kein veröffentlichtes 0.2-Release.
+
+[Native Prüfung von 0.2](docs/NATIVE-VALIDATION-0.2.0.md) · [HALVETH Starship Lab (optional)](https://juri-halveth.github.io/universum/)
+
+![HALVETH / NETZ – Portal Garden: leuchtendes Tor und wachsender Garten](HALVETH_NETZ_HERO.svg)
+
+## Experimenteller Zweig / development branch: HALVETH Portal Garden — anatomical characters, ground response and Earth sky
 
 Four locally generated 600 × 600 metre landscapes with hills, CC0 forest scans,
 portal arches, spell practice, library, crafting and persistent construction.
