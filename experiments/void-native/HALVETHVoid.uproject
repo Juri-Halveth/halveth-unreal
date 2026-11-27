@@ -1,0 +1,11 @@
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.8",
+  "Category": "Games",
+  "Description": "An original seeded native world built from an empty coordinate domain.",
+  "Modules": [
+    {"Name": "HALVETHVoid", "Type": "Runtime", "LoadingPhase": "Default"},
+    {"Name": "HALVETHVoidEditor", "Type": "Editor", "LoadingPhase": "Default"}
+  ],
+  "Plugins": [{"Name":"AndroidFileServer","Enabled":false}]
+}

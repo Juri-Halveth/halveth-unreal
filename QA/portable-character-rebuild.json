@@ -1,0 +1,28 @@
+{
+  "schema": "halveth.portable-character-builder.v1",
+  "entrypoint": "Git Bash CHARACTERS.sh build",
+  "separateSourceTree": true,
+  "scope": "Exact Blender vertices, topology, UVs, material indices, weights, morphs, bone hierarchy/matrices and 37 sampled animation poses.",
+  "fbxAllNumericPropertyDigestMatched": false,
+  "fbxDigestNote": "Export identifiers and surviving polygon enumeration are not canonical across independent Blender processes. The complete oriented face/UV/material set and exact vertex, weight, morph, hierarchy and sampled-pose data match; per-file path-redaction roundtrips still match.",
+  "characters": [
+    {
+      "name": "Scarlet",
+      "inputGeometrySkeletonMorphPoseDigest": "d9fdb46172cc313a6a37362aeec593efc4567ece910ae639d58b83bdd219a3a7",
+      "rebuiltGeometrySkeletonMorphPoseDigest": "d9fdb46172cc313a6a37362aeec593efc4567ece910ae639d58b83bdd219a3a7",
+      "equal": true
+    },
+    {
+      "name": "Lucinet",
+      "inputGeometrySkeletonMorphPoseDigest": "47c11b6669c2e4fc201b0c21f04b00ca78ea6822ad4916b841efbcaaf7676583",
+      "rebuiltGeometrySkeletonMorphPoseDigest": "47c11b6669c2e4fc201b0c21f04b00ca78ea6822ad4916b841efbcaaf7676583",
+      "equal": true
+    },
+    {
+      "name": "Rachel",
+      "inputGeometrySkeletonMorphPoseDigest": "0db16d3654b393a5e3bb65078994d65e7b07356152fc8f56331adb41546b7a4b",
+      "rebuiltGeometrySkeletonMorphPoseDigest": "0db16d3654b393a5e3bb65078994d65e7b07356152fc8f56331adb41546b7a4b",
+      "equal": true
+    }
+  ]
+}

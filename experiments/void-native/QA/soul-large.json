@@ -1,0 +1,16 @@
+{
+	"schema": "halveth-void-native-qa/2.0",
+	"soulseed": "999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+	"soul_id": "0184ec66bfeefc38d1d34f25a051854961f704a35dbf11117b07345215f8417c",
+	"ground_probe_pass": 441,
+	"ground_probe_fail": 0,
+	"trees": 196,
+	"rocks": 503,
+	"ferns": 2136,
+	"walk_distance_cm": 1712.8968375623958,
+	"character_z_cm": 810.6038788361011,
+	"field_z_cm": 722.20978874459729,
+	"passed": true,
+	"scope": "441 direct terrain traces within 55 cm of field; one physical spawn; four-second simulated W-key input through native binding; finite snapshot",
+	"failures": []
+}

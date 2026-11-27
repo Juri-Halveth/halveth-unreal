@@ -1,0 +1,206 @@
+{
+  "status": "ALL_SOURCE_IMAGES_DECODED",
+  "count": 25,
+  "files": [
+    {
+      "file": "models/tree_small_02/textures/tree_small_02_branch_nor_gl_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/tree_small_02/textures/tree_small_02_branch_diff_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/tree_small_02/textures/tree_small_02_branch_arm_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/tree_small_02/textures/tree_small_02_leaves_nor_gl_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/tree_small_02/textures/tree_small_02_leaves_diff_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/tree_small_02/textures/tree_small_02_leaves_arm_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/tree_small_02/textures/tree_small_02_nor_gl_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/tree_small_02/textures/tree_small_02_diff_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/tree_small_02/textures/tree_small_02_arm_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/fern_02/textures/fern_02_diff_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/fern_02/textures/fern_02_arm_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/fern_02/textures/fern_02_nor_gl_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/rock_moss_set_01/textures/rock_moss_set_01_diff_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/rock_moss_set_01/textures/rock_moss_set_01_nor_gl_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/rock_moss_set_01/textures/rock_moss_set_01_rough_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "terrain/sand_03/sand_03_diff_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "terrain/sand_03/sand_03_nor_dx_2k.png",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "terrain/sand_03/sand_03_rough_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "terrain/grass_path_2/grass_path_2_diff_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "terrain/grass_path_2/grass_path_2_nor_dx_2k.png",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "file": "terrain/grass_path_2/grass_path_2_rough_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "L"
+    },
+    {
+      "file": "terrain/rock_boulder_dry/rock_boulder_dry_diff_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "terrain/rock_boulder_dry/rock_boulder_dry_nor_dx_2k.png",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "terrain/rock_boulder_dry/rock_boulder_dry_rough_2k.jpg",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "RGB"
+    },
+    {
+      "file": "models/fern_02/textures/fern_02_alpha_2k.png",
+      "size": [
+        2048,
+        2048
+      ],
+      "mode": "I;16"
+    }
+  ]
+}

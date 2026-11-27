@@ -1,0 +1,16 @@
+{
+	"schema": "halveth-void-native-qa/2.0",
+	"soulseed": "SOULSEED ZERO\nXY hoch minus plus hoch XY+\n☀",
+	"soul_id": "598bc8fb0f4ff55021b04dcc601f6813ade68b414d237bc9c7dda1effb0e7faf",
+	"ground_probe_pass": 441,
+	"ground_probe_fail": 0,
+	"trees": 370,
+	"rocks": 457,
+	"ferns": 3315,
+	"walk_distance_cm": 1712.8913545162955,
+	"character_z_cm": 536.36880330558188,
+	"field_z_cm": 449.05122971320378,
+	"passed": true,
+	"scope": "441 direct terrain traces within 55 cm of field; one physical spawn; four-second simulated W-key input through native binding; finite snapshot",
+	"failures": []
+}

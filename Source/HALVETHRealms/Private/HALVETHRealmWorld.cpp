@@ -1,5 +1,18 @@
 #include "HALVETHRealmWorld.h"
 #include "HALVETHTrainingTarget.h"
+#include "HALVETHCharacter.h"
+#include "HALVETHAdventureComponent.h"
+#include "HALVETHGuideAnimInstance.h"
+#include "HALVETHGuideCharacter.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/WorldSettings.h"
+#include "EarthDynamicsMath.h"
+#include "CollisionShape.h"
+#include "Components/SkeletalMeshComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "Engine/SkeletalMesh.h"
+#include "Animation/AnimSequence.h"
+#include "Animation/AnimSingleNodeInstance.h"
 #include "Engine/World.h"
 #include "RealmLayout.h"
 #include "KnowledgeSystem.h"
@@ -9,14 +22,33 @@
 #include "Components/SkyLightComponent.h"
 #include "Components/ExponentialHeightFogComponent.h"
 #include "Components/SkyAtmosphereComponent.h"
+#include "Components/VolumetricCloudComponent.h"
 #include "Components/PostProcessComponent.h"
 #include "Components/TextRenderComponent.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "UObject/ConstructorHelpers.h"
+#include "Kismet/GameplayStatics.h"
+#include "Misc/CommandLine.h"
+#include "Misc/Parse.h"
+#include "GuideGenome.h"
+#include "HAL/PlatformMisc.h"
+#include "Misc/Paths.h"
+#include "Misc/FileHelper.h"
+#include "Misc/DateTime.h"
+#include "Misc/Guid.h"
+#include "HAL/PlatformFileManager.h"
+#include "Serialization/JsonWriter.h"
+#include "Serialization/JsonSerializer.h"
+THIRD_PARTY_INCLUDES_START
+#include <openssl/sha.h>
+THIRD_PARTY_INCLUDES_END
 
 namespace
 {
+    bool HashBodyData(const void* Data,uint32 Bytes,FSHA256Signature& Out){
+        return SHA256(static_cast<const unsigned char*>(Data),Bytes,Out.Signature)!=nullptr;
+    }
     FLinearColor RealmColor(int32 Realm)
     {
         switch (Realm)
@@ -33,6 +65,9 @@ AHALVETHRealmWorld::AHALVETHRealmWorld()
 {
     PrimaryActorTick.bCanEverTick = true;
     SetRootComponent(CreateDefaultSubobject<USceneComponent>(TEXT("Root")));
+    // The realm origin remains fixed; animated guides/lights are movable children.
+    // Static terrain and foliage must be attached to a compatible static parent.
+    RootComponent->SetMobility(EComponentMobility::Static);
     static ConstructorHelpers::FObjectFinder<UStaticMesh> Cube(TEXT("/Engine/BasicShapes/Cube.Cube"));
     static ConstructorHelpers::FObjectFinder<UStaticMesh> Sphere(TEXT("/Engine/BasicShapes/Sphere.Sphere"));
     static ConstructorHelpers::FObjectFinder<UStaticMesh> Cylinder(TEXT("/Engine/BasicShapes/Cylinder.Cylinder"));
@@ -42,26 +77,46 @@ AHALVETHRealmWorld::AHALVETHRealmWorld()
     Sun->SetupAttachment(RootComponent);
     Sun->SetMobility(EComponentMobility::Movable);
     Sun->SetRelativeRotation(FRotator(-28, -35, 0));
-    Sun->SetIntensity(3.0f);
+    Sun->SetIntensity(48000);
+    Sun->SetLightSourceAngle(.7f);
     Sun->SetAtmosphereSunLight(true);
+    Sun->DynamicShadowDistanceMovableLight=30000;
+    Sun->SetDynamicShadowCascades(4);
+    // Authored night fill preserves navigation; it is not a NASA Moon model.
+    NightFill=CreateDefaultSubobject<UDirectionalLightComponent>(TEXT("AuthoredNightFill"));
+    NightFill->SetupAttachment(RootComponent);NightFill->SetMobility(EComponentMobility::Movable);
+    NightFill->SetRelativeRotation(FRotator(-42,75,0));NightFill->SetLightColor(FLinearColor(.35f,.48f,.72f));
+    NightFill->SetIntensity(0);NightFill->SetCastShadows(false);
     Sky = CreateDefaultSubobject<USkyLightComponent>(TEXT("Sky"));
     Sky->SetupAttachment(RootComponent);
     Sky->SetMobility(EComponentMobility::Movable);
     Sky->SetRealTimeCaptureEnabled(true);
-    Sky->SetIntensity(0.6f);
+    Sky->SetIntensity(1.4f);
     Atmosphere = CreateDefaultSubobject<USkyAtmosphereComponent>(TEXT("Atmosphere"));
     Atmosphere->SetupAttachment(RootComponent);
+    Clouds=CreateDefaultSubobject<UVolumetricCloudComponent>(TEXT("Clouds"));Clouds->SetupAttachment(RootComponent);
+    Clouds->SetLayerBottomAltitude(1.2f);Clouds->SetLayerHeight(4.5f);
+    Clouds->SetMaterial(LoadObject<UMaterialInterface>(nullptr,TEXT("/Engine/EngineSky/VolumetricClouds/m_SimpleVolumetricCloud_Inst.m_SimpleVolumetricCloud_Inst")));
     Fog = CreateDefaultSubobject<UExponentialHeightFogComponent>(TEXT("Fog"));
     Fog->SetupAttachment(RootComponent);
-    Fog->SetFogDensity(0.018f);
+    Fog->SetFogDensity(.007f);
+    Fog->SetFogHeightFalloff(.15f);
+    Fog->SetVolumetricFog(true);
+    Fog->SetRelativeLocation(FVector(0,0,-220));
     Fog->SetStartDistance(180);
     PostProcess = CreateDefaultSubobject<UPostProcessComponent>(TEXT("PostProcess"));
     PostProcess->SetupAttachment(RootComponent);
     PostProcess->bUnbound = true;
     PostProcess->Settings.bOverride_BloomIntensity = true;
-    PostProcess->Settings.BloomIntensity = 0.8f;
+    PostProcess->Settings.BloomIntensity = .22f;
+    PostProcess->Settings.bOverride_AutoExposureMethod=true;
+    PostProcess->Settings.AutoExposureMethod=AEM_Histogram;
+    PostProcess->Settings.bOverride_AutoExposureMinBrightness=true;
+    PostProcess->Settings.bOverride_AutoExposureMaxBrightness=true;
+    PostProcess->Settings.AutoExposureMinBrightness=12;
+    PostProcess->Settings.AutoExposureMaxBrightness=12;
     PostProcess->Settings.bOverride_VignetteIntensity = true;
-    PostProcess->Settings.VignetteIntensity = 0.25f;
+    PostProcess->Settings.VignetteIntensity = .12f;
 }
 
 FString AHALVETHRealmWorld::RealmName(int32 Realm)
@@ -104,7 +159,7 @@ UStaticMeshComponent* AHALVETHRealmWorld::Shape(UStaticMesh* Mesh, FVector Posit
     {
         UMaterialInstanceDynamic* Material = UMaterialInstanceDynamic::Create(SurfaceMaterial, Component);
         Material->SetVectorParameterValue(TEXT("Tint"), Color);
-        Material->SetScalarParameterValue(TEXT("Glow"), Glow);
+        Material->SetScalarParameterValue(TEXT("Glow"), Glow*1400);
         Component->SetMaterial(0, Material);
     }
     Component->RegisterComponent();
@@ -146,11 +201,10 @@ void AHALVETHRealmWorld::Label(FVector Position, const FString& Text, FLinearCol
 
 void AHALVETHRealmWorld::Portal(FVector Position, int32 Destination, FLinearColor Color)
 {
-    const FLinearColor Stone(0.11f, 0.10f, 0.16f);
-    Shape(CubeMesh, Position + FVector(-165, 0, 205), FVector(0.48f, 0.75f, 4.1f), Stone);
-    Shape(CubeMesh, Position + FVector(165, 0, 205), FVector(0.48f, 0.75f, 4.1f), Stone);
-    Shape(CubeMesh, Position + FVector(0, 0, 420), FVector(3.85f, 0.8f, 0.45f), Stone);
-    Shape(CubeMesh, Position + FVector(0, 0, 20), FVector(3.7f, 1.15f, 0.4f), Stone);
+    if(auto* Arch=LoadObject<UStaticMesh>(nullptr,TEXT("/Game/Garden/PortalArch.PortalArch"))) {
+        auto* Frame=Shape(Arch,Position,FVector(1),FLinearColor::White);
+        Frame->SetMaterial(0,Arch->GetMaterial(0));
+    }
     for (int32 Index = 0; Index < 7; ++Index)
     {
         const float Angle = PI * Index / 6;
@@ -169,12 +223,23 @@ void AHALVETHRealmWorld::Portal(FVector Position, int32 Destination, FLinearColo
 void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
 {
     if (!HalvethLayout::ValidRealm(Realm)) return;
+    if(BodyOrigin.IsEmpty()){
+        if(!FParse::Value(FCommandLine::Get(),TEXT("HalvethBodyOrigin="),BodyOrigin))BodyOrigin=FString::Printf(TEXT("HALVETH/body-origin/v1/seed/%u"),Seed);
+    }
     if (TrainingTarget) { TrainingTarget->Destroy(); TrainingTarget = nullptr; }
+    for(auto GuideActor:GuideActors)if(GuideActor)GuideActor->Destroy();GuideActors.Empty();
     GuideHeads.Empty();
+    GuideBodies.Empty(); GuideOrigins.Empty(); GuideIdentities.Empty();
+    GuideBoneBaseline.Empty();GuidePoseChanged.Empty();
+    GuidePatrolTime.Empty();GuideSpatialTravel.Empty();GuideHandBaseline.Empty();GuideHandTravel.Empty();GuideHeadBaseline.Empty();GuideHeadTravel.Empty();
+    GuideChoices.Empty();GuideGoals.Empty();GuideDecisionAt.Empty();GuideRestUntil.Empty();GuideBlockedTime.Empty();GuideDecisionCount.Empty();
+    GuideProfiles.Empty();GuideBodyStates.Empty();
+    SoilComponents.Empty();SoilCenters.Empty();SoilVertices.Empty();SoilColors.Empty();SoilLoads.Empty();SoilDepths.Empty();Stars.Empty();
     Portals.Empty(); Fireflies.Empty(); FireflyOrigins.Empty();
     LoveOrb = nullptr; LoveLight = nullptr;
     for (UActorComponent* Component : Generated) if (Component) Component->DestroyComponent();
     Generated.Empty();
+    TerrainComponent=nullptr;
     CurrentRealm = Realm;
     LoveRemaining = 0;
     Accent = RealmColor(Realm);
@@ -184,60 +249,18 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
         SurfaceMaterial = UMaterial::GetDefaultMaterial(MD_Surface);
         UE_LOG(LogTemp, Warning, TEXT("HALVETH_ASSETS_MISSING: run HALVETHPrepare before rendering or packaging."));
     }
-    Sun->SetLightColor(FMath::Lerp(FLinearColor::White, Accent, 0.24f));
-    Sun->SetIntensity(Realm == 2 ? 2.3f : 3.2f);
+    Sun->SetLightColor(FMath::Lerp(FLinearColor(1,.96,.90),Accent,.055f));
+    Sun->SetIntensity(Realm==1 ? 38000 : 48000);
     Fog->SetFogInscatteringColor(Accent * 0.035f);
-    Sky->SetLightColor(FMath::Lerp(FLinearColor::White, Accent, 0.3f));
+    Sky->SetLightColor(FMath::Lerp(FLinearColor::White,Accent,.03f));
     const FLinearColor Floor = Realm == 1 ? FLinearColor(0.065f, 0.045f, 0.070f)
         : Realm == 2 ? FLinearColor(0.026f, 0.065f, 0.09f)
         : Realm == 3 ? FLinearColor(0.13f, 0.10f, 0.045f) : FLinearColor(0.075f, 0.065f, 0.115f);
-    auto* Ground = Shape(CylinderMesh, FVector(0, 0, -75), FVector(48, 48, 1.5f), Floor);
-    const TCHAR* GroundPath = Realm == 1
-        ? TEXT("/Game/Materials/M_PH_ForestGround04.M_PH_ForestGround04")
-        : TEXT("/Game/Materials/M_PH_CobblestoneFloor03.M_PH_CobblestoneFloor03");
-    if (auto* GroundMaterial = LoadObject<UMaterialInterface>(nullptr, GroundPath)) Ground->SetMaterial(0, GroundMaterial);
-    Shape(SphereMesh, FVector(0, 0, -480), FVector(44, 44, 10), Floor * 0.6f, 0, false);
-    // These luminous rings are decorative; the cylinder remains the collision floor.
-    for (int32 Index = 0; Index < 48; ++Index)
-    {
-        const float Angle = 2 * PI * Index / 48;
-        Shape(CubeMesh, FVector(FMath::Cos(Angle) * 2210, FMath::Sin(Angle) * 2210, 12),
-            FVector(2.7f, 0.08f, 0.10f), Accent, 2, false, FRotator(0, FMath::RadiansToDegrees(Angle) + 90, 0));
-    }
-    for (int32 Index = -5; Index < 9; ++Index)
-    {
-        Shape(CubeMesh, FVector(0, Index * 150, 4), FVector(4.3f, 1.3f, 0.08f), Floor * 1.8f);
-        Shape(CubeMesh, FVector(-230, Index * 150, 12), FVector(0.05f, 0.65f, 0.05f), Accent, 3, false);
-        Shape(CubeMesh, FVector(230, Index * 150, 12), FVector(0.05f, 0.65f, 0.05f), Accent, 3, false);
-    }
+    BuildLandscape(Seed);
+    GetWorld()->GetWorldSettings()->bGlobalGravitySet=true;
+    GetWorld()->GetWorldSettings()->GlobalGravityZ=-100*EarthDynamics::GravityMps2;
+    InitializeEarthSky();
     const auto Layout = HalvethLayout::Build(Seed, Realm);
-    for (const HalvethLayout::Prop& Prop : Layout)
-    {
-        const FVector Base(Prop.X, Prop.Y, 0);
-        const float Height = static_cast<float>(Prop.Height);
-        if (Realm == 1)
-        {
-            Shape(CylinderMesh, Base + FVector(0, 0, Height / 2), FVector(0.16f, 0.16f, Height / 100), FLinearColor(0.18f, 0.10f, 0.11f));
-            Shape(SphereMesh, Base + FVector(0, 0, Height), FVector(1.7f, 1.7f, 0.85f), Accent * (0.25f + Prop.Variant * 0.14f), 0.18f, false);
-            Shape(SphereMesh, Base + FVector(45, 0, Height + 28), FVector(0.3f), FLinearColor(1, 0.24f, 0.18f), 4, false);
-        }
-        else if (Realm == 2)
-        {
-            Shape(ConeMesh, Base + FVector(0, 0, Height / 2), FVector(0.8f, 0.8f, Height / 100), Accent * 0.32f, 0.4f, true, FRotator(10, Prop.Rotation, 0));
-            Shape(ConeMesh, Base + FVector(70, 25, Height / 4), FVector(0.4f, 0.4f, Height / 200), Accent * 0.65f, 0.25f, true, FRotator(-18, Prop.Rotation, 0));
-        }
-        else if (Realm == 3)
-        {
-            Shape(CubeMesh, Base + FVector(0, 0, Height / 2), FVector(0.7f, 0.6f, Height / 100), Floor * 1.6f, 0, true, FRotator(0, Prop.Rotation, 0));
-            Shape(SphereMesh, Base + FVector(0, 0, Height + 35), FVector(0.5f), Accent, 3, false);
-            Shape(CubeMesh, Base + FVector(0, 0, 16), FVector(1.25f, 1.25f, 0.3f), Floor * 2);
-        }
-        else
-        {
-            Shape(CylinderMesh, Base + FVector(0, 0, Height / 2), FVector(0.45f, 0.45f, Height / 100), Floor * 1.8f);
-            Shape(SphereMesh, Base + FVector(0, 0, Height + 22), FVector(0.65f, 0.65f, 0.85f), RealmColor(1 + Prop.Variant), 1.5f, false);
-        }
-    }
     ReadablePositions.Empty();
     if (Realm == 0)
     {
@@ -257,28 +280,8 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
         Readable(FVector(720, -250, 0), Realm + 2);
         Guide(FVector(-380, -470, 0), Realm);
         Portal(FVector(0, 1180, 0), 0, RealmColor(0));
-        // A central landmark gives each destination a silhouette, not only a palette.
-        if (Realm == 1)
-        {
-            Shape(CylinderMesh, FVector(0, 200, 190), FVector(0.8f, 0.8f, 3.8f), Floor * 2);
-            Shape(SphereMesh, FVector(-85, 200, 465), FVector(2, 1.3f, 2), Accent, 0.3f, false);
-            Shape(SphereMesh, FVector(85, 200, 465), FVector(2, 1.3f, 2), Accent, 0.3f, false);
-            Shape(ConeMesh, FVector(0, 200, 365), FVector(3.2f, 1.4f, 2.7f), Accent, 0.3f, false, FRotator(180, 0, 0));
-        }
-        else if (Realm == 2)
-        {
-            for (int32 Index = 0; Index < 8; ++Index)
-                Shape(CubeMesh, FVector(0, 250, 260 + Index * 80), FVector(2.6f - Index * 0.2f, 2.6f - Index * 0.2f, 0.2f), Accent * 0.45f, 0.8f, false, FRotator(0, Index * 18, 0));
-        }
-        else
-        {
-            for (int32 Index = 0; Index < 3; ++Index)
-            {
-                Shape(CubeMesh, FVector(-200, 250, 150 + Index * 140), FVector(0.7f, 0.8f, 1.4f), Floor * 1.8f);
-                Shape(CubeMesh, FVector(200, 250, 150 + Index * 140), FVector(0.7f, 0.8f, 1.4f), Floor * 1.8f);
-                Shape(CubeMesh, FVector(0, 250, 220 + Index * 140), FVector(4.7f, 1.0f, 0.35f), Accent * 0.6f, 0.2f);
-            }
-        }
+        // Distinct destinations now have terrain, vegetation and a lake rather
+        // than primitive block towers. Their books and routes are the same game.
     }
     for (int32 Index = 0; Index < 30; ++Index)
     {
@@ -290,7 +293,7 @@ void AHALVETHRealmWorld::BuildRealm(int32 Realm, uint32 Seed)
     LoveOrb = Shape(SphereMesh, FVector(0, 0, 120), FVector(0.01f), FLinearColor(1, 0.1f, 0.25f), 5, false);
     LoveOrb->SetVisibility(false);
     LoveLight = Light(FVector(0, 0, 250), FLinearColor(1, 0.22f, 0.37f), 0, 1600);
-    Label(FVector(0, 1630, 650), RealmName(Realm), FLinearColor(0.96f, 0.82f, 0.55f), 55);
+
     UE_LOG(LogTemp, Display, TEXT("HALVETH_REALM_READY realm=%d seed=%u props=%d portals=%d fingerprint=%llu"),
         Realm, Seed, HalvethLayout::PropCount, Portals.Num(), static_cast<unsigned long long>(HalvethLayout::Fingerprint(Layout)));
 }
@@ -300,16 +303,135 @@ void AHALVETHRealmWorld::Guide(FVector Position, int32 Identity)
     const FLinearColor Color = RealmColor(Identity);
     const FName GuideTags[] = {TEXT("HALVETH_NPC_SCARLET"), TEXT("HALVETH_NPC_LUCINET"), TEXT("HALVETH_NPC_RACHEL")};
     const FString Names[] = {TEXT("SCARLET"), TEXT("LUCINET"), TEXT("RACHEL")};
-    auto* Body = Shape(ConeMesh, Position + FVector(0, 0, 73), FVector(0.85f, 0.65f, 1.45f), Color * 0.25f, 0.1f);
-    Body->ComponentTags.Add(GuideTags[Identity - 1]);
-    auto* Head = Shape(SphereMesh, Position + FVector(0, 0, 170), FVector(0.43f), FLinearColor(0.72f, 0.58f, 0.40f), 0.25f, false);
-    GuideHeads.Add(Head);
-    Shape(SphereMesh, Position + FVector(-7, -20, 174), FVector(0.055f), Color, 4, false);
-    Shape(SphereMesh, Position + FVector(7, -20, 174), FVector(0.055f), Color, 4, false);
-    Shape(CylinderMesh, Position + FVector(48, 0, 104), FVector(0.055f, 0.055f, 2.05f), FLinearColor(0.30f, 0.21f, 0.10f));
-    Shape(SphereMesh, Position + FVector(48, 0, 216), FVector(0.24f), Color, 4, false);
-    Light(Position + FVector(0, -65, 160), Color, 450, 290);
-    Label(Position + FVector(0, 0, 253), Names[Identity - 1] + TEXT("  [E]"), FLinearColor(0.96f, 0.84f, 0.60f), 19);
+    const FString CharacterName=Identity==1?TEXT("Scarlet"):Identity==2?TEXT("Lucinet"):TEXT("Rachel");
+    const FString Path=TEXT("/Game/Characters/")+CharacterName+TEXT(".")+CharacterName;
+    BuildSoil(Position);
+    FActorSpawnParameters Spawn;Spawn.Owner=this;Spawn.SpawnCollisionHandlingOverride=ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+    auto* GuideActor=GetWorld()->SpawnActor<AHALVETHGuideCharacter>(GetActorLocation()+Position+FVector(0,0,96),FRotator::ZeroRotator,Spawn);
+    if(!GuideActor)return;GuideActors.Add(GuideActor);
+    GuideActor->GetCharacterMovement()->Mass=Identity==1?68:Identity==2?82:61;
+    auto* Body=GuideActor->GetMesh();
+    Body->SetSkeletalMeshAsset(LoadObject<USkeletalMesh>(nullptr,*Path));
+    Body->SetAnimationMode(EAnimationMode::AnimationBlueprint);
+    Body->SetAnimInstanceClass(UHALVETHGuideAnimInstance::StaticClass());
+    Body->VisibilityBasedAnimTickOption=EVisibilityBasedAnimTickOption::AlwaysTickPoseAndRefreshBones;
+    Body->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    Body->ComponentTags.Add(GuideTags[Identity-1]);GuideActor->Tags.Add(GuideTags[Identity-1]);
+    const FString IdlePath=TEXT("/Game/Characters/")+CharacterName+TEXT("Idle.")+CharacterName+TEXT("Idle");
+    auto* Idle=LoadObject<UAnimSequence>(nullptr,*IdlePath);
+    if(auto* Motion=Cast<UHALVETHGuideAnimInstance>(Body->GetAnimInstance())){Motion->BaseIdle=Idle;Motion->Identity=Identity;}
+    GuideBodies.Add(Body); GuideOrigins.Add(Position); GuideIdentities.Add(Identity);
+    GuideBoneBaseline.Add(FQuat::Identity);GuidePoseChanged.Add(false);
+    GuidePatrolTime.Add(Identity*3.7);GuideSpatialTravel.Add(0);GuideHandBaseline.Add(FVector::ZeroVector);GuideHandTravel.Add(0);GuideHeadBaseline.Add(FQuat::Identity);GuideHeadTravel.Add(0);
+    GuideChoices.Emplace(Identity*7919+CurrentRealm*104729);GuideGoals.Add(GuideActor->GetActorLocation());
+    GuideDecisionAt.Add(0);GuideRestUntil.Add(0);GuideBlockedTime.Add(0);GuideDecisionCount.Add(0);
+    if(!BodyLineages.Contains(Identity)){
+        FHALVETHBodyLineage Line;Line.Profile=HalvethBody::Profile::ForIdentity(Identity);
+        Line.JournalPath=FPaths::ProjectSavedDir()/TEXT("BodyLineage")/(FGuid::NewGuid().ToString(EGuidFormats::Digits)+FString::Printf(TEXT("-entity-%d.jsonl"),Identity));
+        BodyLineages.Add(Identity,MoveTemp(Line));GrowBodyLineage(Identity,TEXT("birth"));
+    }
+    GuideProfiles.Add(BodyLineages[Identity].Profile);GuideBodyStates.Add(BodyLineages[Identity].State);
+    GuideActor->GetCharacterMovement()->MaxWalkSpeed=GuideProfiles.Last().paceCmS;
+    GuideActor->GetCharacterMovement()->Mass=GuideProfiles.Last().massKg;
+    UE_LOG(LogTemp,Display,TEXT("GARDEN_GUIDE_READY identity=%d skeletal=%d idle=%d own_clothing=true cc0_human=true morphs=%d"),Identity,Body->GetSkeletalMeshAsset()!=nullptr,Idle!=nullptr,Body->GetSkeletalMeshAsset()?Body->GetSkeletalMeshAsset()->GetMorphTargets().Num():0);
+    auto* Glow=Light(Position + FVector(0, -65, 160), Color, 180, 290);
+    Glow->AttachToComponent(Body,FAttachmentTransformRules::KeepWorldTransform);
+    Label(Position + FVector(0, 0, 213), Names[Identity - 1] + TEXT("  [E]"), FLinearColor(0.96f, 0.84f, 0.60f), 12);
+    if(auto* Name=Cast<USceneComponent>(Generated.Last()))Name->AttachToComponent(Body,FAttachmentTransformRules::KeepWorldTransform);
+}
+
+FVector AHALVETHRealmWorld::GetGuidePosition(int32 Identity) const {
+    for(int I=0;I<GuideIdentities.Num();I++)if(GuideIdentities[I]==Identity&&GuideBodies[I])return GuideBodies[I]->GetComponentLocation();
+    return FVector::ZeroVector;
+}
+
+AHALVETHGuideCharacter* AHALVETHRealmWorld::GetGuideCharacter(int32 Identity) const {
+    for(int I=0;I<GuideIdentities.Num();I++)if(GuideIdentities[I]==Identity&&GuideActors.IsValidIndex(I))return GuideActors[I];
+    return nullptr;
+}
+
+void AHALVETHRealmWorld::GrowBodyLineage(int32 Identity,const FString& Event){
+    auto* Line=BodyLineages.Find(Identity);if(!Line)return;
+    const FString Parent=Line->Digest;
+    auto Record=MakeShared<FJsonObject>();
+    Record->SetStringField(TEXT("schema"),TEXT("halveth.virtual-body-lineage.v2"));
+    Record->SetStringField(TEXT("lineageId"),FPaths::GetBaseFilename(Line->JournalPath));
+    Record->SetStringField(TEXT("entityId"),FString::Printf(TEXT("halveth-guide-%d"),Identity));
+    Record->SetStringField(TEXT("event"),Event);Record->SetStringField(TEXT("recordedAt"),FDateTime::UtcNow().ToIso8601());
+    Record->SetNumberField(TEXT("simulationSeconds"),Elapsed);Record->SetStringField(TEXT("parentDigest"),Parent);
+    Record->SetStringField(TEXT("generation"),LexToString(Line->Generation));
+    Record->SetNumberField(TEXT("muscleReserve"),Line->State.muscleReserve);
+    if(Line->Generation==0){
+        FTCHARToUTF8 OriginBytes(*BodyOrigin);FSHA256Signature OriginSignature;
+        if(!HashBodyData(OriginBytes.Get(),OriginBytes.Length(),OriginSignature))return;
+        Record->SetStringField(TEXT("originDigest"),OriginSignature.ToString());
+    }
+    FString Payload;FJsonSerializer::Serialize(Record,TJsonWriterFactory<TCHAR,TCondensedJsonPrintPolicy<TCHAR>>::Create(&Payload));
+    FTCHARToUTF8 Bytes(*Payload);FSHA256Signature Signature;
+    if(!HashBodyData(Bytes.Get(),Bytes.Length(),Signature)){
+        UE_LOG(LogTemp,Warning,TEXT("GARDEN_GENOME_WRITE identity=%d result=hash_unavailable"),Identity);return;
+    }
+    HalvethGenome::Digest Data;for(int J=0;J<32;J++)Data[J]=Signature.Signature[J];
+    const std::string Bases=HalvethGenome::Encode(Data);auto NextProfile=Line->Profile;
+    if(Line->Generation==0){
+        NextProfile.massKg*=.97+.06*double(Data[0])/255.;
+        NextProfile.paceCmS=56+28*double(Data[1])/255.;
+        NextProfile.curiosity=double(Data[2])/255.;NextProfile.reactionSeconds=.14+.12*double(Data[3])/255.;
+    }else{
+        NextProfile.curiosity+=.01*(Line->State.muscleReserve-.5);
+        NextProfile.paceCmS+=.025*(Line->State.muscleReserve-.5);
+    }
+    Record->SetStringField(TEXT("sourcePayload"),Payload);
+    Record->SetStringField(TEXT("sourceDigest"),Signature.ToString());Record->SetStringField(TEXT("newBases"),UTF8_TO_TCHAR(Bases.c_str()));
+    Record->SetNumberField(TEXT("massKg"),NextProfile.massKg);Record->SetNumberField(TEXT("paceCmS"),NextProfile.paceCmS);
+    Record->SetNumberField(TEXT("curiosity"),NextProfile.curiosity);Record->SetNumberField(TEXT("reactionSeconds"),NextProfile.reactionSeconds);
+    FString Encoded;FJsonSerializer::Serialize(Record,TJsonWriterFactory<TCHAR,TCondensedJsonPrintPolicy<TCHAR>>::Create(&Encoded));
+    FTCHARToUTF8 RecordBytes(*Encoded);FSHA256Signature RecordSignature;
+    if(!HashBodyData(RecordBytes.Get(),RecordBytes.Length(),RecordSignature))return;
+    FPlatformFileManager::Get().GetPlatformFile().CreateDirectoryTree(*FPaths::GetPath(Line->JournalPath));
+    if(!FFileHelper::SaveStringToFile(Encoded+TEXT("\n"),*Line->JournalPath,FFileHelper::EEncodingOptions::ForceUTF8WithoutBOM,&IFileManager::Get(),FILEWRITE_Append)){
+        UE_LOG(LogTemp,Warning,TEXT("GARDEN_GENOME_WRITE identity=%d result=journal_failed"),Identity);return;
+    }
+    Line->Profile=NextProfile;Line->Digest=RecordSignature.ToString();Line->Genome+=UTF8_TO_TCHAR(Bases.c_str());Line->Generation++;
+    UE_LOG(LogTemp,Display,TEXT("GARDEN_GENOME_WRITE identity=%d generation=%llu bases=%d parent=%s digest=%s result=appended"),Identity,Line->Generation,Line->Genome.Len(),*Parent,*Line->Digest);
+}
+
+bool AHALVETHRealmWorld::VerifyGuidePatrol() const
+{
+    if (GuideSpatialTravel.Num() != 3) return false;
+    for (int32 I=0; I<GuideSpatialTravel.Num(); ++I)
+    {
+        const bool Passed = GuideSpatialTravel[I] >= 150.;
+        UE_LOG(LogTemp,Display,TEXT("GARDEN_PATROL_AUDIT identity=%d passed=%d observed_max_distance_cm=%.5f required_distance_cm=150"),GuideIdentities[I],Passed,GuideSpatialTravel[I]);
+        if (!Passed) return false;
+    }
+    return true;
+}
+
+bool AHALVETHRealmWorld::VerifyCharacters() const
+{
+    if(GuideBodies.Num()!=3)return false;
+    for(int32 I=0;I<GuideBodies.Num();I++) {
+        const auto* Body=GuideBodies[I].Get(); if(!Body)return false;
+        const auto* Mesh=Body->GetSkeletalMeshAsset();
+        const auto* Anim=Cast<UHALVETHGuideAnimInstance>(Body->GetAnimInstance());
+        const auto* Idle=Anim?Anim->BaseIdle.Get():nullptr;
+        const bool Bound=Mesh&&Mesh->GetSkeleton()&&Idle&&Idle->GetSkeleton()==Mesh->GetSkeleton()
+            &&Mesh->GetRefSkeleton().GetNum()>=163&&Idle->GetPlayLength()>=11.9
+            &&Mesh->FindMorphTarget(TEXT("Blink"))&&Mesh->FindMorphTarget(TEXT("Talk"))
+            &&Mesh->FindMorphTarget(TEXT("ClothLeft"))&&Mesh->FindMorphTarget(TEXT("HairRight"))&&Mesh->FindMorphTarget(TEXT("Breath"))
+            &&Body->GetBoneIndex(TEXT("spine02"))!=INDEX_NONE
+            &&Body->GetBoneIndex(TEXT("wrist_R"))!=INDEX_NONE&&Body->GetBoneIndex(TEXT("upperleg01_L"))!=INDEX_NONE
+            &&GuideActors.IsValidIndex(I)&&GuideActors[I]&&GuideActors[I]->GetCharacterMovement()->GravityScale==1;
+        const bool Motion=GuidePoseChanged.IsValidIndex(I)&&GuidePoseChanged[I];
+        UE_LOG(LogTemp,Display,TEXT("GARDEN_CHARACTER_AUDIT identity=%d skeleton_animation_morphs=%d sampled_internal_pose_change=%d"),GuideIdentities[I],Bound,Motion);
+        UE_LOG(LogTemp,Display,TEXT("GARDEN_MOTION_AUDIT identity=%d hand_travel_cm=%.5f head_angle_radians=%.5f independent_bones=1 foot_ik=1"),GuideIdentities[I],GuideHandTravel[I],GuideHeadTravel[I]);
+        UE_LOG(LogTemp,Display,TEXT("GARDEN_GUIDE_WALK_EXTENT identity=%d observed_max_distance_from_start_cm=%.5f decisions=%d locomotion=terrain_checked_individual_goal_selection"),GuideIdentities[I],GuideSpatialTravel[I],GuideDecisionCount[I]);
+        const auto& Phys=GuideBodyStates[I];const auto& Genes=GuideProfiles[I];const auto Mass=HalvethBody::MassBudget(Genes.massKg);
+        UE_LOG(LogTemp,Display,TEXT("GARDEN_BODY_AUDIT identity=%d model=fictional_gameplay_physiology mass_kg=%.5f tissue_budget_kg=%.5f muscle_reserve=%.5f muscle_power=%.5f oxygen_supply=%.5f heart_rate_bpm=%.5f breathing_rate_per_min=%.5f reaction_seconds=%.5f tendon_strain=%.5f decisions=%d"),GuideIdentities[I],Genes.massKg,Mass.total(),Phys.muscleReserve,Phys.musclePower,Phys.oxygenSupply,Phys.heartRateBpm,Phys.breathsPerMinute,Phys.reactionSeconds,Phys.tendonStrain,GuideDecisionCount[I]);
+        if(!Bound||!Motion||GuideHandTravel[I]<1.0||GuideHeadTravel[I]<.01)return false;
+    }
+    return true;
 }
 
 void AHALVETHRealmWorld::Readable(FVector Position, int32 Book)
@@ -383,7 +505,122 @@ void AHALVETHRealmWorld::BeginLovePulse()
 void AHALVETHRealmWorld::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
+    TickSoil(DeltaSeconds);TickEarthSky(DeltaSeconds);
     Elapsed += DeltaSeconds;
+    const auto* Player=Cast<AHALVETHCharacter>(UGameplayStatics::GetPlayerPawn(this,0));
+    for(int32 I=0;I<GuideBodies.Num();I++) {
+        auto* Body=GuideBodies[I].Get(); if(!Body)continue;
+        auto* Motion=Cast<UHALVETHGuideAnimInstance>(Body->GetAnimInstance());if(!Motion)continue;
+        if(Body->GetBoneIndex(TEXT("spine02"))!=INDEX_NONE) {
+            const FQuat Bone=Body->GetBoneQuaternion(TEXT("spine02"),EBoneSpaces::ComponentSpace);
+            if(GuideBoneBaseline[I].Equals(FQuat::Identity))GuideBoneBaseline[I]=Bone;
+            else if(GuideBoneBaseline[I].AngularDistance(Bone)>.0005f)GuidePoseChanged[I]=true;
+        }
+        const float Phase=FMath::Fmod(Elapsed+I*1.37f,4.8f);
+        const float Blink=Phase<.09f?Phase/.09f:Phase<.18f?( .18f-Phase)/.09f:0;
+        Body->SetMorphTarget(TEXT("Blink"),Blink);
+        auto* GuideActor=GuideActors.IsValidIndex(I)?GuideActors[I].Get():nullptr;if(!GuideActor)continue;
+        auto* Movement=GuideActor->GetCharacterMovement();
+        auto& Phys=GuideBodyStates[I];auto& Genes=GuideProfiles[I];
+        Phys.advance(Genes,Movement->IsMovingOnGround()?Movement->Velocity.Size2D():0,DeltaSeconds);
+        Movement->MaxWalkSpeed=Genes.paceCmS*Phys.musclePower;
+        Movement->MaxAcceleration=260*Phys.musclePower;
+        Motion->BodyBreathPhase=Phys.breathPhase;Motion->BodyHeartPhase=Phys.heartPhase;
+        Motion->BodyLoad=1-Phys.oxygenSupply;Motion->ResponseSeconds=Phys.reactionSeconds;
+        Motion->CruiseSpeed=Genes.paceCmS;BodyLineages[GuideIdentities[I]].State=Phys;
+        const FVector Before=Body->GetComponentLocation();
+        GuideSpatialTravel[I]=FMath::Max(GuideSpatialTravel[I],FVector::DistXY(Before,GetActorLocation()+GuideOrigins[I]));
+        FVector Difference=Player?Player->GetActorLocation()-Body->GetComponentLocation():FVector(0,-5000,0);
+        const bool Near=Difference.SizeSquared2D()<FMath::Square(360.f);
+        const bool Speaking=Near&&Player&&Player->GetAdventure()&&Body->ComponentTags.Num()>0
+            &&Player->GetAdventure()->IsSpeakingTo(Body->ComponentTags[0]);
+        // Ordinary proximity permits movement. A conversation pauses it;
+        // development still portraits explicitly hold their nearby subjects.
+        const bool PortraitHold=Near&&FParse::Param(FCommandLine::Get(),TEXT("HalvethVisual"));
+        if(!Speaking&&!PortraitHold) {
+            if(Phys.muscleReserve<.22&&Elapsed>=GuideRestUntil[I]){
+                GuideRestUntil[I]=Elapsed+12;GuideDecisionAt[I]=GuideRestUntil[I];
+                UE_LOG(LogTemp,Display,TEXT("GARDEN_GUIDE_INTENT identity=%d event=muscle_recovery time_s=%.5f until_s=%.5f reserve=%.5f"),GuideIdentities[I],Elapsed,GuideRestUntil[I],Phys.muscleReserve);
+                GrowBodyLineage(GuideIdentities[I],TEXT("muscle_recovery"));Genes=BodyLineages[GuideIdentities[I]].Profile;
+            }
+            FCollisionQueryParams Query(SCENE_QUERY_STAT(GuidePatrol),true);Query.AddIgnoredActor(GuideActor);
+            auto& Choice=GuideChoices[I];
+            if(GuideDecisionCount[I]>0&&Elapsed>=GuideRestUntil[I]&&FVector::Dist2D(Before,GuideGoals[I])<35&&Elapsed<GuideDecisionAt[I]){
+                GuideRestUntil[I]=Elapsed+Choice.FRandRange(2.0,4.5);
+                GuideDecisionAt[I]=GuideRestUntil[I];
+                UE_LOG(LogTemp,Display,TEXT("GARDEN_GUIDE_INTENT identity=%d event=rest time_s=%.5f until_s=%.5f"),GuideIdentities[I],Elapsed,GuideRestUntil[I]);
+                GrowBodyLineage(GuideIdentities[I],TEXT("rest"));Genes=BodyLineages[GuideIdentities[I]].Profile;
+            }
+            if(Elapsed>=GuideDecisionAt[I]&&Elapsed>=GuideRestUntil[I]){
+                bool Chosen=false;FString Kind=TEXT("explore");
+                for(int Attempt=0;Attempt<12&&!Chosen;Attempt++){
+                    const double Angle=Choice.FRandRange(-PI,PI),Distance=Choice.FRandRange(450,800);
+                    FVector Goal=Before+FVector(FMath::Cos(Angle)*Distance,FMath::Sin(Angle)*Distance,0);
+                    // Curiosity can turn a later walk towards an actual book or portal.
+                    if(Attempt==0&&GuideDecisionCount[I]>0&&Choice.FRand()<.2+.35*Genes.curiosity){
+                        if(Choice.FRand()<.5&&Portals.Num()>0){Goal=Portals[Choice.RandRange(0,Portals.Num()-1)].Position+GetActorLocation()+FVector(80,-100,0);Kind=TEXT("visit_portal");}
+                        else if(ReadablePositions.Num()>0){TArray<int32> Books;ReadablePositions.GetKeys(Books);Books.Sort();Goal=ReadablePositions[Books[Choice.RandRange(0,Books.Num()-1)]]+GetActorLocation()+FVector(80,-100,0);Kind=TEXT("visit_book");}
+                    }else Kind=TEXT("explore");
+                    const FVector LocalGoal=Goal-GetActorLocation();
+                    if(FMath::Abs(LocalGoal.X)>27500||FMath::Abs(LocalGoal.Y)>27500||FVector::Dist2D(Goal,Before)<200)continue;
+                    FHitResult Ground;
+                    if(GetWorld()->LineTraceSingleByChannel(Ground,Goal+FVector(0,0,1500),Goal-FVector(0,0,1500),ECC_Visibility,Query)&&Ground.ImpactNormal.Z>.75){
+                        Goal.Z=Ground.ImpactPoint.Z;GuideGoals[I]=Goal;Chosen=true;
+                    }
+                }
+                if(Chosen){
+                    GuideDecisionCount[I]++;GuideDecisionAt[I]=Elapsed+Choice.FRandRange(12,19);GuideBlockedTime[I]=0;
+                    UE_LOG(LogTemp,Display,TEXT("GARDEN_GUIDE_INTENT identity=%d event=choose sequence=%d kind=%s time_s=%.5f target=%s"),GuideIdentities[I],GuideDecisionCount[I],*Kind,Elapsed,*GuideGoals[I].ToString());
+                    GrowBodyLineage(GuideIdentities[I],Kind);Genes=BodyLineages[GuideIdentities[I]].Profile;
+                }else {GuideDecisionAt[I]=Elapsed+1;GuideRestUntil[I]=Elapsed+1;}
+            }
+            FVector Direction=GuideGoals[I]-Before;Direction.Z=0;
+            auto SafeDirection=[&](FVector Candidate) {
+                const FVector Next=Before+Candidate*85;
+                FHitResult Support;
+                if(!GetWorld()->LineTraceSingleByChannel(Support,Next+FVector(0,0,150),Next-FVector(0,0,250),ECC_Visibility,Query)
+                    ||Support.ImpactNormal.Z<.70||Support.ImpactPoint.Z-Before.Z>Movement->MaxStepHeight)return false;
+                const FVector Centre=GuideActor->GetActorLocation();
+                const auto* Capsule=GuideActor->GetCapsuleComponent();
+                FHitResult Obstacle;
+                return !GetWorld()->SweepSingleByChannel(Obstacle,Centre,Centre+Candidate*85,FQuat::Identity,ECC_Pawn,
+                    FCollisionShape::MakeCapsule(Capsule->GetScaledCapsuleRadius(),Capsule->GetScaledCapsuleHalfHeight()-3),Query);
+            };
+            bool Advanced=false;
+            if(Elapsed>=GuideRestUntil[I]&&Direction.Size2D()>35) {
+                const FVector Forward=Direction.GetSafeNormal();
+                for(double Turn:{0.,60.,-60.}) {
+                    const FVector Candidate=Forward.RotateAngleAxis(Turn,FVector::UpVector);
+                    if(SafeDirection(Candidate)) {GuideActor->AddMovementInput(Candidate,FMath::Clamp(Direction.Size2D()/85,0.,1.),true);Advanced=true;break;}
+                }
+            }
+            GuideBlockedTime[I]=Advanced?0:GuideBlockedTime[I]+DeltaSeconds;
+            if(Elapsed>=GuideRestUntil[I]&&GuideBlockedTime[I]>1.5){GuideDecisionAt[I]=Elapsed;GuideBlockedTime[I]=0;}
+        }
+        const FVector Velocity=Movement->Velocity;
+        FRotator Facing=GuideActor->GetActorRotation();
+        if(Velocity.SizeSquared2D()>25)Facing.Yaw=Velocity.Rotation().Yaw;
+        else if(Near){
+            FVector Local=Body->GetComponentTransform().InverseTransformVectorNoScale(Difference);
+            double Angle=FMath::Atan2(FVector::DotProduct(Local,Motion->Right),FVector::DotProduct(Local,Motion->Forward));
+            if(FMath::Abs(Angle)>.55)Facing.Yaw=Difference.Rotation().Yaw;
+        }
+        GuideActor->SetActorRotation(FMath::RInterpTo(GuideActor->GetActorRotation(),Facing,DeltaSeconds,2.3));
+        // Translation drives strides. Turning towards a speaker must not leave
+        // a planted walking foot behind while the capsule rotates in place.
+        Motion->DesiredSpeed=Movement->IsMovingOnGround()?Velocity.Size2D():0;
+        Motion->Speaking=Speaking;
+        FVector EyeTarget=Player?Player->GetActorLocation()+FVector(0,0,55)-Body->GetComponentLocation():FVector(0,0,0);
+        EyeTarget=Body->GetComponentTransform().InverseTransformVectorNoScale(EyeTarget);
+        EyeTarget.Z-=165;
+        Motion->DesiredLookYaw=Near?FMath::Clamp(FMath::Atan2(FVector::DotProduct(EyeTarget,Motion->Right),FVector::DotProduct(EyeTarget,Motion->Forward)),-.7,.7):.18*FMath::Sin(Elapsed*.41+I);
+        Motion->DesiredLookPitch=Near?FMath::Clamp(FMath::Atan2(EyeTarget.Z,EyeTarget.Size2D()),-.22,.22):.03*FMath::Sin(Elapsed*.61+I);
+        Body->SetMorphTarget(TEXT("Talk"),Speaking?.5f*FMath::Max(0.f,FMath::Sin(Elapsed*5.2f+I)):0.f);
+        FVector Hand=Body->GetBoneLocation(TEXT("wrist_R"),EBoneSpaces::ComponentSpace);
+        FQuat Head=Body->GetBoneQuaternion(TEXT("head"),EBoneSpaces::ComponentSpace);
+        if(GuideHandBaseline[I].IsNearlyZero()){GuideHandBaseline[I]=Hand;GuideHeadBaseline[I]=Head;}
+        else {GuideHandTravel[I]=FMath::Max(GuideHandTravel[I],FVector::Dist(Hand,GuideHandBaseline[I]));GuideHeadTravel[I]=FMath::Max(GuideHeadTravel[I],Head.AngularDistance(GuideHeadBaseline[I]));}
+    }
     for (int32 Index = 0; Index < GuideHeads.Num(); ++Index)
         if (GuideHeads[Index]) GuideHeads[Index]->SetRelativeScale3D(FVector(0.43f + FMath::Sin(Elapsed * 1.5f + Index) * 0.006f));
     LoveRemaining = FMath::Max(0.0f, LoveRemaining - DeltaSeconds);

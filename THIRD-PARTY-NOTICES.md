@@ -37,3 +37,9 @@ Checked 23 September 2026:
 - [Unreal Engine on GitHub](https://www.unrealengine.com/ue-on-github): separate engine-source access and MIT compatibility.
 
 The product credits reproduce Epic's prescribed notice text with the actual product name and current year. This file records the relevant notices; publication, successful packaging and acceptance by any storefront are separate release results.
+
+## Current nature and character assets
+
+Tree Small 02 (Rico Cilliers), Fern 02 (Rob Tuytel/Rico Cilliers) and Rock Moss Set 01 (Kless Gyzen) retain their bound Poly Haven CC0 records. MakeHuman hm08 core anatomy, rig, skinning and skin maps retain SOURCES.json. Authored CC0 clothing, footwear and hair are bound in ArtSource/Characters/wardrobe-sources.json. System assets were expressly released to CC0 in September 2020 by Data Collection AB, Joel Palmius and Jonas Hauquier. Original author headers are retained.
+
+The hm08 affine attachment reader is independent MIT code. Blender and its bundled FBX parser/writer remain separately licensed tools. Current source exports contain CC0 character inputs and MIT builders; Unreal binaries, vendor content, retail Morrowind assets, saves and raw runtime logs stay local.

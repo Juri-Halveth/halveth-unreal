@@ -76,14 +76,10 @@ void AHALVETHHUD::DrawHUD()
         Wrapped(TEXT("Read at your pace. Insight is earned once; practical skill grows when you apply it."), Margin, Height - 23 * ReaderScale, Width - Margin * 2, Gold, 0.94f * ReaderScale);
         return;
     }
-    DrawRect(FLinearColor(0.018f, 0.014f, 0.032f, 0.8f), 0, 0, Width, 112 * Scale);
-    DrawText(TEXT("HALVETH  /  PORTAL GARDEN"), Gold, 30, 18, Font, Scale);
-    DrawText(AHALVETHRealmWorld::RealmName(Realm->GetCurrentRealm()), White, 30, 48 * Scale, Font, 1.5f * Scale);
-    DrawText(AHALVETHRealmWorld::RealmDescription(Realm->GetCurrentRealm()), Gold, 30, 85 * Scale, Font, 0.8f * Scale);
-    const FString Quality = Mode->GetQuality() == 0 ? TEXT("Performance") : Mode->GetQuality() == 1 ? TEXT("Balanced") : TEXT("Epic");
-    DrawText(FString::Printf(TEXT("Seed %d  |  %s  |  Local prototype"), Mode->WorldSeed, *Quality), Gold,
-        FMath::Max(30.0f, Width - 410 * Scale), 20, Font, 0.85f * Scale);
-    DrawRect(FLinearColor(1, 0.82f, 0.6f, 0.9f), Width / 2 - 2, Height / 2 - 2, 4, 4);
+    DrawRect(FLinearColor(0.015f,0.02f,0.025f,.55f),24,22,350*Scale,64*Scale);
+    DrawText(TEXT("PORTAL GARDEN"),Gold,38,31,Font,.82f*Scale);
+    DrawText(AHALVETHRealmWorld::RealmName(Realm->GetCurrentRealm()),White,38,53*Scale,Font,.9f*Scale);
+    DrawRect(FLinearColor(1,.88f,.65f,.7f),Width/2-1,Height/2-1,2,2);
     if (Pawn->IsHelpVisible())
     {
         DrawRect(FLinearColor(0.018f, 0.014f, 0.032f, 0.88f), 0, Height - 100 * Scale, Width, 100 * Scale);
@@ -91,34 +87,24 @@ void AHALVETHHUD::DrawHUD()
         Wrapped(TEXT("Q choose spell | Left click cast | L LOVE | I choose item | F use item"), 30, Height - 57 * Scale, Width - 60, White, 0.9f * Scale);
         Wrapped(TEXT("B library | T choose structure / G build ahead | R home | 1 / 2 / 3 graphics | H help | F10 credits | Esc save + quit"), 30, Height - 27 * Scale, Width - 60, Gold, 0.8f * Scale);
     }
-    if (auto* Adventure = Pawn->GetAdventure())
-    {
-        const float PanelY = Height - (Pawn->IsHelpVisible() ? 232 : 132) * Scale;
-        DrawRect(FLinearColor(0.018f, 0.014f, 0.032f, 0.88f), 20, PanelY, Width - 40, 122 * Scale);
-        const float BarWidth = FMath::Min(230.0f * Scale, (Width - 100) / 3);
-        const float Values[] = {Adventure->GetHealth(), Adventure->GetMana(), Adventure->GetStamina()};
-        const float Maxima[] = {100.0f, Adventure->GetMaxMana(), 100.0f};
-        const TCHAR* Names[] = {TEXT("HEALTH"), TEXT("MANA"), TEXT("STAMINA")};
-        const FLinearColor Colors[] = {FLinearColor(0.86f, 0.18f, 0.34f), FLinearColor(0.14f, 0.62f, 0.91f), FLinearColor(0.92f, 0.65f, 0.23f)};
-        for (int32 Index = 0; Index < 3; ++Index)
-        {
-            const float X = 34 + Index * (BarWidth + 20);
-            DrawText(FString::Printf(TEXT("%s %.0f/%.0f"), Names[Index], Values[Index], Maxima[Index]), White, X, PanelY + 9 * Scale, Font, 0.8f * Scale);
-            DrawRect(FLinearColor(0.12f, 0.11f, 0.17f), X, PanelY + 33 * Scale, BarWidth, 5 * Scale);
-            DrawRect(Colors[Index], X, PanelY + 33 * Scale, BarWidth * Values[Index] / Maxima[Index], 5 * Scale);
+    if(auto* Adventure=Pawn->GetAdventure()) {
+        const float Y=Height-(Pawn->IsHelpVisible()?187:72)*Scale;
+        const float Values[]={Adventure->GetHealth(),Adventure->GetMana(),Adventure->GetStamina()};
+        const float Maxima[]={100.0f,Adventure->GetMaxMana(),100.0f};
+        const FLinearColor Colors[]={FLinearColor(.76f,.12f,.20f),FLinearColor(.10f,.47f,.80f),FLinearColor(.75f,.58f,.22f)};
+        const TCHAR* Names[]={TEXT("HEALTH"),TEXT("MANA"),TEXT("STAMINA")};
+        for(int32 I=0;I<3;I++) {
+            float X=32+I*185*Scale;
+            DrawRect(FLinearColor(.01f,.02f,.025f,.58f),X-9,Y-9,175*Scale,50*Scale);
+            DrawText(FString::Printf(TEXT("%s  %.0f"),Names[I],Values[I]),White,X,Y,Font,.65f*Scale);
+            DrawRect(FLinearColor(.14f,.14f,.14f,.7f),X,Y+24*Scale,153*Scale,4*Scale);
+            DrawRect(Colors[I],X,Y+24*Scale,153*Scale*Values[I]/Maxima[I],4*Scale);
         }
-        Wrapped(TEXT("[Q / CLICK]  ") + Adventure->GetAbilityText(), 34, PanelY + 46 * Scale, Width - 70, Gold, 0.8f * Scale);
-        Wrapped(TEXT("[I / F]  ") + Adventure->GetInventoryText(), 34, PanelY + 76 * Scale, Width - 70, White, 0.75f * Scale);
-        DrawRect(FLinearColor(0.018f, 0.014f, 0.032f, 0.78f), 20, 157 * Scale, FMath::Min(780.0f * Scale, Width - 40), 92 * Scale);
-        Wrapped(Adventure->GetInteractionText(), 34, 172 * Scale, FMath::Min(746.0f * Scale, Width - 70), White, 0.85f * Scale);
+        DrawText(TEXT("Q  Spell     E  Interact     B  Library     H  Help"),Gold,32,Height-23*Scale,Font,.68f*Scale);
+        FString Spell=Adventure->GetAbilityText();
+        DrawText(Spell,Gold,Width-460*Scale,Y+6*Scale,Font,.65f*Scale);
     }
-    const int32 Destination = Realm->FindPortal(Pawn->GetActorLocation());
-    if (auto* Knowledge = Pawn->GetKnowledge())
-    {
-        DrawRect(FLinearColor(0.018f, 0.014f, 0.032f, 0.78f), 20, 255 * Scale, FMath::Min(780.0f * Scale, Width - 40), 88 * Scale);
-        const float NextLine = Wrapped(Knowledge->GetConstructionHint(), 34, 265 * Scale, FMath::Min(746.0f * Scale, Width - 70), Gold, 0.75f * Scale);
-        Wrapped(Knowledge->GetStatusText(), 34, NextLine + 3 * Scale, FMath::Min(746.0f * Scale, Width - 70), White, 0.72f * Scale);
-    }
+    const int32 Destination=Realm->FindPortal(Pawn->GetActorLocation());
     if (Destination != INDEX_NONE)
     {
         const FString Prompt = TEXT("E  -  ENTER ") + AHALVETHRealmWorld::RealmName(Destination);
@@ -126,7 +112,7 @@ void AHALVETHHUD::DrawHUD()
         DrawText(Prompt, White, Width / 2 - 250 * Scale, Height * 0.65f + 12 * Scale, Font, Scale);
     }
     if (Mode->GetMessageRemaining() > 0)
-        DrawText(Mode->GetMessage(), White, 30, 128 * Scale, Font, 0.95f * Scale);
+        DrawText(Mode->GetMessage(), White, 38, 99 * Scale, Font, 0.8f * Scale);
     if (Realm->GetLoveStrength() > 0)
     {
         DrawRect(FLinearColor(1, 0.08f, 0.25f, Realm->GetLoveStrength() * 0.08f), 0, 0, Width, Height);

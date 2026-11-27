@@ -1,0 +1,62 @@
+{
+  "schema": "halveth.character-sources.v1",
+  "coreGraphicsLicense": "CC0 1.0",
+  "ownAdditionsLicense": "CC0 1.0",
+  "builderLicense": "MIT",
+  "base": {
+    "name": "base.obj",
+    "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/master/makehuman/data/3dobjs/base.obj",
+    "bytes": 1749303,
+    "sha256": "8e761e6624b8f54536409135d1636da63b32486a90d4897f84e121d144f6fb4c",
+    "status": "FETCHED"
+  },
+  "rig": [
+    {
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/master/makehuman/data/rigs/default.mhskel",
+      "bytes": 117790,
+      "sha256": "99f179bce0aa850b45d4191a1d0d234c5851f881c057439470ded3bddf729a24",
+      "path": "default.mhskel"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/makehumancommunity/makehuman/master/makehuman/data/rigs/default_weights.mhw",
+      "bytes": 897521,
+      "sha256": "0f3641d651ae3d00ad6b4ccee43142edb109d3bd909d27d9e4139ef1beed8625",
+      "path": "default_weights.mhw"
+    }
+  ],
+  "skins": [
+    {
+      "file": "skin_female.png",
+      "sourceURL": "https://files2.makehumancommunity.org/asset_packs/skins01/skins01_cc0.zip",
+      "selectedMember": "skins/onlytheghosts_young_eurasian_female/young_eurasian_female_diffuse.png",
+      "memberSha256": "e4547a04bab2244d8ec6bcb1d239f4cddb83f145d4ce2a5c7734ec514c8bebcf",
+      "memberCRC": 3660987451,
+      "completeArchiveDownloaded": false,
+      "completeArchiveDigest": "UNOBSERVED"
+    },
+    {
+      "file": "skin_male.png",
+      "sourceURL": "https://files2.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip",
+      "selectedMember": "skins/middleage_caucasian_male/middleage_lightskinned_male_diffuse.png",
+      "memberSha256": "3f94f3f6a5cab92dedf5cce392a87332312fc435f1cb44c6e7b897daef9a5fbb",
+      "memberCRC": 1696652457,
+      "completeArchiveDownloaded": false,
+      "completeArchiveDigest": "UNKNOWN"
+    }
+  ],
+  "targets": "Sources/targets/sources.json",
+  "numericFBXPathReceipt": "fbx-path-roundtrip.json",
+  "licenseReferences": [
+    "https://static.makehumancommunity.org/about/license.html",
+    "https://static.makehumancommunity.org/assets/assetpacks/skins01.html",
+    "https://static.makehumancommunity.org/assets/assetpacks/makehuman_system_assets.html"
+  ],
+  "authoredWardrobe": "wardrobe-sources.json",
+  "activeConstruction": "hm08-affine-proxy-v1",
+  "retiredActiveConstruction": [
+    "cylindrical coat",
+    "segmented tube sleeves",
+    "ellipsoid footwear",
+    "tube hair and cap"
+  ]
+}

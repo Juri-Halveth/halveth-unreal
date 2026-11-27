@@ -1,0 +1,74 @@
+HALVETH VOID - Neue Uferwelt
+
+Die erste Welt entsteht als offene Landschaft mit einem ruhigen See, heller
+Sandkante, rauen Felsruecken und dichterer Vegetation in feuchten Senken.
+Ein niedriger, alter Steinbogen wird erst beim Naeherkommen als Portal lesbar.
+Die alte Morrowind-Innenraumgeometrie liefert dafuer keine Form-, Licht- oder
+Materialvorlage. Dune und New World sind Hinweise auf Bildwirkung und Massstab;
+die vorliegenden Quelldateien stammen ausschliesslich von Poly Haven.
+
+Ein konkretes Startbild:
+Der Spieler steht an einem schmalen Pfad etwa zwei Meter ueber dem Ufer.
+Links liegt ein teilweise moosiger Fels, rechts Farne unter einem belaubten
+Baum. Der Blick geht ueber flaches Wasser zu einer unregelmaessigen Felswand.
+Ein warmer, niedriger Sonnenstand trennt die Felskanten vom kuehleren Himmel.
+Der Steinbogen steht versetzt am Ufer, ohne Podest und ohne breite Neonflaeche.
+
+Materialverteilung:
+- sand_03 bildet die trockene Uferkante und kleine Ablagerungen.
+- grass_path_2 bildet Erde, begehbare Pfade und lueckenhaften Grasboden.
+- rock_boulder_dry bildet steilere Felsflaechen und trockene Ruecken.
+- Die sechs rock_moss_set_01-Varianten sitzen dort, wo Wasser oder Schatten
+  Moos plausibel machen. Ihre Basen sinken etwas in Boden und Sand ein.
+- fern_02 liefert vier geometrische Pflanzenvarianten statt flacher Rechtecke.
+- tree_small_02 liefert einen belaubten Baum mit modelliertem Stamm, Zweigen
+  und Blattern. Gruppen bekommen unregelmaessige Abstaende und Drehungen.
+
+Die Landschaft gewinnt ihren Eindruck aus zusammenhaengenden Hoehenzuegen,
+weichen Bodenwechseln, plausibler Vegetationsverteilung und Licht. Zufallswerte
+duerfen Details variieren; sie ersetzen nicht den lesbaren Pfad, Horizont,
+Uferverlauf und sicheren Spielerstart.
+
+Praktischer Import:
+1. ASSETS.json verwendet nur Pfade relativ zu ArtSource. Alle GLTF-Dateien
+   behalten die dort aufgefuehrten BIN- und Textur-Abhaengigkeiten daneben.
+2. Interchange importiert die Modelle und ihre PBR-Materialien. Der
+   GLTF-Standard verwendet Meter und Y als Hochachse; Unreal verwendet
+   Zentimeter. Ein einzelner importierter Baum soll etwa 456 cm hoch sein.
+   Ein gemessener Unreal-Bounding-Box-Wert prueft die tatsaechliche Konversion.
+3. Rock Moss Set enthaelt sechs getrennte Meshes; Fern 02 enthaelt vier.
+   Importierte Varianten einzeln platzieren, damit die Quell-Layoutpositionen
+   der Beispielszene nicht als festes Raster in die Welt uebernommen werden.
+4. Terrain-Diffuse: sRGB. Terrain-Normal: Normalmap-Kompression, linear,
+   DirectX, Gruenkanal nicht umkehren. Roughness: linear, Rotkanal verwenden.
+   Die GLTF-Modellnormalmaps sind OpenGL und brauchen die passende
+   Interchange-Konversion. Sie nicht wie die expliziten DX-Terrainmaps behandeln.
+5. Der Baum enthaelt 1.777.278 Positions-Eintraege und 2.062.487 Dreiecke.
+   Er besitzt in dieser Quelle genau LOD0. Nanite beziehungsweise geeignete
+   reduzierte Laufzeit-LODs gehoeren zu den abgeleiteten Unreal-Assets.
+6. Die Baumblattdefinition ist BLEND und beidseitig; sie referenziert eine JPG
+   ohne Alphakanal und keinen weiteren Opacity-Wert. Fuer diese Quelldaten ist
+   eine beidseitige OPAQUE-Materialvariante ein plausibler Nanite-Ausgangspunkt.
+   Die Original-GLTF bleibt erhalten. Sichtpruefung entscheidet ueber die
+   tatsaechliche Blattwirkung und weitere Materialanpassung.
+7. Baumzweige nutzen UV-Set 1 und KHR_texture_transform. Materialaustausch
+   darf diese UV-Zuordnung und Texturtransformation nicht versehentlich verlieren.
+8. Kollision fuer Stamm und Felsen gezielt anlegen; Blatter und einzelne
+   Farnfiedern brauchen keine komplexe Spieler-Kollision.
+
+Quellpruefung:
+30 Dateien, 189.021.239 Bytes = etwa 180,26 MiB. Jede Quelldatei wurde gegen
+die veroeffentlichte Bytegroesse und MD5 sowie mit einem eigenen SHA256 gebunden.
+24 Bilder wurden vollstaendig dekodiert; sie sind jeweils 2048 x 2048 Pixel.
+Die referenzierten GLTF-Abhaengigkeiten liegen vollstaendig vor. Die sechs
+Diffuse-Oberflaechen wurden als lokale Kontaktansicht visuell geprueft.
+Die Import-, Laufzeit-, Kollisions- und Bildqualitaet der neuen Unreal-Welt
+wird erst an der laufenden Engine beurteilt.
+
+Primaerquellen:
+https://polyhaven.com/license
+https://dev.epicgames.com/documentation/unreal-engine/interchange-import-reference-in-unreal-engine
+https://dev.epicgames.com/documentation/unreal-engine/the-gl-transmission-format-gltf-in-unreal-engine
+https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html
+
+Einzelautoren und Quellen: CREDITS.txt und ASSETS.json.

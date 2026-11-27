@@ -27,7 +27,7 @@ private:
     UPROPERTY() TObjectPtr<UCameraComponent> Camera;
     UPROPERTY() TObjectPtr<UHALVETHAdventureComponent> Adventure;
     UPROPERTY() TObjectPtr<UHALVETHKnowledgeComponent> Knowledge;
-    bool bHelpVisible = true;
+    bool bHelpVisible = false;
     bool bCreditsVisible = false;
     int32 ReaderPanel = 0;
     void Forward(float Value);

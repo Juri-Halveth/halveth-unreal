@@ -6,3 +6,4 @@
 # Preserve the exact upstream legal-document bytes and whitespace.
 docs/NSIS-COPYING.txt -text -whitespace
 ArtSource/PolyHaven/LICENSE-CC0-1.0.txt -text -whitespace
+ArtSource/Characters/** -text -whitespace

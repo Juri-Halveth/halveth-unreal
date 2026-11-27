@@ -1,0 +1,15 @@
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+Content/
+Builds/
+.vs/
+*.sln
+*.suo
+__pycache__/
+ArtSource/models/
+ArtSource/terrain/
+ArtSource/metadata/
+*.part
+QA/history/
